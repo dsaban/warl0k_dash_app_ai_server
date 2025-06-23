@@ -1,11 +1,12 @@
-[2025-06-23 21:32:47] Server is starting...
-[2025-06-23 21:32:52] New session started with ID: 61ef76a5-2b73-4267-91be-2f9a10119510
-[2025-06-23 21:32:59] Obfuscated secret: CKQvOifIEvOBGUkK
-[2025-06-23 21:32:59] New session started with ID: 61ef76a5-2b73-4267-91be-2f9a10119510
-[2025-06-23 21:32:59] Recovered master: tVGzKYFi6a4TTbFK
-[2025-06-23 21:32:59] Decrypted payload: This is my secure message
-[2025-06-23 21:33:29] New session started with ID: 9bc4abd7-8fea-489c-b095-1df6cb197b93
-[2025-06-23 21:33:33] Obfuscated secret: 9ZKeRkwNC2eDyKEN
-[2025-06-23 21:33:33] New session started with ID: 9bc4abd7-8fea-489c-b095-1df6cb197b93
-[2025-06-23 21:33:33] Recovered master: KQDbKTAXwdTsXSgF
-[2025-06-23 21:33:33] Decrypted payload: This is my secure message
+[BOOT] WARL0K TCP Server Starting...
+[2025-06-23 21:48:03] Server is starting...
+[SESSION] New request for: c0b881be-2dfa-4edf-ba64-8d66f1b49c58
+[2025-06-23 21:48:07] New session started with ID: c0b881be-2dfa-4edf-ba64-8d66f1b49c58
+[SEND] Obfuscated secret sent.
+[2025-06-23 21:48:14] Obfuscated secret: WiZ3fuCr7mzF5rXU
+[SESSION] New request for: c0b881be-2dfa-4edf-ba64-8d66f1b49c58
+[2025-06-23 21:48:14] New session started with ID: c0b881be-2dfa-4edf-ba64-8d66f1b49c58
+[RECONSTRUCT] Master: HjnJXv0SIztHTDpE
+[2025-06-23 21:48:14] Recovered master: HjnJXv0SIztHTDpE
+[✓] Payload Decrypted: This is my secure message
+[2025-06-23 21:48:14] Decrypted payload: This is my secure message

@@ -1,0 +1,11 @@
+[2025-06-23 21:32:47] Server is starting...
+[2025-06-23 21:32:52] New session started with ID: 61ef76a5-2b73-4267-91be-2f9a10119510
+[2025-06-23 21:32:59] Obfuscated secret: CKQvOifIEvOBGUkK
+[2025-06-23 21:32:59] New session started with ID: 61ef76a5-2b73-4267-91be-2f9a10119510
+[2025-06-23 21:32:59] Recovered master: tVGzKYFi6a4TTbFK
+[2025-06-23 21:32:59] Decrypted payload: This is my secure message
+[2025-06-23 21:33:29] New session started with ID: 9bc4abd7-8fea-489c-b095-1df6cb197b93
+[2025-06-23 21:33:33] Obfuscated secret: 9ZKeRkwNC2eDyKEN
+[2025-06-23 21:33:33] New session started with ID: 9bc4abd7-8fea-489c-b095-1df6cb197b93
+[2025-06-23 21:33:33] Recovered master: KQDbKTAXwdTsXSgF
+[2025-06-23 21:33:33] Decrypted payload: This is my secure message

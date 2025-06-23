@@ -1,12 +1,12 @@
 [BOOT] WARL0K TCP Server Starting...
-[2025-06-23 21:48:03] Server is starting...
-[SESSION] New request for: c0b881be-2dfa-4edf-ba64-8d66f1b49c58
-[2025-06-23 21:48:07] New session started with ID: c0b881be-2dfa-4edf-ba64-8d66f1b49c58
+[2025-06-23 22:48:06] Server is starting...
+[SESSION] New request for: 74de642a-c9d3-4693-ae86-cf9f25cfcc9a
+[2025-06-23 22:48:07] New session started with ID: 74de642a-c9d3-4693-ae86-cf9f25cfcc9a
 [SEND] Obfuscated secret sent.
-[2025-06-23 21:48:14] Obfuscated secret: WiZ3fuCr7mzF5rXU
-[SESSION] New request for: c0b881be-2dfa-4edf-ba64-8d66f1b49c58
-[2025-06-23 21:48:14] New session started with ID: c0b881be-2dfa-4edf-ba64-8d66f1b49c58
-[RECONSTRUCT] Master: HjnJXv0SIztHTDpE
-[2025-06-23 21:48:14] Recovered master: HjnJXv0SIztHTDpE
+[2025-06-23 22:48:15] Obfuscated secret: EP19YVitE70m2fTu
+[SESSION] New request for: 74de642a-c9d3-4693-ae86-cf9f25cfcc9a
+[2025-06-23 22:48:15] New session started with ID: 74de642a-c9d3-4693-ae86-cf9f25cfcc9a
+[RECONSTRUCT] Master: 5UQ6dEgoweURIZt1
+[2025-06-23 22:48:15] Recovered master: 5UQ6dEgoweURIZt1
 [✓] Payload Decrypted: This is my secure message
-[2025-06-23 21:48:14] Decrypted payload: This is my secure message
+[2025-06-23 22:48:15] Decrypted payload: This is my secure message

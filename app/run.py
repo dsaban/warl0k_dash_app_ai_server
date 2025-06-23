@@ -17,7 +17,7 @@ subprocess.Popen(
 )
 
 # --- Wait for server to initialize ---
-time.sleep(2)
+# time.sleep(2)
 
 # --- Start the Streamlit Client Dashboard ---
 print("[CLIENT DASHBOARD] Launching Streamlit dashboard...")

@@ -1,7 +1,7 @@
 import streamlit as st
 import socket, uuid, random, torch, pickle, os
 import pandas as pd
-from model import add_noise_to_tensor
+from model import add_noise_to_tensor, inject_patterned_noise
 from utils import aead_encrypt, log_client
 
 vocab = list("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789")
@@ -43,7 +43,18 @@ except Exception as e:
 # Step 2: Generate fingerprint
 torch.manual_seed(int(session_id[:8], 16))
 fingerprint = add_noise_to_tensor(text_to_tensor(obfs).squeeze(1), len(vocab)).unsqueeze(1)
-log_client(f"[GENERATED] Fingerprint: {fingerprint.numpy().tobytes().hex()}")
+#  convert to ascii characters into 1 dimensional tensor
+noisy_tensor = inject_patterned_noise(
+            seq_tensor=text_to_tensor(obfs).squeeze(1),
+            vocab_size=len(vocab),
+            error_rate=0.25,
+            pattern_ratio=0.6,  # Example ratio, can be adjusted
+            seed=session_id
+        ).unsqueeze(1)
+
+noisy_obf_secret = ''.join([vocab[i] for i in noisy_tensor.squeeze(1).tolist()])
+print(f"[CLIENT] Injected noisy obf_secret: {noisy_obf_secret}")
+log_client(f"[GENERATED] Fingerprint: {noisy_obf_secret}")
 
 # Step 3: AEAD encryption
 key = fingerprint.numpy().tobytes()[:16]

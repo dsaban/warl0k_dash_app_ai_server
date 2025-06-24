@@ -1,8 +1,18 @@
 import socket, threading, pickle
 import torch
-from model import train_secret_regenerator, evaluate_secret_regenerator
+from model import (
+    train_secret_regenerator,
+    evaluate_secret_regenerator,
+    add_noise_to_tensor,
+    inject_patterned_noise)
 from utils import (
-    load_key,create_key,decrypt, encrypt, generate_secret, aead_decrypt, log)
+    load_key,
+    create_key,
+    decrypt,
+    encrypt,
+    generate_secret,
+    aead_decrypt,
+    log)
 import random
 
 HOST = '0.0.0.0'
@@ -11,7 +21,11 @@ SESSIONS = {}
 
 vocab = list("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789")
 
+def text_to_tensor(text):
+    return torch.tensor([vocab.index(c) for c in text], dtype=torch.long).unsqueeze(1)
+
 def handle_client(conn):
+    global SESSIONS
     session_id = conn.recv(36).decode()
     print(f"[SESSION] New request for: {session_id}")
     log(f"New session started with ID: {session_id}")
@@ -42,18 +56,40 @@ def handle_client(conn):
         return
 
     try:
-        fingerprint, encrypted_payload = pickle.loads(raw)
+        _fingerprint, encrypted_payload = pickle.loads(raw)
         obfs_model = SESSIONS[session_id]["model_obfs"]
         master_expected = SESSIONS[session_id]["master"]
-        recovered = evaluate_secret_regenerator(obfs_model, fingerprint, vocab)
-
+        recovered = evaluate_secret_regenerator(obfs_model, _fingerprint, vocab)
+        # print(f"[RECONSTRUCT] Master: {recovered}")
+        
+        #  get obfs from SESSIONS
+        obfs = SESSIONS[session_id]["obfs"]
+        torch.manual_seed(int(session_id[:8], 16))
+        # fingerprint = add_noise_to_tensor(text_to_tensor(obfs).squeeze(1), len(vocab)).unsqueeze(1)
+        
+        noisy_tensor = inject_patterned_noise(
+            seq_tensor=text_to_tensor(obfs).squeeze(1),
+            vocab_size=len(vocab),
+            error_rate=0.25,
+            pattern_ratio=0.6,  # Example ratio, can be adjusted
+            seed=session_id
+        ).unsqueeze(1)
+        
+        noisy_obf_secret = ''.join([vocab[i] for i in noisy_tensor.squeeze(1).tolist()])
+        # print(f"[RECEIVED] Fingerprint: {fingerprint}")
+        # log(f"Received fingerprint: {fingerprint}")
+        log(f"Received fingerprint: {noisy_obf_secret}")
+        obfs_model = SESSIONS[session_id]["model_obfs"]
+        master_expected = SESSIONS[session_id]["master"]
+        recovered = evaluate_secret_regenerator(obfs_model, _fingerprint, vocab)
+        
         print(f"[RECONSTRUCT] Master: {recovered}")
         log(f"Recovered master: {recovered}")
         if recovered != master_expected:
             conn.send(b"[FAIL] Authentication failed.")
             return
 
-        decrypted = aead_decrypt(fingerprint.numpy().tobytes()[:16], encrypted_payload.encode())
+        decrypted = aead_decrypt(_fingerprint.numpy().tobytes()[:16], encrypted_payload.encode())
         print(f"[✓] Payload Decrypted: {decrypted.decode()}")
         log(f"Decrypted payload: {decrypted.decode()}")
         conn.send(b"[OK] Authenticated & Decrypted.")

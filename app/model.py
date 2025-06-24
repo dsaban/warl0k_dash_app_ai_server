@@ -12,6 +12,32 @@ def add_noise_to_tensor(tensor, vocab_size, noise_level=0.4):
             noisy[i] = random.randint(0, vocab_size - 1)
     return noisy
 
+
+def inject_patterned_noise(seq_tensor, vocab_size, error_rate=0.2, pattern_ratio=0.5, seed=None):
+    """
+    Adds deterministic patterned noise into the sequence for a given session.
+    pattern_ratio controls how many of the errors are repeatable and detectable.
+    """
+    if seed:
+        random.seed(seed)
+    
+    noisy = seq_tensor.clone()
+    length = len(noisy)
+    pattern_indexes = random.sample(range(length), int(length * error_rate * pattern_ratio))
+    print(f"Pattern indexes: {pattern_indexes}")
+    random_indexes = random.sample([i for i in range(length) if i not in pattern_indexes],
+                                   int(length * error_rate * (1 - pattern_ratio)))
+    print(f"Random indexes: {random_indexes}")
+    
+    # Apply predictable noise to pattern_indexes and full random noise to random_indexes
+    for i in pattern_indexes:
+        noisy[i] = (noisy[i] + 1) % vocab_size  # predictable offset
+    for i in random_indexes:
+        noisy[i] = random.randint(0, vocab_size - 1)  # full random
+    
+    return noisy
+
+
 class Attention(nn.Module):
     def __init__(self, hidden_dim):
         super().__init__()

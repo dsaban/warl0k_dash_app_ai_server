@@ -1,12 +1,13 @@
-[BOOT] WARL0K TCP Server Starting...
-[2025-06-23 22:48:06] Server is starting...
-[SESSION] New request for: 74de642a-c9d3-4693-ae86-cf9f25cfcc9a
-[2025-06-23 22:48:07] New session started with ID: 74de642a-c9d3-4693-ae86-cf9f25cfcc9a
-[SEND] Obfuscated secret sent.
-[2025-06-23 22:48:15] Obfuscated secret: EP19YVitE70m2fTu
-[SESSION] New request for: 74de642a-c9d3-4693-ae86-cf9f25cfcc9a
-[2025-06-23 22:48:15] New session started with ID: 74de642a-c9d3-4693-ae86-cf9f25cfcc9a
-[RECONSTRUCT] Master: 5UQ6dEgoweURIZt1
-[2025-06-23 22:48:15] Recovered master: 5UQ6dEgoweURIZt1
-[✓] Payload Decrypted: This is my secure message
-[2025-06-23 22:48:15] Decrypted payload: This is my secure message
+[2025-06-24 11:55:41] Server is starting...
+[2025-06-24 11:55:45] New session started with ID: e272a4dd-590e-4a63-b6f1-cf8f0040a800
+[2025-06-24 11:55:52] Obfuscated secret: pR6VrEUzra4LOITz
+[2025-06-24 11:55:52] New session started with ID: e272a4dd-590e-4a63-b6f1-cf8f0040a800
+[2025-06-24 11:55:52] Received fingerprint: pR6WrEU0ra4LOIUz
+[2025-06-24 11:55:52] Recovered master: GOjkZZghFIUhAOFm
+[2025-06-24 11:55:53] Decrypted payload: This is my secure message
+[2025-06-24 11:57:03] New session started with ID: 7b31838d-3748-4241-ba07-9a38812d7460
+[2025-06-24 11:57:07] Obfuscated secret: woWLNCQ7hiOXczKX
+[2025-06-24 11:57:07] New session started with ID: 7b31838d-3748-4241-ba07-9a38812d7460
+[2025-06-24 11:57:07] Received fingerprint: woWMNCA7hiOXczLX
+[2025-06-24 11:57:07] Recovered master: mURvcZzwjBROjQTa
+[2025-06-24 11:57:07] Decrypted payload: This is my secure message

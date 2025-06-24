@@ -10,7 +10,7 @@
 
 # Initialize a new Git repository
 git add .
-git commit -m "run server in background"
+git commit -m "update code for noisy inject pattern client+server"
 git remote add origin git@github.com:dsaban/warl0k_dash_app_ai_server.git
 git branch -M main
 git push -u origin main

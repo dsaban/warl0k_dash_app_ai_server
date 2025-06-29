@@ -1,69 +1,51 @@
 
   You can now view your Streamlit app in your browser.
 
-  Local URL: http://localhost:8501
-  Network URL: http://192.168.1.158:8501
+  Local URL: http://localhost:8503
+  Network URL: http://192.168.1.158:8503
 
-[CLIENT] [2025-06-29 11:22:29] [RECEIVED] Obfuscated secret: w3DFzG8kVQkHwsth
-[CLIENT] [2025-06-29 11:22:29] [CLIENT] Pattern indexes: [5, 7]
-[CLIENT] [2025-06-29 11:22:29] [CLIENT] Random indexes: [11]
-[CLIENT] [2025-06-29 11:22:29] [FINGERPRINT] [48, 55, 22, 5, 27, 30, 14, 11, 29, 32, 35, 7, 48, 31, 31, 52]
-[CLIENT] [2025-06-29 11:22:29] [NOISY] w3DFzH8lVQkwwsth
-[CLIENT] [2025-06-29 11:22:29] [ENCRYPTED] YCMTXm+PMB8CzY4p3rHOM6BTNbsPki311z6HyOlPp5bozI8AeNkwNKwhmzwm27XjoREZVRw=
-[CLIENT] [2025-06-29 11:22:29] [CLIENT] Pattern indexes: [5, 7]
-[CLIENT] [2025-06-29 11:22:29] [CLIENT] Random indexes: [11]
-[CLIENT] [2025-06-29 11:22:29] [RESPONSE] Server: [OK] Authenticated & Decrypted.
-[CLIENT] [2025-06-29 11:24:13] [RECEIVED] Obfuscated secret: EmT8qetwPUkcFhLT
-[CLIENT] [2025-06-29 11:24:13] [CLIENT] Pattern indexes: [11, 7]
-[CLIENT] [2025-06-29 11:24:13] [CLIENT] Random indexes: [9]
-[CLIENT] [2025-06-29 11:24:13] [FINGERPRINT] [41, 24, 18, 28, 29, 19, 40, 48, 43, 20, 38, 40, 5, 25, 11, 17]
-[CLIENT] [2025-06-29 11:24:13] [NOISY] EmT8qetxPHkdFhLT
-[CLIENT] [2025-06-29 11:24:13] [ENCRYPTED] y/FkkxCRhARI4pc0Lpc4CrJbtwuBOGpuf1VLuSjau1gmB3RYo6D3Fa98JC5a/ngU2Ij6JT4=
-[CLIENT] [2025-06-29 11:24:13] [CLIENT] Pattern indexes: [11, 7]
-[CLIENT] [2025-06-29 11:24:13] [CLIENT] Random indexes: [9]
-[CLIENT] [2025-06-29 11:24:13] [RESPONSE] Server: [OK] Authenticated & Decrypted.
-[CLIENT] [2025-06-29 12:16:47] [RECEIVED] Obfuscated secret: wQNvuIBE1Nx5CrGG
-[CLIENT] [2025-06-29 12:16:47] [CLIENT] Pattern indexes: [5, 15]
-[CLIENT] [2025-06-29 12:16:47] [CLIENT] Random indexes: [2]
-[CLIENT] [2025-06-29 12:16:47] [FINGERPRINT] [54, 16, 34, 11, 19, 28, 51, 4, 60, 29, 32, 57, 2, 21, 6, 6]
-[CLIENT] [2025-06-29 12:16:47] [NOISY] wQEvuJBE1Nx5CrGH
-[CLIENT] [2025-06-29 12:16:47] [ENCRYPTED] ntg1S/UaAMBkXDVbioejYZWMqoaShptgbCSE7Ae7cY6+GcOuz4Bvm8l0gYH16EWI+m7Q+IE=
-[CLIENT] [2025-06-29 12:16:47] [CLIENT] Pattern indexes: [5, 15]
-[CLIENT] [2025-06-29 12:16:47] [CLIENT] Random indexes: [2]
-[CLIENT] [2025-06-29 12:16:47] [RESPONSE] Server: [OK] Authenticated & Decrypted.
-[CLIENT] [2025-06-29 12:17:31] [RECEIVED] Obfuscated secret: MzwTYVyPhHX99Ruj
-[CLIENT] [2025-06-29 12:17:31] [CLIENT] Pattern indexes: [2, 15]
-[CLIENT] [2025-06-29 12:17:31] [CLIENT] Random indexes: [3]
-[CLIENT] [2025-06-29 12:17:31] [FINGERPRINT] [30, 51, 48, 19, 42, 37, 5, 50, 58, 35, 23, 32, 1, 47, 10, 5]
-[CLIENT] [2025-06-29 12:17:31] [NOISY] MzxiYVyPhHX99Ruk
-[CLIENT] [2025-06-29 12:17:31] [ENCRYPTED] BDQJRj7LMnbV9gqpe/uXkCQcPkq8KPzGGQFnlLgf3q+iYGiB1q9Qr/raJ72dgE/pMAqqNgM=
-[CLIENT] [2025-06-29 12:17:31] [CLIENT] Pattern indexes: [2, 15]
-[CLIENT] [2025-06-29 12:17:31] [CLIENT] Random indexes: [3]
-[CLIENT] [2025-06-29 12:17:31] [RESPONSE] Server: [OK] Authenticated & Decrypted.
-[CLIENT] [2025-06-29 12:17:48] [RECEIVED] Obfuscated secret: 6Zz6zBMd6HIFedHx
-[CLIENT] [2025-06-29 12:17:48] [CLIENT] Pattern indexes: [12, 13]
-[CLIENT] [2025-06-29 12:17:48] [CLIENT] Random indexes: [3]
-[CLIENT] [2025-06-29 12:17:48] [FINGERPRINT] [58, 53, 51, 7, 51, 50, 57, 55, 58, 11, 46, 5, 30, 35, 29, 31]
-[CLIENT] [2025-06-29 12:17:48] [NOISY] 6ZzGzBMd6HIFfeHx
-[CLIENT] [2025-06-29 12:17:48] [ENCRYPTED] LnH/1ACPjPYluqeg9cT+08ic1tPn8xNmvCKmjXoXDHpUgR/IcgkXnMbXfDAWp5Y5d8VJ7+k=
-[CLIENT] [2025-06-29 12:17:48] [CLIENT] Pattern indexes: [12, 13]
-[CLIENT] [2025-06-29 12:17:48] [CLIENT] Random indexes: [3]
-[CLIENT] [2025-06-29 12:17:48] [RESPONSE] Server: [FAIL] Authentication failed.
-[CLIENT] [2025-06-29 12:18:03] [RECEIVED] Obfuscated secret: h7ZC6EINuMfE1VqW
-[CLIENT] [2025-06-29 12:18:03] [CLIENT] Pattern indexes: [4, 12]
-[CLIENT] [2025-06-29 12:18:03] [CLIENT] Random indexes: [13]
-[CLIENT] [2025-06-29 12:18:03] [FINGERPRINT] [23, 25, 25, 57, 36, 8, 60, 3, 17, 12, 31, 4, 13, 10, 35, 22]
-[CLIENT] [2025-06-29 12:18:03] [NOISY] h7ZC7EINuMfE2JqW
-[CLIENT] [2025-06-29 12:18:03] [ENCRYPTED] ZF1P9uS2oDLXf6yR9dtYNPvz2L8l73NM8ZwAPkpiqxhG/Dq0p3BvqCn51dNdJCLGRRUvugk=
-[CLIENT] [2025-06-29 12:18:03] [CLIENT] Pattern indexes: [4, 12]
-[CLIENT] [2025-06-29 12:18:03] [CLIENT] Random indexes: [13]
-[CLIENT] [2025-06-29 12:18:03] [RESPONSE] Server: [OK] Authenticated & Decrypted.
-[CLIENT] [2025-06-29 12:21:11] [RECEIVED] Obfuscated secret: N7TrsqOEM19kRy1d
-[CLIENT] [2025-06-29 12:21:11] [CLIENT] Pattern indexes: [0, 1]
-[CLIENT] [2025-06-29 12:21:11] [CLIENT] Random indexes: [2]
-[CLIENT] [2025-06-29 12:21:11] [FINGERPRINT] [0, 15, 45, 43, 31, 42, 14, 4, 19, 16, 61, 44, 55, 60, 53, 29]
-[CLIENT] [2025-06-29 12:21:11] [NOISY] O8ArsqOEM19kRy1d
-[CLIENT] [2025-06-29 12:21:11] [ENCRYPTED] 5FoCYzcT8lS/Da1xDTx/NJAwUaWOpCW/BoiEzy1W0UT9ZLl3VgJDZF4GI7QBxfEtiNtJgGQ=
-[CLIENT] [2025-06-29 12:21:11] [CLIENT] Pattern indexes: [0, 1]
-[CLIENT] [2025-06-29 12:21:11] [CLIENT] Random indexes: [2]
-[CLIENT] [2025-06-29 12:21:11] [RESPONSE] Server: [OK] Authenticated & Decrypted.
+[CLIENT] [2025-06-29 15:53:49] [RECEIVED] Obfuscated secret: 5Ociw64C7M53GHhd
+[CLIENT] [2025-06-29 15:53:49] [CLIENT] Pattern indexes: [6, 11]
+[CLIENT] [2025-06-29 15:53:49] [CLIENT] Random indexes: [13]
+[CLIENT] [2025-06-29 15:53:49] [FINGERPRINT] [57, 3, 13, 40, 34, 34, 30, 0, 59, 59, 43, 45, 6, 33, 0, 52]
+[CLIENT] [2025-06-29 15:53:49] [NOISY] 5Ociw65C7M54GMhd
+[CLIENT] [2025-06-29 15:53:49] [ENCRYPTED] Kok5ySqLCLAxFVI6wrc+x/SCYhET5ysKf2+adlTigV7eYu0Mk8ntpKSEZin/kTPXfsGUSxI=
+[CLIENT] [2025-06-29 15:53:49] [CLIENT] Pattern indexes: [6, 11]
+[CLIENT] [2025-06-29 15:53:49] [CLIENT] Random indexes: [13]
+[CLIENT] [2025-06-29 15:53:49] [RESPONSE] Server: [OK] Authenticated & Decrypted.
+[CLIENT] [2025-06-29 15:57:05] [RECEIVED] Obfuscated secret: 8rG5A2SwIm0BKOUr
+[CLIENT] [2025-06-29 15:57:05] [CLIENT] Pattern indexes: [12, 6]
+[CLIENT] [2025-06-29 15:57:05] [CLIENT] Random indexes: [5]
+[CLIENT] [2025-06-29 15:57:05] [FINGERPRINT] [54, 43, 49, 6, 0, 39, 18, 9, 13, 38, 52, 1, 8, 4, 20, 43]
+[CLIENT] [2025-06-29 15:57:05] [NOISY] 8rG5AMTwIm0BLOUr
+[CLIENT] [2025-06-29 15:57:05] [ENCRYPTED] XHKTiXB0eoPmRoCSScwob4w4S44OAp2bvvDYZqFcjNhPPsR439UxigKmEaqtf+VltPonhws=
+[CLIENT] [2025-06-29 15:57:05] [CLIENT] Pattern indexes: [12, 6]
+[CLIENT] [2025-06-29 15:57:05] [CLIENT] Random indexes: [5]
+[CLIENT] [2025-06-29 15:57:05] [RESPONSE] Server: [OK] Authenticated & Decrypted.
+[CLIENT] [2025-06-29 15:57:22] [RECEIVED] Obfuscated secret: uxvgWKw75nbjBcGG
+[CLIENT] [2025-06-29 15:57:22] [CLIENT] Pattern indexes: [9, 5]
+[CLIENT] [2025-06-29 15:57:22] [CLIENT] Random indexes: [15]
+[CLIENT] [2025-06-29 15:57:22] [FINGERPRINT] [31, 9, 21, 39, 61, 10, 10, 48, 57, 39, 19, 35, 19, 55, 58, 8]
+[CLIENT] [2025-06-29 15:57:22] [NOISY] uxvgWLw75objBcG7
+[CLIENT] [2025-06-29 15:57:22] [ENCRYPTED] KuX8/inz92pyPBcODJ+/NZhIhWB+JyB1ZIXheLlFaak6vQtdYRwiSmawg7AAYSXxnDRNMts=
+[CLIENT] [2025-06-29 15:57:22] [CLIENT] Pattern indexes: [9, 5]
+[CLIENT] [2025-06-29 15:57:22] [CLIENT] Random indexes: [15]
+[CLIENT] [2025-06-29 15:57:22] [RESPONSE] Server: [OK] Authenticated & Decrypted.
+[CLIENT] [2025-06-29 15:57:59] [RECEIVED] Obfuscated secret: uFQPrNAOaoUrDTtP
+[CLIENT] [2025-06-29 15:57:59] [CLIENT] Pattern indexes: [15, 12]
+[CLIENT] [2025-06-29 15:57:59] [CLIENT] Random indexes: [11]
+[CLIENT] [2025-06-29 15:57:59] [FINGERPRINT] [27, 5, 16, 15, 43, 33, 11, 14, 60, 30, 44, 23, 3, 19, 45, 15]
+[CLIENT] [2025-06-29 15:57:59] [NOISY] uFQPrNAOaoUBETtQ
+[CLIENT] [2025-06-29 15:57:59] [ENCRYPTED] bldaezGhsoyCXJE8xan5Rtrs6LaF8sDEnLNgeLvxzdVUkKI7eZf5yO5JWPzUwS6PiBFQBlI=
+[CLIENT] [2025-06-29 15:57:59] [CLIENT] Pattern indexes: [15, 12]
+[CLIENT] [2025-06-29 15:57:59] [CLIENT] Random indexes: [11]
+[CLIENT] [2025-06-29 15:57:59] [RESPONSE] Server: [OK] Authenticated & Decrypted.
+[CLIENT] [2025-06-29 15:59:00] [RECEIVED] Obfuscated secret: RjTC3SS81qUUcyOM
+[CLIENT] [2025-06-29 15:59:00] [CLIENT] Pattern indexes: [8, 2]
+[CLIENT] [2025-06-29 15:59:00] [CLIENT] Random indexes: [10]
+[CLIENT] [2025-06-29 15:59:00] [FINGERPRINT] [17, 39, 19, 0, 36, 18, 7, 60, 53, 24, 30, 20, 56, 26, 14, 12]
+[CLIENT] [2025-06-29 15:59:00] [NOISY] RjUC3SS82qJUcyOM
+[CLIENT] [2025-06-29 15:59:00] [ENCRYPTED] 4UnYbNnfptK75pvA9Wa4FxSbj7uc8ObQBtPZtRwDZ2jrBeiZuwSndfUogEHsH3IObgEegCc=
+[CLIENT] [2025-06-29 15:59:00] [CLIENT] Pattern indexes: [8, 2]
+[CLIENT] [2025-06-29 15:59:00] [CLIENT] Random indexes: [10]
+[CLIENT] [2025-06-29 15:59:00] [RESPONSE] Server: [OK] Authenticated & Decrypted.

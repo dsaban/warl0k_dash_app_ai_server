@@ -18,7 +18,7 @@ open("logs/server.log", "a").close()
 # --- Shared Config ---
 vocab = list("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789")
 HOST = '0.0.0.0'
-PORT = 9994
+PORT = 9992
 SESSIONS = {}
 
 def text_to_tensor(text):
@@ -75,9 +75,14 @@ def handle_client(conn):
 		conn.send(b"[ERR] Processing failed.")
 
 def start_server():
-	s = socket.socket()
+	# s = socket.socket()
+	# s.bind((HOST, PORT))
+	# s.listen(5)
+	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+	s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)  # 🔥 Important fix
 	s.bind((HOST, PORT))
 	s.listen(5)
+	
 	while True:
 		conn, _ = s.accept()
 		threading.Thread(target=handle_client, args=(conn,), daemon=True).start()

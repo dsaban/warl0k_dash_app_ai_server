@@ -10,6 +10,10 @@ from model import (
 from utils import (
 	aead_encrypt, aead_decrypt, generate_secret, log, log_client
 )
+# --- Ensure logs directory and log files exist ---
+os.makedirs("logs", exist_ok=True)
+open("logs/client.log", "a").close()
+open("logs/server.log", "a").close()
 
 # --- Shared Config ---
 vocab = list("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789")

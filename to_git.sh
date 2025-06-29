@@ -10,7 +10,7 @@
 
 # Initialize a new Git repository
 git add .
-git commit -m "update code for warl0k_controlroom_combined.py"
+git commit -m "update requirements.txt"
 git remote add origin git@github.com:dsaban/warl0k_dash_app_ai_server.git
 git branch -M main
 git push -u origin main

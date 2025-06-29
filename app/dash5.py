@@ -1,0 +1,142 @@
+import streamlit as st
+import socket, uuid, torch, pickle, os
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+from model import add_noise_to_tensor, inject_patterned_noise
+from utils import aead_encrypt, log_client
+
+vocab = list("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789")
+
+def text_to_tensor(text):
+    return torch.tensor([vocab.index(c) for c in text], dtype=torch.long).unsqueeze(1)
+
+st.set_page_config("WARL0K Control Room", layout="wide")
+st.title("WARL0K Client Control Room")
+
+if st.sidebar.button("🔄 Reload Authentication Process"):
+    for key in list(st.session_state.keys()):
+        del st.session_state[key]
+    st.rerun()
+
+if "session_id" not in st.session_state:
+    st.session_state.session_id = str(uuid.uuid4())
+
+session_id = st.session_state.session_id
+st.sidebar.title("📌 Session Info")
+st.sidebar.subheader("Session ID")
+st.sidebar.code(session_id)
+
+try:
+    s = socket.socket()
+    s.connect(('localhost', 9995))
+    s.send(session_id.encode())
+    obfs = s.recv(64).decode()
+    log_client(f"[RECEIVED] Obfuscated secret: {obfs}")
+except Exception as e:
+    st.error(f"Failed to receive obfuscated secret: {e}")
+    st.stop()
+
+#  display obfuscated secret
+st.success("✅ Obfuscated Secret Received")
+st.code(obfs, language="text")
+
+# Generate fingerprint and noisy version
+torch.manual_seed(int(session_id[:8], 16))
+fingerprint = add_noise_to_tensor(text_to_tensor(obfs).squeeze(1), len(vocab)).unsqueeze(1)
+noisy_tensor = inject_patterned_noise(
+    seq_tensor=text_to_tensor(obfs).squeeze(1),
+    vocab_size=len(vocab),
+    error_rate=0.25,
+    pattern_ratio=0.6,
+    seed=session_id
+).unsqueeze(1)
+
+noisy_obf_secret = ''.join([vocab[i] for i in noisy_tensor.squeeze(1).tolist()])
+log_client(f"[FINGERPRINT] Generated fingerprint: {fingerprint.squeeze(1).tolist()}")
+log_client(f"[CLIENT] Injected noisy obf_secret: {noisy_obf_secret}")
+
+# Encrypt
+key = fingerprint.numpy().tobytes()[:16]
+secure_payload = aead_encrypt(key, b"This is my secure message")
+log_client(f"[ENCRYPTED] Payload: {secure_payload}")
+
+# Send to server
+try:
+    s2 = socket.socket()
+    s2.connect(('localhost', 9995))
+    s2.send(session_id.encode())
+    s2.send(pickle.dumps((fingerprint, secure_payload)))
+    log_client(f"[SENT] Fingerprint and encrypted payload sent.")
+    response = s2.recv(1024).decode()
+    log_client(f"[RESPONSE] Server: {response}")
+    auth_status = "✅ Authentication successful" if "[OK]" in response else "❌ Authentication failed"
+except Exception as e:
+    auth_status = f"Transmission error: {e}"
+
+# Two-column layout
+col1, col2 = st.columns([3, 2])
+
+with col1:
+    st.subheader("📡 Fingerprint Drift Analysis")
+    fp_df = pd.DataFrame({
+        "Index": list(range(len(fingerprint))),
+        "Original": fingerprint.squeeze(1).tolist(),
+        "Noisy": noisy_tensor.squeeze(1).tolist()
+    })
+    st.line_chart(fp_df.set_index("Index"))
+
+    st.subheader("🔍 Fingerprint Vector")
+    st.code(fingerprint.squeeze(1).tolist(), language="python")
+
+    st.subheader("🧬 Noisy Obfuscated Secret")
+    st.code(noisy_obf_secret, language="text")
+
+    st.subheader("🔐 Encrypted Payload")
+    st.code(secure_payload, "Encrypted Payload")
+
+    st.subheader("🧬 Secret Alignment Matrix")
+    fig, ax = plt.subplots(figsize=(10, 3))
+    df_lattice = pd.DataFrame({
+        "Obfuscated": list(obfs),
+        "Noisy": list(noisy_obf_secret),
+        "Fingerprint": [vocab[i] for i in fingerprint.squeeze(1).tolist()]
+    })
+    annot_data = df_lattice.T.values.tolist()
+    sns.heatmap(
+        data=[[ord(c) for c in row] for row in annot_data],
+        cmap="Blues", cbar=False,
+        annot=annot_data, fmt='s', ax=ax
+    )
+    ax.set_yticklabels(df_lattice.columns)
+    ax.set_xticks([])
+    ax.set_title("Alignment Matrix")
+    st.pyplot(fig)
+
+with col2:
+    st.subheader("📜 Server Log")
+    if os.path.exists("logs/server.log"):
+        with open("logs/server.log", "r") as f:
+            lines = f.readlines()
+        st.text_area("Server Log", "".join(lines[-20:]), height=200)
+    else:
+        st.info("No server log.")
+
+    st.subheader("📜 Client Log")
+    if os.path.exists("logs/client.log"):
+        with open("logs/client.log", "r") as f:
+            lines = f.readlines()
+        st.code("".join(lines[-20:]), language="bash")
+        st.sidebar.subheader("📊 Metrics")
+        st.sidebar.metric("Messages Sent", sum("Payload" in l for l in lines))
+        st.sidebar.metric("Auth Success", sum("[OK]" in l for l in lines))
+    else:
+        st.warning("Client log not found.")
+
+    st.subheader("✅ Status")
+    if "Authentication successful" in auth_status:
+        st.success(auth_status)
+    elif "Authentication failed" in auth_status:
+        st.error(auth_status)
+    else:
+        st.warning(auth_status)

@@ -16,7 +16,7 @@ from utils import (
 import random
 
 HOST = '0.0.0.0'
-PORT = 9996
+PORT = 9995
 SESSIONS = {}
 
 vocab = list("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789")
@@ -27,8 +27,8 @@ def text_to_tensor(text):
 def handle_client(conn):
     global SESSIONS
     session_id = conn.recv(36).decode()
-    print(f"[SESSION] New request for: {session_id}")
-    log(f"New session started with ID: {session_id}")
+    # print(f"[SESSION] New request for: {session_id}")
+    log(f"[Server] New session started with ID: {session_id}")
 
     if session_id not in SESSIONS:
         master = generate_secret()
@@ -44,9 +44,9 @@ def handle_client(conn):
         }
 
         conn.send(obfs.encode())
-        print(f"[SEND] Obfuscated secret sent.")
+        # print(f"[SEND] Obfuscated secret sent.")
         # Example after sending obfuscated secret:
-        log(f"Obfuscated secret: {obfs}")
+        log(f"[Server] Obfuscated secret: {obfs}")
         
         return
 
@@ -78,28 +78,28 @@ def handle_client(conn):
         noisy_obf_secret = ''.join([vocab[i] for i in noisy_tensor.squeeze(1).tolist()])
         # print(f"[RECEIVED] Fingerprint: {fingerprint}")
         # log(f"Received fingerprint: {fingerprint}")
-        log(f"Received fingerprint: {noisy_obf_secret}")
+        log(f"[Server] Received fingerprint: {noisy_obf_secret}")
         obfs_model = SESSIONS[session_id]["model_obfs"]
         master_expected = SESSIONS[session_id]["master"]
         recovered = evaluate_secret_regenerator(obfs_model, _fingerprint, vocab)
         
-        print(f"[RECONSTRUCT] Master: {recovered}")
-        log(f"Recovered master: {recovered}")
+        log(f"[Server][RECONSTRUCT] Master: {recovered}")
+        log(f"[Server] Recovered master: {recovered}")
         if recovered != master_expected:
             conn.send(b"[FAIL] Authentication failed.")
             return
 
         decrypted = aead_decrypt(_fingerprint.numpy().tobytes()[:16], encrypted_payload.encode())
-        print(f"[✓] Payload Decrypted: {decrypted.decode()}")
-        log(f"Decrypted payload: {decrypted.decode()}")
+        log(f"[Server] [✓] Payload Decrypted: {decrypted.decode()}")
+        log(f"[Server] Decrypted payload: {decrypted.decode()}")
         conn.send(b"[OK] Authenticated & Decrypted.")
     except Exception as e:
-        print(f"[ERROR] {e}")
+        print(f"[Server] [ERROR] {e}")
         conn.send(b"[ERR] Processing failed.")
 
 def start_server():
     print("[BOOT] WARL0K TCP Server Starting...")
-    log("Server is starting...")
+    log("[Server] Server is starting...")
     s = socket.socket()
     s.bind((HOST, PORT))
     s.listen(5)

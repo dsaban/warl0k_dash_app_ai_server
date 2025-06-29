@@ -1,13 +1,75 @@
-[2025-06-24 11:55:41] Server is starting...
-[2025-06-24 11:55:45] New session started with ID: e272a4dd-590e-4a63-b6f1-cf8f0040a800
-[2025-06-24 11:55:52] Obfuscated secret: pR6VrEUzra4LOITz
-[2025-06-24 11:55:52] New session started with ID: e272a4dd-590e-4a63-b6f1-cf8f0040a800
-[2025-06-24 11:55:52] Received fingerprint: pR6WrEU0ra4LOIUz
-[2025-06-24 11:55:52] Recovered master: GOjkZZghFIUhAOFm
-[2025-06-24 11:55:53] Decrypted payload: This is my secure message
-[2025-06-24 11:57:03] New session started with ID: 7b31838d-3748-4241-ba07-9a38812d7460
-[2025-06-24 11:57:07] Obfuscated secret: woWLNCQ7hiOXczKX
-[2025-06-24 11:57:07] New session started with ID: 7b31838d-3748-4241-ba07-9a38812d7460
-[2025-06-24 11:57:07] Received fingerprint: woWMNCA7hiOXczLX
-[2025-06-24 11:57:07] Recovered master: mURvcZzwjBROjQTa
-[2025-06-24 11:57:07] Decrypted payload: This is my secure message
+[BOOT] WARL0K TCP Server Starting...
+[Server][2025-06-29 11:22:17] [Server] Server is starting...
+[Server][2025-06-29 11:22:22] [Server] New session started with ID: 129dcb2a-ab34-442b-ad24-eafeeaa74b45
+[Server][2025-06-29 11:22:29] [Server] Obfuscated secret: w3DFzG8kVQkHwsth
+[Server][2025-06-29 11:22:29] Pattern indexes: [5, 7]
+[Server][2025-06-29 11:22:29] Random indexes: [11]
+[Server][2025-06-29 11:22:29] [Server] New session started with ID: 129dcb2a-ab34-442b-ad24-eafeeaa74b45
+[Server][2025-06-29 11:22:29] Pattern indexes: [5, 7]
+[Server][2025-06-29 11:22:29] Random indexes: [11]
+[Server][2025-06-29 11:22:29] [Server] Received fingerprint: w3DFzH8lVQkwwsth
+[Server][2025-06-29 11:22:29] [Server][RECONSTRUCT] Master: WovE4XTEPwHDlcmd
+[Server][2025-06-29 11:22:29] [Server] Recovered master: WovE4XTEPwHDlcmd
+[Server][2025-06-29 11:22:29] [Server] [✓] Payload Decrypted: This is my secure message
+[Server][2025-06-29 11:22:29] [Server] Decrypted payload: This is my secure message
+[Server][2025-06-29 11:24:08] [Server] New session started with ID: 12ca74b4-7402-4201-9dbc-a6b5fe1cf9ef
+[Server][2025-06-29 11:24:13] [Server] Obfuscated secret: EmT8qetwPUkcFhLT
+[Server][2025-06-29 11:24:13] Pattern indexes: [11, 7]
+[Server][2025-06-29 11:24:13] Random indexes: [9]
+[Server][2025-06-29 11:24:13] [Server] New session started with ID: 12ca74b4-7402-4201-9dbc-a6b5fe1cf9ef
+[Server][2025-06-29 11:24:13] Pattern indexes: [11, 7]
+[Server][2025-06-29 11:24:13] Random indexes: [9]
+[Server][2025-06-29 11:24:13] [Server] Received fingerprint: EmT8qetxPHkdFhLT
+[Server][2025-06-29 11:24:13] [Server][RECONSTRUCT] Master: fQniPEGVbBNZCIKF
+[Server][2025-06-29 11:24:13] [Server] Recovered master: fQniPEGVbBNZCIKF
+[Server][2025-06-29 11:24:13] [Server] [✓] Payload Decrypted: This is my secure message
+[Server][2025-06-29 11:24:13] [Server] Decrypted payload: This is my secure message
+[Server][2025-06-29 12:16:39] [Server] New session started with ID: 34f9fbd2-ec74-4fb6-b3fa-268bdab74ca4
+[Server][2025-06-29 12:16:47] [Server] Obfuscated secret: wQNvuIBE1Nx5CrGG
+[Server][2025-06-29 12:16:47] Pattern indexes: [5, 15]
+[Server][2025-06-29 12:16:47] Random indexes: [2]
+[Server][2025-06-29 12:16:47] [Server] New session started with ID: 34f9fbd2-ec74-4fb6-b3fa-268bdab74ca4
+[Server][2025-06-29 12:16:47] Pattern indexes: [5, 15]
+[Server][2025-06-29 12:16:47] Random indexes: [2]
+[Server][2025-06-29 12:16:47] [Server] Received fingerprint: wQEvuJBE1Nx5CrGH
+[Server][2025-06-29 12:16:47] [Server][RECONSTRUCT] Master: GK7xcaXt3FtQpOiA
+[Server][2025-06-29 12:16:47] [Server] [✓] Payload Decrypted: This is my secure message
+[Server][2025-06-29 12:17:27] [Server] New session started with ID: d2a21676-578c-412a-8cea-26eec5a7e96c
+[Server][2025-06-29 12:17:31] [Server] Obfuscated secret: MzwTYVyPhHX99Ruj
+[Server][2025-06-29 12:17:31] Pattern indexes: [2, 15]
+[Server][2025-06-29 12:17:31] Random indexes: [3]
+[Server][2025-06-29 12:17:31] [Server] New session started with ID: d2a21676-578c-412a-8cea-26eec5a7e96c
+[Server][2025-06-29 12:17:31] Pattern indexes: [2, 15]
+[Server][2025-06-29 12:17:31] Random indexes: [3]
+[Server][2025-06-29 12:17:31] [Server] Received fingerprint: MzxiYVyPhHX99Ruk
+[Server][2025-06-29 12:17:31] [Server][RECONSTRUCT] Master: pyhCKPFdUNe7HTUr
+[Server][2025-06-29 12:17:31] [Server] [✓] Payload Decrypted: This is my secure message
+[Server][2025-06-29 12:17:43] [Server] New session started with ID: 135ce1db-411a-42fe-9282-89f456c8e779
+[Server][2025-06-29 12:17:48] [Server] Obfuscated secret: 6Zz6zBMd6HIFedHx
+[Server][2025-06-29 12:17:48] Pattern indexes: [12, 13]
+[Server][2025-06-29 12:17:48] Random indexes: [3]
+[Server][2025-06-29 12:17:48] [Server] New session started with ID: 135ce1db-411a-42fe-9282-89f456c8e779
+[Server][2025-06-29 12:17:48] Pattern indexes: [12, 13]
+[Server][2025-06-29 12:17:48] Random indexes: [3]
+[Server][2025-06-29 12:17:48] [Server] Received fingerprint: 6ZzGzBMd6HIFfeHx
+[Server][2025-06-29 12:17:48] [Server][RECONSTRUCT] Master: uGpxzX6zX40uxVTT
+[Server][2025-06-29 12:17:58] [Server] New session started with ID: d311a020-f4c3-4abd-8bda-668fced3e942
+[Server][2025-06-29 12:18:03] [Server] Obfuscated secret: h7ZC6EINuMfE1VqW
+[Server][2025-06-29 12:18:03] Pattern indexes: [4, 12]
+[Server][2025-06-29 12:18:03] Random indexes: [13]
+[Server][2025-06-29 12:18:03] [Server] New session started with ID: d311a020-f4c3-4abd-8bda-668fced3e942
+[Server][2025-06-29 12:18:03] Pattern indexes: [4, 12]
+[Server][2025-06-29 12:18:03] Random indexes: [13]
+[Server][2025-06-29 12:18:03] [Server] Received fingerprint: h7ZC7EINuMfE2JqW
+[Server][2025-06-29 12:18:03] [Server][RECONSTRUCT] Master: gBQnudHVFPB3Mj1N
+[Server][2025-06-29 12:18:03] [Server] [✓] Payload Decrypted: This is my secure message
+[Server][2025-06-29 12:21:06] [Server] New session started with ID: e1b87b3d-cb94-4989-95e7-b90ddc03350e
+[Server][2025-06-29 12:21:11] [Server] Obfuscated secret: N7TrsqOEM19kRy1d
+[Server][2025-06-29 12:21:11] Pattern indexes: [0, 1]
+[Server][2025-06-29 12:21:11] Random indexes: [2]
+[Server][2025-06-29 12:21:11] [Server] New session started with ID: e1b87b3d-cb94-4989-95e7-b90ddc03350e
+[Server][2025-06-29 12:21:11] Pattern indexes: [0, 1]
+[Server][2025-06-29 12:21:11] Random indexes: [2]
+[Server][2025-06-29 12:21:11] [Server] Received fingerprint: O8ArsqOEM19kRy1d
+[Server][2025-06-29 12:21:11] [Server][RECONSTRUCT] Master: Pa2QEHwoEDl2kqbN
+[Server][2025-06-29 12:21:11] [Server] [✓] Payload Decrypted: This is my secure message

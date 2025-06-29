@@ -57,12 +57,12 @@ def decrypt(key, nonce, ct):
 def log(msg):
     timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     with open(LOG_FILE, "a") as f:
-        f.write(f"[{timestamp}] {msg}\n")
-    print(f"[{timestamp}] {msg}")
+        f.write(f"[Server][{timestamp}] {msg}\n")
+    # print(f"[Server][{timestamp}] {msg}")
 
 #  log for client
 def log_client(msg):
     timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     with open(LOG_FILE_CLIENT, "a") as f:
         f.write(f"[CLIENT] [{timestamp}] {msg}\n")
-    print(f"[CLIENT] [{timestamp}] {msg}")
+    # print(f"[CLIENT] [{timestamp}] {msg}")

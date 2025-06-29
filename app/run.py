@@ -23,7 +23,7 @@ time.sleep(2)
 # --- Start the Streamlit Client Dashboard ---
 print("[CLIENT DASHBOARD] Launching Streamlit dashboard...")
 subprocess.Popen(
-    ["streamlit", "run", "client_ai_dash2.py"],
+    ["streamlit", "run", "dash6.py"],
     stdout=open("logs/client.log", "w"),
     stderr=subprocess.STDOUT,
     start_new_session=True

@@ -4,7 +4,8 @@
 import torch
 import torch.nn as nn
 import random
-
+# from model import add_noise_to_tensor, inject_patterned_noise
+from utils import log, log_client
 def add_noise_to_tensor(tensor, vocab_size, noise_level=0.4):
     noisy = tensor.clone()
     for i in range(len(noisy)):
@@ -24,10 +25,12 @@ def inject_patterned_noise(seq_tensor, vocab_size, error_rate=0.2, pattern_ratio
     noisy = seq_tensor.clone()
     length = len(noisy)
     pattern_indexes = random.sample(range(length), int(length * error_rate * pattern_ratio))
-    print(f"Pattern indexes: {pattern_indexes}")
+    log(f"Pattern indexes: {pattern_indexes}")
+    log_client(f"[CLIENT] Pattern indexes: {pattern_indexes}")
     random_indexes = random.sample([i for i in range(length) if i not in pattern_indexes],
                                    int(length * error_rate * (1 - pattern_ratio)))
-    print(f"Random indexes: {random_indexes}")
+    log(f"Random indexes: {random_indexes}")
+    log_client(f"[CLIENT] Random indexes: {random_indexes}")
     
     # Apply predictable noise to pattern_indexes and full random noise to random_indexes
     for i in pattern_indexes:

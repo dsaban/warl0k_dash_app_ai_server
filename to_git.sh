@@ -10,7 +10,7 @@
 
 # Initialize a new Git repository
 git add .
-git commit -m "add control_room.py"
+git commit -m "add plotly to requirements.txt"
 git remote add origin git@github.com:dsaban/warl0k_dash_app_ai_server.git
 git branch -M main
 git push -u origin main

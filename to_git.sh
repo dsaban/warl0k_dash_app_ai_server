@@ -10,7 +10,7 @@
 
 # Initialize a new Git repository
 git add .
-git commit -m "add sklearn 0.0 to requirements.txt and add to gitignore"
+git commit -m "add scikit-learn==1.3.2 to requirements.txt and add to gitignore"
 git remote add origin git@github.com:dsaban/warl0k_dash_app_ai_server.git
 git branch -M main
 git push -u origin main

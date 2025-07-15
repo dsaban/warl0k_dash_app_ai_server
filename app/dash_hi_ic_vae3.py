@@ -23,8 +23,9 @@ import warnings
 warnings.filterwarnings("ignore", category=UserWarning, module="matplotlib")
 
 # ----------------------- Page Config ---------------------------------
-st.set_page_config(page_title="IC‑VAE Dashboard", layout="wide")
-
+st.set_page_config(page_title="WARL0K IC‑VAE Dashboard", layout="wide")
+#  set page title and layout
+st.title("WARL0K IC‑VAE & HIC‑VAE Dashboard")
 # --------------------- Sidebar Controls ------------------------------
 st.sidebar.header("Hyperparameters & Thresholds")
 latent_dim     = st.sidebar.slider("Latent Dim", 1, 8, 2)
@@ -40,7 +41,7 @@ time_dev_percent   = st.sidebar.slider("Timing Deviation (%)", 5, 100, 20, 5)
 
 # ----------------- Synthetic Data Generation -------------------------
 np.random.seed(42)
-NUM_POINTS = 2000
+NUM_POINTS = 1000
 x = np.linspace(-10, 10, NUM_POINTS)
 base_signal = np.sin(x) + np.sin(2 * x) + np.sin(3 * x)
 noise = 0.5 * np.random.normal(size=x.shape)
@@ -247,7 +248,11 @@ if "ic_vae" in st.session_state and "hic_vae" in st.session_state:
 	
 # 	 show default training data
 	st.subheader("Default Training Data")
-	st.line_chart(data_tensor.numpy().flatten(), use_container_width=True, height=300)
+	st.write("This is the original testing data used for scaling and model training.")
+	#  set signal in red color
+	# st.markdown("<span style='color:red'>Default Training Data</span>", unsafe_allow_html=True)
+	
+	st.line_chart(test_data.numpy().flatten(), use_container_width=True, height=300, color="#ffaa00")
 # 	 show the default data as the training scaler
 	st.sidebar.subheader("Default Data Scaler")
 	st.sidebar.write("Min:", scaler.data_min_[0])

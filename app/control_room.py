@@ -172,16 +172,20 @@ except Exception as e:
 
 # --- Layout ---
 col1, col2, col3 = st.columns(3)
-
+#  create a new malicious sample for the hacky sample based on the obfuscated secret with noise
+hacky_sample = [obfs[i % len(obfs)] for i in range(len(fingerprint))]
 with col1:
 	st.subheader("📊 Fingerprint Drift")
 	df = pd.DataFrame({
-		"Index": range(len(fingerprint)),
+		# "Index": range(len(fingerprint)),
+		# "Master": [vocab[i] for i in text_to_tensor(SESSIONS[session_id]["master"]).squeeze(1).tolist()],
+		"Obfuscated": range(len(obfs)),
+		# "Obfuscated Secret": obfs.squeeze(1).tolist(),
 		"Original": fingerprint.squeeze(1).tolist(),
 		"Noisy": noisy_tensor.squeeze(1).tolist(),
-		# "Master": [vocab[i] for i in text_to_tensor(SESSIONS[session_id]["master"]).squeeze(1).tolist()]
+		# "Hacky Sample": hacky_sample
 	})
-	st.line_chart(df.set_index("Index"))
+	st.line_chart(df.set_index("Obfuscated"))
 	
 	st.subheader("🧬 Secret Alignment")
 	fig, ax = plt.subplots(figsize=(10, 3))

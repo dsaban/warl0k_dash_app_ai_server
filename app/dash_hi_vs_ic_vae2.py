@@ -26,7 +26,7 @@ from sklearn.model_selection import train_test_split
 
 st.set_page_config(page_title="IC‑VAE Dashboard", layout="wide")
 
-st.title("Incremental Control VAE Dashboard")
+st.title("WARL0K Incremental Control VAE Dashboard")
 st.write(
     "Train and compare **IC‑VAE** and **Hierarchical IC‑VAE** on a synthetic "
     "spike‑laden signal. Adjust hyper‑parameters and anomaly thresholds in the "

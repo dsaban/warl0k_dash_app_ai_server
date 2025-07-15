@@ -249,14 +249,14 @@ if "ic_vae" in st.session_state and "hic_vae" in st.session_state:
 # 	 show default training data
 	st.subheader("Default Training Data")
 	st.write("This is the original testing data used for scaling and model training.")
-	#  set signal in red color
-	# st.markdown("<span style='color:red'>Default Training Data</span>", unsafe_allow_html=True)
 	
-	st.line_chart(test_data.numpy().flatten(), use_container_width=True, height=300, color="#ffaa00")
 # 	 show the default data as the training scaler
 	st.sidebar.subheader("Default Data Scaler")
 	st.sidebar.write("Min:", scaler.data_min_[0])
 	st.sidebar.write("Max:", scaler.data_max_[0])
+	
+	st.line_chart(test_data.numpy().flatten(), use_container_width=True, height=300, color="#ffaa00")
+
 # 	 show the IC‑VAE reconstructions
 	st.subheader("IC‑VAE Reconstructions")
 	st.line_chart(ic_recon.flatten(), use_container_width=True, height=300)
@@ -264,6 +264,18 @@ if "ic_vae" in st.session_state and "hic_vae" in st.session_state:
 	st.subheader("HIC‑VAE Reconstructions")
 	st.line_chart(hic_recon.flatten(), use_container_width=True, height=300)
 # 	# ------------------ Display Reconstructions (Commented Out) ---------
+# 	set all chart in same line for comparison with different colors each
+	st.subheader("IC‑VAE vs HIC‑VAE Reconstructions vs Default Data")
+	fig, ax = plt.subplots(figsize=(10, 5))
+	ax.plot(ic_recon.flatten(), label='IC‑VAE Reconstruction', color='blue')
+	ax.plot(hic_recon.flatten(), label='HIC‑VAE Reconstruction', color='orange')
+	ax.plot(test_data.numpy().flatten(), label='Default Data', color='green', linestyle='--')
+	ax.set_title("IC‑VAE vs HIC‑VAE Reconstructions")
+	ax.set_xlabel("Time")
+	ax.set_ylabel("Amplitude")
+	ax.legend()
+	st.pyplot(fig)
+	
 
 
 

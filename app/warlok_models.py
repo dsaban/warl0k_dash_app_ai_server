@@ -91,3 +91,101 @@ class HICVAE(nn.Module):
 		kld1 = -0.5 * torch.sum(1 + logvar1 - mu1.pow(2) - logvar1.exp())
 		kld2 = -0.5 * torch.sum(1 + logvar2 - mu2.pow(2) - logvar2.exp())
 		return bce + kl_w * (kld1 + kld2)
+
+# Define the Beta-VAE model
+class BetaVAE(nn.Module):
+	def __init__(self, input_dim, latent_dim, beta):
+		super(BetaVAE, self).__init__()
+		self.beta = beta
+		self.fc1 = nn.Linear(input_dim, 128)
+		self.fc2 = nn.Linear(128, 64)
+		self.fc3_mu = nn.Linear(64, latent_dim)
+		self.fc3_logvar = nn.Linear(64, latent_dim)
+		self.fc4 = nn.Linear(latent_dim, 64)
+		self.fc5 = nn.Linear(64, 128)
+		self.fc6 = nn.Linear(128, input_dim)
+	
+	def encode(self, x):
+		h = torch.relu(self.fc1(x))
+		h = torch.relu(self.fc2(h))
+		mu = self.fc3_mu(h)
+		logvar = self.fc3_logvar(h)
+		return mu, logvar
+	
+	def reparameterize(self, mu, logvar):
+		std = torch.exp(0.5 * logvar)
+		eps = torch.randn_like(std)
+		return mu + eps * std
+	
+	def decode(self, z):
+		h = torch.relu(self.fc4(z))
+		h = torch.relu(self.fc5(h))
+		return torch.sigmoid(self.fc6(h))
+	
+	def forward(self, x):
+		mu, logvar = self.encode(x)
+		z = self.reparameterize(mu, logvar)
+		return self.decode(z), mu, logvar
+	
+	def loss_function(self, recon_x, x, mu, logvar):
+		BCE = nn.functional.binary_cross_entropy(recon_x, x, reduction='sum')
+		KLD = -0.5 * torch.sum(1 + logvar - mu.pow(2) - logvar.exp())
+		return BCE + self.beta * KLD
+
+
+# Define the IC-VAE model (from previous implementation)
+class IC_VAE(nn.Module):
+	def __init__(self, input_dim, latent_dim, beta_initial):
+		super(IC_VAE, self).__init__()
+		self.beta = beta_initial
+		
+		# Encoder with incremental refinement
+		self.fc1 = nn.Linear(input_dim, 128)
+		self.fc2 = nn.Linear(128, 64)
+		self.fc3_mu = nn.Linear(64, latent_dim)
+		self.fc3_logvar = nn.Linear(64, latent_dim)
+		
+		# Auxiliary network for soft KL control
+		self.aux_network = nn.Sequential(
+			nn.Linear(latent_dim, 32),
+			nn.ReLU(),
+			nn.Linear(32, 1)
+		)
+		
+		# Decoder
+		self.fc4 = nn.Linear(latent_dim, 64)
+		self.fc5 = nn.Linear(64, 128)
+		self.fc6 = nn.Linear(128, input_dim)
+	
+	def encode(self, x):
+		h = torch.relu(self.fc1(x))
+		h = torch.relu(self.fc2(h))
+		mu = self.fc3_mu(h)
+		logvar = self.fc3_logvar(h)
+		return mu, logvar
+	
+	def reparameterize(self, mu, logvar):
+		std = torch.exp(0.5 * logvar)
+		eps = torch.randn_like(std)
+		return mu + eps * std
+	
+	def decode(self, z):
+		h = torch.relu(self.fc4(z))
+		h = torch.relu(self.fc5(h))
+		return torch.sigmoid(self.fc6(h))
+	
+	def forward(self, x):
+		mu, logvar = self.encode(x)
+		z = self.reparameterize(mu, logvar)
+		recon_x = self.decode(z)
+		
+		# Adaptive KL regularization
+		kl_weight = torch.sigmoid(self.aux_network(mu))
+		kl_weight = kl_weight.mean()
+		
+		return recon_x, mu, logvar, kl_weight
+	
+	def loss_function(self, recon_x, x, mu, logvar, kl_weight):
+		BCE = nn.functional.binary_cross_entropy(recon_x, x, reduction='sum')
+		KLD = -0.5 * torch.sum(1 + logvar - mu.pow(2) - logvar.exp())
+		return BCE + kl_weight * KLD

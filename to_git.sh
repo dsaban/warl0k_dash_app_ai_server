@@ -10,7 +10,7 @@
 
 # Initialize a new Git repository
 git add .
-git commit -m "add dash_vae6.py warlok_models.py to gitignore"
+git commit -m "add dash_beta_vs_ic_vae1.py and updated warlok_models.py to gitignore"
 git remote add origin git@github.com:dsaban/warl0k_dash_app_ai_server.git
 git branch -M main
 git push -u origin main

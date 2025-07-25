@@ -1,0 +1,39 @@
+[Starting RNN Training with Noise and Dropout]
+[Clean Target]: ywr0n9rEw3aY5ErZsaLPiMKbu7rN4jZ2
+[Epoch 0] Loss: 132.095 | Reconstructed: OZwdaQwa1ESZuxwvBv3r8ZKQEZwvjPvr
+[Epoch 100] Loss: 25.7165 | Reconstructed: ywrkn9rEw3aY5ErZsawrZruLuwrkwjwr
+[Epoch 200] Loss: 3.07403 | Reconstructed: ywrkn9rkn9knn9rkn9kkn99kn9rkn9kn
+[Epoch 300] Loss: 1.37064 | Reconstructed: ywrkn9rkw9rkn9rknjr24jZ24jrN4jZ2
+[Epoch 400] Loss: 0.853921 | Reconstructed: ywrkn9rEw3aY5ErZsaLPiMKbu7rE4ju7
+[Epoch 500] Loss: 0.61283 | Reconstructed: ywrkn9rEwrkn9Erkn9wrkn9nknrkn9rr
+[Epoch 600] Loss: 0.475083 | Reconstructed: ywrkn9rEwrrkw9rEwarEw3rE5jrZsaZ2
+[Epoch 700] Loss: 0.386579 | Reconstructed: ywrkn9rkw9knw9rkw9wrkn9rk9rkk9wr
+[Epoch 800] Loss: 0.325185 | Reconstructed: ywrkn9rkw9rkn9rkw9rnw9rkw9rkw9kn
+[Epoch 900] Loss: 0.280234 | Reconstructed: ywrkn9rEw3rY53rE5arr53rY53rYn3r2
+[Epoch 1000] Loss: 0.245973 | Reconstructed: ywrkn9rkw3kY59rk49rywrkny7rk49ry
+[Epoch 1100] Loss: 0.219038 | Reconstructed: ywrkn9rEw3aY5ErZsaLPiMKbu7rNn9Y5
+[Epoch 1200] Loss: 0.19733 | Reconstructed: ywrkn9rEw3kn9ErEn9kn9EkEw9rN4jrE
+[Epoch 1300] Loss: 0.179476 | Reconstructed: ywrkn9rkn9rkn9rkn9rkn9rkn9rkn9rk
+[Epoch 1400] Loss: 0.164542 | Reconstructed: ywrkn9r5w3aY5ErZsaLPiMKbu7rN4jr2
+[Epoch 1500] Loss: 0.151871 | Reconstructed: ywrkn9rEw3rYn9rEwjrZs7Kbu7rN4jZ2
+[Epoch 1600] Loss: 0.140989 | Reconstructed: ywrkn93r7rZ5ZErZ5ErZsZE5ErEMZMZb
+[Epoch 1700] Loss: 0.131542 | Reconstructed: ywrkn9rE99rEE9rkn9r9r999E9rEE9rr
+[Epoch 1800] Loss: 0.123266 | Reconstructed: ywrkn9rEw3aY5ErZsaLPiMKbu7rN4jZ2
+[Epoch 1900] Loss: 0.115957 | Reconstructed: ywrkn9rkw9k999rk99w9w99k99rk99k9
+[Epoch 2000] Loss: 0.109455 | Reconstructed: ywrkn9rywrkn9LriMaY5wMKbu7aiMKbu
+[Epoch 2100] Loss: 0.103634 | Reconstructed: ywrkn9rEw3aY5ErZsaLrk3abu7rN4jZ2
+[Epoch 2200] Loss: 0.0983924 | Reconstructed: ywrkn9rEw3aY5ErEEaL5wMKb53rEE3EE
+[Epoch 2300] Loss: 0.0936482 | Reconstructed: ywrkn9r5w3aY5EraYaY5a3ab5srE4jr5
+[Epoch 2400] Loss: 0.0893339 | Reconstructed: ywrkn9rEw9rrn9rEn9rkn9rkn9rkn9rr
+[Epoch 2500] Loss: 0.0853938 | Reconstructed: ywrkn9rEw3rY53rZsaaZuaKZ2arZsaZ2
+[Epoch 2600] Loss: 0.0817814 | Reconstructed: yw9kn99E99kn9EnaY3aE5E5b5ErZsKZ2
+[Epoch 2700] Loss: 0.0784576 | Reconstructed: ywrkn9rEwEE55ErZsasaiMKbu73as73P
+[Epoch 2800] Loss: 0.0753892 | Reconstructed: ywrkn9rEw3aY5ErZsaLPiMKbu7rNn9L2
+[Epoch 2900] Loss: 0.072548 | Reconstructed: ywrkn9rEw3rY5ErZ2aLPiMKbu7rN4jZ2
+[Epoch 3000] Loss: 0.0699097 | Reconstructed: ywrkn9rrw3aY5ErZsaL2iMKbu7rN4jZ2
+[Clean Target ]: ywr0n9rEw3aY5ErZsaLPiMKbu7rN4jZ2
+[Noisy Version]: ywrkn9rEw3aY5ErZsaLPiMKbu7rN4jZ2
+[Training Time]: 962 ms
+[Final Prediction]: ywrkn9rEw3rE5ErZsaLPiMKbu7rN4jZ2
+X - Target and prediction do not match!
+[Estimated AI RAM Usage]: 39.7344 KB

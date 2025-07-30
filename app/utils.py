@@ -10,6 +10,9 @@ import os
 import base64
 from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 import datetime
+#  validate that the log directory exists
+os.makedirs("./logs", exist_ok=True)
+#  log for server
 LOG_FILE = "./logs/server.log"
 #  log for client
 LOG_FILE_CLIENT = "./logs/client.log"

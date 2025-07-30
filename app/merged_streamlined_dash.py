@@ -61,7 +61,7 @@ if "run" in st.session_state:
 
     # --- RIGHT COLUMN: Session Simulation ---
     with col2:
-        st.header("🧬 Session Auth Pipeline")
+        st.header("🧬 SCADA: Session Auth Dashboard")
 
         master = generate_secret()
         obfs = generate_secret()
@@ -76,7 +76,9 @@ if "run" in st.session_state:
         noisy = inject_patterned_noise(torch.tensor([vocab.index(c) for c in obfs]), len(vocab), 0.25, 0.6, session_id)
         noisy_text = ''.join([vocab[i] for i in noisy.tolist()])
         fingerprint = add_noise_to_tensor(torch.tensor([vocab.index(c) for c in obfs]), len(vocab)).unsqueeze(1)
-
+        st.code(f"Injected Noisy Obfuscated Secret: {noisy_text}")
+        log_client(f"[CLIENT] Injected noisy obfuscated secret: {noisy_text}")
+        
         st.subheader("🔍 Fingerprint Alignment")
         df = pd.DataFrame({
             "Index": list(range(len(obfs))),
@@ -89,12 +91,13 @@ if "run" in st.session_state:
         st.subheader("📥 Encrypted Payload")
         key = fingerprint.numpy().tobytes()[:16]
         encrypted = aead_encrypt(key, b"Payload: Hello WARL0K")
-        log_client(f"[ENCRYPTED] Payload: {encrypted}")
-        st.code(encrypted, language="bash")
+        decrypted = aead_decrypt(key, encrypted.encode())
+        log_client(f"[DECRYPTED] Payload: {decrypted}")
+        st.code(decrypted, language="bash")
         recovered = evaluate_secret_regenerator(model_obfs, fingerprint, vocab)
         status = "✅ AUTH OK" if recovered == master else "❌ AUTH FAIL"
 
-        st.code(f"Recovered: {recovered}")
+        st.code(f"Recovered Master: {recovered}")
         st.code(encrypted, language="bash")
         st.markdown(f"**Status:** {status}")
         # st.success(status) if "OK" in status else st.error(status)

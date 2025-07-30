@@ -31,3 +31,10 @@
 [CLIENT] [2025-07-30 17:49:12] [CLIENT] Random indexes: [10]
 [CLIENT] [2025-07-30 17:49:24] [CLIENT] Pattern indexes: [11, 5]
 [CLIENT] [2025-07-30 17:49:24] [CLIENT] Random indexes: [14]
+[CLIENT] [2025-07-30 18:17:39] [CLIENT] Pattern indexes: [1, 5]
+[CLIENT] [2025-07-30 18:17:39] [CLIENT] Random indexes: [2]
+[CLIENT] [2025-07-30 18:17:40] [ENCRYPTED] Payload: D1iQWI4UF8zTtWfFMv3e446OXP7zT1In4Ey0cUy3zalkoyKTBcf4RKVomSR+YBz8fA==
+[CLIENT] [2025-07-30 18:20:46] [CLIENT] Pattern indexes: [12, 0]
+[CLIENT] [2025-07-30 18:20:46] [CLIENT] Random indexes: [2]
+[CLIENT] [2025-07-30 18:20:46] [CLIENT] Injected noisy obfuscated secret: Mf&TjyqhOqKyX7jH
+[CLIENT] [2025-07-30 18:20:47] [DECRYPTED] Payload: b'Payload: Hello WARL0K'

@@ -69,6 +69,8 @@ if "run" in st.session_state:
         model_obfs = train_secret_regenerator(master, vocab, input_override=obfs)
 
         st.code(f"Obfuscated Secret: {obfs}")
+        st.code(f"Master Secret: {master}")
+        
 
         torch.manual_seed(int(session_id, 16))
         noisy = inject_patterned_noise(torch.tensor([vocab.index(c) for c in obfs]), len(vocab), 0.25, 0.6, session_id)
@@ -87,6 +89,8 @@ if "run" in st.session_state:
         st.subheader("📥 Encrypted Payload")
         key = fingerprint.numpy().tobytes()[:16]
         encrypted = aead_encrypt(key, b"Payload: Hello WARL0K")
+        log_client(f"[ENCRYPTED] Payload: {encrypted}")
+        st.code(encrypted, language="bash")
         recovered = evaluate_secret_regenerator(model_obfs, fingerprint, vocab)
         status = "✅ AUTH OK" if recovered == master else "❌ AUTH FAIL"
 

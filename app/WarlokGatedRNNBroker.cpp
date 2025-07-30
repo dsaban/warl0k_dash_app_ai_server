@@ -5,6 +5,7 @@
 #include <random>
 #include <cmath>
 #include <algorithm>
+#include <fstream>
 using namespace std;
 
 const double LR = 0.01;
@@ -144,14 +145,43 @@ struct RNN {
         }
         return result;
     }
+//    save and load model for fast inference
+    void save_model(const string& filename) {
+        ofstream ofs(filename, ios::binary);
+        ofs.write(reinterpret_cast<const char*>(&input_dim), sizeof(input_dim));
+        ofs.write(reinterpret_cast<const char*>(&hidden_dim), sizeof(hidden_dim));
+        ofs.write(reinterpret_cast<const char*>(&output_dim), sizeof(output_dim));
+        for (const auto& row : Wxh) ofs.write(reinterpret_cast<const char*>(row.data()), row.size() * sizeof(double));
+        for (const auto& row : Whh) ofs.write(reinterpret_cast<const char*>(row.data()), row.size() * sizeof(double));
+        for (const auto& row : Why) ofs.write(reinterpret_cast<const char*>(row.data()), row.size() * sizeof(double));
+        ofs.write(reinterpret_cast<const char*>(bh.data()), bh.size() * sizeof(double));
+        ofs.write(reinterpret_cast<const char*>(by.data()), by.size() * sizeof(double));
+    }
+
+    void load_model(const string& filename) {
+        ifstream ifs(filename, ios::binary);
+        ifs.read(reinterpret_cast<char*>(&input_dim), sizeof(input_dim));
+        ifs.read(reinterpret_cast<char*>(&hidden_dim), sizeof(hidden_dim));
+        ifs.read(reinterpret_cast<char*>(&output_dim), sizeof(output_dim));
+        Wxh.resize(hidden_dim, vector<double>(input_dim));
+        Whh.resize(hidden_dim, vector<double>(hidden_dim));
+        Why.resize(output_dim, vector<double>(hidden_dim));
+        bh.resize(hidden_dim);
+        by.resize(output_dim);
+        for (auto& row : Wxh) ifs.read(reinterpret_cast<char*>(row.data()), row.size() * sizeof(double));
+        for (auto& row : Whh) ifs.read(reinterpret_cast<char*>(row.data()), row.size() * sizeof(double));
+        for (auto& row : Why) ifs.read(reinterpret_cast<char*>(row.data()), row.size() * sizeof(double));
+        ifs.read(reinterpret_cast<char*>(bh.data()), bh.size() * sizeof(double));
+        ifs.read(reinterpret_cast<char*>(by.data()), by.size() * sizeof(double));
+    }
 };
 
 int main() {
-    string vocab = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
+    string vocab = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()-_=+[]{}|;:',.<>?/";
     string target = "";
     // int seed = 42;
     int secret_size = 32;
-    // srand(seed);
+//    srand(seed);
     srand(time(0));
     // Generate a random target string
     // for (int i = 0; i < secret_size; ++i) target += vocab[rand() % vocab.size()];

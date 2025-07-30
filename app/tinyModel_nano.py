@@ -76,7 +76,7 @@ def est_size_time(model=TinySecretRegenerator):
 # Full on-device training + inference pipeline
 if __name__ == "__main__":
 	start_time0 = time.perf_counter()
-	vocab = list("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789")
+	vocab = list("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_=+[]{}|;:',.<>?/")
 	secret = ''.join(np.random.choice(vocab, 16))
 	print(f"Generated Secret (on-device): {secret}")
 

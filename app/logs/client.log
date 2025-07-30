@@ -4,3 +4,30 @@
   Local URL: http://localhost:8501
   Network URL: http://192.168.1.158:8501
 
+[CLIENT] [2025-07-30 17:34:12] [CLIENT] Restarting authentication process...
+[CLIENT] [2025-07-30 17:34:18] [RECEIVED] Obfuscated secret: unR4OFeQQUVcJHHw
+[CLIENT] [2025-07-30 17:34:18] [CLIENT] Pattern indexes: [2, 13]
+[CLIENT] [2025-07-30 17:34:18] [CLIENT] Random indexes: [12]
+[CLIENT] [2025-07-30 17:34:18] [FINGERPRINT] [47, 26, 21, 24, 10, 5, 30, 16, 16, 44, 59, 28, 9, 7, 7, 52]
+[CLIENT] [2025-07-30 17:34:18] [NOISY] unS4OFeQQUVcgIHw
+[CLIENT] [2025-07-30 17:34:18] [ENCRYPTED] S1A4LRjTPMns6GUTrPD7oqHnDk89Jyhzi3PpW/1/YXfF3gAZSov4rHSGvVxk/mfNgHJryWI=
+[CLIENT] [2025-07-30 17:34:18] [CLIENT] Pattern indexes: [2, 13]
+[CLIENT] [2025-07-30 17:34:18] [CLIENT] Random indexes: [12]
+[CLIENT] [2025-07-30 17:34:18] [RESPONSE] Server: [OK] Authenticated & Decrypted.
+[CLIENT] [2025-07-30 17:34:19] [RECEIVED] Obfuscated secret: n03DrPfAVo843XFZ
+[CLIENT] [2025-07-30 17:34:19] [CLIENT] Pattern indexes: [4, 8]
+[CLIENT] [2025-07-30 17:34:19] [CLIENT] Random indexes: [1]
+[CLIENT] [2025-07-30 17:34:19] [FINGERPRINT] [39, 12, 55, 32, 54, 54, 7, 21, 32, 40, 42, 4, 55, 4, 5, 25]
+[CLIENT] [2025-07-30 17:34:19] [NOISY] nj3DsPfAWo843XFZ
+[CLIENT] [2025-07-30 17:34:19] [ENCRYPTED] NpMZPHEm0SNAHwGeXCgqhcwpSuD6E65oTwfIqy4/VvU4dTLSIsbkqa17Gt4YG6zOZyH9x9M=
+[CLIENT] [2025-07-30 17:34:19] [CLIENT] Pattern indexes: [4, 8]
+[CLIENT] [2025-07-30 17:34:19] [CLIENT] Random indexes: [1]
+[CLIENT] [2025-07-30 17:34:19] [RESPONSE] Server: [OK] Authenticated & Decrypted.
+[CLIENT] [2025-07-30 17:46:48] [CLIENT] Pattern indexes: [1, 12]
+[CLIENT] [2025-07-30 17:46:48] [CLIENT] Random indexes: [6]
+[CLIENT] [2025-07-30 17:48:46] [CLIENT] Pattern indexes: [2, 15]
+[CLIENT] [2025-07-30 17:48:46] [CLIENT] Random indexes: [9]
+[CLIENT] [2025-07-30 17:49:12] [CLIENT] Pattern indexes: [1, 4]
+[CLIENT] [2025-07-30 17:49:12] [CLIENT] Random indexes: [10]
+[CLIENT] [2025-07-30 17:49:24] [CLIENT] Pattern indexes: [11, 5]
+[CLIENT] [2025-07-30 17:49:24] [CLIENT] Random indexes: [14]

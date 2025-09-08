@@ -198,7 +198,8 @@ tiny_mcu = TinyModelMCU(vocab=vocab)
 secrets, string_secrets = tiny_mcu.generate_3_secrets(length=8)
 
 # Broker Gated RNN
-broker_rnn = GatedRNNBroker(input_dim=tiny_mcu.hidden_dim, hidden_dim=32, vocab=vocab)
+# broker_rnn = GatedRNNBroker(input_dim=tiny_mcu.hidden_dim, hidden_dim=32, vocab=vocab)
+broker_rnn = GatedRNNBroker(vocab=vocab, hidden_dim=32, lr=0.01)
 print(f"\n[Training Gated RNN Broker with Hybrid Loss on 8-char secrets...]")
 broker_rnn.train(secrets, string_secrets, secrets)
 

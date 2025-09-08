@@ -1,0 +1,6 @@
+[2025-09-07 09:42:17.793Z] [HUB] New session: Y-snE3L4VkNgQmj5 policy={'allow_methods': ['WRITE', 'READ'], 'route': '/api/write', 'device_id': 'plc-01'}
+[2025-09-07 09:42:24.661Z] [CLIENT] INIT → server (session_id=Y-snE3L4VkNgQmj5, client_pub)
+[2025-09-07 09:42:24.666Z] [SERVER] INIT ok: stored session_seed (hidden). Replying server_pub.
+[2025-09-07 09:42:24.671Z] [CLIENT] INIT ack ← server_pub; derived session_seed (hidden).
+[2025-09-07 09:42:54.509Z] [CLIENT] WRITE → Server: proof={"session_id": "Y-snE3L4VkNgQmj5", "nonce": "EdsR6YD9DzmYJjl3SB5aag", "counter": 1, "ttl_ms": 400, "issued_ms": 1757238174508, "policy_hash": "HKZlVYGWhR24NFJBMg6ntpP4Vg_StkFrsJqDZbXXXos", "sig": "3gBAOhB80PLjKT8dGm7WZwB6C5HsmI8TzQ2OGNIYeuw"} meta={"route": "/api/write", "device_id": "plc-01"} body={"cmd":{"_warlok_env":{"alg":"mac-only","nonce":"","ct":"eyJvcCI6ICJzZXRfc3BlZWQifQ","tag":"EwAOKBaHMJwliBMBBzOdejs8g5_M2yrEBwobFgZPNac"}},"data":{"_warlok_env":{"alg":"mac-only","nonce":"","ct":"eyJ2YWx1ZSI6IDQyfQ","tag":"5d79aVuOfVLsr2-6V04p5mf1wNSoKppjmB3oL6bS73U"}},"note":"non-sensitive"}
+[2025-09-07 09:42:54.513Z] [SERVER] WRITE result: 200 OK (method WRITE). Decrypted body: {"cmd": {"op": "set_speed"}, "data": {"value": 42}, "note": "non-sensitive"}

@@ -1,0 +1,438 @@
+[1754854165]  [INTERCEPTOR] Subscribed: warlok/secrets
+[1754854165] [GATEWAY] Subscribed: warlok/ingest, warlok/quarantine
+[1754854165]  [DEVICE] Subscribed: warlok/validation/edge-PLC-001
+[1754854165]  [DEVICE] Using session_seed=3298230960
+[1754854165]  [DEVICE] Generated secret_string=*3KcYlpB!nsfTVl+cZZ9ZaFm session_seed=3298230960
+[1754854165]  [DEVICE] ▶ cmd[1]=VALVE_OPEN:edge-PLC-001:valve=12,value=47 in policy=True
+[1754854165]  [DEVICE] ▶ cmd[2]=VALVE_OPEN:edge-PLC-001:valve=12,value=60 in policy=False
+[1754854165]  [DEVICE] ▶ Published warlok/secrets: seq=1 device=edge-PLC-001 secret_digest=d6aacc7c cmd=VALVE_OPEN:edge-PLC-001:valve=12,value=47
+[1754854165]  [INTERCEPTOR] Received message: {'device_id': 'edge-PLC-001', 'role': 'VendorTech', 'ts': 1754854165, 'seq': 1}
+[1754854165]  [DEVICE] ▶ Published warlok/secrets: seq=2 device=edge-PLC-001 secret_digest=d6aacc7c cmd=VALVE_OPEN:edge-PLC-001:valve=12,value=60
+[1754854166]  [INTERCEPTOR] Regenerated secret: *3KcYlpB!nsfTVl+cZZ9ZaFm session_seed=3298230960 seed_input=*3KcYlpB!nsfTVl+cZZ9ZaFm device_id=edge-PLC-001 role=VendorTech
+[1754854166]  [INTERCEPTOR] ✅ AUTH seq=1 device=edge-PLC-001 cmd=VALVE_OPEN:edge-PLC-001:valve=12,value=47 secret_digest=d6aacc7c
+[1754854166]  [INTERCEPTOR] Received message: {'device_id': 'edge-PLC-001', 'role': 'VendorTech', 'ts': 1754854165, 'seq': 2}
+[1754854167]  [INTERCEPTOR] Regenerated secret: *3KcYlpB!nsfTVl+cZZ9ZaFm session_seed=3298230960 seed_input=*3KcYlpB!nsfTVl+cZZ9ZaFm device_id=edge-PLC-001 role=VendorTech
+[1754854167]  [INTERCEPTOR] 🚫 QUAR seq=2 device=edge-PLC-001 cmd=VALVE_OPEN:edge-PLC-001:valve=12,value=60 secret_digest=d6aacc7c
+[1754854170] Shutting down...
+[1754854171] [GATEWAY] Subscribed: warlok/ingest, warlok/quarantine
+[1754854171]  [INTERCEPTOR] Subscribed: warlok/secrets
+[1754854171]  [DEVICE] Subscribed: warlok/validation/edge-PLC-001
+[1754854171]  [DEVICE] Using session_seed=938151947
+[1754854171]  [DEVICE] Generated secret_string=Z#%dqCL6i*1+!KNQ&P&oTM^U session_seed=938151947
+[1754854172]  [DEVICE] ▶ cmd[1]=VALVE_OPEN:edge-PLC-001:valve=12,value=47 in policy=True
+[1754854172]  [DEVICE] ▶ cmd[2]=VALVE_OPEN:edge-PLC-001:valve=12,value=60 in policy=False
+[1754854172]  [DEVICE] ▶ Published warlok/secrets: seq=1 device=edge-PLC-001 secret_digest=834c718a cmd=VALVE_OPEN:edge-PLC-001:valve=12,value=47
+[1754854172]  [DEVICE] ▶ Published warlok/secrets: seq=2 device=edge-PLC-001 secret_digest=834c718a cmd=VALVE_OPEN:edge-PLC-001:valve=12,value=60
+[1754854176] Shutting down...
+[1754854177] [GATEWAY] Subscribed: warlok/ingest, warlok/quarantine
+[1754854177]  [INTERCEPTOR] Subscribed: warlok/secrets
+[1754854177]  [DEVICE] Subscribed: warlok/validation/edge-PLC-001
+[1754854177]  [DEVICE] Using session_seed=2626314962
+[1754854177]  [DEVICE] Generated secret_string=newFOb%3OL85jJbArV4~Op1A session_seed=2626314962
+[1754854178]  [DEVICE] ▶ cmd[1]=VALVE_OPEN:edge-PLC-001:valve=12,value=47 in policy=True
+[1754854178]  [DEVICE] ▶ cmd[2]=VALVE_OPEN:edge-PLC-001:valve=12,value=60 in policy=False
+[1754854178]  [DEVICE] ▶ Published warlok/secrets: seq=1 device=edge-PLC-001 secret_digest=6ee34f4a cmd=VALVE_OPEN:edge-PLC-001:valve=12,value=47
+[1754854178]  [DEVICE] ▶ Published warlok/secrets: seq=2 device=edge-PLC-001 secret_digest=6ee34f4a cmd=VALVE_OPEN:edge-PLC-001:valve=12,value=60
+[1754854180] Shutting down...
+[1754854181] [GATEWAY] Subscribed: warlok/ingest, warlok/quarantine
+[1754854181]  [INTERCEPTOR] Subscribed: warlok/secrets
+[1754854181]  [DEVICE] Subscribed: warlok/validation/edge-PLC-001
+[1754854181]  [DEVICE] Using session_seed=2343203244
+[1754854181]  [DEVICE] Generated secret_string=P@c6QL_3C8rVZ1+0!gw!FUmO session_seed=2343203244
+[1754854182]  [DEVICE] ▶ cmd[1]=VALVE_OPEN:edge-PLC-001:valve=12,value=47 in policy=True
+[1754854182]  [DEVICE] ▶ cmd[2]=VALVE_OPEN:edge-PLC-001:valve=12,value=60 in policy=False
+[1754854182]  [DEVICE] ▶ Published warlok/secrets: seq=1 device=edge-PLC-001 secret_digest=646cc483 cmd=VALVE_OPEN:edge-PLC-001:valve=12,value=47
+[1754854182]  [DEVICE] ▶ Published warlok/secrets: seq=2 device=edge-PLC-001 secret_digest=646cc483 cmd=VALVE_OPEN:edge-PLC-001:valve=12,value=60
+[1754854184] Shutting down...
+[1754854187] [GATEWAY] Subscribed: warlok/ingest, warlok/quarantine
+[1754854187]  [INTERCEPTOR] Subscribed: warlok/secrets
+[1754854187]  [DEVICE] Subscribed: warlok/validation/edge-PLC-001
+[1754854187]  [DEVICE] Using session_seed=3772727152
+[1754854187]  [DEVICE] Generated secret_string=q$^&~28+nIWKvvbydkXP&rXb session_seed=3772727152
+[1754854187]  [DEVICE] ▶ cmd[1]=VALVE_OPEN:edge-PLC-001:valve=12,value=47 in policy=True
+[1754854187]  [DEVICE] ▶ cmd[2]=VALVE_OPEN:edge-PLC-001:valve=12,value=60 in policy=False
+[1754854187]  [DEVICE] ▶ Published warlok/secrets: seq=1 device=edge-PLC-001 secret_digest=81a427f4 cmd=VALVE_OPEN:edge-PLC-001:valve=12,value=47
+[1754854187]  [INTERCEPTOR] Received message: {'device_id': 'edge-PLC-001', 'role': 'VendorTech', 'ts': 1754854187, 'seq': 1}
+[1754854187]  [DEVICE] ▶ Published warlok/secrets: seq=2 device=edge-PLC-001 secret_digest=81a427f4 cmd=VALVE_OPEN:edge-PLC-001:valve=12,value=60
+[1754854188]  [INTERCEPTOR] Regenerated secret: q$^&~28+nIWKvvbydkXP&rXb session_seed=3772727152 seed_input=q$^&~28+nIWKvvbydkXP&rXb device_id=edge-PLC-001 role=VendorTech
+[1754854188]  [INTERCEPTOR] ✅ AUTH seq=1 device=edge-PLC-001 cmd=VALVE_OPEN:edge-PLC-001:valve=12,value=47 secret_digest=81a427f4
+[1754854188]  [INTERCEPTOR] Received message: {'device_id': 'edge-PLC-001', 'role': 'VendorTech', 'ts': 1754854187, 'seq': 2}
+[1754854189]  [INTERCEPTOR] Regenerated secret: q$^&~28+nIWKvvbydkXP&rXb session_seed=3772727152 seed_input=q$^&~28+nIWKvvbydkXP&rXb device_id=edge-PLC-001 role=VendorTech
+[1754854189]  [INTERCEPTOR] 🚫 QUAR seq=2 device=edge-PLC-001 cmd=VALVE_OPEN:edge-PLC-001:valve=12,value=60 secret_digest=81a427f4
+[1754854191] Shutting down...
+[1754854192]  [INTERCEPTOR] Subscribed: warlok/secrets
+[1754854192] [GATEWAY] Subscribed: warlok/ingest, warlok/quarantine
+[1754854192]  [DEVICE] Subscribed: warlok/validation/edge-PLC-001
+[1754854192]  [DEVICE] Using session_seed=253957229
+[1754854192]  [DEVICE] Generated secret_string=NU6mXves6by3tJpXK1%1Gd&G session_seed=253957229
+[1754854193]  [DEVICE] ▶ cmd[1]=VALVE_OPEN:edge-PLC-001:valve=12,value=47 in policy=True
+[1754854193]  [DEVICE] ▶ cmd[2]=VALVE_OPEN:edge-PLC-001:valve=12,value=60 in policy=False
+[1754854193]  [DEVICE] ▶ Published warlok/secrets: seq=1 device=edge-PLC-001 secret_digest=f6cf4f86 cmd=VALVE_OPEN:edge-PLC-001:valve=12,value=47
+[1754854193]  [INTERCEPTOR] Received message: {'device_id': 'edge-PLC-001', 'role': 'VendorTech', 'ts': 1754854193, 'seq': 1}
+[1754854193]  [DEVICE] ▶ Published warlok/secrets: seq=2 device=edge-PLC-001 secret_digest=f6cf4f86 cmd=VALVE_OPEN:edge-PLC-001:valve=12,value=60
+[1754854193]  [INTERCEPTOR] Regenerated secret: NU6mXves6by3tJpXK1%1Gd&G session_seed=253957229 seed_input=NU6mXves6by3tJpXK1%1Gd&G device_id=edge-PLC-001 role=VendorTech
+[1754854193]  [INTERCEPTOR] ✅ AUTH seq=1 device=edge-PLC-001 cmd=VALVE_OPEN:edge-PLC-001:valve=12,value=47 secret_digest=f6cf4f86
+[1754854193]  [INTERCEPTOR] Received message: {'device_id': 'edge-PLC-001', 'role': 'VendorTech', 'ts': 1754854193, 'seq': 2}
+[1754854194]  [INTERCEPTOR] Regenerated secret: NU6mXves6by3tJpXK1%1Gd&G session_seed=253957229 seed_input=NU6mXves6by3tJpXK1%1Gd&G device_id=edge-PLC-001 role=VendorTech
+[1754854194]  [INTERCEPTOR] 🚫 QUAR seq=2 device=edge-PLC-001 cmd=VALVE_OPEN:edge-PLC-001:valve=12,value=60 secret_digest=f6cf4f86
+[1754854198] Shutting down...
+[1754854199] [GATEWAY] Subscribed: warlok/ingest, warlok/quarantine
+[1754854199]  [INTERCEPTOR] Subscribed: warlok/secrets
+[1754854199]  [DEVICE] Subscribed: warlok/validation/edge-PLC-001
+[1754854199]  [DEVICE] Using session_seed=2983123259
+[1754854199]  [DEVICE] Generated secret_string=Q+9#JdGS9&IUNR4sL3a110gd session_seed=2983123259
+[1754854200]  [DEVICE] ▶ cmd[1]=VALVE_OPEN:edge-PLC-001:valve=12,value=47 in policy=True
+[1754854200]  [DEVICE] ▶ cmd[2]=VALVE_OPEN:edge-PLC-001:valve=12,value=60 in policy=False
+[1754854200]  [DEVICE] ▶ Published warlok/secrets: seq=1 device=edge-PLC-001 secret_digest=ba300e65 cmd=VALVE_OPEN:edge-PLC-001:valve=12,value=47
+[1754854200]  [DEVICE] ▶ Published warlok/secrets: seq=2 device=edge-PLC-001 secret_digest=ba300e65 cmd=VALVE_OPEN:edge-PLC-001:valve=12,value=60
+[1754854200]  [INTERCEPTOR] Received message: {'device_id': 'edge-PLC-001', 'role': 'VendorTech', 'ts': 1754854200, 'seq': 1}
+[1754854200]  [INTERCEPTOR] Regenerated secret: Q+9#JdGS9&IUNR4sL3a110gd session_seed=2983123259 seed_input=Q+9#JdGS9&IUNR4sL3a110gd device_id=edge-PLC-001 role=VendorTech
+[1754854200]  [INTERCEPTOR] ✅ AUTH seq=1 device=edge-PLC-001 cmd=VALVE_OPEN:edge-PLC-001:valve=12,value=47 secret_digest=ba300e65
+[1754854200]  [INTERCEPTOR] Received message: {'device_id': 'edge-PLC-001', 'role': 'VendorTech', 'ts': 1754854200, 'seq': 2}
+[1754854201]  [INTERCEPTOR] Regenerated secret: Q+9#JdGS9&IUNR4sL3a110gd session_seed=2983123259 seed_input=Q+9#JdGS9&IUNR4sL3a110gd device_id=edge-PLC-001 role=VendorTech
+[1754854201]  [INTERCEPTOR] 🚫 QUAR seq=2 device=edge-PLC-001 cmd=VALVE_OPEN:edge-PLC-001:valve=12,value=60 secret_digest=ba300e65
+[1754854203] Shutting down...
+[1754854205]  [INTERCEPTOR] Subscribed: warlok/secrets
+[1754854205] [GATEWAY] Subscribed: warlok/ingest, warlok/quarantine
+[1754854205]  [DEVICE] Subscribed: warlok/validation/edge-PLC-001
+[1754854205]  [DEVICE] Using session_seed=503185296
+[1754854205]  [DEVICE] Generated secret_string=Ku1qwQholg1%XLQv$11Z*B0W session_seed=503185296
+[1754854206]  [DEVICE] ▶ cmd[1]=VALVE_OPEN:edge-PLC-001:valve=12,value=47 in policy=True
+[1754854206]  [DEVICE] ▶ cmd[2]=VALVE_OPEN:edge-PLC-001:valve=12,value=60 in policy=False
+[1754854206]  [DEVICE] ▶ Published warlok/secrets: seq=1 device=edge-PLC-001 secret_digest=384658e8 cmd=VALVE_OPEN:edge-PLC-001:valve=12,value=47
+[1754854206]  [DEVICE] ▶ Published warlok/secrets: seq=2 device=edge-PLC-001 secret_digest=384658e8 cmd=VALVE_OPEN:edge-PLC-001:valve=12,value=60
+[1754854206]  [INTERCEPTOR] Received message: {'device_id': 'edge-PLC-001', 'role': 'VendorTech', 'ts': 1754854206, 'seq': 1}
+[1754854206]  [INTERCEPTOR] Regenerated secret: Ku1qwQholg1%XLQv$11Z*B0W session_seed=503185296 seed_input=Ku1qwQholg1%XLQv$11Z*B0W device_id=edge-PLC-001 role=VendorTech
+[1754854206]  [INTERCEPTOR] ✅ AUTH seq=1 device=edge-PLC-001 cmd=VALVE_OPEN:edge-PLC-001:valve=12,value=47 secret_digest=384658e8
+[1754854206]  [INTERCEPTOR] Received message: {'device_id': 'edge-PLC-001', 'role': 'VendorTech', 'ts': 1754854206, 'seq': 2}
+[1754854207]  [INTERCEPTOR] Regenerated secret: Ku1qwQholg1%XLQv$11Z*B0W session_seed=503185296 seed_input=Ku1qwQholg1%XLQv$11Z*B0W device_id=edge-PLC-001 role=VendorTech
+[1754854207]  [INTERCEPTOR] 🚫 QUAR seq=2 device=edge-PLC-001 cmd=VALVE_OPEN:edge-PLC-001:valve=12,value=60 secret_digest=384658e8
+[1754856135] Shutting down...
+[1754856137] [GATEWAY] Subscribed: warlok/ingest, warlok/quarantine
+[1754856137]  [INTERCEPTOR] Subscribed: warlok/secrets
+[1754856137]  [DEVICE] Subscribed: warlok/validation/edge-PLC-001
+[1754856137]  [DEVICE] Using session_seed=4128740610
+[1754856137]  [DEVICE] Generated secret_string=*a8~47kG82I3~pL%NVKe0I1I session_seed=4128740610
+[1754856138]  [DEVICE] ▶ cmd[1]=VALVE_OPEN:edge-PLC-001:valve=12,value=47 in policy=True
+[1754856138]  [DEVICE] ▶ cmd[2]=VALVE_OPEN:edge-PLC-001:valve=12,value=60 in policy=False
+[1754856138]  [DEVICE] ▶ Published warlok/secrets: seq=1 device=edge-PLC-001 secret_digest=2abb6872 cmd=VALVE_OPEN:edge-PLC-001:valve=12,value=47
+[1754856138]  [INTERCEPTOR] Received message: {'device_id': 'edge-PLC-001', 'role': 'VendorTech', 'ts': 1754856138, 'seq': 1}
+[1754856138]  [DEVICE] ▶ Published warlok/secrets: seq=2 device=edge-PLC-001 secret_digest=2abb6872 cmd=VALVE_OPEN:edge-PLC-001:valve=12,value=60
+[1754856138]  [INTERCEPTOR] Regenerated secret: *a8~47kG82I3~pL%NVKe0I1I session_seed=4128740610 seed_input=*a8~47kG82I3~pL%NVKe0I1I device_id=edge-PLC-001 role=VendorTech
+[1754856138]  [INTERCEPTOR] ✅ AUTH seq=1 device=edge-PLC-001 cmd=VALVE_OPEN:edge-PLC-001:valve=12,value=47 secret_digest=2abb6872
+[1754856138]  [INTERCEPTOR] Received message: {'device_id': 'edge-PLC-001', 'role': 'VendorTech', 'ts': 1754856138, 'seq': 2}
+[1754856139]  [INTERCEPTOR] Regenerated secret: *a8~47kG82I3~pL%NVKe0I1I session_seed=4128740610 seed_input=*a8~47kG82I3~pL%NVKe0I1I device_id=edge-PLC-001 role=VendorTech
+[1754856139]  [INTERCEPTOR] 🚫 QUAR seq=2 device=edge-PLC-001 cmd=VALVE_OPEN:edge-PLC-001:valve=12,value=60 secret_digest=2abb6872
+[1754856243] Shutting down...
+[1754856244] [GATEWAY] Subscribed: warlok/ingest, warlok/quarantine
+[1754856244]  [INTERCEPTOR] Subscribed: warlok/secrets
+[1754856244]  [DEVICE] Subscribed: warlok/validation/edge-PLC-001
+[1754856244]  [DEVICE] Using session_seed=3821713347
+[1754856244]  [DEVICE] Generated secret_string=&_oH&_XQ#ClqpyWDMc&6J7SA session_seed=3821713347
+[1754856245]  [DEVICE] ▶ cmd[1]=VALVE_OPEN:edge-PLC-001:valve=12,value=47 in policy=True
+[1754856245]  [DEVICE] ▶ cmd[2]=VALVE_OPEN:edge-PLC-001:valve=12,value=60 in policy=False
+[1754856245]  [DEVICE] ▶ Published warlok/secrets: seq=1 device=edge-PLC-001 secret_digest=47b2691a cmd=VALVE_OPEN:edge-PLC-001:valve=12,value=47
+[1754856245]  [DEVICE] ▶ Published warlok/secrets: seq=2 device=edge-PLC-001 secret_digest=47b2691a cmd=VALVE_OPEN:edge-PLC-001:valve=12,value=60
+[1754856249] Shutting down...
+[1754856249] [GATEWAY] Subscribed: warlok/ingest, warlok/quarantine
+[1754856249]  [INTERCEPTOR] Subscribed: warlok/secrets
+[1754856249]  [DEVICE] Subscribed: warlok/validation/edge-PLC-001
+[1754856249]  [DEVICE] Using session_seed=757593614
+[1754856249]  [DEVICE] Generated secret_string=Z+eJo_k8+^Hcz2DUsfX+@w_7 session_seed=757593614
+[1754856250]  [DEVICE] ▶ cmd[1]=VALVE_OPEN:edge-PLC-001:valve=12,value=47 in policy=True
+[1754856250]  [DEVICE] ▶ cmd[2]=VALVE_OPEN:edge-PLC-001:valve=12,value=60 in policy=False
+[1754856250]  [DEVICE] ▶ Published warlok/secrets: seq=1 device=edge-PLC-001 secret_digest=3dac5864 cmd=VALVE_OPEN:edge-PLC-001:valve=12,value=47
+[1754856250]  [INTERCEPTOR] Received message: {'device_id': 'edge-PLC-001', 'role': 'VendorTech', 'ts': 1754856250, 'seq': 1}
+[1754856250]  [DEVICE] ▶ Published warlok/secrets: seq=2 device=edge-PLC-001 secret_digest=3dac5864 cmd=VALVE_OPEN:edge-PLC-001:valve=12,value=60
+[1754856251]  [INTERCEPTOR] Regenerated secret: Z+eJo_k8+^Hcz2DUsfX+@w_7 session_seed=757593614 seed_input=Z+eJo_k8+^Hcz2DUsfX+@w_7 device_id=edge-PLC-001 role=VendorTech
+[1754856251]  [INTERCEPTOR] ✅ AUTH seq=1 device=edge-PLC-001 cmd=VALVE_OPEN:edge-PLC-001:valve=12,value=47 secret_digest=3dac5864
+[1754856251]  [INTERCEPTOR] Received message: {'device_id': 'edge-PLC-001', 'role': 'VendorTech', 'ts': 1754856250, 'seq': 2}
+[1754856251] Shutting down...
+[1754856257] [GATEWAY] Subscribed: warlok/ingest, warlok/quarantine
+[1754856257]  [INTERCEPTOR] Subscribed: warlok/secrets
+[1754856257]  [DEVICE] Subscribed: warlok/validation/edge-PLC-001
+[1754856257]  [DEVICE] Using session_seed=143176411
+[1754856257]  [DEVICE] Generated secret_string=wOU5%phPCul*trvyXhA*h3*d session_seed=143176411
+[1754856258]  [DEVICE] ▶ cmd[1]=VALVE_OPEN:edge-PLC-001:valve=12,value=47 in policy=True
+[1754856258]  [DEVICE] ▶ cmd[2]=VALVE_OPEN:edge-PLC-001:valve=12,value=60 in policy=False
+[1754856258]  [DEVICE] ▶ Published warlok/secrets: seq=1 device=edge-PLC-001 secret_digest=4bf1ff82 cmd=VALVE_OPEN:edge-PLC-001:valve=12,value=47
+[1754856258]  [DEVICE] ▶ Published warlok/secrets: seq=2 device=edge-PLC-001 secret_digest=4bf1ff82 cmd=VALVE_OPEN:edge-PLC-001:valve=12,value=60
+[1754856258]  [INTERCEPTOR] Received message: {'device_id': 'edge-PLC-001', 'role': 'VendorTech', 'ts': 1754856258, 'seq': 1}
+[1754856259]  [INTERCEPTOR] Regenerated secret: wOU5%phPCul*trvyXhA*h3*d session_seed=143176411 seed_input=wOU5%phPCul*trvyXhA*h3*d device_id=edge-PLC-001 role=VendorTech
+[1754856259]  [INTERCEPTOR] ✅ AUTH seq=1 device=edge-PLC-001 cmd=VALVE_OPEN:edge-PLC-001:valve=12,value=47 secret_digest=4bf1ff82
+[1754856259]  [INTERCEPTOR] Received message: {'device_id': 'edge-PLC-001', 'role': 'VendorTech', 'ts': 1754856258, 'seq': 2}
+[1754856260]  [INTERCEPTOR] Regenerated secret: wOU5%phPCul*trvyXhA*h3*d session_seed=143176411 seed_input=wOU5%phPCul*trvyXhA*h3*d device_id=edge-PLC-001 role=VendorTech
+[1754856260]  [INTERCEPTOR] 🚫 QUAR seq=2 device=edge-PLC-001 cmd=VALVE_OPEN:edge-PLC-001:valve=12,value=60 secret_digest=4bf1ff82
+[1754856260] Shutting down...
+[1754856265] [GATEWAY] Subscribed: warlok/ingest, warlok/quarantine
+[1754856265]  [INTERCEPTOR] Subscribed: warlok/secrets
+[1754856265]  [DEVICE] Subscribed: warlok/validation/edge-PLC-001
+[1754856265]  [DEVICE] Using session_seed=3489484838
+[1754856265]  [DEVICE] Generated secret_string=TaHils7^NK#KH_MMy3tOKT87 session_seed=3489484838
+[1754856266]  [DEVICE] ▶ cmd[1]=VALVE_OPEN:edge-PLC-001:valve=12,value=47 in policy=True
+[1754856266]  [DEVICE] ▶ cmd[2]=VALVE_OPEN:edge-PLC-001:valve=12,value=60 in policy=False
+[1754856266]  [DEVICE] ▶ Published warlok/secrets: seq=1 device=edge-PLC-001 secret_digest=9f6866cf cmd=VALVE_OPEN:edge-PLC-001:valve=12,value=47
+[1754856266]  [INTERCEPTOR] Received message: {'device_id': 'edge-PLC-001', 'role': 'VendorTech', 'ts': 1754856266, 'seq': 1}
+[1754856266]  [DEVICE] ▶ Published warlok/secrets: seq=2 device=edge-PLC-001 secret_digest=9f6866cf cmd=VALVE_OPEN:edge-PLC-001:valve=12,value=60
+[1754856267]  [INTERCEPTOR] Regenerated secret: TaHils7^NK#KH_MMy3tOKT87 session_seed=3489484838 seed_input=TaHils7^NK#KH_MMy3tOKT87 device_id=edge-PLC-001 role=VendorTech
+[1754856267]  [INTERCEPTOR] ✅ AUTH seq=1 device=edge-PLC-001 cmd=VALVE_OPEN:edge-PLC-001:valve=12,value=47 secret_digest=9f6866cf
+[1754856267]  [INTERCEPTOR] Received message: {'device_id': 'edge-PLC-001', 'role': 'VendorTech', 'ts': 1754856266, 'seq': 2}
+[1754856267]  [INTERCEPTOR] Regenerated secret: TaHils7^NK#KH_MMy3tOKT87 session_seed=3489484838 seed_input=TaHils7^NK#KH_MMy3tOKT87 device_id=edge-PLC-001 role=VendorTech
+[1754856267]  [INTERCEPTOR] 🚫 QUAR seq=2 device=edge-PLC-001 cmd=VALVE_OPEN:edge-PLC-001:valve=12,value=60 secret_digest=9f6866cf
+[1754856548] Shutting down...
+[1754856551] [GATEWAY] Subscribed: warlok/ingest, warlok/quarantine
+[1754856551]  [INTERCEPTOR] Subscribed: warlok/secrets
+[1754856551]  [DEVICE] Subscribed: warlok/validation/edge-VALVE-009
+[1754856551]  [DEVICE] Using session_seed=1371992681
+[1754856551]  [DEVICE] Generated secret_string=FFf_f62nPyOj*Q3yXQMf@L+U session_seed=1371992681
+[1754856552]  [DEVICE] ▶ cmd[1]=VALVE_OPEN:edge-VALVE-009:valve=12,value=47 in policy=True
+[1754856552]  [DEVICE] ▶ cmd[2]=VALVE_OPEN:edge-VALVE-009:valve=12,value=60 in policy=False
+[1754856552]  [DEVICE] ▶ Published warlok/secrets: seq=1 device=edge-VALVE-009 secret_digest=6ed6c43f cmd=VALVE_OPEN:edge-VALVE-009:valve=12,value=47
+[1754856552]  [DEVICE] ▶ Published warlok/secrets: seq=2 device=edge-VALVE-009 secret_digest=6ed6c43f cmd=VALVE_OPEN:edge-VALVE-009:valve=12,value=60
+[1754856552]  [INTERCEPTOR] Received message: {'device_id': 'edge-VALVE-009', 'role': 'VendorTech', 'ts': 1754856552, 'seq': 1}
+[1754856552]  [INTERCEPTOR] Regenerated secret: FFf_f62nPyOj*Q3yXQMf@L+U session_seed=1371992681 seed_input=FFf_f62nPyOj*Q3yXQMf@L+U device_id=edge-VALVE-009 role=VendorTech
+[1754856552]  [INTERCEPTOR] ✅ AUTH seq=1 device=edge-VALVE-009 cmd=VALVE_OPEN:edge-VALVE-009:valve=12,value=47 secret_digest=6ed6c43f
+[1754856552]  [INTERCEPTOR] Received message: {'device_id': 'edge-VALVE-009', 'role': 'VendorTech', 'ts': 1754856552, 'seq': 2}
+[1754856553]  [INTERCEPTOR] Regenerated secret: FFf_f62nPyOj*Q3yXQMf@L+U session_seed=1371992681 seed_input=FFf_f62nPyOj*Q3yXQMf@L+U device_id=edge-VALVE-009 role=VendorTech
+[1754856553]  [INTERCEPTOR] 🚫 QUAR seq=2 device=edge-VALVE-009 cmd=VALVE_OPEN:edge-VALVE-009:valve=12,value=60 secret_digest=6ed6c43f
+[1754856570] Shutting down...
+[1754856572] [GATEWAY] Subscribed: warlok/ingest, warlok/quarantine
+[1754856572]  [DEVICE] Subscribed: warlok/validation/edge-VALVE-009
+[1754856572]  [INTERCEPTOR] Subscribed: warlok/secrets
+[1754856572]  [DEVICE] Using session_seed=1127969786
+[1754856572]  [DEVICE] Generated secret_string=paRbjca^B*HjmOErsfCBtvnb session_seed=1127969786
+[1754856573]  [DEVICE] ▶ cmd[1]=VALVE_OPEN:edge-VALVE-009:valve=12,value=47 in policy=True
+[1754856573]  [DEVICE] ▶ cmd[2]=VALVE_OPEN:edge-VALVE-009:valve=12,value=60 in policy=False
+[1754856573]  [DEVICE] ▶ Published warlok/secrets: seq=1 device=edge-VALVE-009 secret_digest=c1846f45 cmd=VALVE_OPEN:edge-VALVE-009:valve=12,value=47
+[1754856573]  [DEVICE] ▶ Published warlok/secrets: seq=2 device=edge-VALVE-009 secret_digest=c1846f45 cmd=VALVE_OPEN:edge-VALVE-009:valve=12,value=60
+[1754856573]  [INTERCEPTOR] Received message: {'device_id': 'edge-VALVE-009', 'role': 'VendorTech', 'ts': 1754856573, 'seq': 1}
+[1754856574]  [INTERCEPTOR] Regenerated secret: paRbjca^B*HjmOErsfCBtvnb session_seed=1127969786 seed_input=paRbjca^B*HjmOErsfCBtvnb device_id=edge-VALVE-009 role=VendorTech
+[1754856574]  [INTERCEPTOR] ✅ AUTH seq=1 device=edge-VALVE-009 cmd=VALVE_OPEN:edge-VALVE-009:valve=12,value=47 secret_digest=c1846f45
+[1754856574]  [INTERCEPTOR] Received message: {'device_id': 'edge-VALVE-009', 'role': 'VendorTech', 'ts': 1754856573, 'seq': 2}
+[1754856575]  [INTERCEPTOR] Regenerated secret: paRbjca^B*HjmOErsfCBtvnb session_seed=1127969786 seed_input=paRbjca^B*HjmOErsfCBtvnb device_id=edge-VALVE-009 role=VendorTech
+[1754856575]  [INTERCEPTOR] 🚫 QUAR seq=2 device=edge-VALVE-009 cmd=VALVE_OPEN:edge-VALVE-009:valve=12,value=60 secret_digest=c1846f45
+[1754856810] Shutting down...
+[1754856812]  [INTERCEPTOR] Subscribed: warlok/secrets
+[1754856812] [GATEWAY] Subscribed: warlok/ingest, warlok/quarantine
+[1754856812]  [DEVICE] Using device_id=edge-VALVE-008
+[1754856812]  [DEVICE] Subscribed: warlok/validation/edge-VALVE-008
+[1754856812]  [DEVICE] Using session_seed=1021396529
+[1754856812]  [DEVICE] Generated secret_string=$VLGQ+x0%Lw9CPQSldrJ3qDI session_seed=1021396529
+[1754856813]  [DEVICE] ▶ cmd[1]=VALVE_OPEN:edge-VALVE-008:valve=12,value=47 in policy=True
+[1754856813]  [DEVICE] ▶ cmd[2]=VALVE_OPEN:edge-VALVE-008:valve=12,value=60 in policy=False
+[1754856813]  [DEVICE] ▶ Published warlok/secrets: seq=1 device=edge-VALVE-008 secret_digest=0a7e4413 cmd=VALVE_OPEN:edge-VALVE-008:valve=12,value=47
+[1754856813]  [DEVICE] ▶ Published warlok/secrets: seq=2 device=edge-VALVE-008 secret_digest=0a7e4413 cmd=VALVE_OPEN:edge-VALVE-008:valve=12,value=60
+[1754856813]  [INTERCEPTOR] Received message: {'device_id': 'edge-VALVE-008', 'role': 'VendorTech', 'ts': 1754856813, 'seq': 1}
+[1754856814]  [INTERCEPTOR] Regenerated secret: $VLGQ+x0%Lw9CPQSldrJ3qDI session_seed=1021396529 seed_input=$VLGQ+x0%Lw9CPQSldrJ3qDI device_id=edge-VALVE-008 role=VendorTech
+[1754856814]  [INTERCEPTOR] ✅ AUTH seq=1 device=edge-VALVE-008 cmd=VALVE_OPEN:edge-VALVE-008:valve=12,value=47 secret_digest=0a7e4413
+[1754856814]  [INTERCEPTOR] Received message: {'device_id': 'edge-VALVE-008', 'role': 'VendorTech', 'ts': 1754856813, 'seq': 2}
+[1754856815]  [INTERCEPTOR] Regenerated secret: $VLGQ+x0%Lw9CPQSldrJ3qDI session_seed=1021396529 seed_input=$VLGQ+x0%Lw9CPQSldrJ3qDI device_id=edge-VALVE-008 role=VendorTech
+[1754856815]  [INTERCEPTOR] 🚫 QUAR seq=2 device=edge-VALVE-008 cmd=VALVE_OPEN:edge-VALVE-008:valve=12,value=60 secret_digest=0a7e4413
+[1754856819] Shutting down...
+[1754856820] [GATEWAY] Subscribed: warlok/ingest, warlok/quarantine
+[1754856820]  [DEVICE] Using device_id=edge-VALVE-009
+[1754856820]  [DEVICE] Subscribed: warlok/validation/edge-VALVE-009
+[1754856820]  [INTERCEPTOR] Subscribed: warlok/secrets
+[1754856820]  [DEVICE] Using session_seed=140963929
+[1754856820]  [DEVICE] Generated secret_string=yczNNVZTvttSXmH42xFf6@~V session_seed=140963929
+[1754856821]  [DEVICE] ▶ cmd[1]=VALVE_OPEN:edge-VALVE-009:valve=12,value=47 in policy=True
+[1754856821]  [DEVICE] ▶ cmd[2]=VALVE_OPEN:edge-VALVE-009:valve=12,value=60 in policy=False
+[1754856821]  [DEVICE] ▶ Published warlok/secrets: seq=1 device=edge-VALVE-009 secret_digest=26f3a246 cmd=VALVE_OPEN:edge-VALVE-009:valve=12,value=47
+[1754856821]  [DEVICE] ▶ Published warlok/secrets: seq=2 device=edge-VALVE-009 secret_digest=26f3a246 cmd=VALVE_OPEN:edge-VALVE-009:valve=12,value=60
+[1754856829] Shutting down...
+[1754856829] [GATEWAY] Subscribed: warlok/ingest, warlok/quarantine
+[1754856829]  [INTERCEPTOR] Subscribed: warlok/secrets
+[1754856829]  [DEVICE] Using device_id=edge-VALVE-009
+[1754856829]  [DEVICE] Subscribed: warlok/validation/edge-VALVE-009
+[1754856829]  [DEVICE] Using session_seed=640144180
+[1754856829]  [DEVICE] Generated secret_string=h1QqxHtx1YU~kKykZysjUMcJ session_seed=640144180
+[1754856830]  [DEVICE] ▶ cmd[1]=VALVE_OPEN:edge-VALVE-009:valve=12,value=47 in policy=True
+[1754856830]  [DEVICE] ▶ cmd[2]=VALVE_OPEN:edge-VALVE-009:valve=12,value=60 in policy=False
+[1754856830]  [DEVICE] ▶ Published warlok/secrets: seq=1 device=edge-VALVE-009 secret_digest=9d3cd7e6 cmd=VALVE_OPEN:edge-VALVE-009:valve=12,value=47
+[1754856830]  [DEVICE] ▶ Published warlok/secrets: seq=2 device=edge-VALVE-009 secret_digest=9d3cd7e6 cmd=VALVE_OPEN:edge-VALVE-009:valve=12,value=60
+[1754856832] Shutting down...
+[1754856835] [GATEWAY] Subscribed: warlok/ingest, warlok/quarantine
+[1754856835]  [DEVICE] Using device_id=edge-VALVE-008
+[1754856835]  [INTERCEPTOR] Subscribed: warlok/secrets
+[1754856835]  [DEVICE] Subscribed: warlok/validation/edge-VALVE-008
+[1754856835]  [DEVICE] Using session_seed=2040240941
+[1754856835]  [DEVICE] Generated secret_string=RK^XPulGGPOTv&4GaRgGtRxj session_seed=2040240941
+[1754856836]  [DEVICE] ▶ cmd[1]=VALVE_OPEN:edge-VALVE-008:valve=12,value=47 in policy=True
+[1754856836]  [DEVICE] ▶ cmd[2]=VALVE_OPEN:edge-VALVE-008:valve=12,value=60 in policy=False
+[1754856836]  [DEVICE] ▶ Published warlok/secrets: seq=1 device=edge-VALVE-008 secret_digest=71a8ef84 cmd=VALVE_OPEN:edge-VALVE-008:valve=12,value=47
+[1754856836]  [DEVICE] ▶ Published warlok/secrets: seq=2 device=edge-VALVE-008 secret_digest=71a8ef84 cmd=VALVE_OPEN:edge-VALVE-008:valve=12,value=60
+[1754856836]  [INTERCEPTOR] Received message: {'device_id': 'edge-VALVE-008', 'role': 'VendorTech', 'ts': 1754856836, 'seq': 1}
+[1754856836]  [INTERCEPTOR] Regenerated secret: RK^XPulGGPOTv&4GaRgGtRxj session_seed=2040240941 seed_input=RK^XPulGGPOTv&4GaRgGtRxj device_id=edge-VALVE-008 role=VendorTech
+[1754856836]  [INTERCEPTOR] ✅ AUTH seq=1 device=edge-VALVE-008 cmd=VALVE_OPEN:edge-VALVE-008:valve=12,value=47 secret_digest=71a8ef84
+[1754856836]  [INTERCEPTOR] Received message: {'device_id': 'edge-VALVE-008', 'role': 'VendorTech', 'ts': 1754856836, 'seq': 2}
+[1754856837]  [INTERCEPTOR] Regenerated secret: RK^XPulGGPOTv&4GaRgGtRxj session_seed=2040240941 seed_input=RK^XPulGGPOTv&4GaRgGtRxj device_id=edge-VALVE-008 role=VendorTech
+[1754856837]  [INTERCEPTOR] 🚫 QUAR seq=2 device=edge-VALVE-008 cmd=VALVE_OPEN:edge-VALVE-008:valve=12,value=60 secret_digest=71a8ef84
+[1754857040] Shutting down...
+[1754857042]  [DEVICE] Using device_id=edge-VALVE-010
+[1754857042]  [INTERCEPTOR] Subscribed: warlok/secrets
+[1754857042] [GATEWAY] Subscribed: warlok/ingest, warlok/quarantine
+[1754857042]  [DEVICE] Subscribed: warlok/validation/edge-VALVE-010
+[1754857042]  [DEVICE] Using session_seed=2930543884
+[1754857042]  [DEVICE] Generated secret_string=_@OEbxk@NLi9P9WRU8szwp#% session_seed=2930543884
+[1754857043]  [DEVICE] ▶ cmd[1]=VALVE_OPEN:edge-VALVE-010:valve=12,value=47 in policy=True
+[1754857043]  [DEVICE] ▶ cmd[2]=VALVE_OPEN:edge-VALVE-010:valve=12,value=60 in policy=False
+[1754857043]  [DEVICE] ▶ Published warlok/secrets: seq=1 device=edge-VALVE-010 secret_digest=00cd3996 cmd=VALVE_OPEN:edge-VALVE-010:valve=12,value=47
+[1754857043]  [DEVICE] ▶ Published warlok/secrets: seq=2 device=edge-VALVE-010 secret_digest=00cd3996 cmd=VALVE_OPEN:edge-VALVE-010:valve=12,value=60
+[1754857043]  [INTERCEPTOR] Received message: {'device_id': 'edge-VALVE-010', 'role': 'VendorTech', 'ts': 1754857043, 'seq': 1}
+[1754857043]  [INTERCEPTOR] Regenerated secret: _@OEbxk@NLi9P9WRU8szwp#% session_seed=2930543884 seed_input=_@OEbxk@NLi9P9WRU8szwp#% device_id=edge-VALVE-010 role=VendorTech
+[1754857043]  [INTERCEPTOR] ✅ AUTH seq=1 device=edge-VALVE-010 cmd=VALVE_OPEN:edge-VALVE-010:valve=12,value=47 secret_digest=00cd3996
+[1754857043]  [INTERCEPTOR] Received message: {'device_id': 'edge-VALVE-010', 'role': 'VendorTech', 'ts': 1754857043, 'seq': 2}
+[1754857044]  [INTERCEPTOR] Regenerated secret: _@OEbxk@NLi9P9WRU8szwp#% session_seed=2930543884 seed_input=_@OEbxk@NLi9P9WRU8szwp#% device_id=edge-VALVE-010 role=VendorTech
+[1754857044]  [INTERCEPTOR] 🚫 QUAR seq=2 device=edge-VALVE-010 cmd=VALVE_OPEN:edge-VALVE-010:valve=12,value=60 secret_digest=00cd3996
+[1754892161] Shutting down...
+[1754892163] [GATEWAY] Subscribed: warlok/ingest, warlok/quarantine
+[1754892163]  [INTERCEPTOR] Subscribed: warlok/secrets
+[1754892163]  [DEVICE] Using device_id=edge-PLC-001
+[1754892163]  [DEVICE] Subscribed: warlok/validation/edge-PLC-001
+[1754892163]  [DEVICE] Using session_seed=4124009299
+[1754892163]  [DEVICE] Generated secret_string=%C42@cLz_#^sU3y#AnS61%Im session_seed=4124009299
+[1754892164]  [DEVICE] ▶ cmd[1]=VALVE_OPEN:edge-PLC-001:valve=12,value=47 in policy=True
+[1754892164]  [DEVICE] ▶ cmd[2]=VALVE_OPEN:edge-PLC-001:valve=12,value=60 in policy=False
+[1754892164]  [DEVICE] ▶ Published warlok/secrets: seq=1 device=edge-PLC-001 secret_digest=bc755574 cmd=VALVE_OPEN:edge-PLC-001:valve=12,value=47
+[1754892164]  [DEVICE] ▶ Published warlok/secrets: seq=2 device=edge-PLC-001 secret_digest=bc755574 cmd=VALVE_OPEN:edge-PLC-001:valve=12,value=60
+[1754892181] Shutting down...
+[1754892182] [GATEWAY] Subscribed: warlok/ingest, warlok/quarantine
+[1754892182]  [INTERCEPTOR] Subscribed: warlok/secrets
+[1754892182]  [DEVICE] Using device_id=edge-ACTUATOR-013
+[1754892182]  [DEVICE] Subscribed: warlok/validation/edge-ACTUATOR-013
+[1754892182]  [DEVICE] Using session_seed=1673650427
+[1754892182]  [DEVICE] Generated secret_string=DjenELrJ7o@i1PtN%Rxmib47 session_seed=1673650427
+[1754892183]  [DEVICE] ▶ cmd[1]=VALVE_OPEN:edge-ACTUATOR-013:valve=12,value=47 in policy=True
+[1754892183]  [DEVICE] ▶ cmd[2]=VALVE_OPEN:edge-ACTUATOR-013:valve=12,value=60 in policy=False
+[1754892183]  [DEVICE] ▶ Published warlok/secrets: seq=1 device=edge-ACTUATOR-013 secret_digest=5ca1a397 cmd=VALVE_OPEN:edge-ACTUATOR-013:valve=12,value=47
+[1754892183]  [DEVICE] ▶ Published warlok/secrets: seq=2 device=edge-ACTUATOR-013 secret_digest=5ca1a397 cmd=VALVE_OPEN:edge-ACTUATOR-013:valve=12,value=60
+[1754892188] Shutting down...
+[1754892191] [GATEWAY] Subscribed: warlok/ingest, warlok/quarantine
+[1754892191]  [INTERCEPTOR] Subscribed: warlok/secrets
+[1754892191]  [DEVICE] Using device_id=edge-VALVE-012
+[1754892191]  [DEVICE] Subscribed: warlok/validation/edge-VALVE-012
+[1754892191]  [DEVICE] Using session_seed=1975125855
+[1754892191]  [DEVICE] Generated secret_string=ng8kVA32Ytz5B%r14m6SgDNc session_seed=1975125855
+[1754892192]  [DEVICE] ▶ cmd[1]=VALVE_OPEN:edge-VALVE-012:valve=12,value=47 in policy=True
+[1754892192]  [DEVICE] ▶ cmd[2]=VALVE_OPEN:edge-VALVE-012:valve=12,value=60 in policy=False
+[1754892192]  [DEVICE] ▶ Published warlok/secrets: seq=1 device=edge-VALVE-012 secret_digest=9994ef23 cmd=VALVE_OPEN:edge-VALVE-012:valve=12,value=47
+[1754892192]  [INTERCEPTOR] Received message: {'device_id': 'edge-VALVE-012', 'role': 'VendorTech', 'ts': 1754892192, 'seq': 1}
+[1754892192]  [DEVICE] ▶ Published warlok/secrets: seq=2 device=edge-VALVE-012 secret_digest=9994ef23 cmd=VALVE_OPEN:edge-VALVE-012:valve=12,value=60
+[1754892193]  [INTERCEPTOR] Regenerated secret: ng8kVA32Ytz5B%r14m6SgDNc session_seed=1975125855 seed_input=ng8kVA32Ytz5B%r14m6SgDNc device_id=edge-VALVE-012 role=VendorTech
+[1754892193]  [INTERCEPTOR] ✅ AUTH seq=1 device=edge-VALVE-012 cmd=VALVE_OPEN:edge-VALVE-012:valve=12,value=47 secret_digest=9994ef23
+[1754892193]  [INTERCEPTOR] Received message: {'device_id': 'edge-VALVE-012', 'role': 'VendorTech', 'ts': 1754892192, 'seq': 2}
+[1754892193]  [INTERCEPTOR] Regenerated secret: ng8kVA32Ytz5B%r14m6SgDNc session_seed=1975125855 seed_input=ng8kVA32Ytz5B%r14m6SgDNc device_id=edge-VALVE-012 role=VendorTech
+[1754892193]  [INTERCEPTOR] 🚫 QUAR seq=2 device=edge-VALVE-012 cmd=VALVE_OPEN:edge-VALVE-012:valve=12,value=60 secret_digest=9994ef23
+[1754917970] Shutting down...
+[1754917972] [GATEWAY] Subscribed: warlok/ingest, warlok/quarantine
+[1754917972]  [INTERCEPTOR] Subscribed: warlok/secrets
+[1754917972]  [DEVICE] Using device_id=edge-VALVE-009
+[1754917972]  [DEVICE] Subscribed: warlok/validation/edge-VALVE-009
+[1754917972]  [DEVICE] Using session_seed=639411265
+[1754917972] [DEVICE] Generated secret_string=OnWzKkfD~qv9T#XHhh$_#QPj session_seed=639411265
+[1754917974] [DEVICE] ❌ Local RNN attestation failed: secret_digest=4d87649d recon=OnWzKkfD~qPjT#XHhh$_#QPj
+[1754917974]  [DEVICE] ▶ cmd[1]=VALVE_OPEN:edge-VALVE-009:valve=12,value=47 in policy=True
+[1754917974]  [DEVICE] ▶ cmd[2]=VALVE_OPEN:edge-VALVE-009:valve=12,value=60 in policy=False
+[1754917974]  [DEVICE] ▶ Published warlok/secrets: seq=1 device=edge-VALVE-009 secret_digest=4d87649d cmd=VALVE_OPEN:edge-VALVE-009:valve=12,value=47
+[1754917974]  [DEVICE] ▶ Published warlok/secrets: seq=2 device=edge-VALVE-009 secret_digest=4d87649d cmd=VALVE_OPEN:edge-VALVE-009:valve=12,value=60
+[1754917996] Shutting down...
+[1754917997] [GATEWAY] Subscribed: warlok/ingest, warlok/quarantine
+[1754917997]  [INTERCEPTOR] Subscribed: warlok/secrets
+[1754917997]  [DEVICE] Using device_id=edge-VALVE-009
+[1754917997]  [DEVICE] Subscribed: warlok/validation/edge-VALVE-009
+[1754917997]  [DEVICE] Using session_seed=3557051619
+[1754917997] [DEVICE] Generated secret_string=jrm0e+cDluumttaQYtpePzmj session_seed=3557051619
+[1754917998]  [DEVICE] ▶ cmd[1]=VALVE_OPEN:edge-VALVE-009:valve=12,value=47 in policy=True
+[1754917998]  [DEVICE] ▶ cmd[2]=VALVE_OPEN:edge-VALVE-009:valve=12,value=60 in policy=False
+[1754917998]  [DEVICE] ▶ Published warlok/secrets: seq=1 device=edge-VALVE-009 secret_digest=893a36c3 cmd=VALVE_OPEN:edge-VALVE-009:valve=12,value=47
+[1754917998]  [DEVICE] ▶ Published warlok/secrets: seq=2 device=edge-VALVE-009 secret_digest=893a36c3 cmd=VALVE_OPEN:edge-VALVE-009:valve=12,value=60
+[1754918003] Shutting down...
+[1754918004] [GATEWAY] Subscribed: warlok/ingest, warlok/quarantine
+[1754918004]  [INTERCEPTOR] Subscribed: warlok/secrets
+[1754918004]  [DEVICE] Using device_id=edge-VALVE-011
+[1754918004]  [DEVICE] Subscribed: warlok/validation/edge-VALVE-011
+[1754918004]  [DEVICE] Using session_seed=2114717274
+[1754918004] [DEVICE] Generated secret_string=BRPGodlMn7UNT5Kz2apgBWOF session_seed=2114717274
+[1754918005]  [DEVICE] ▶ cmd[1]=VALVE_OPEN:edge-VALVE-011:valve=12,value=47 in policy=True
+[1754918005]  [DEVICE] ▶ cmd[2]=VALVE_OPEN:edge-VALVE-011:valve=12,value=60 in policy=False
+[1754918005]  [DEVICE] ▶ Published warlok/secrets: seq=1 device=edge-VALVE-011 secret_digest=1c559507 cmd=VALVE_OPEN:edge-VALVE-011:valve=12,value=47
+[1754918005]  [DEVICE] ▶ Published warlok/secrets: seq=2 device=edge-VALVE-011 secret_digest=1c559507 cmd=VALVE_OPEN:edge-VALVE-011:valve=12,value=60
+[1754918014] Shutting down...
+[1754918017] [GATEWAY] Subscribed: warlok/ingest, warlok/quarantine
+[1754918017]  [INTERCEPTOR] Subscribed: warlok/secrets
+[1754918017]  [DEVICE] Using device_id=edge-PLC-001
+[1754918017]  [DEVICE] Subscribed: warlok/validation/edge-PLC-001
+[1754918017]  [DEVICE] Using session_seed=2366266922
+[1754918017] [DEVICE] Generated secret_string=t6+nqX&Es*jyhY4RzFH7FNML session_seed=2366266922
+[1754918018] [DEVICE] ❌ Local RNN attestation failed: secret_digest=ae09cf5c recon=t6+nqX&Es*jyh*jyhFHyFNM7
+[1754918018]  [DEVICE] ▶ cmd[1]=VALVE_OPEN:edge-PLC-001:valve=12,value=47 in policy=True
+[1754918018]  [DEVICE] ▶ cmd[2]=VALVE_OPEN:edge-PLC-001:valve=12,value=60 in policy=False
+[1754918018]  [DEVICE] ▶ Published warlok/secrets: seq=1 device=edge-PLC-001 secret_digest=ae09cf5c cmd=VALVE_OPEN:edge-PLC-001:valve=12,value=47
+[1754918018]  [INTERCEPTOR] Received message: {'device_id': 'edge-PLC-001', 'role': 'VendorTech', 'ts': 1754918018, 'seq': 1}
+[1754918018]  [DEVICE] ▶ Published warlok/secrets: seq=2 device=edge-PLC-001 secret_digest=ae09cf5c cmd=VALVE_OPEN:edge-PLC-001:valve=12,value=60
+[1754918019]  [INTERCEPTOR] Regenerated secret: t6+nqX&Es*jyhY4RzFH7FNML session_seed=2366266922 seed_input=t6+nqX&Es*jyhY4RzFH7FNML device_id=edge-PLC-001 role=VendorTech
+[1754918019]  [INTERCEPTOR] ✅ AUTH seq=1 device=edge-PLC-001 cmd=VALVE_OPEN:edge-PLC-001:valve=12,value=47 secret_digest=ae09cf5c
+[1754918019]  [INTERCEPTOR] Received message: {'device_id': 'edge-PLC-001', 'role': 'VendorTech', 'ts': 1754918018, 'seq': 2}
+[1754918020]  [INTERCEPTOR] Regenerated secret: t6+nqX&Es*jyhY4RzFH7FNML session_seed=2366266922 seed_input=t6+nqX&Es*jyhY4RzFH7FNML device_id=edge-PLC-001 role=VendorTech
+[1754918020]  [INTERCEPTOR] 🚫 QUAR seq=2 device=edge-PLC-001 cmd=VALVE_OPEN:edge-PLC-001:valve=12,value=60 secret_digest=ae09cf5c
+[1759820472] [GATEWAY] Subscribed: warlok/ingest, warlok/quarantine
+[1759820472]  [INTERCEPTOR] Subscribed: warlok/secrets
+[1759820472]  [DEVICE] Using device_id=edge-VALVE-012
+[1759820472]  [DEVICE] Subscribed: warlok/validation/edge-VALVE-012
+[1759820472]  [DEVICE] Using session_seed=1406432514
+[1759820472] [DEVICE] Generated secret_string=ulpwvVFuWuZE+NqOwBo9DMyJ session_seed=1406432514
+[1759820473]  [DEVICE] ▶ cmd[1]=VALVE_OPEN:edge-VALVE-012:valve=12,value=47 in policy=True
+[1759820473]  [DEVICE] ▶ cmd[2]=VALVE_OPEN:edge-VALVE-012:valve=12,value=60 in policy=False
+[1759820473]  [DEVICE] ▶ Published warlok/secrets: seq=1 device=edge-VALVE-012 secret_digest=46df24f5 cmd=VALVE_OPEN:edge-VALVE-012:valve=12,value=47
+[1759820473]  [DEVICE] ▶ Published warlok/secrets: seq=2 device=edge-VALVE-012 secret_digest=46df24f5 cmd=VALVE_OPEN:edge-VALVE-012:valve=12,value=60
+[1759820473]  [INTERCEPTOR] Received message: {'device_id': 'edge-VALVE-012', 'role': 'VendorTech', 'ts': 1759820473, 'seq': 1}
+[1759820474]  [INTERCEPTOR] Regenerated secret: ulpwvVFuWuZE+NqOwBo9DMyJ session_seed=1406432514 seed_input=ulpwvVFuWuZE+NqOwBo9DMyJ device_id=edge-VALVE-012 role=VendorTech
+[1759820474]  [INTERCEPTOR] ✅ AUTH seq=1 device=edge-VALVE-012 cmd=VALVE_OPEN:edge-VALVE-012:valve=12,value=47 secret_digest=46df24f5
+[1759820474]  [INTERCEPTOR] Received message: {'device_id': 'edge-VALVE-012', 'role': 'VendorTech', 'ts': 1759820473, 'seq': 2}
+[1759820475]  [INTERCEPTOR] Regenerated secret: ulpwvVFuWuZE+NqOwBo9DMyJ session_seed=1406432514 seed_input=ulpwvVFuWuZE+NqOwBo9DMyJ device_id=edge-VALVE-012 role=VendorTech
+[1759820475]  [INTERCEPTOR] 🚫 QUAR seq=2 device=edge-VALVE-012 cmd=VALVE_OPEN:edge-VALVE-012:valve=12,value=60 secret_digest=46df24f5
+[1759820475] [GATEWAY] warlok/ingest: {'meta': {'device_id': 'edge-VALVE-012', 'role': 'VendorTech', 'ts': 1759820473, 'seq': 1}, 'policy_id': 'POL-VALVE-OPEN@v1', 'plaintext': 'VALVE_OPEN:edge-VALVE-012:valve=12,value=47', 'validated': True, 'reason': None, 'secret_digest': '46df24f5'}
+[1759820475]  [DEVICE] Validation result: {'meta': {'device_id': 'edge-VALVE-012', 'role': 'VendorTech', 'ts': 1759820473, 'seq': 1}, 'policy_id': 'POL-VALVE-OPEN@v1', 'plaintext': 'VALVE_OPEN:edge-VALVE-012:valve=12,value=47', 'validated': True, 'reason': None, 'secret_digest': '46df24f5'}
+[1759820475]  [DEVICE] Validation result: {'meta': {'device_id': 'edge-VALVE-012', 'role': 'VendorTech', 'ts': 1759820473, 'seq': 2}, 'policy_id': 'POL-VALVE-OPEN@v1', 'plaintext': 'VALVE_OPEN:edge-VALVE-012:valve=12,value=60', 'validated': False, 'reason': 'policy_violation', 'secret_digest': '46df24f5'}
+[1759820475] [GATEWAY] warlok/quarantine: {'meta': {'device_id': 'edge-VALVE-012', 'role': 'VendorTech', 'ts': 1759820473, 'seq': 2}, 'policy_id': 'POL-VALVE-OPEN@v1', 'plaintext': 'VALVE_OPEN:edge-VALVE-012:valve=12,value=60', 'validated': False, 'reason': 'policy_violation', 'secret_digest': '46df24f5'}
+[1759821722] Shutting down...
+[1759821723] [GATEWAY] Subscribed: warlok/ingest, warlok/quarantine
+[1759821723]  [INTERCEPTOR] Subscribed: warlok/secrets
+[1759821723]  [DEVICE] Using device_id=edge-PLC-001
+[1759821723]  [DEVICE] Subscribed: warlok/validation/edge-PLC-001
+[1759821723]  [DEVICE] Using session_seed=2307712316
+[1759821723] [DEVICE] Generated secret_string=gYxBOo*W66UCbJ%jA3I0_!wG session_seed=2307712316
+[1759821724]  [DEVICE] ▶ cmd[1]=VALVE_OPEN:edge-PLC-001:valve=12,value=47 in policy=True
+[1759821724]  [DEVICE] ▶ cmd[2]=VALVE_OPEN:edge-PLC-001:valve=12,value=60 in policy=False
+[1759821724]  [DEVICE] ▶ Published warlok/secrets: seq=1 device=edge-PLC-001 secret_digest=e1526732 cmd=VALVE_OPEN:edge-PLC-001:valve=12,value=47
+[1759821724]  [DEVICE] ▶ Published warlok/secrets: seq=2 device=edge-PLC-001 secret_digest=e1526732 cmd=VALVE_OPEN:edge-PLC-001:valve=12,value=60
+[1759821724]  [INTERCEPTOR] Received message: {'device_id': 'edge-PLC-001', 'role': 'VendorTech', 'ts': 1759821724, 'seq': 1}
+[1759821725]  [INTERCEPTOR] Regenerated secret: gYxBOo*W66UCbJ%jA3I0_!wG session_seed=2307712316 seed_input=gYxBOo*W66UCbJ%jA3I0_!wG device_id=edge-PLC-001 role=VendorTech
+[1759821725]  [INTERCEPTOR] ✅ AUTH seq=1 device=edge-PLC-001 cmd=VALVE_OPEN:edge-PLC-001:valve=12,value=47 secret_digest=e1526732
+[1759821725]  [INTERCEPTOR] Received message: {'device_id': 'edge-PLC-001', 'role': 'VendorTech', 'ts': 1759821724, 'seq': 2}
+[1759821726]  [INTERCEPTOR] Regenerated secret: gYxBOo*W66UCbJ%jA3I0_!wG session_seed=2307712316 seed_input=gYxBOo*W66UCbJ%jA3I0_!wG device_id=edge-PLC-001 role=VendorTech
+[1759821726]  [INTERCEPTOR] 🚫 QUAR seq=2 device=edge-PLC-001 cmd=VALVE_OPEN:edge-PLC-001:valve=12,value=60 secret_digest=e1526732
+[1759821726] [GATEWAY] warlok/ingest: {'meta': {'device_id': 'edge-PLC-001', 'role': 'VendorTech', 'ts': 1759821724, 'seq': 1}, 'policy_id': 'POL-VALVE-OPEN@v1', 'plaintext': 'VALVE_OPEN:edge-PLC-001:valve=12,value=47', 'validated': True, 'reason': None, 'secret_digest': 'e1526732'}
+[1759821726] [GATEWAY] warlok/quarantine: {'meta': {'device_id': 'edge-PLC-001', 'role': 'VendorTech', 'ts': 1759821724, 'seq': 2}, 'policy_id': 'POL-VALVE-OPEN@v1', 'plaintext': 'VALVE_OPEN:edge-PLC-001:valve=12,value=60', 'validated': False, 'reason': 'policy_violation', 'secret_digest': 'e1526732'}
+[1759821726]  [DEVICE] Validation result: {'meta': {'device_id': 'edge-PLC-001', 'role': 'VendorTech', 'ts': 1759821724, 'seq': 1}, 'policy_id': 'POL-VALVE-OPEN@v1', 'plaintext': 'VALVE_OPEN:edge-PLC-001:valve=12,value=47', 'validated': True, 'reason': None, 'secret_digest': 'e1526732'}
+[1759821726]  [DEVICE] Validation result: {'meta': {'device_id': 'edge-PLC-001', 'role': 'VendorTech', 'ts': 1759821724, 'seq': 2}, 'policy_id': 'POL-VALVE-OPEN@v1', 'plaintext': 'VALVE_OPEN:edge-PLC-001:valve=12,value=60', 'validated': False, 'reason': 'policy_violation', 'secret_digest': 'e1526732'}
+[1759905971] [GATEWAY] Subscribed: warlok/ingest, warlok/quarantine
+[1759905971]  [INTERCEPTOR] Subscribed: warlok/secrets
+[1759905971]  [DEVICE] Using device_id=edge-PLC-001
+[1759905971]  [DEVICE] Subscribed: warlok/validation/edge-PLC-001
+[1759905971]  [DEVICE] Using session_seed=251850522
+[1759905971] [DEVICE] Generated secret_string=irKYI!Uhy5@tF@_Smz_ThCNk session_seed=251850522
+[1759905972]  [DEVICE] ▶ cmd[1]=VALVE_OPEN:edge-PLC-001:valve=12,value=47 in policy=True
+[1759905972]  [DEVICE] ▶ cmd[2]=VALVE_OPEN:edge-PLC-001:valve=12,value=60 in policy=False
+[1759905972]  [DEVICE] ▶ Published warlok/secrets: seq=1 device=edge-PLC-001 secret_digest=e7b0621b cmd=VALVE_OPEN:edge-PLC-001:valve=12,value=47
+[1759905972]  [DEVICE] ▶ Published warlok/secrets: seq=2 device=edge-PLC-001 secret_digest=e7b0621b cmd=VALVE_OPEN:edge-PLC-001:valve=12,value=60
+[1759905972]  [INTERCEPTOR] Received message: {'device_id': 'edge-PLC-001', 'role': 'VendorTech', 'ts': 1759905972, 'seq': 1}
+[1759905973]  [INTERCEPTOR] Regenerated secret: irKYI!Uhy5@tF@_Smz_ThCNk session_seed=251850522 seed_input=irKYI!Uhy5@tF@_Smz_ThCNk device_id=edge-PLC-001 role=VendorTech
+[1759905973]  [INTERCEPTOR] ✅ AUTH seq=1 device=edge-PLC-001 cmd=VALVE_OPEN:edge-PLC-001:valve=12,value=47 secret_digest=e7b0621b
+[1759905973]  [INTERCEPTOR] Received message: {'device_id': 'edge-PLC-001', 'role': 'VendorTech', 'ts': 1759905972, 'seq': 2}
+[1759905974]  [INTERCEPTOR] Regenerated secret: irKYI!Uhy5@tF@_Smz_ThCNk session_seed=251850522 seed_input=irKYI!Uhy5@tF@_Smz_ThCNk device_id=edge-PLC-001 role=VendorTech
+[1759905974]  [INTERCEPTOR] 🚫 QUAR seq=2 device=edge-PLC-001 cmd=VALVE_OPEN:edge-PLC-001:valve=12,value=60 secret_digest=e7b0621b
+[1759905974]  [DEVICE] Validation result: {'meta': {'device_id': 'edge-PLC-001', 'role': 'VendorTech', 'ts': 1759905972, 'seq': 1}, 'policy_id': 'POL-VALVE-OPEN@v1', 'plaintext': 'VALVE_OPEN:edge-PLC-001:valve=12,value=47', 'validated': True, 'reason': None, 'secret_digest': 'e7b0621b'}
+[1759905974] [GATEWAY] warlok/ingest: {'meta': {'device_id': 'edge-PLC-001', 'role': 'VendorTech', 'ts': 1759905972, 'seq': 1}, 'policy_id': 'POL-VALVE-OPEN@v1', 'plaintext': 'VALVE_OPEN:edge-PLC-001:valve=12,value=47', 'validated': True, 'reason': None, 'secret_digest': 'e7b0621b'}
+[1759905974]  [DEVICE] Validation result: {'meta': {'device_id': 'edge-PLC-001', 'role': 'VendorTech', 'ts': 1759905972, 'seq': 2}, 'policy_id': 'POL-VALVE-OPEN@v1', 'plaintext': 'VALVE_OPEN:edge-PLC-001:valve=12,value=60', 'validated': False, 'reason': 'policy_violation', 'secret_digest': 'e7b0621b'}
+[1759905974] [GATEWAY] warlok/quarantine: {'meta': {'device_id': 'edge-PLC-001', 'role': 'VendorTech', 'ts': 1759905972, 'seq': 2}, 'policy_id': 'POL-VALVE-OPEN@v1', 'plaintext': 'VALVE_OPEN:edge-PLC-001:valve=12,value=60', 'validated': False, 'reason': 'policy_violation', 'secret_digest': 'e7b0621b'}

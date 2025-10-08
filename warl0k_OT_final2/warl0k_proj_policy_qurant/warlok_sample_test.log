@@ -1,0 +1,36 @@
+[1754823564] [DEVICE] Using session_seed=429610
+[1754823565] [DEVICE] ▶ Published warlok/secrets: seq=1 device=edge-PUMP-003 secret_digest=2c7e2a7a cmd=VALVE_OPEN:edge-PUMP-003:valve=12,value=47
+[1754823565] [INTERCEPTOR] Regenerated secret: TRQJGF5CBFPQBN4Q6TAL5XTK session_seed=429610 seed_input=*** device_id=edge-PUMP-003 role=VendorTech
+[1754823565] [INTERCEPTOR] ✅ AUTH seq=1 device=edge-PUMP-003 cmd=VALVE_OPEN:edge-PUMP-003:valve=12,value=47 secret_digest=2c7e2a7a
+[1754823565] [GATEWAY] warlok/ingest: {"meta":{"device_id":"edge-PUMP-003","role":"VendorTech","seq":1,"ts":1754823565},"policy_id":"POL-VALVE-OPEN@v1","plaintext":"VALVE_OPEN:edge-PUMP-003:valve=12,value=47","validated":true,"reason":null,"secret_digest":"2c7e2a7a"}
+[1754823566] [DEVICE] ▶ Published warlok/secrets: seq=2 device=edge-PUMP-003 secret_digest=2c7e2a7a cmd=VALVE_OPEN:edge-PUMP-003:valve=12,value=60
+[1754823566] [INTERCEPTOR] Regenerated secret: TRQJGF5CBFPQBN4Q6TAL5XTK session_seed=429610 seed_input=*** device_id=edge-PUMP-003 role=VendorTech
+[1754823566] [INTERCEPTOR] 🚫 QUAR seq=2 device=edge-PUMP-003 cmd=VALVE_OPEN:edge-PUMP-003:valve=12,value=60 secret_digest=2c7e2a7a
+[1754823566] [GATEWAY] warlok/quarantine: {"meta":{"device_id":"edge-PUMP-003","role":"VendorTech","seq":2,"ts":1754823566},"policy_id":"POL-VALVE-OPEN@v1","plaintext":"VALVE_OPEN:edge-PUMP-003:valve=12,value=60","validated":false,"reason":"policy_violation","secret_digest":"2c7e2a7a"}
+[1754823584] [DEVICE] Using session_seed=1566017
+[1754823585] [DEVICE] ▶ Published warlok/secrets: seq=1 device=edge-VALVE-007 secret_digest=e1b796c5 cmd=VALVE_OPEN:edge-VALVE-007:valve=12,value=47
+[1754823585] [INTERCEPTOR] Regenerated secret: 2GYYSC7H2FUZNECQUFQG2T7Z session_seed=1566017 seed_input=*** device_id=edge-VALVE-007 role=VendorTech
+[1754823585] [INTERCEPTOR] ✅ AUTH seq=1 device=edge-VALVE-007 cmd=VALVE_OPEN:edge-VALVE-007:valve=12,value=47 secret_digest=e1b796c5
+[1754823585] [GATEWAY] warlok/ingest: {"meta":{"device_id":"edge-VALVE-007","role":"VendorTech","seq":1,"ts":1754823585},"policy_id":"POL-VALVE-OPEN@v1","plaintext":"VALVE_OPEN:edge-VALVE-007:valve=12,value=47","validated":true,"reason":null,"secret_digest":"e1b796c5"}
+[1754823586] [DEVICE] ▶ Published warlok/secrets: seq=2 device=edge-VALVE-007 secret_digest=e1b796c5 cmd=VALVE_OPEN:edge-VALVE-007:valve=12,value=60
+[1754823586] [INTERCEPTOR] Regenerated secret: 2GYYSC7H2FUZNECQUFQG2T7Z session_seed=1566017 seed_input=*** device_id=edge-VALVE-007 role=VendorTech
+[1754823586] [INTERCEPTOR] 🚫 QUAR seq=2 device=edge-VALVE-007 cmd=VALVE_OPEN:edge-VALVE-007:valve=12,value=60 secret_digest=e1b796c5
+[1754823586] [GATEWAY] warlok/quarantine: {"meta":{"device_id":"edge-VALVE-007","role":"VendorTech","seq":2,"ts":1754823586},"policy_id":"POL-VALVE-OPEN@v1","plaintext":"VALVE_OPEN:edge-VALVE-007:valve=12,value=60","validated":false,"reason":"policy_violation","secret_digest":"e1b796c5"}
+[1754823604] [DEVICE] Using session_seed=3524944
+[1754823605] [DEVICE] ▶ Published warlok/secrets: seq=1 device=edge-VALVE-007 secret_digest=482d6d7e cmd=VALVE_OPEN:edge-VALVE-007:valve=12,value=47
+[1754823605] [INTERCEPTOR] Regenerated secret: TELRL72TQWDQCW3TEPWP937K session_seed=3524944 seed_input=*** device_id=edge-VALVE-007 role=FieldEng
+[1754823605] [INTERCEPTOR] ✅ AUTH seq=1 device=edge-VALVE-007 cmd=VALVE_OPEN:edge-VALVE-007:valve=12,value=47 secret_digest=482d6d7e
+[1754823605] [GATEWAY] warlok/ingest: {"meta":{"device_id":"edge-VALVE-007","role":"FieldEng","seq":1,"ts":1754823605},"policy_id":"POL-VALVE-OPEN@v1","plaintext":"VALVE_OPEN:edge-VALVE-007:valve=12,value=47","validated":true,"reason":null,"secret_digest":"482d6d7e"}
+[1754823606] [DEVICE] ▶ Published warlok/secrets: seq=2 device=edge-VALVE-007 secret_digest=482d6d7e cmd=VALVE_OPEN:edge-VALVE-007:valve=12,value=33
+[1754823606] [INTERCEPTOR] Regenerated secret: TELRL72TQWDQCW3TEPWP937K session_seed=3524944 seed_input=*** device_id=edge-VALVE-007 role=FieldEng
+[1754823606] [INTERCEPTOR] 🚫 QUAR seq=2 device=edge-VALVE-007 cmd=VALVE_OPEN:edge-VALVE-007:valve=12,value=33 secret_digest=482d6d7e
+[1754823606] [GATEWAY] warlok/quarantine: {"meta":{"device_id":"edge-VALVE-007","role":"FieldEng","seq":2,"ts":1754823606},"policy_id":"POL-VALVE-OPEN@v1","plaintext":"VALVE_OPEN:edge-VALVE-007:valve=12,value=33","validated":false,"reason":"policy_violation","secret_digest":"482d6d7e"}
+[1754823624] [DEVICE] Using session_seed=9428194
+[1754823625] [DEVICE] ▶ Published warlok/secrets: seq=1 device=edge-PLC-001 secret_digest=3b363d60 cmd=VALVE_OPEN:edge-PLC-001:valve=12,value=47
+[1754823625] [INTERCEPTOR] Regenerated secret: S53ZQJ9FDHKL5E227SAHTXHU session_seed=9428194 seed_input=*** device_id=edge-PLC-001 role=VendorTech
+[1754823625] [INTERCEPTOR] ✅ AUTH seq=1 device=edge-PLC-001 cmd=VALVE_OPEN:edge-PLC-001:valve=12,value=47 secret_digest=3b363d60
+[1754823625] [GATEWAY] warlok/ingest: {"meta":{"device_id":"edge-PLC-001","role":"VendorTech","seq":1,"ts":1754823625},"policy_id":"POL-VALVE-OPEN@v1","plaintext":"VALVE_OPEN:edge-PLC-001:valve=12,value=47","validated":true,"reason":null,"secret_digest":"3b363d60"}
+[1754823626] [DEVICE] ▶ Published warlok/secrets: seq=2 device=edge-PLC-001 secret_digest=3b363d60 cmd=VALVE_OPEN:edge-PLC-001:valve=12,value=33
+[1754823626] [INTERCEPTOR] Regenerated secret: S53ZQJ9FDHKL5E227SAHTXHU session_seed=9428194 seed_input=*** device_id=edge-PLC-001 role=VendorTech
+[1754823626] [INTERCEPTOR] 🚫 QUAR seq=2 device=edge-PLC-001 cmd=VALVE_OPEN:edge-PLC-001:valve=12,value=33 secret_digest=3b363d60
+[1754823626] [GATEWAY] warlok/quarantine: {"meta":{"device_id":"edge-PLC-001","role":"VendorTech","seq":2,"ts":1754823626},"policy_id":"POL-VALVE-OPEN@v1","plaintext":"VALVE_OPEN:edge-PLC-001:valve=12,value=33","validated":false,"reason":"policy_violation","secret_digest":"3b363d60"}

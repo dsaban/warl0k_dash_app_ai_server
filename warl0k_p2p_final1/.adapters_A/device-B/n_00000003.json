@@ -1,0 +1,18 @@
+{
+  "artifacts": {
+    "adapter_pkl": "n_00000003.pkl",
+    "adapter_pkl_sha256": "09a4fcf9a572ce5b2909729c944a4117a7df59a24ea009f34515caefa8ba00ad"
+  },
+  "audit_json_sha256": "3b16c0bfec620521fbdbafe9634821da33d18510fa5515ed77b456f15cb98d22",
+  "n": 3,
+  "obf_hex": "f2f3497b49c4691d",
+  "peer_id": "device-B",
+  "saved_at_epoch_ms": 1759577193.1071332,
+  "target_sha256": "55d8f58e931b1a166bcca70c7b63d3e419f15ac615f4f07de1dd4b81c7053c20",
+  "training": {
+    "early_stopped": false,
+    "epochs_run": 20,
+    "meta_used": true
+  },
+  "w_sha256": "f07599093a7bc5dfd300d592b9520dd671b35b51ed8e4af92b5df1d336169c49"
+}

@@ -1,0 +1,21 @@
+general:
+  host: "127.0.0.1"
+  hub_port: 55000
+  peerA_port: 55100
+  peerB_port: 55200
+  demo_plaintext: "transfer 25 units"
+  verbose: true
+
+session:
+  policy_id: "PAYMENT:limit=100"
+  obf_len: 16
+  counter_start: 1
+  pretrain_window: 8
+
+models:
+  master_len_chars: 32
+  drnn_hidden_dim: 48
+  drnn_lr: 0.05
+  drnn_epochs_per_session: 20
+  drnn_meta_samples: 8
+  drnn_meta_steps: 40

@@ -1,0 +1,9 @@
+{
+  "skip_prefixes": ["keywords:"],
+  "drop_contains": ["open in a new tab"],
+  "keep_if_contains": ["may cause", "results from", "states that", "therefore"],
+  "min_token_len": 7,
+  "max_token_len": 80,
+  "listy_drop_min_tokens": 10,
+  "strip_leading_until_any": ["may cause", "results from", "states that", "therefore"]
+}

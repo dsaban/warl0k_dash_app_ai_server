@@ -1,0 +1,57 @@
+{
+  "version": "1.0",
+  "notes": "Pack-driven ontology spec. Engine is domain-agnostic and only executes these extractors.",
+  "node_extractors": [
+    {
+      "node_type": "condition",
+      "mode": "substring",
+      "match": [
+        "gestational diabetes",
+        "gdm",
+        "type 2 diabetes",
+        "t2dm",
+        "prediabetes"
+      ]
+    },
+    {
+      "node_type": "process",
+      "mode": "substring",
+      "match": [
+        "insulin resistance",
+        "hyperglycemia",
+        "hyperinsulinemia",
+        "beta cell",
+        "beta-cell",
+        "placenta",
+        "placental"
+      ]
+    },
+    {
+      "node_type": "test",
+      "mode": "substring",
+      "match": [
+        "ogtt",
+        "oral glucose tolerance test",
+        "hba1c",
+        "fasting blood glucose"
+      ]
+    },
+    {
+      "node_type": "outcome_fetal",
+      "mode": "substring",
+      "match": [
+        "macrosomia",
+        "large for gestational age",
+        "lga"
+      ]
+    },
+    {
+      "node_type": "guideline_org",
+      "mode": "regex",
+      "label": "Guideline organization mention",
+      "regex": [
+        { "pattern": "\\b(ADA|NICE|WHO|IADPSG)\\b", "strength": 3 }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+[
+  {
+    "qid": "q1",
+    "qtype": "pedersen_macrosomia",
+    "question": "Using the modified Pedersen hypothesis, explain how maternal hyperglycemia leads to fetal macrosomia.",
+    "gold_path": [
+      "maternal_hyperglycemia",
+      "placental_glucose_transfer",
+      "fetal_hyperinsulinemia",
+      "fetal_adipogenesis",
+      "fetal_macrosomia"
+    ],
+    "bad_paths": [
+      [
+        "maternal_hyperglycemia",
+        "prematurity_related_problems"
+      ],
+      [
+        "gestational_diabetes",
+        "continuous_glucose_monitoring"
+      ]
+    ]
+  },
+  {
+    "qid": "q2",
+    "qtype": "obesity_inflammation_postpartum_risk",
+    "question": "How does obesity-driven inflammation contribute to long-term maternal cardiometabolic risk following a GDM pregnancy?",
+    "gold_path": [
+      "maternal_obesity",
+      "chronic_low_grade_inflammation",
+      "insulin_resistance",
+      "endothelial_dysfunction",
+      "postpartum_cardiometabolic_risk"
+    ],
+    "bad_paths": [
+      [
+        "continuous_glucose_monitoring",
+        "HbA1c_reduction"
+      ],
+      [
+        "maternal_obesity",
+        "neonatal_hypoglycemia"
+      ]
+    ]
+  },
+  {
+    "qid": "q3",
+    "qtype": "insulin_resistance_to_diabetes_transition",
+    "question": "In what ways does GDM serve as a clinical model for understanding the transition from insulin resistance to overt diabetes?",
+    "gold_path": [
+      "pregnancy_insulin_resistance",
+      "beta_cell_compensation",
+      "beta_cell_stress",
+      "beta_cell_failure",
+      "type2_diabetes"
+    ],
+    "bad_paths": [
+      [
+        "gestational_diabetes",
+        "nicu_admission"
+      ],
+      [
+        "placental_glucose_transfer",
+        "macrosomia"
+      ]
+    ]
+  }
+]

@@ -1,0 +1,19 @@
+# shellcheck disable=SC2287
+local_gdm_claimgraph/
+  app.py
+  docs/
+    example_claimgraph.txt
+  core/
+    __init__.py
+    utils.py
+    schema.py
+    ingest.py
+    claimgraph.py
+    retrieve.py
+    qtype.py
+    gates.py
+    experts.py
+    moe_router.py
+    ebm_ranker.py
+    pipeline.py
+    train_ebm_router.py

@@ -1,0 +1,197 @@
+🔹 FRAME A — Pregnancy physiology → GDM (normal → pathology)
+
+How do placental hormones induce insulin resistance during normal pregnancy?
+
+Why does insulin resistance increase progressively from mid-pregnancy to the third trimester?
+
+How do pancreatic beta cells normally compensate for pregnancy-induced insulin resistance?
+
+What failure in beta-cell adaptation leads to the development of GDM?
+
+Why does GDM typically manifest between 24–28 weeks of gestation?
+
+How does maternal adiposity amplify pregnancy-related insulin resistance?
+
+Why does insulin resistance rapidly abate after delivery?
+
+How does normal pregnancy physiology resemble a temporary type 2 diabetes–like state?
+
+What differentiates normal pregnancy insulin resistance from pathological GDM?
+
+Why is GDM considered a failure of compensation rather than a primary insulin resistance disorder?
+
+🔹 FRAME B — Maternal hyperglycemia → fetal macrosomia (Pedersen / HAPO)
+
+Using the modified Pedersen hypothesis, explain how maternal hyperglycemia leads to fetal macrosomia.
+
+Why does maternal glucose, but not insulin, cross the placenta?
+
+How does fetal hyperinsulinemia act as an anabolic hormone?
+
+Why is fetal fat deposition disproportionately increased in the abdomen and shoulders?
+
+How does placental GLUT upregulation contribute to fetal overgrowth?
+
+What role does placental mTOR activation play in fetal nutrient supply?
+
+Why are post-prandial glucose levels stronger predictors of macrosomia than fasting levels?
+
+How does intermittent maternal hyperglycemia affect fetal insulin secretion differently from sustained hyperglycemia?
+
+Why does fetal hyperinsulinemia persist immediately after birth?
+
+How does this mechanism explain neonatal hypoglycemia?
+
+🔹 FRAME C — Epidemiology & risk amplification
+
+Why does GDM prevalence vary widely between populations?
+
+How does background type 2 diabetes prevalence influence GDM rates?
+
+Why is ethnicity an independent risk factor for GDM?
+
+How does obesity increase GDM risk beyond simple insulin resistance?
+
+Why does maternal age correlate with rising GDM incidence?
+
+How does prior macrosomia increase the risk of GDM in subsequent pregnancies?
+
+Why is polycystic ovary syndrome associated with higher GDM risk?
+
+How do genetic susceptibility and environment interact in GDM risk?
+
+Why do low- and middle-income countries show rising GDM prevalence?
+
+How do screening criteria differences inflate or deflate reported prevalence?
+
+🔹 FRAME D — Postpartum progression (GDM → T2DM)
+
+Why does GDM dramatically increase the risk of future type 2 diabetes?
+
+How does declining beta-cell compensation persist after pregnancy?
+
+Why is postpartum glucose tolerance often abnormal despite pregnancy resolution?
+
+What proportion of women with GDM develop T2DM within 5–10 years?
+
+Why is GDM considered a marker of latent metabolic syndrome?
+
+How does weight gain accelerate beta-cell deterioration after GDM?
+
+Why does insulin resistance remain elevated postpartum in some women?
+
+How do inflammatory markers predict post-GDM diabetes progression?
+
+Why is GDM recurrence common in subsequent pregnancies?
+
+How does breastfeeding reduce maternal T2DM risk?
+
+🔹 FRAME E — Guidelines & diagnostic variability
+
+Why do ADA, NICE, WHO, and IADPSG use different GDM diagnostic thresholds?
+
+How do one-step and two-step screening approaches alter GDM prevalence?
+
+Why is universal screening recommended at 24–28 weeks?
+
+Why should high-risk women be screened earlier than 15 weeks?
+
+How do HbA1c limitations affect its role in GDM diagnosis?
+
+Why do fasting and post-load thresholds differ across guidelines?
+
+How do guideline differences impact health system burden?
+
+Why is standardization of GDM diagnosis still unresolved?
+
+How do diagnostic criteria influence downstream treatment rates?
+
+Why is early detection universally emphasized despite threshold disagreement?
+
+🔹 FRAME F — Intervention & monitoring (proper scope)
+
+Why is lifestyle modification first-line therapy in GDM?
+
+When does diet and exercise become insufficient for glycemic control?
+
+Why is insulin considered the safest pharmacologic option in pregnancy?
+
+Why do metformin and glyburide raise safety concerns?
+
+How does CGM improve glycemic control compared to SMBG?
+
+Why is CGM adoption limited despite demonstrated benefits?
+
+How do cost and access create inequities in GDM management?
+
+Why does tight glycemic control increase hypoglycemia risk?
+
+How does multidisciplinary care improve pregnancy outcomes?
+
+Why is fetal growth monitoring essential in poorly controlled GDM?
+
+🔹 FRAME G — Reframing: transient vs chronic metabolic disease
+
+Why does GDM usually resolve after delivery?
+
+What evidence suggests GDM is not merely a transient pregnancy complication?
+
+How does declining beta-cell function support a chronic risk model?
+
+Why is GDM considered a prediabetes-like condition?
+
+How does postpartum OGTT reflect concern for long-term metabolic risk?
+
+Why does resolution of hyperglycemia not imply metabolic normalization?
+
+How do obesity and insulin resistance persist beyond pregnancy?
+
+Why is long-term surveillance recommended after GDM?
+
+Should GDM be classified as a chronic metabolic risk state rather than a disease?
+
+How does this reframing change postpartum care priorities?
+
+🔹 FRAME H — Intergenerational & developmental programming
+
+How does in-utero hyperglycemia program long-term metabolic disease in offspring?
+
+Why are children of GDM mothers at higher risk of obesity?
+
+How does fetal hyperinsulinemia alter long-term insulin sensitivity?
+
+Why does the HAPO study support a dose-response relationship?
+
+How does maternal glucose affect offspring cardiovascular risk?
+
+Why do metabolic consequences of GDM exposure appear in adolescence?
+
+How does placental nutrient transport influence lifelong disease risk?
+
+Why is the intrauterine environment critical for metabolic programming?
+
+How does GDM contribute to the transgenerational diabetes cycle?
+
+Why is offspring follow-up rarely implemented despite known risks?
+
+🔹 FRAME I — Systemic gaps & care-pathway failures
+
+Why is postpartum follow-up after GDM consistently poor?
+
+How does healthcare system fragmentation contribute to missed OGTT testing?
+
+Why is GDM often treated as “resolved” once pregnancy ends?
+
+How do insurance and access barriers worsen long-term outcomes?
+
+Why does responsibility for follow-up fall between obstetrics and primary care?
+
+How does inadequate postpartum care increase T2DM incidence?
+
+Why do guidelines fail to translate into real-world follow-up?
+
+How does health inequity amplify post-GDM risk?
+
+Why is patient noncompliance an incomplete explanation for missed follow-up?
+
+How does reframing GDM as chronic risk expose systemic care failures?

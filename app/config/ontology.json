@@ -1,0 +1,95 @@
+{
+  "version": "1.0",
+  "domain": "Gestational Diabetes Mellitus (GDM)",
+  "fixed_qtypes": [
+    "pedersen_macrosomia",
+    "obesity_inflammation_postpartum_risk",
+    "insulin_resistance_to_diabetes_transition",
+    "placental_transport_and_mtor",
+    "postpartum_cardiometabolic_risk"
+  ],
+  "tags": [
+    "glucose_transfer",
+    "placenta",
+    "fetal_insulin",
+    "macrosomia",
+    "mTOR",
+    "inflammation",
+    "adipokines",
+    "endothelial_dysfunction",
+    "beta_cell_compensation",
+    "beta_cell_failure",
+    "insulin_resistance",
+    "postpartum_risk",
+    "metabolic_syndrome",
+    "t2d_risk",
+    "lipotoxicity",
+    "oxidative_stress",
+    "vascular_risk"
+  ],
+  "relations": [
+    {
+      "type": "causes",
+      "arity": 2
+    },
+    {
+      "type": "increases",
+      "arity": 2
+    },
+    {
+      "type": "decreases",
+      "arity": 2
+    },
+    {
+      "type": "mediated_by",
+      "arity": 3
+    },
+    {
+      "type": "leads_to",
+      "arity": 2
+    },
+    {
+      "type": "contributes_to",
+      "arity": 2
+    },
+    {
+      "type": "activates",
+      "arity": 2
+    },
+    {
+      "type": "upregulates",
+      "arity": 2
+    },
+    {
+      "type": "downregulates",
+      "arity": 2
+    },
+    {
+      "type": "associated_with",
+      "arity": 2
+    }
+  ],
+  "required_causal_chains": {
+    "pedersen_macrosomia": [
+      "maternal_hyperglycemia",
+      "placental_glucose_transfer",
+      "fetal_hyperinsulinemia",
+      "fetal_adipogenesis",
+      "fetal_macrosomia"
+    ],
+    "obesity_inflammation_postpartum_risk": [
+      "maternal_obesity",
+      "chronic_low_grade_inflammation",
+      "insulin_resistance",
+      "endothelial_dysfunction",
+      "postpartum_cardiometabolic_risk"
+    ],
+    "insulin_resistance_to_diabetes_transition": [
+      "pregnancy_insulin_resistance",
+      "beta_cell_compensation",
+      "beta_cell_stress",
+      "beta_cell_failure",
+      "type2_diabetes"
+    ]
+  }
+}

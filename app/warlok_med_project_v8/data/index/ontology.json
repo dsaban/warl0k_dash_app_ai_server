@@ -1,0 +1,99 @@
+{
+  "nodes": [
+    {
+      "id": "n000001",
+      "type": "condition",
+      "label": "gdm"
+    },
+    {
+      "id": "n000002",
+      "type": "condition",
+      "label": "type 2 diabetes"
+    },
+    {
+      "id": "n000003",
+      "type": "outcome_fetal",
+      "label": "macrosomia"
+    },
+    {
+      "id": "n000004",
+      "type": "process",
+      "label": "insulin resistance"
+    },
+    {
+      "id": "n000005",
+      "type": "process",
+      "label": "placenta"
+    },
+    {
+      "id": "n000006",
+      "type": "process",
+      "label": "placental"
+    },
+    {
+      "id": "n000007",
+      "type": "condition",
+      "label": "gestational diabetes"
+    },
+    {
+      "id": "n000008",
+      "type": "process",
+      "label": "hyperglycemia"
+    },
+    {
+      "id": "n000009",
+      "type": "process",
+      "label": "beta cell"
+    },
+    {
+      "id": "n000010",
+      "type": "process",
+      "label": "beta-cell"
+    },
+    {
+      "id": "n000011",
+      "type": "test",
+      "label": "hba1c"
+    },
+    {
+      "id": "n000012",
+      "type": "test",
+      "label": "fasting blood glucose"
+    },
+    {
+      "id": "n000013",
+      "type": "guideline_org",
+      "label": "guideline_org"
+    },
+    {
+      "id": "n000014",
+      "type": "test",
+      "label": "oral glucose tolerance test"
+    },
+    {
+      "id": "n000015",
+      "type": "test",
+      "label": "ogtt"
+    },
+    {
+      "id": "n000016",
+      "type": "condition",
+      "label": "t2dm"
+    },
+    {
+      "id": "n000017",
+      "type": "process",
+      "label": "hyperinsulinemia"
+    }
+  ],
+  "edges": [],
+  "meta": {
+    "docs": [
+      "Diabetes_mellitus_and_pregnancy.txt",
+      "Management_of_Diabetes_in_Pregnancy_A_Review_of_Clinical_Guidelines_Practices.txt",
+      "A Comprehensive_Review_of_Gestational_Diabetes_Mellitus.txt"
+    ],
+    "claim_count": 27,
+    "node_count": 17
+  }
+}

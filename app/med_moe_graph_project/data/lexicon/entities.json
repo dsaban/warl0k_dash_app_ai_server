@@ -1,0 +1,21 @@
+{
+  "entities": [
+    {"id": "E_glucose", "name": "glucose", "aliases": ["glucose", "blood glucose"], "type": "metabolite"},
+    {"id": "E_hyperglycemia", "name": "hyperglycemia", "aliases": ["hyperglycemia", "high glucose"], "type": "condition"},
+    {"id": "E_GDM", "name": "gestational diabetes mellitus", "aliases": ["GDM", "gestational diabetes"], "type": "diagnosis"},
+    {"id": "E_placenta", "name": "placenta", "aliases": ["placenta", "placental"], "type": "anatomy"},
+    {"id": "E_GLUT", "name": "GLUT transporters", "aliases": ["GLUT", "GLUT1", "GLUT3"], "type": "protein"},
+    {"id": "E_insulin", "name": "insulin", "aliases": ["insulin"], "type": "hormone"},
+    {"id": "E_fetal_insulin", "name": "fetal insulin", "aliases": ["fetal insulin", "fetal hyperinsulinemia"], "type": "hormone"},
+    {"id": "E_mTOR", "name": "mTOR", "aliases": ["mTOR"], "type": "pathway"},
+    {"id": "E_SystemA", "name": "System A amino acid transport", "aliases": ["System A"], "type": "transport"},
+    {"id": "E_SystemL", "name": "System L amino acid transport", "aliases": ["System L"], "type": "transport"},
+    {"id": "E_macrosomia", "name": "fetal macrosomia", "aliases": ["macrosomia", "large for gestational age", "LGA"], "type": "outcome"},
+    {"id": "E_obesity", "name": "obesity", "aliases": ["obesity", "overweight", "adiposity"], "type": "risk_factor"},
+    {"id": "E_inflammation", "name": "inflammation", "aliases": ["inflammation", "inflammatory"], "type": "process"},
+    {"id": "E_TNF", "name": "TNF-alpha", "aliases": ["TNF", "TNF-alpha"], "type": "cytokine"},
+    {"id": "E_IL6", "name": "IL-6", "aliases": ["IL-6", "interleukin-6"], "type": "cytokine"},
+    {"id": "E_beta_cell", "name": "beta cell", "aliases": ["beta-cell", "beta cell", "pancreatic beta"], "type": "cell"},
+    {"id": "E_T2D", "name": "type 2 diabetes", "aliases": ["type 2 diabetes", "T2D"], "type": "diagnosis"}
+  ]
+}

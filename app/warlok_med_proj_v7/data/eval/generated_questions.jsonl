@@ -1,0 +1,637 @@
+{"q": "Using the modified Pedersen hypothesis, explain how maternal hyperglycemia leads to fetal macrosomia.", "source": "core"}
+{"q": "Explain how normal pregnancy physiology progresses to GDM when beta-cell compensation fails.", "source": "core"}
+{"q": "How does failure to address postpartum follow-up represent a systemic gap in GDM care rather than individual noncompliance?", "source": "core"}
+{"q": "Compare guideline approaches to screening and diagnostic criteria for GDM.", "source": "core"}
+{"q": "How do monitoring targets and interventions reduce GDM-related complications?", "source": "core"}
+{"q": "Explain how maternal glucose exposure reaches the fetus via placental transfer.", "edge": "CROSSES_PLACENTA", "source": "edge"}
+{"q": "In mechanistic steps, why does maternal hyperglycemia lead to fetal hyperglycemia (placental glucose transfer)?", "edge": "CROSSES_PLACENTA", "source": "edge"}
+{"q": "Describe the maternal-to-fetal glucose transfer step in the modified Pedersen hypothesis. Include key intermediates and directionality.", "edge": "CROSSES_PLACENTA", "source": "edge"}
+{"q": "Explain how maternal glucose exposure reaches the fetus via placental transfer. Use a concise 4–6 step causal chain.", "edge": "CROSSES_PLACENTA", "source": "edge"}
+{"q": "Why does maternal hyperglycemia lead to fetal hyperglycemia (placental glucose transfer)?", "edge": "CROSSES_PLACENTA", "source": "edge"}
+{"q": "Describe the maternal-to-fetal glucose transfer step in the modified Pedersen hypothesis.", "edge": "CROSSES_PLACENTA", "source": "edge"}
+{"q": "In mechanistic steps, explain how maternal glucose exposure reaches the fetus via placental transfer.", "edge": "CROSSES_PLACENTA", "source": "edge"}
+{"q": "Why does maternal hyperglycemia lead to fetal hyperglycemia (placental glucose transfer)? Include key intermediates and directionality.", "edge": "CROSSES_PLACENTA", "source": "edge"}
+{"q": "Describe the maternal-to-fetal glucose transfer step in the modified Pedersen hypothesis. Use a concise 4–6 step causal chain.", "edge": "CROSSES_PLACENTA", "source": "edge"}
+{"q": "In mechanistic steps, describe the maternal-to-fetal glucose transfer step in the modified Pedersen hypothesis.", "edge": "CROSSES_PLACENTA", "source": "edge"}
+{"q": "Explain how maternal glucose exposure reaches the fetus via placental transfer. Include key intermediates and directionality.", "edge": "CROSSES_PLACENTA", "source": "edge"}
+{"q": "Why does maternal hyperglycemia lead to fetal hyperglycemia (placental glucose transfer)? Use a concise 4–6 step causal chain.", "edge": "CROSSES_PLACENTA", "source": "edge"}
+{"q": "Why does fetal hyperglycemia trigger fetal hyperinsulinemia?", "edge": "STIMULATES_INSULIN", "source": "edge"}
+{"q": "In mechanistic steps, explain the fetal pancreatic insulin response to increased glucose exposure.", "edge": "STIMULATES_INSULIN", "source": "edge"}
+{"q": "Connect fetal glucose exposure to fetal insulin secretion in GDM. Include key intermediates and directionality.", "edge": "STIMULATES_INSULIN", "source": "edge"}
+{"q": "Why does fetal hyperglycemia trigger fetal hyperinsulinemia? Use a concise 4–6 step causal chain.", "edge": "STIMULATES_INSULIN", "source": "edge"}
+{"q": "Explain the fetal pancreatic insulin response to increased glucose exposure.", "edge": "STIMULATES_INSULIN", "source": "edge"}
+{"q": "Connect fetal glucose exposure to fetal insulin secretion in GDM.", "edge": "STIMULATES_INSULIN", "source": "edge"}
+{"q": "In mechanistic steps, why does fetal hyperglycemia trigger fetal hyperinsulinemia?", "edge": "STIMULATES_INSULIN", "source": "edge"}
+{"q": "Explain the fetal pancreatic insulin response to increased glucose exposure. Include key intermediates and directionality.", "edge": "STIMULATES_INSULIN", "source": "edge"}
+{"q": "Connect fetal glucose exposure to fetal insulin secretion in GDM. Use a concise 4–6 step causal chain.", "edge": "STIMULATES_INSULIN", "source": "edge"}
+{"q": "In mechanistic steps, connect fetal glucose exposure to fetal insulin secretion in GDM.", "edge": "STIMULATES_INSULIN", "source": "edge"}
+{"q": "Why does fetal hyperglycemia trigger fetal hyperinsulinemia? Include key intermediates and directionality.", "edge": "STIMULATES_INSULIN", "source": "edge"}
+{"q": "Explain the fetal pancreatic insulin response to increased glucose exposure. Use a concise 4–6 step causal chain.", "edge": "STIMULATES_INSULIN", "source": "edge"}
+{"q": "Explain how inadequate beta-cell adaptation leads to GDM.", "edge": "FAILURE_LEADS_TO_GDM", "source": "edge"}
+{"q": "In mechanistic steps, why does beta-cell compensation failure produce gestational diabetes?", "edge": "FAILURE_LEADS_TO_GDM", "source": "edge"}
+{"q": "Explain how inadequate beta-cell adaptation leads to GDM. Include key intermediates and directionality.", "edge": "FAILURE_LEADS_TO_GDM", "source": "edge"}
+{"q": "Why does beta-cell compensation failure produce gestational diabetes? Use a concise 4–6 step causal chain.", "edge": "FAILURE_LEADS_TO_GDM", "source": "edge"}
+{"q": "Why does beta-cell compensation failure produce gestational diabetes?", "edge": "FAILURE_LEADS_TO_GDM", "source": "edge"}
+{"q": "In mechanistic steps, explain how inadequate beta-cell adaptation leads to GDM.", "edge": "FAILURE_LEADS_TO_GDM", "source": "edge"}
+{"q": "Why does beta-cell compensation failure produce gestational diabetes? Include key intermediates and directionality.", "edge": "FAILURE_LEADS_TO_GDM", "source": "edge"}
+{"q": "Explain how inadequate beta-cell adaptation leads to GDM. Use a concise 4–6 step causal chain.", "edge": "FAILURE_LEADS_TO_GDM", "source": "edge"}
+{"q": "Explain how obesity increases GDM risk (mechanistic linkage).", "edge": "INCREASES_RISK", "source": "edge"}
+{"q": "In mechanistic steps, why do age/BMI/family history increase the incidence of GDM?", "edge": "INCREASES_RISK", "source": "edge"}
+{"q": "Explain how obesity increases GDM risk (mechanistic linkage). Include key intermediates and directionality.", "edge": "INCREASES_RISK", "source": "edge"}
+{"q": "Why do age/BMI/family history increase the incidence of GDM? Use a concise 4–6 step causal chain.", "edge": "INCREASES_RISK", "source": "edge"}
+{"q": "Why do age/BMI/family history increase the incidence of GDM?", "edge": "INCREASES_RISK", "source": "edge"}
+{"q": "In mechanistic steps, explain how obesity increases GDM risk (mechanistic linkage).", "edge": "INCREASES_RISK", "source": "edge"}
+{"q": "Why do age/BMI/family history increase the incidence of GDM? Include key intermediates and directionality.", "edge": "INCREASES_RISK", "source": "edge"}
+{"q": "Explain how obesity increases GDM risk (mechanistic linkage). Use a concise 4–6 step causal chain.", "edge": "INCREASES_RISK", "source": "edge"}
+{"q": "Why does GDM prevalence vary across populations (background T2DM linkage)?", "edge": "VARIES_WITH_BACKGROUND_T2DM", "source": "edge"}
+{"q": "In mechanistic steps, explain the relationship between background T2DM rates and GDM prevalence.", "edge": "VARIES_WITH_BACKGROUND_T2DM", "source": "edge"}
+{"q": "Why does GDM prevalence vary across populations (background T2DM linkage)? Include key intermediates and directionality.", "edge": "VARIES_WITH_BACKGROUND_T2DM", "source": "edge"}
+{"q": "Explain the relationship between background T2DM rates and GDM prevalence. Use a concise 4–6 step causal chain.", "edge": "VARIES_WITH_BACKGROUND_T2DM", "source": "edge"}
+{"q": "Explain the relationship between background T2DM rates and GDM prevalence.", "edge": "VARIES_WITH_BACKGROUND_T2DM", "source": "edge"}
+{"q": "In mechanistic steps, why does GDM prevalence vary across populations (background T2DM linkage)?", "edge": "VARIES_WITH_BACKGROUND_T2DM", "source": "edge"}
+{"q": "Explain the relationship between background T2DM rates and GDM prevalence. Include key intermediates and directionality.", "edge": "VARIES_WITH_BACKGROUND_T2DM", "source": "edge"}
+{"q": "Why does GDM prevalence vary across populations (background T2DM linkage)? Use a concise 4–6 step causal chain.", "edge": "VARIES_WITH_BACKGROUND_T2DM", "source": "edge"}
+{"q": "Why is routine GDM screening commonly performed at 24–28 weeks?", "edge": "SCREEN_24_28_WEEKS", "source": "edge"}
+{"q": "In mechanistic steps, explain the rationale for the 24–28 week screening window.", "edge": "SCREEN_24_28_WEEKS", "source": "edge"}
+{"q": "Why is routine GDM screening commonly performed at 24–28 weeks? Include key intermediates and directionality.", "edge": "SCREEN_24_28_WEEKS", "source": "edge"}
+{"q": "Explain the rationale for the 24–28 week screening window. Use a concise 4–6 step causal chain.", "edge": "SCREEN_24_28_WEEKS", "source": "edge"}
+{"q": "Explain the rationale for the 24–28 week screening window.", "edge": "SCREEN_24_28_WEEKS", "source": "edge"}
+{"q": "In mechanistic steps, why is routine GDM screening commonly performed at 24–28 weeks?", "edge": "SCREEN_24_28_WEEKS", "source": "edge"}
+{"q": "Explain the rationale for the 24–28 week screening window. Include key intermediates and directionality.", "edge": "SCREEN_24_28_WEEKS", "source": "edge"}
+{"q": "Why is routine GDM screening commonly performed at 24–28 weeks? Use a concise 4–6 step causal chain.", "edge": "SCREEN_24_28_WEEKS", "source": "edge"}
+{"q": "Why is postpartum OGTT recommended after GDM, and when should it be done?", "edge": "POSTPARTUM_OGTT", "source": "edge"}
+{"q": "In mechanistic steps, explain how postpartum OGTT detects persistent dysglycemia after GDM.", "edge": "POSTPARTUM_OGTT", "source": "edge"}
+{"q": "Why is postpartum OGTT recommended after GDM, and when should it be done? Include key intermediates and directionality.", "edge": "POSTPARTUM_OGTT", "source": "edge"}
+{"q": "Explain how postpartum OGTT detects persistent dysglycemia after GDM. Use a concise 4–6 step causal chain.", "edge": "POSTPARTUM_OGTT", "source": "edge"}
+{"q": "Explain how postpartum OGTT detects persistent dysglycemia after GDM.", "edge": "POSTPARTUM_OGTT", "source": "edge"}
+{"q": "In mechanistic steps, why is postpartum OGTT recommended after GDM, and when should it be done?", "edge": "POSTPARTUM_OGTT", "source": "edge"}
+{"q": "Explain how postpartum OGTT detects persistent dysglycemia after GDM. Include key intermediates and directionality.", "edge": "POSTPARTUM_OGTT", "source": "edge"}
+{"q": "Why is postpartum OGTT recommended after GDM, and when should it be done? Use a concise 4–6 step causal chain.", "edge": "POSTPARTUM_OGTT", "source": "edge"}
+{"q": "How do diagnostic thresholds influence GDM prevalence and management?", "edge": "THRESHOLD_CRITERIA", "source": "edge"}
+{"q": "In mechanistic steps, explain why different criteria/thresholds produce different GDM rates.", "edge": "THRESHOLD_CRITERIA", "source": "edge"}
+{"q": "How do diagnostic thresholds influence GDM prevalence and management? Include key intermediates and directionality.", "edge": "THRESHOLD_CRITERIA", "source": "edge"}
+{"q": "Explain why different criteria/thresholds produce different GDM rates. Use a concise 4–6 step causal chain.", "edge": "THRESHOLD_CRITERIA", "source": "edge"}
+{"q": "Explain why different criteria/thresholds produce different GDM rates.", "edge": "THRESHOLD_CRITERIA", "source": "edge"}
+{"q": "In mechanistic steps, how do diagnostic thresholds influence GDM prevalence and management?", "edge": "THRESHOLD_CRITERIA", "source": "edge"}
+{"q": "Explain why different criteria/thresholds produce different GDM rates. Include key intermediates and directionality.", "edge": "THRESHOLD_CRITERIA", "source": "edge"}
+{"q": "How do diagnostic thresholds influence GDM prevalence and management? Use a concise 4–6 step causal chain.", "edge": "THRESHOLD_CRITERIA", "source": "edge"}
+{"q": "What glucose targets are used in GDM monitoring and why do they matter?", "edge": "MONITORING_TARGETS", "source": "edge"}
+{"q": "In mechanistic steps, explain how fasting and postprandial targets guide therapy in GDM.", "edge": "MONITORING_TARGETS", "source": "edge"}
+{"q": "What glucose targets are used in GDM monitoring and why do they matter? Include key intermediates and directionality.", "edge": "MONITORING_TARGETS", "source": "edge"}
+{"q": "Explain how fasting and postprandial targets guide therapy in GDM. Use a concise 4–6 step causal chain.", "edge": "MONITORING_TARGETS", "source": "edge"}
+{"q": "Explain how fasting and postprandial targets guide therapy in GDM.", "edge": "MONITORING_TARGETS", "source": "edge"}
+{"q": "In mechanistic steps, what glucose targets are used in GDM monitoring and why do they matter?", "edge": "MONITORING_TARGETS", "source": "edge"}
+{"q": "Explain how fasting and postprandial targets guide therapy in GDM. Include key intermediates and directionality.", "edge": "MONITORING_TARGETS", "source": "edge"}
+{"q": "What glucose targets are used in GDM monitoring and why do they matter? Use a concise 4–6 step causal chain.", "edge": "MONITORING_TARGETS", "source": "edge"}
+{"q": "Describe the stepwise management of GDM (diet/exercise → medication).", "edge": "TREATED_BY", "source": "edge"}
+{"q": "In mechanistic steps, when is pharmacotherapy indicated in GDM and what options are used?", "edge": "TREATED_BY", "source": "edge"}
+{"q": "Describe the stepwise management of GDM (diet/exercise → medication). Include key intermediates and directionality.", "edge": "TREATED_BY", "source": "edge"}
+{"q": "When is pharmacotherapy indicated in GDM and what options are used? Use a concise 4–6 step causal chain.", "edge": "TREATED_BY", "source": "edge"}
+{"q": "When is pharmacotherapy indicated in GDM and what options are used?", "edge": "TREATED_BY", "source": "edge"}
+{"q": "In mechanistic steps, describe the stepwise management of GDM (diet/exercise → medication).", "edge": "TREATED_BY", "source": "edge"}
+{"q": "When is pharmacotherapy indicated in GDM and what options are used? Include key intermediates and directionality.", "edge": "TREATED_BY", "source": "edge"}
+{"q": "Describe the stepwise management of GDM (diet/exercise → medication). Use a concise 4–6 step causal chain.", "edge": "TREATED_BY", "source": "edge"}
+{"q": "How does treating hyperglycemia reduce adverse maternal/fetal outcomes?", "edge": "IMPROVES_OUTCOMES", "source": "edge"}
+{"q": "In mechanistic steps, explain how glycemic control improves pregnancy outcomes in GDM.", "edge": "IMPROVES_OUTCOMES", "source": "edge"}
+{"q": "How does treating hyperglycemia reduce adverse maternal/fetal outcomes? Include key intermediates and directionality.", "edge": "IMPROVES_OUTCOMES", "source": "edge"}
+{"q": "Explain how glycemic control improves pregnancy outcomes in GDM. Use a concise 4–6 step causal chain.", "edge": "IMPROVES_OUTCOMES", "source": "edge"}
+{"q": "Explain how glycemic control improves pregnancy outcomes in GDM.", "edge": "IMPROVES_OUTCOMES", "source": "edge"}
+{"q": "In mechanistic steps, how does treating hyperglycemia reduce adverse maternal/fetal outcomes?", "edge": "IMPROVES_OUTCOMES", "source": "edge"}
+{"q": "Explain how glycemic control improves pregnancy outcomes in GDM. Include key intermediates and directionality.", "edge": "IMPROVES_OUTCOMES", "source": "edge"}
+{"q": "How does treating hyperglycemia reduce adverse maternal/fetal outcomes? Use a concise 4–6 step causal chain.", "edge": "IMPROVES_OUTCOMES", "source": "edge"}
+{"q": "Explain how age increases the risk of gestational diabetes mellitus (GDM).", "node_type": "risk_factor", "source": "node"}
+{"q": "Why is age considered a risk factor for GDM?", "node_type": "risk_factor", "source": "node"}
+{"q": "Explain how bmi increases the risk of gestational diabetes mellitus (GDM).", "node_type": "risk_factor", "source": "node"}
+{"q": "Why is bmi considered a risk factor for GDM?", "node_type": "risk_factor", "source": "node"}
+{"q": "Explain how family history increases the risk of gestational diabetes mellitus (GDM).", "node_type": "risk_factor", "source": "node"}
+{"q": "Why is family history considered a risk factor for GDM?", "node_type": "risk_factor", "source": "node"}
+{"q": "Explain how maternal age increases the risk of gestational diabetes mellitus (GDM).", "node_type": "risk_factor", "source": "node"}
+{"q": "Why is maternal age considered a risk factor for GDM?", "node_type": "risk_factor", "source": "node"}
+{"q": "Explain how ethnicity increases the risk of gestational diabetes mellitus (GDM).", "node_type": "risk_factor", "source": "node"}
+{"q": "Why is ethnicity considered a risk factor for GDM?", "node_type": "risk_factor", "source": "node"}
+{"q": "Explain how previous infant with macrosomia increases the risk of gestational diabetes mellitus (GDM).", "node_type": "risk_factor", "source": "node"}
+{"q": "Why is previous infant with macrosomia considered a risk factor for GDM?", "node_type": "risk_factor", "source": "node"}
+{"q": "Explain how GDM contributes to macrosomia and the causal steps involved.", "node_type": "outcome_fetal", "source": "node"}
+{"q": "What mechanisms link maternal dysglycemia to macrosomia?", "node_type": "outcome_fetal", "source": "node"}
+{"q": "Explain how GDM contributes to shoulder dystocia and the causal steps involved.", "node_type": "outcome_fetal", "source": "node"}
+{"q": "What mechanisms link maternal dysglycemia to shoulder dystocia?", "node_type": "outcome_fetal", "source": "node"}
+{"q": "Explain how GDM contributes to neonatal hypoglycemia and the causal steps involved.", "node_type": "outcome_fetal", "source": "node"}
+{"q": "What mechanisms link maternal dysglycemia to neonatal hypoglycemia?", "node_type": "outcome_fetal", "source": "node"}
+{"q": "Explain how GDM contributes to stillbirth and the causal steps involved.", "node_type": "outcome_fetal", "source": "node"}
+{"q": "What mechanisms link maternal dysglycemia to stillbirth?", "node_type": "outcome_fetal", "source": "node"}
+{"q": "Explain how GDM contributes to preterm birth and the causal steps involved.", "node_type": "outcome_fetal", "source": "node"}
+{"q": "What mechanisms link maternal dysglycemia to preterm birth?", "node_type": "outcome_fetal", "source": "node"}
+{"q": "Explain how GDM contributes to lga and the causal steps involved.", "node_type": "outcome_fetal", "source": "node"}
+{"q": "What mechanisms link maternal dysglycemia to lga?", "node_type": "outcome_fetal", "source": "node"}
+{"q": "Explain how GDM contributes to large for gestational age and the causal steps involved.", "node_type": "outcome_fetal", "source": "node"}
+{"q": "What mechanisms link maternal dysglycemia to large for gestational age?", "node_type": "outcome_fetal", "source": "node"}
+{"q": "Explain how GDM contributes to nicu and the causal steps involved.", "node_type": "outcome_fetal", "source": "node"}
+{"q": "What mechanisms link maternal dysglycemia to nicu?", "node_type": "outcome_fetal", "source": "node"}
+{"q": "How is GDM associated with maternal outcome: type 2 diabetes?", "node_type": "outcome_maternal", "source": "node"}
+{"q": "Explain mechanistic or clinical links between GDM and type 2 diabetes.", "node_type": "outcome_maternal", "source": "node"}
+{"q": "How is GDM associated with maternal outcome: hypertension?", "node_type": "outcome_maternal", "source": "node"}
+{"q": "Explain mechanistic or clinical links between GDM and hypertension.", "node_type": "outcome_maternal", "source": "node"}
+{"q": "How is GDM associated with maternal outcome: cesarean?", "node_type": "outcome_maternal", "source": "node"}
+{"q": "Explain mechanistic or clinical links between GDM and cesarean.", "node_type": "outcome_maternal", "source": "node"}
+{"q": "How is GDM associated with maternal outcome: preeclampsia?", "node_type": "outcome_maternal", "source": "node"}
+{"q": "Explain mechanistic or clinical links between GDM and preeclampsia.", "node_type": "outcome_maternal", "source": "node"}
+{"q": "How is GDM associated with maternal outcome: caesarean?", "node_type": "outcome_maternal", "source": "node"}
+{"q": "Explain mechanistic or clinical links between GDM and caesarean.", "node_type": "outcome_maternal", "source": "node"}
+{"q": "How is GDM associated with maternal outcome: c-section?", "node_type": "outcome_maternal", "source": "node"}
+{"q": "Explain mechanistic or clinical links between GDM and c-section.", "node_type": "outcome_maternal", "source": "node"}
+{"q": "How is GDM associated with maternal outcome: postpartum diabetes?", "node_type": "outcome_maternal", "source": "node"}
+{"q": "Explain mechanistic or clinical links between GDM and postpartum diabetes.", "node_type": "outcome_maternal", "source": "node"}
+{"q": "What is the role of hba1c in screening/diagnosing/monitoring GDM?", "node_type": "test", "source": "node"}
+{"q": "Explain when and why hba1c is used in GDM care.", "node_type": "test", "source": "node"}
+{"q": "What is the role of ogtt in screening/diagnosing/monitoring GDM?", "node_type": "test", "source": "node"}
+{"q": "Explain when and why ogtt is used in GDM care.", "node_type": "test", "source": "node"}
+{"q": "What is the role of oral glucose tolerance test in screening/diagnosing/monitoring GDM?", "node_type": "test", "source": "node"}
+{"q": "Explain when and why oral glucose tolerance test is used in GDM care.", "node_type": "test", "source": "node"}
+{"q": "What is the role of cgm in screening/diagnosing/monitoring GDM?", "node_type": "test", "source": "node"}
+{"q": "Explain when and why cgm is used in GDM care.", "node_type": "test", "source": "node"}
+{"q": "What is the role of gct in screening/diagnosing/monitoring GDM?", "node_type": "test", "source": "node"}
+{"q": "Explain when and why gct is used in GDM care.", "node_type": "test", "source": "node"}
+{"q": "What is the role of continuous glucose monitoring in screening/diagnosing/monitoring GDM?", "node_type": "test", "source": "node"}
+{"q": "Explain when and why continuous glucose monitoring is used in GDM care.", "node_type": "test", "source": "node"}
+{"q": "What is the role of smbg in screening/diagnosing/monitoring GDM?", "node_type": "test", "source": "node"}
+{"q": "Explain when and why smbg is used in GDM care.", "node_type": "test", "source": "node"}
+{"q": "What is the role of fpg in screening/diagnosing/monitoring GDM?", "node_type": "test", "source": "node"}
+{"q": "Explain when and why fpg is used in GDM care.", "node_type": "test", "source": "node"}
+{"q": "What is the role of glucose challenge test in screening/diagnosing/monitoring GDM?", "node_type": "test", "source": "node"}
+{"q": "Explain when and why glucose challenge test is used in GDM care.", "node_type": "test", "source": "node"}
+{"q": "What is the role of fasting plasma glucose in screening/diagnosing/monitoring GDM?", "node_type": "test", "source": "node"}
+{"q": "Explain when and why fasting plasma glucose is used in GDM care.", "node_type": "test", "source": "node"}
+{"q": "Explain how placental lactogen contributes to insulin resistance in pregnancy.", "node_type": "hormone", "source": "node"}
+{"q": "What role does placental lactogen play in pregnancy metabolism relevant to GDM?", "node_type": "hormone", "source": "node"}
+{"q": "Explain how placental hormones contributes to insulin resistance in pregnancy.", "node_type": "hormone", "source": "node"}
+{"q": "What role does placental hormones play in pregnancy metabolism relevant to GDM?", "node_type": "hormone", "source": "node"}
+{"q": "Explain how progesterone contributes to insulin resistance in pregnancy.", "node_type": "hormone", "source": "node"}
+{"q": "What role does progesterone play in pregnancy metabolism relevant to GDM?", "node_type": "hormone", "source": "node"}
+{"q": "Explain how estrogen contributes to insulin resistance in pregnancy.", "node_type": "hormone", "source": "node"}
+{"q": "What role does estrogen play in pregnancy metabolism relevant to GDM?", "node_type": "hormone", "source": "node"}
+{"q": "Explain how adiponectin contributes to insulin resistance in pregnancy.", "node_type": "hormone", "source": "node"}
+{"q": "What role does adiponectin play in pregnancy metabolism relevant to GDM?", "node_type": "hormone", "source": "node"}
+{"q": "Explain how human placental lactogen contributes to insulin resistance in pregnancy.", "node_type": "hormone", "source": "node"}
+{"q": "What role does human placental lactogen play in pregnancy metabolism relevant to GDM?", "node_type": "hormone", "source": "node"}
+{"q": "Explain how leptin contributes to insulin resistance in pregnancy.", "node_type": "hormone", "source": "node"}
+{"q": "What role does leptin play in pregnancy metabolism relevant to GDM?", "node_type": "hormone", "source": "node"}
+{"q": "Explain how cortisol contributes to insulin resistance in pregnancy.", "node_type": "hormone", "source": "node"}
+{"q": "What role does cortisol play in pregnancy metabolism relevant to GDM?", "node_type": "hormone", "source": "node"}
+{"q": "Explain how growth hormone contributes to insulin resistance in pregnancy.", "node_type": "hormone", "source": "node"}
+{"q": "What role does growth hormone play in pregnancy metabolism relevant to GDM?", "node_type": "hormone", "source": "node"}
+{"q": "Explain how prolactin contributes to insulin resistance in pregnancy.", "node_type": "hormone", "source": "node"}
+{"q": "What role does prolactin play in pregnancy metabolism relevant to GDM?", "node_type": "hormone", "source": "node"}
+{"q": "Explain how insulin is used to manage GDM and what outcomes it targets.", "node_type": "intervention", "source": "node"}
+{"q": "When is insulin recommended in GDM management?", "node_type": "intervention", "source": "node"}
+{"q": "Explain how diet is used to manage GDM and what outcomes it targets.", "node_type": "intervention", "source": "node"}
+{"q": "When is diet recommended in GDM management?", "node_type": "intervention", "source": "node"}
+{"q": "Explain how lifestyle is used to manage GDM and what outcomes it targets.", "node_type": "intervention", "source": "node"}
+{"q": "When is lifestyle recommended in GDM management?", "node_type": "intervention", "source": "node"}
+{"q": "Explain how metformin is used to manage GDM and what outcomes it targets.", "node_type": "intervention", "source": "node"}
+{"q": "When is metformin recommended in GDM management?", "node_type": "intervention", "source": "node"}
+{"q": "Explain how exercise is used to manage GDM and what outcomes it targets.", "node_type": "intervention", "source": "node"}
+{"q": "When is exercise recommended in GDM management?", "node_type": "intervention", "source": "node"}
+{"q": "Explain how glyburide is used to manage GDM and what outcomes it targets.", "node_type": "intervention", "source": "node"}
+{"q": "When is glyburide recommended in GDM management?", "node_type": "intervention", "source": "node"}
+{"q": "Explain how glibenclamide is used to manage GDM and what outcomes it targets.", "node_type": "intervention", "source": "node"}
+{"q": "When is glibenclamide recommended in GDM management?", "node_type": "intervention", "source": "node"}
+{"q": "What is the significance of the threshold/timing '5.5 mmol/l' in GDM diagnosis or management?", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "Explain how '5.5 mmol/l' is used in guideline timing/targets for GDM.", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "What is the significance of the threshold/timing '95 mg/dL' in GDM diagnosis or management?", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "Explain how '95 mg/dL' is used in guideline timing/targets for GDM.", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "What is the significance of the threshold/timing '140 mg/dL' in GDM diagnosis or management?", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "Explain how '140 mg/dL' is used in guideline timing/targets for GDM.", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "What is the significance of the threshold/timing '95mg/dl' in GDM diagnosis or management?", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "Explain how '95mg/dl' is used in guideline timing/targets for GDM.", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "What is the significance of the threshold/timing '7.8 mmol/l' in GDM diagnosis or management?", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "Explain how '7.8 mmol/l' is used in guideline timing/targets for GDM.", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "What is the significance of the threshold/timing '140mg/dl' in GDM diagnosis or management?", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "Explain how '140mg/dl' is used in guideline timing/targets for GDM.", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "What is the significance of the threshold/timing '4-12 weeks' in GDM diagnosis or management?", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "Explain how '4-12 weeks' is used in guideline timing/targets for GDM.", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "What is the significance of the threshold/timing '92 mg/dL' in GDM diagnosis or management?", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "Explain how '92 mg/dL' is used in guideline timing/targets for GDM.", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "What is the significance of the threshold/timing '153 mg/dL' in GDM diagnosis or management?", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "Explain how '153 mg/dL' is used in guideline timing/targets for GDM.", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "What is the significance of the threshold/timing '5.3 mmol/L' in GDM diagnosis or management?", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "Explain how '5.3 mmol/L' is used in guideline timing/targets for GDM.", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "What is the significance of the threshold/timing '39 weeks' in GDM diagnosis or management?", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "Explain how '39 weeks' is used in guideline timing/targets for GDM.", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "What is the significance of the threshold/timing '120 mg/dL' in GDM diagnosis or management?", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "Explain how '120 mg/dL' is used in guideline timing/targets for GDM.", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "What is the significance of the threshold/timing '30 weeks' in GDM diagnosis or management?", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "Explain how '30 weeks' is used in guideline timing/targets for GDM.", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "What is the significance of the threshold/timing '19 weeks' in GDM diagnosis or management?", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "Explain how '19 weeks' is used in guideline timing/targets for GDM.", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "What is the significance of the threshold/timing '22 weeks' in GDM diagnosis or management?", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "Explain how '22 weeks' is used in guideline timing/targets for GDM.", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "What is the significance of the threshold/timing '26 weeks' in GDM diagnosis or management?", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "Explain how '26 weeks' is used in guideline timing/targets for GDM.", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "What is the significance of the threshold/timing '36 weeks' in GDM diagnosis or management?", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "Explain how '36 weeks' is used in guideline timing/targets for GDM.", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "What is the significance of the threshold/timing '5.5mmol/l' in GDM diagnosis or management?", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "Explain how '5.5mmol/l' is used in guideline timing/targets for GDM.", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "What is the significance of the threshold/timing '6 weeks' in GDM diagnosis or management?", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "Explain how '6 weeks' is used in guideline timing/targets for GDM.", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "What is the significance of the threshold/timing '110mg/dl' in GDM diagnosis or management?", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "Explain how '110mg/dl' is used in guideline timing/targets for GDM.", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "What is the significance of the threshold/timing '7.8mmol/l' in GDM diagnosis or management?", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "Explain how '7.8mmol/l' is used in guideline timing/targets for GDM.", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "What is the significance of the threshold/timing '125mg/dl' in GDM diagnosis or management?", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "Explain how '125mg/dl' is used in guideline timing/targets for GDM.", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "What is the significance of the threshold/timing '199mg/dl' in GDM diagnosis or management?", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "Explain how '199mg/dl' is used in guideline timing/targets for GDM.", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "What is the significance of the threshold/timing '126mg/dl' in GDM diagnosis or management?", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "Explain how '126mg/dl' is used in guideline timing/targets for GDM.", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "What is the significance of the threshold/timing '11.1mmol/l' in GDM diagnosis or management?", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "Explain how '11.1mmol/l' is used in guideline timing/targets for GDM.", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "What is the significance of the threshold/timing '200mg/dl' in GDM diagnosis or management?", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "Explain how '200mg/dl' is used in guideline timing/targets for GDM.", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "What is the significance of the threshold/timing '18 mg/dl' in GDM diagnosis or management?", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "Explain how '18 mg/dl' is used in guideline timing/targets for GDM.", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "What is the significance of the threshold/timing '24-28 weeks' in GDM diagnosis or management?", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "Explain how '24-28 weeks' is used in guideline timing/targets for GDM.", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "What is the significance of the threshold/timing '15 weeks' in GDM diagnosis or management?", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "Explain how '15 weeks' is used in guideline timing/targets for GDM.", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "What is the significance of the threshold/timing '5.1 mmol/L' in GDM diagnosis or management?", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "Explain how '5.1 mmol/L' is used in guideline timing/targets for GDM.", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "What is the significance of the threshold/timing '180 mg/dL' in GDM diagnosis or management?", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "Explain how '180 mg/dL' is used in guideline timing/targets for GDM.", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "What is the significance of the threshold/timing '8.5 mmol/L' in GDM diagnosis or management?", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "Explain how '8.5 mmol/L' is used in guideline timing/targets for GDM.", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "What is the significance of the threshold/timing '39-40 weeks' in GDM diagnosis or management?", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "Explain how '39-40 weeks' is used in guideline timing/targets for GDM.", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "What is the significance of the threshold/timing '37-38 weeks' in GDM diagnosis or management?", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "Explain how '37-38 weeks' is used in guideline timing/targets for GDM.", "node_type": "threshold_or_timing", "source": "node"}
+{"q": "Explain the causal chain: MONITORING_TARGETS → THRESHOLD_CRITERIA, and why this progression matters clinically.", "source": "2hop", "edges": ["MONITORING_TARGETS", "THRESHOLD_CRITERIA"]}
+{"q": "Build a stepwise explanation connecting MONITORING_TARGETS to THRESHOLD_CRITERIA in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["MONITORING_TARGETS", "THRESHOLD_CRITERIA"]}
+{"q": "Using a mechanistic chain, connect MONITORING_TARGETS and THRESHOLD_CRITERIA with intermediate steps.", "source": "2hop", "edges": ["MONITORING_TARGETS", "THRESHOLD_CRITERIA"]}
+{"q": "Explain the causal chain: THRESHOLD_CRITERIA → MONITORING_TARGETS, and why this progression matters clinically.", "source": "2hop", "edges": ["THRESHOLD_CRITERIA", "MONITORING_TARGETS"]}
+{"q": "Build a stepwise explanation connecting THRESHOLD_CRITERIA to MONITORING_TARGETS in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["THRESHOLD_CRITERIA", "MONITORING_TARGETS"]}
+{"q": "Using a mechanistic chain, connect THRESHOLD_CRITERIA and MONITORING_TARGETS with intermediate steps.", "source": "2hop", "edges": ["THRESHOLD_CRITERIA", "MONITORING_TARGETS"]}
+{"q": "Explain the causal chain: TREATED_BY → BETA_CELL_LIMITATION, and why this progression matters clinically.", "source": "2hop", "edges": ["TREATED_BY", "BETA_CELL_LIMITATION"]}
+{"q": "Build a stepwise explanation connecting TREATED_BY to BETA_CELL_LIMITATION in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["TREATED_BY", "BETA_CELL_LIMITATION"]}
+{"q": "Using a mechanistic chain, connect TREATED_BY and BETA_CELL_LIMITATION with intermediate steps.", "source": "2hop", "edges": ["TREATED_BY", "BETA_CELL_LIMITATION"]}
+{"q": "Explain the causal chain: BETA_CELL_LIMITATION → TREATED_BY, and why this progression matters clinically.", "source": "2hop", "edges": ["BETA_CELL_LIMITATION", "TREATED_BY"]}
+{"q": "Build a stepwise explanation connecting BETA_CELL_LIMITATION to TREATED_BY in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["BETA_CELL_LIMITATION", "TREATED_BY"]}
+{"q": "Using a mechanistic chain, connect BETA_CELL_LIMITATION and TREATED_BY with intermediate steps.", "source": "2hop", "edges": ["BETA_CELL_LIMITATION", "TREATED_BY"]}
+{"q": "Explain the causal chain: INCREASES_RISK → VARIES_WITH_BACKGROUND_T2DM, and why this progression matters clinically.", "source": "2hop", "edges": ["INCREASES_RISK", "VARIES_WITH_BACKGROUND_T2DM"]}
+{"q": "Build a stepwise explanation connecting INCREASES_RISK to VARIES_WITH_BACKGROUND_T2DM in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["INCREASES_RISK", "VARIES_WITH_BACKGROUND_T2DM"]}
+{"q": "Using a mechanistic chain, connect INCREASES_RISK and VARIES_WITH_BACKGROUND_T2DM with intermediate steps.", "source": "2hop", "edges": ["INCREASES_RISK", "VARIES_WITH_BACKGROUND_T2DM"]}
+{"q": "Explain the causal chain: CROSSES_PLACENTA → STIMULATES_INSULIN, and why this progression matters clinically.", "source": "2hop", "edges": ["CROSSES_PLACENTA", "STIMULATES_INSULIN"]}
+{"q": "Build a stepwise explanation connecting CROSSES_PLACENTA to STIMULATES_INSULIN in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["CROSSES_PLACENTA", "STIMULATES_INSULIN"]}
+{"q": "Using a mechanistic chain, connect CROSSES_PLACENTA and STIMULATES_INSULIN with intermediate steps.", "source": "2hop", "edges": ["CROSSES_PLACENTA", "STIMULATES_INSULIN"]}
+{"q": "Explain the causal chain: VARIES_WITH_BACKGROUND_T2DM → INCREASES_RISK, and why this progression matters clinically.", "source": "2hop", "edges": ["VARIES_WITH_BACKGROUND_T2DM", "INCREASES_RISK"]}
+{"q": "Build a stepwise explanation connecting VARIES_WITH_BACKGROUND_T2DM to INCREASES_RISK in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["VARIES_WITH_BACKGROUND_T2DM", "INCREASES_RISK"]}
+{"q": "Using a mechanistic chain, connect VARIES_WITH_BACKGROUND_T2DM and INCREASES_RISK with intermediate steps.", "source": "2hop", "edges": ["VARIES_WITH_BACKGROUND_T2DM", "INCREASES_RISK"]}
+{"q": "Explain the causal chain: STIMULATES_INSULIN → CROSSES_PLACENTA, and why this progression matters clinically.", "source": "2hop", "edges": ["STIMULATES_INSULIN", "CROSSES_PLACENTA"]}
+{"q": "Build a stepwise explanation connecting STIMULATES_INSULIN to CROSSES_PLACENTA in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["STIMULATES_INSULIN", "CROSSES_PLACENTA"]}
+{"q": "Using a mechanistic chain, connect STIMULATES_INSULIN and CROSSES_PLACENTA with intermediate steps.", "source": "2hop", "edges": ["STIMULATES_INSULIN", "CROSSES_PLACENTA"]}
+{"q": "Explain the causal chain: BETA_CELL_LIMITATION → PERSISTENT_INSULIN_RESISTANCE, and why this progression matters clinically.", "source": "2hop", "edges": ["BETA_CELL_LIMITATION", "PERSISTENT_INSULIN_RESISTANCE"]}
+{"q": "Build a stepwise explanation connecting BETA_CELL_LIMITATION to PERSISTENT_INSULIN_RESISTANCE in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["BETA_CELL_LIMITATION", "PERSISTENT_INSULIN_RESISTANCE"]}
+{"q": "Using a mechanistic chain, connect BETA_CELL_LIMITATION and PERSISTENT_INSULIN_RESISTANCE with intermediate steps.", "source": "2hop", "edges": ["BETA_CELL_LIMITATION", "PERSISTENT_INSULIN_RESISTANCE"]}
+{"q": "Explain the causal chain: PERSISTENT_INSULIN_RESISTANCE → BETA_CELL_LIMITATION, and why this progression matters clinically.", "source": "2hop", "edges": ["PERSISTENT_INSULIN_RESISTANCE", "BETA_CELL_LIMITATION"]}
+{"q": "Build a stepwise explanation connecting PERSISTENT_INSULIN_RESISTANCE to BETA_CELL_LIMITATION in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["PERSISTENT_INSULIN_RESISTANCE", "BETA_CELL_LIMITATION"]}
+{"q": "Using a mechanistic chain, connect PERSISTENT_INSULIN_RESISTANCE and BETA_CELL_LIMITATION with intermediate steps.", "source": "2hop", "edges": ["PERSISTENT_INSULIN_RESISTANCE", "BETA_CELL_LIMITATION"]}
+{"q": "Explain the causal chain: INCREASES_RISK → POSTPARTUM_T2DM_RISK, and why this progression matters clinically.", "source": "2hop", "edges": ["INCREASES_RISK", "POSTPARTUM_T2DM_RISK"]}
+{"q": "Build a stepwise explanation connecting INCREASES_RISK to POSTPARTUM_T2DM_RISK in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["INCREASES_RISK", "POSTPARTUM_T2DM_RISK"]}
+{"q": "Using a mechanistic chain, connect INCREASES_RISK and POSTPARTUM_T2DM_RISK with intermediate steps.", "source": "2hop", "edges": ["INCREASES_RISK", "POSTPARTUM_T2DM_RISK"]}
+{"q": "Explain the causal chain: INCREASES_RISK → BETA_CELL_LIMITATION, and why this progression matters clinically.", "source": "2hop", "edges": ["INCREASES_RISK", "BETA_CELL_LIMITATION"]}
+{"q": "Build a stepwise explanation connecting INCREASES_RISK to BETA_CELL_LIMITATION in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["INCREASES_RISK", "BETA_CELL_LIMITATION"]}
+{"q": "Using a mechanistic chain, connect INCREASES_RISK and BETA_CELL_LIMITATION with intermediate steps.", "source": "2hop", "edges": ["INCREASES_RISK", "BETA_CELL_LIMITATION"]}
+{"q": "Explain the causal chain: POSTPARTUM_T2DM_RISK → INCREASES_RISK, and why this progression matters clinically.", "source": "2hop", "edges": ["POSTPARTUM_T2DM_RISK", "INCREASES_RISK"]}
+{"q": "Build a stepwise explanation connecting POSTPARTUM_T2DM_RISK to INCREASES_RISK in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["POSTPARTUM_T2DM_RISK", "INCREASES_RISK"]}
+{"q": "Using a mechanistic chain, connect POSTPARTUM_T2DM_RISK and INCREASES_RISK with intermediate steps.", "source": "2hop", "edges": ["POSTPARTUM_T2DM_RISK", "INCREASES_RISK"]}
+{"q": "Explain the causal chain: POSTPARTUM_T2DM_RISK → VARIES_WITH_BACKGROUND_T2DM, and why this progression matters clinically.", "source": "2hop", "edges": ["POSTPARTUM_T2DM_RISK", "VARIES_WITH_BACKGROUND_T2DM"]}
+{"q": "Build a stepwise explanation connecting POSTPARTUM_T2DM_RISK to VARIES_WITH_BACKGROUND_T2DM in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["POSTPARTUM_T2DM_RISK", "VARIES_WITH_BACKGROUND_T2DM"]}
+{"q": "Using a mechanistic chain, connect POSTPARTUM_T2DM_RISK and VARIES_WITH_BACKGROUND_T2DM with intermediate steps.", "source": "2hop", "edges": ["POSTPARTUM_T2DM_RISK", "VARIES_WITH_BACKGROUND_T2DM"]}
+{"q": "Explain the causal chain: POSTPARTUM_T2DM_RISK → BETA_CELL_LIMITATION, and why this progression matters clinically.", "source": "2hop", "edges": ["POSTPARTUM_T2DM_RISK", "BETA_CELL_LIMITATION"]}
+{"q": "Build a stepwise explanation connecting POSTPARTUM_T2DM_RISK to BETA_CELL_LIMITATION in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["POSTPARTUM_T2DM_RISK", "BETA_CELL_LIMITATION"]}
+{"q": "Using a mechanistic chain, connect POSTPARTUM_T2DM_RISK and BETA_CELL_LIMITATION with intermediate steps.", "source": "2hop", "edges": ["POSTPARTUM_T2DM_RISK", "BETA_CELL_LIMITATION"]}
+{"q": "Explain the causal chain: TREATED_BY → CROSSES_PLACENTA, and why this progression matters clinically.", "source": "2hop", "edges": ["TREATED_BY", "CROSSES_PLACENTA"]}
+{"q": "Build a stepwise explanation connecting TREATED_BY to CROSSES_PLACENTA in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["TREATED_BY", "CROSSES_PLACENTA"]}
+{"q": "Using a mechanistic chain, connect TREATED_BY and CROSSES_PLACENTA with intermediate steps.", "source": "2hop", "edges": ["TREATED_BY", "CROSSES_PLACENTA"]}
+{"q": "Explain the causal chain: TREATED_BY → STIMULATES_INSULIN, and why this progression matters clinically.", "source": "2hop", "edges": ["TREATED_BY", "STIMULATES_INSULIN"]}
+{"q": "Build a stepwise explanation connecting TREATED_BY to STIMULATES_INSULIN in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["TREATED_BY", "STIMULATES_INSULIN"]}
+{"q": "Using a mechanistic chain, connect TREATED_BY and STIMULATES_INSULIN with intermediate steps.", "source": "2hop", "edges": ["TREATED_BY", "STIMULATES_INSULIN"]}
+{"q": "Explain the causal chain: TREATED_BY → PERSISTENT_INSULIN_RESISTANCE, and why this progression matters clinically.", "source": "2hop", "edges": ["TREATED_BY", "PERSISTENT_INSULIN_RESISTANCE"]}
+{"q": "Build a stepwise explanation connecting TREATED_BY to PERSISTENT_INSULIN_RESISTANCE in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["TREATED_BY", "PERSISTENT_INSULIN_RESISTANCE"]}
+{"q": "Using a mechanistic chain, connect TREATED_BY and PERSISTENT_INSULIN_RESISTANCE with intermediate steps.", "source": "2hop", "edges": ["TREATED_BY", "PERSISTENT_INSULIN_RESISTANCE"]}
+{"q": "Explain the causal chain: BETA_CELL_LIMITATION → CROSSES_PLACENTA, and why this progression matters clinically.", "source": "2hop", "edges": ["BETA_CELL_LIMITATION", "CROSSES_PLACENTA"]}
+{"q": "Build a stepwise explanation connecting BETA_CELL_LIMITATION to CROSSES_PLACENTA in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["BETA_CELL_LIMITATION", "CROSSES_PLACENTA"]}
+{"q": "Using a mechanistic chain, connect BETA_CELL_LIMITATION and CROSSES_PLACENTA with intermediate steps.", "source": "2hop", "edges": ["BETA_CELL_LIMITATION", "CROSSES_PLACENTA"]}
+{"q": "Explain the causal chain: BETA_CELL_LIMITATION → STIMULATES_INSULIN, and why this progression matters clinically.", "source": "2hop", "edges": ["BETA_CELL_LIMITATION", "STIMULATES_INSULIN"]}
+{"q": "Build a stepwise explanation connecting BETA_CELL_LIMITATION to STIMULATES_INSULIN in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["BETA_CELL_LIMITATION", "STIMULATES_INSULIN"]}
+{"q": "Using a mechanistic chain, connect BETA_CELL_LIMITATION and STIMULATES_INSULIN with intermediate steps.", "source": "2hop", "edges": ["BETA_CELL_LIMITATION", "STIMULATES_INSULIN"]}
+{"q": "Explain the causal chain: BETA_CELL_LIMITATION → INCREASES_RISK, and why this progression matters clinically.", "source": "2hop", "edges": ["BETA_CELL_LIMITATION", "INCREASES_RISK"]}
+{"q": "Build a stepwise explanation connecting BETA_CELL_LIMITATION to INCREASES_RISK in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["BETA_CELL_LIMITATION", "INCREASES_RISK"]}
+{"q": "Using a mechanistic chain, connect BETA_CELL_LIMITATION and INCREASES_RISK with intermediate steps.", "source": "2hop", "edges": ["BETA_CELL_LIMITATION", "INCREASES_RISK"]}
+{"q": "Explain the causal chain: BETA_CELL_LIMITATION → VARIES_WITH_BACKGROUND_T2DM, and why this progression matters clinically.", "source": "2hop", "edges": ["BETA_CELL_LIMITATION", "VARIES_WITH_BACKGROUND_T2DM"]}
+{"q": "Build a stepwise explanation connecting BETA_CELL_LIMITATION to VARIES_WITH_BACKGROUND_T2DM in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["BETA_CELL_LIMITATION", "VARIES_WITH_BACKGROUND_T2DM"]}
+{"q": "Using a mechanistic chain, connect BETA_CELL_LIMITATION and VARIES_WITH_BACKGROUND_T2DM with intermediate steps.", "source": "2hop", "edges": ["BETA_CELL_LIMITATION", "VARIES_WITH_BACKGROUND_T2DM"]}
+{"q": "Explain the causal chain: BETA_CELL_LIMITATION → POSTPARTUM_T2DM_RISK, and why this progression matters clinically.", "source": "2hop", "edges": ["BETA_CELL_LIMITATION", "POSTPARTUM_T2DM_RISK"]}
+{"q": "Build a stepwise explanation connecting BETA_CELL_LIMITATION to POSTPARTUM_T2DM_RISK in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["BETA_CELL_LIMITATION", "POSTPARTUM_T2DM_RISK"]}
+{"q": "Using a mechanistic chain, connect BETA_CELL_LIMITATION and POSTPARTUM_T2DM_RISK with intermediate steps.", "source": "2hop", "edges": ["BETA_CELL_LIMITATION", "POSTPARTUM_T2DM_RISK"]}
+{"q": "Explain the causal chain: PERSISTENT_INSULIN_RESISTANCE → TREATED_BY, and why this progression matters clinically.", "source": "2hop", "edges": ["PERSISTENT_INSULIN_RESISTANCE", "TREATED_BY"]}
+{"q": "Build a stepwise explanation connecting PERSISTENT_INSULIN_RESISTANCE to TREATED_BY in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["PERSISTENT_INSULIN_RESISTANCE", "TREATED_BY"]}
+{"q": "Using a mechanistic chain, connect PERSISTENT_INSULIN_RESISTANCE and TREATED_BY with intermediate steps.", "source": "2hop", "edges": ["PERSISTENT_INSULIN_RESISTANCE", "TREATED_BY"]}
+{"q": "Explain the causal chain: CROSSES_PLACENTA → TREATED_BY, and why this progression matters clinically.", "source": "2hop", "edges": ["CROSSES_PLACENTA", "TREATED_BY"]}
+{"q": "Build a stepwise explanation connecting CROSSES_PLACENTA to TREATED_BY in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["CROSSES_PLACENTA", "TREATED_BY"]}
+{"q": "Using a mechanistic chain, connect CROSSES_PLACENTA and TREATED_BY with intermediate steps.", "source": "2hop", "edges": ["CROSSES_PLACENTA", "TREATED_BY"]}
+{"q": "Explain the causal chain: CROSSES_PLACENTA → BETA_CELL_LIMITATION, and why this progression matters clinically.", "source": "2hop", "edges": ["CROSSES_PLACENTA", "BETA_CELL_LIMITATION"]}
+{"q": "Build a stepwise explanation connecting CROSSES_PLACENTA to BETA_CELL_LIMITATION in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["CROSSES_PLACENTA", "BETA_CELL_LIMITATION"]}
+{"q": "Using a mechanistic chain, connect CROSSES_PLACENTA and BETA_CELL_LIMITATION with intermediate steps.", "source": "2hop", "edges": ["CROSSES_PLACENTA", "BETA_CELL_LIMITATION"]}
+{"q": "Explain the causal chain: VARIES_WITH_BACKGROUND_T2DM → POSTPARTUM_T2DM_RISK, and why this progression matters clinically.", "source": "2hop", "edges": ["VARIES_WITH_BACKGROUND_T2DM", "POSTPARTUM_T2DM_RISK"]}
+{"q": "Build a stepwise explanation connecting VARIES_WITH_BACKGROUND_T2DM to POSTPARTUM_T2DM_RISK in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["VARIES_WITH_BACKGROUND_T2DM", "POSTPARTUM_T2DM_RISK"]}
+{"q": "Using a mechanistic chain, connect VARIES_WITH_BACKGROUND_T2DM and POSTPARTUM_T2DM_RISK with intermediate steps.", "source": "2hop", "edges": ["VARIES_WITH_BACKGROUND_T2DM", "POSTPARTUM_T2DM_RISK"]}
+{"q": "Explain the causal chain: VARIES_WITH_BACKGROUND_T2DM → BETA_CELL_LIMITATION, and why this progression matters clinically.", "source": "2hop", "edges": ["VARIES_WITH_BACKGROUND_T2DM", "BETA_CELL_LIMITATION"]}
+{"q": "Build a stepwise explanation connecting VARIES_WITH_BACKGROUND_T2DM to BETA_CELL_LIMITATION in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["VARIES_WITH_BACKGROUND_T2DM", "BETA_CELL_LIMITATION"]}
+{"q": "Using a mechanistic chain, connect VARIES_WITH_BACKGROUND_T2DM and BETA_CELL_LIMITATION with intermediate steps.", "source": "2hop", "edges": ["VARIES_WITH_BACKGROUND_T2DM", "BETA_CELL_LIMITATION"]}
+{"q": "Explain the causal chain: STIMULATES_INSULIN → TREATED_BY, and why this progression matters clinically.", "source": "2hop", "edges": ["STIMULATES_INSULIN", "TREATED_BY"]}
+{"q": "Build a stepwise explanation connecting STIMULATES_INSULIN to TREATED_BY in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["STIMULATES_INSULIN", "TREATED_BY"]}
+{"q": "Using a mechanistic chain, connect STIMULATES_INSULIN and TREATED_BY with intermediate steps.", "source": "2hop", "edges": ["STIMULATES_INSULIN", "TREATED_BY"]}
+{"q": "Explain the causal chain: STIMULATES_INSULIN → BETA_CELL_LIMITATION, and why this progression matters clinically.", "source": "2hop", "edges": ["STIMULATES_INSULIN", "BETA_CELL_LIMITATION"]}
+{"q": "Build a stepwise explanation connecting STIMULATES_INSULIN to BETA_CELL_LIMITATION in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["STIMULATES_INSULIN", "BETA_CELL_LIMITATION"]}
+{"q": "Using a mechanistic chain, connect STIMULATES_INSULIN and BETA_CELL_LIMITATION with intermediate steps.", "source": "2hop", "edges": ["STIMULATES_INSULIN", "BETA_CELL_LIMITATION"]}
+{"q": "Explain the causal chain: INCREASES_RISK → TREATED_BY, and why this progression matters clinically.", "source": "2hop", "edges": ["INCREASES_RISK", "TREATED_BY"]}
+{"q": "Build a stepwise explanation connecting INCREASES_RISK to TREATED_BY in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["INCREASES_RISK", "TREATED_BY"]}
+{"q": "Using a mechanistic chain, connect INCREASES_RISK and TREATED_BY with intermediate steps.", "source": "2hop", "edges": ["INCREASES_RISK", "TREATED_BY"]}
+{"q": "Explain the causal chain: INCREASES_RISK → IMPROVES_OUTCOMES, and why this progression matters clinically.", "source": "2hop", "edges": ["INCREASES_RISK", "IMPROVES_OUTCOMES"]}
+{"q": "Build a stepwise explanation connecting INCREASES_RISK to IMPROVES_OUTCOMES in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["INCREASES_RISK", "IMPROVES_OUTCOMES"]}
+{"q": "Using a mechanistic chain, connect INCREASES_RISK and IMPROVES_OUTCOMES with intermediate steps.", "source": "2hop", "edges": ["INCREASES_RISK", "IMPROVES_OUTCOMES"]}
+{"q": "Explain the causal chain: TREATED_BY → MONITORING_TARGETS, and why this progression matters clinically.", "source": "2hop", "edges": ["TREATED_BY", "MONITORING_TARGETS"]}
+{"q": "Build a stepwise explanation connecting TREATED_BY to MONITORING_TARGETS in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["TREATED_BY", "MONITORING_TARGETS"]}
+{"q": "Using a mechanistic chain, connect TREATED_BY and MONITORING_TARGETS with intermediate steps.", "source": "2hop", "edges": ["TREATED_BY", "MONITORING_TARGETS"]}
+{"q": "Explain the causal chain: TREATED_BY → INCREASES_RISK, and why this progression matters clinically.", "source": "2hop", "edges": ["TREATED_BY", "INCREASES_RISK"]}
+{"q": "Build a stepwise explanation connecting TREATED_BY to INCREASES_RISK in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["TREATED_BY", "INCREASES_RISK"]}
+{"q": "Using a mechanistic chain, connect TREATED_BY and INCREASES_RISK with intermediate steps.", "source": "2hop", "edges": ["TREATED_BY", "INCREASES_RISK"]}
+{"q": "Explain the causal chain: TREATED_BY → IMPROVES_OUTCOMES, and why this progression matters clinically.", "source": "2hop", "edges": ["TREATED_BY", "IMPROVES_OUTCOMES"]}
+{"q": "Build a stepwise explanation connecting TREATED_BY to IMPROVES_OUTCOMES in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["TREATED_BY", "IMPROVES_OUTCOMES"]}
+{"q": "Using a mechanistic chain, connect TREATED_BY and IMPROVES_OUTCOMES with intermediate steps.", "source": "2hop", "edges": ["TREATED_BY", "IMPROVES_OUTCOMES"]}
+{"q": "Explain the causal chain: MONITORING_TARGETS → SCREEN_24_28_WEEKS, and why this progression matters clinically.", "source": "2hop", "edges": ["MONITORING_TARGETS", "SCREEN_24_28_WEEKS"]}
+{"q": "Build a stepwise explanation connecting MONITORING_TARGETS to SCREEN_24_28_WEEKS in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["MONITORING_TARGETS", "SCREEN_24_28_WEEKS"]}
+{"q": "Using a mechanistic chain, connect MONITORING_TARGETS and SCREEN_24_28_WEEKS with intermediate steps.", "source": "2hop", "edges": ["MONITORING_TARGETS", "SCREEN_24_28_WEEKS"]}
+{"q": "Explain the causal chain: MONITORING_TARGETS → TREATED_BY, and why this progression matters clinically.", "source": "2hop", "edges": ["MONITORING_TARGETS", "TREATED_BY"]}
+{"q": "Build a stepwise explanation connecting MONITORING_TARGETS to TREATED_BY in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["MONITORING_TARGETS", "TREATED_BY"]}
+{"q": "Using a mechanistic chain, connect MONITORING_TARGETS and TREATED_BY with intermediate steps.", "source": "2hop", "edges": ["MONITORING_TARGETS", "TREATED_BY"]}
+{"q": "Explain the causal chain: IMPROVES_OUTCOMES → TREATED_BY, and why this progression matters clinically.", "source": "2hop", "edges": ["IMPROVES_OUTCOMES", "TREATED_BY"]}
+{"q": "Build a stepwise explanation connecting IMPROVES_OUTCOMES to TREATED_BY in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["IMPROVES_OUTCOMES", "TREATED_BY"]}
+{"q": "Using a mechanistic chain, connect IMPROVES_OUTCOMES and TREATED_BY with intermediate steps.", "source": "2hop", "edges": ["IMPROVES_OUTCOMES", "TREATED_BY"]}
+{"q": "Explain the causal chain: IMPROVES_OUTCOMES → INCREASES_RISK, and why this progression matters clinically.", "source": "2hop", "edges": ["IMPROVES_OUTCOMES", "INCREASES_RISK"]}
+{"q": "Build a stepwise explanation connecting IMPROVES_OUTCOMES to INCREASES_RISK in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["IMPROVES_OUTCOMES", "INCREASES_RISK"]}
+{"q": "Using a mechanistic chain, connect IMPROVES_OUTCOMES and INCREASES_RISK with intermediate steps.", "source": "2hop", "edges": ["IMPROVES_OUTCOMES", "INCREASES_RISK"]}
+{"q": "Explain the causal chain: IMPROVES_OUTCOMES → VARIES_WITH_BACKGROUND_T2DM, and why this progression matters clinically.", "source": "2hop", "edges": ["IMPROVES_OUTCOMES", "VARIES_WITH_BACKGROUND_T2DM"]}
+{"q": "Build a stepwise explanation connecting IMPROVES_OUTCOMES to VARIES_WITH_BACKGROUND_T2DM in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["IMPROVES_OUTCOMES", "VARIES_WITH_BACKGROUND_T2DM"]}
+{"q": "Using a mechanistic chain, connect IMPROVES_OUTCOMES and VARIES_WITH_BACKGROUND_T2DM with intermediate steps.", "source": "2hop", "edges": ["IMPROVES_OUTCOMES", "VARIES_WITH_BACKGROUND_T2DM"]}
+{"q": "Explain the causal chain: VARIES_WITH_BACKGROUND_T2DM → IMPROVES_OUTCOMES, and why this progression matters clinically.", "source": "2hop", "edges": ["VARIES_WITH_BACKGROUND_T2DM", "IMPROVES_OUTCOMES"]}
+{"q": "Build a stepwise explanation connecting VARIES_WITH_BACKGROUND_T2DM to IMPROVES_OUTCOMES in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["VARIES_WITH_BACKGROUND_T2DM", "IMPROVES_OUTCOMES"]}
+{"q": "Using a mechanistic chain, connect VARIES_WITH_BACKGROUND_T2DM and IMPROVES_OUTCOMES with intermediate steps.", "source": "2hop", "edges": ["VARIES_WITH_BACKGROUND_T2DM", "IMPROVES_OUTCOMES"]}
+{"q": "Explain the causal chain: SCREEN_24_28_WEEKS → MONITORING_TARGETS, and why this progression matters clinically.", "source": "2hop", "edges": ["SCREEN_24_28_WEEKS", "MONITORING_TARGETS"]}
+{"q": "Build a stepwise explanation connecting SCREEN_24_28_WEEKS to MONITORING_TARGETS in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["SCREEN_24_28_WEEKS", "MONITORING_TARGETS"]}
+{"q": "Using a mechanistic chain, connect SCREEN_24_28_WEEKS and MONITORING_TARGETS with intermediate steps.", "source": "2hop", "edges": ["SCREEN_24_28_WEEKS", "MONITORING_TARGETS"]}
+{"q": "Explain the causal chain: POSTPARTUM_T2DM_RISK → STIMULATES_INSULIN, and why this progression matters clinically.", "source": "2hop", "edges": ["POSTPARTUM_T2DM_RISK", "STIMULATES_INSULIN"]}
+{"q": "Build a stepwise explanation connecting POSTPARTUM_T2DM_RISK to STIMULATES_INSULIN in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["POSTPARTUM_T2DM_RISK", "STIMULATES_INSULIN"]}
+{"q": "Using a mechanistic chain, connect POSTPARTUM_T2DM_RISK and STIMULATES_INSULIN with intermediate steps.", "source": "2hop", "edges": ["POSTPARTUM_T2DM_RISK", "STIMULATES_INSULIN"]}
+{"q": "Explain the causal chain: POSTPARTUM_T2DM_RISK → IMPROVES_OUTCOMES, and why this progression matters clinically.", "source": "2hop", "edges": ["POSTPARTUM_T2DM_RISK", "IMPROVES_OUTCOMES"]}
+{"q": "Build a stepwise explanation connecting POSTPARTUM_T2DM_RISK to IMPROVES_OUTCOMES in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["POSTPARTUM_T2DM_RISK", "IMPROVES_OUTCOMES"]}
+{"q": "Using a mechanistic chain, connect POSTPARTUM_T2DM_RISK and IMPROVES_OUTCOMES with intermediate steps.", "source": "2hop", "edges": ["POSTPARTUM_T2DM_RISK", "IMPROVES_OUTCOMES"]}
+{"q": "Explain the causal chain: TREATED_BY → VARIES_WITH_BACKGROUND_T2DM, and why this progression matters clinically.", "source": "2hop", "edges": ["TREATED_BY", "VARIES_WITH_BACKGROUND_T2DM"]}
+{"q": "Build a stepwise explanation connecting TREATED_BY to VARIES_WITH_BACKGROUND_T2DM in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["TREATED_BY", "VARIES_WITH_BACKGROUND_T2DM"]}
+{"q": "Using a mechanistic chain, connect TREATED_BY and VARIES_WITH_BACKGROUND_T2DM with intermediate steps.", "source": "2hop", "edges": ["TREATED_BY", "VARIES_WITH_BACKGROUND_T2DM"]}
+{"q": "Explain the causal chain: FAILURE_LEADS_TO_GDM → BETA_CELL_LIMITATION, and why this progression matters clinically.", "source": "2hop", "edges": ["FAILURE_LEADS_TO_GDM", "BETA_CELL_LIMITATION"]}
+{"q": "Build a stepwise explanation connecting FAILURE_LEADS_TO_GDM to BETA_CELL_LIMITATION in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["FAILURE_LEADS_TO_GDM", "BETA_CELL_LIMITATION"]}
+{"q": "Using a mechanistic chain, connect FAILURE_LEADS_TO_GDM and BETA_CELL_LIMITATION with intermediate steps.", "source": "2hop", "edges": ["FAILURE_LEADS_TO_GDM", "BETA_CELL_LIMITATION"]}
+{"q": "Explain the causal chain: FAILURE_LEADS_TO_GDM → PERSISTENT_INSULIN_RESISTANCE, and why this progression matters clinically.", "source": "2hop", "edges": ["FAILURE_LEADS_TO_GDM", "PERSISTENT_INSULIN_RESISTANCE"]}
+{"q": "Build a stepwise explanation connecting FAILURE_LEADS_TO_GDM to PERSISTENT_INSULIN_RESISTANCE in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["FAILURE_LEADS_TO_GDM", "PERSISTENT_INSULIN_RESISTANCE"]}
+{"q": "Using a mechanistic chain, connect FAILURE_LEADS_TO_GDM and PERSISTENT_INSULIN_RESISTANCE with intermediate steps.", "source": "2hop", "edges": ["FAILURE_LEADS_TO_GDM", "PERSISTENT_INSULIN_RESISTANCE"]}
+{"q": "Explain the causal chain: FAILURE_LEADS_TO_GDM → IMPROVES_OUTCOMES, and why this progression matters clinically.", "source": "2hop", "edges": ["FAILURE_LEADS_TO_GDM", "IMPROVES_OUTCOMES"]}
+{"q": "Build a stepwise explanation connecting FAILURE_LEADS_TO_GDM to IMPROVES_OUTCOMES in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["FAILURE_LEADS_TO_GDM", "IMPROVES_OUTCOMES"]}
+{"q": "Using a mechanistic chain, connect FAILURE_LEADS_TO_GDM and IMPROVES_OUTCOMES with intermediate steps.", "source": "2hop", "edges": ["FAILURE_LEADS_TO_GDM", "IMPROVES_OUTCOMES"]}
+{"q": "Explain the causal chain: FAILURE_LEADS_TO_GDM → VARIES_WITH_BACKGROUND_T2DM, and why this progression matters clinically.", "source": "2hop", "edges": ["FAILURE_LEADS_TO_GDM", "VARIES_WITH_BACKGROUND_T2DM"]}
+{"q": "Build a stepwise explanation connecting FAILURE_LEADS_TO_GDM to VARIES_WITH_BACKGROUND_T2DM in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["FAILURE_LEADS_TO_GDM", "VARIES_WITH_BACKGROUND_T2DM"]}
+{"q": "Using a mechanistic chain, connect FAILURE_LEADS_TO_GDM and VARIES_WITH_BACKGROUND_T2DM with intermediate steps.", "source": "2hop", "edges": ["FAILURE_LEADS_TO_GDM", "VARIES_WITH_BACKGROUND_T2DM"]}
+{"q": "Explain the causal chain: FAILURE_LEADS_TO_GDM → SCREEN_24_28_WEEKS, and why this progression matters clinically.", "source": "2hop", "edges": ["FAILURE_LEADS_TO_GDM", "SCREEN_24_28_WEEKS"]}
+{"q": "Build a stepwise explanation connecting FAILURE_LEADS_TO_GDM to SCREEN_24_28_WEEKS in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["FAILURE_LEADS_TO_GDM", "SCREEN_24_28_WEEKS"]}
+{"q": "Using a mechanistic chain, connect FAILURE_LEADS_TO_GDM and SCREEN_24_28_WEEKS with intermediate steps.", "source": "2hop", "edges": ["FAILURE_LEADS_TO_GDM", "SCREEN_24_28_WEEKS"]}
+{"q": "Explain the causal chain: BETA_CELL_LIMITATION → FAILURE_LEADS_TO_GDM, and why this progression matters clinically.", "source": "2hop", "edges": ["BETA_CELL_LIMITATION", "FAILURE_LEADS_TO_GDM"]}
+{"q": "Build a stepwise explanation connecting BETA_CELL_LIMITATION to FAILURE_LEADS_TO_GDM in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["BETA_CELL_LIMITATION", "FAILURE_LEADS_TO_GDM"]}
+{"q": "Using a mechanistic chain, connect BETA_CELL_LIMITATION and FAILURE_LEADS_TO_GDM with intermediate steps.", "source": "2hop", "edges": ["BETA_CELL_LIMITATION", "FAILURE_LEADS_TO_GDM"]}
+{"q": "Explain the causal chain: BETA_CELL_LIMITATION → MONITORING_TARGETS, and why this progression matters clinically.", "source": "2hop", "edges": ["BETA_CELL_LIMITATION", "MONITORING_TARGETS"]}
+{"q": "Build a stepwise explanation connecting BETA_CELL_LIMITATION to MONITORING_TARGETS in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["BETA_CELL_LIMITATION", "MONITORING_TARGETS"]}
+{"q": "Using a mechanistic chain, connect BETA_CELL_LIMITATION and MONITORING_TARGETS with intermediate steps.", "source": "2hop", "edges": ["BETA_CELL_LIMITATION", "MONITORING_TARGETS"]}
+{"q": "Explain the causal chain: PERSISTENT_INSULIN_RESISTANCE → FAILURE_LEADS_TO_GDM, and why this progression matters clinically.", "source": "2hop", "edges": ["PERSISTENT_INSULIN_RESISTANCE", "FAILURE_LEADS_TO_GDM"]}
+{"q": "Build a stepwise explanation connecting PERSISTENT_INSULIN_RESISTANCE to FAILURE_LEADS_TO_GDM in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["PERSISTENT_INSULIN_RESISTANCE", "FAILURE_LEADS_TO_GDM"]}
+{"q": "Using a mechanistic chain, connect PERSISTENT_INSULIN_RESISTANCE and FAILURE_LEADS_TO_GDM with intermediate steps.", "source": "2hop", "edges": ["PERSISTENT_INSULIN_RESISTANCE", "FAILURE_LEADS_TO_GDM"]}
+{"q": "Explain the causal chain: PERSISTENT_INSULIN_RESISTANCE → CROSSES_PLACENTA, and why this progression matters clinically.", "source": "2hop", "edges": ["PERSISTENT_INSULIN_RESISTANCE", "CROSSES_PLACENTA"]}
+{"q": "Build a stepwise explanation connecting PERSISTENT_INSULIN_RESISTANCE to CROSSES_PLACENTA in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["PERSISTENT_INSULIN_RESISTANCE", "CROSSES_PLACENTA"]}
+{"q": "Using a mechanistic chain, connect PERSISTENT_INSULIN_RESISTANCE and CROSSES_PLACENTA with intermediate steps.", "source": "2hop", "edges": ["PERSISTENT_INSULIN_RESISTANCE", "CROSSES_PLACENTA"]}
+{"q": "Explain the causal chain: PERSISTENT_INSULIN_RESISTANCE → STIMULATES_INSULIN, and why this progression matters clinically.", "source": "2hop", "edges": ["PERSISTENT_INSULIN_RESISTANCE", "STIMULATES_INSULIN"]}
+{"q": "Build a stepwise explanation connecting PERSISTENT_INSULIN_RESISTANCE to STIMULATES_INSULIN in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["PERSISTENT_INSULIN_RESISTANCE", "STIMULATES_INSULIN"]}
+{"q": "Using a mechanistic chain, connect PERSISTENT_INSULIN_RESISTANCE and STIMULATES_INSULIN with intermediate steps.", "source": "2hop", "edges": ["PERSISTENT_INSULIN_RESISTANCE", "STIMULATES_INSULIN"]}
+{"q": "Explain the causal chain: PERSISTENT_INSULIN_RESISTANCE → MONITORING_TARGETS, and why this progression matters clinically.", "source": "2hop", "edges": ["PERSISTENT_INSULIN_RESISTANCE", "MONITORING_TARGETS"]}
+{"q": "Build a stepwise explanation connecting PERSISTENT_INSULIN_RESISTANCE to MONITORING_TARGETS in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["PERSISTENT_INSULIN_RESISTANCE", "MONITORING_TARGETS"]}
+{"q": "Using a mechanistic chain, connect PERSISTENT_INSULIN_RESISTANCE and MONITORING_TARGETS with intermediate steps.", "source": "2hop", "edges": ["PERSISTENT_INSULIN_RESISTANCE", "MONITORING_TARGETS"]}
+{"q": "Explain the causal chain: CROSSES_PLACENTA → PERSISTENT_INSULIN_RESISTANCE, and why this progression matters clinically.", "source": "2hop", "edges": ["CROSSES_PLACENTA", "PERSISTENT_INSULIN_RESISTANCE"]}
+{"q": "Build a stepwise explanation connecting CROSSES_PLACENTA to PERSISTENT_INSULIN_RESISTANCE in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["CROSSES_PLACENTA", "PERSISTENT_INSULIN_RESISTANCE"]}
+{"q": "Using a mechanistic chain, connect CROSSES_PLACENTA and PERSISTENT_INSULIN_RESISTANCE with intermediate steps.", "source": "2hop", "edges": ["CROSSES_PLACENTA", "PERSISTENT_INSULIN_RESISTANCE"]}
+{"q": "Explain the causal chain: CROSSES_PLACENTA → MONITORING_TARGETS, and why this progression matters clinically.", "source": "2hop", "edges": ["CROSSES_PLACENTA", "MONITORING_TARGETS"]}
+{"q": "Build a stepwise explanation connecting CROSSES_PLACENTA to MONITORING_TARGETS in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["CROSSES_PLACENTA", "MONITORING_TARGETS"]}
+{"q": "Using a mechanistic chain, connect CROSSES_PLACENTA and MONITORING_TARGETS with intermediate steps.", "source": "2hop", "edges": ["CROSSES_PLACENTA", "MONITORING_TARGETS"]}
+{"q": "Explain the causal chain: MONITORING_TARGETS → POSTPARTUM_OGTT, and why this progression matters clinically.", "source": "2hop", "edges": ["MONITORING_TARGETS", "POSTPARTUM_OGTT"]}
+{"q": "Build a stepwise explanation connecting MONITORING_TARGETS to POSTPARTUM_OGTT in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["MONITORING_TARGETS", "POSTPARTUM_OGTT"]}
+{"q": "Using a mechanistic chain, connect MONITORING_TARGETS and POSTPARTUM_OGTT with intermediate steps.", "source": "2hop", "edges": ["MONITORING_TARGETS", "POSTPARTUM_OGTT"]}
+{"q": "Explain the causal chain: MONITORING_TARGETS → BETA_CELL_LIMITATION, and why this progression matters clinically.", "source": "2hop", "edges": ["MONITORING_TARGETS", "BETA_CELL_LIMITATION"]}
+{"q": "Build a stepwise explanation connecting MONITORING_TARGETS to BETA_CELL_LIMITATION in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["MONITORING_TARGETS", "BETA_CELL_LIMITATION"]}
+{"q": "Using a mechanistic chain, connect MONITORING_TARGETS and BETA_CELL_LIMITATION with intermediate steps.", "source": "2hop", "edges": ["MONITORING_TARGETS", "BETA_CELL_LIMITATION"]}
+{"q": "Explain the causal chain: MONITORING_TARGETS → CROSSES_PLACENTA, and why this progression matters clinically.", "source": "2hop", "edges": ["MONITORING_TARGETS", "CROSSES_PLACENTA"]}
+{"q": "Build a stepwise explanation connecting MONITORING_TARGETS to CROSSES_PLACENTA in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["MONITORING_TARGETS", "CROSSES_PLACENTA"]}
+{"q": "Using a mechanistic chain, connect MONITORING_TARGETS and CROSSES_PLACENTA with intermediate steps.", "source": "2hop", "edges": ["MONITORING_TARGETS", "CROSSES_PLACENTA"]}
+{"q": "Explain the causal chain: MONITORING_TARGETS → STIMULATES_INSULIN, and why this progression matters clinically.", "source": "2hop", "edges": ["MONITORING_TARGETS", "STIMULATES_INSULIN"]}
+{"q": "Build a stepwise explanation connecting MONITORING_TARGETS to STIMULATES_INSULIN in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["MONITORING_TARGETS", "STIMULATES_INSULIN"]}
+{"q": "Using a mechanistic chain, connect MONITORING_TARGETS and STIMULATES_INSULIN with intermediate steps.", "source": "2hop", "edges": ["MONITORING_TARGETS", "STIMULATES_INSULIN"]}
+{"q": "Explain the causal chain: MONITORING_TARGETS → PERSISTENT_INSULIN_RESISTANCE, and why this progression matters clinically.", "source": "2hop", "edges": ["MONITORING_TARGETS", "PERSISTENT_INSULIN_RESISTANCE"]}
+{"q": "Build a stepwise explanation connecting MONITORING_TARGETS to PERSISTENT_INSULIN_RESISTANCE in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["MONITORING_TARGETS", "PERSISTENT_INSULIN_RESISTANCE"]}
+{"q": "Using a mechanistic chain, connect MONITORING_TARGETS and PERSISTENT_INSULIN_RESISTANCE with intermediate steps.", "source": "2hop", "edges": ["MONITORING_TARGETS", "PERSISTENT_INSULIN_RESISTANCE"]}
+{"q": "Explain the causal chain: IMPROVES_OUTCOMES → POSTPARTUM_T2DM_RISK, and why this progression matters clinically.", "source": "2hop", "edges": ["IMPROVES_OUTCOMES", "POSTPARTUM_T2DM_RISK"]}
+{"q": "Build a stepwise explanation connecting IMPROVES_OUTCOMES to POSTPARTUM_T2DM_RISK in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["IMPROVES_OUTCOMES", "POSTPARTUM_T2DM_RISK"]}
+{"q": "Using a mechanistic chain, connect IMPROVES_OUTCOMES and POSTPARTUM_T2DM_RISK with intermediate steps.", "source": "2hop", "edges": ["IMPROVES_OUTCOMES", "POSTPARTUM_T2DM_RISK"]}
+{"q": "Explain the causal chain: IMPROVES_OUTCOMES → FAILURE_LEADS_TO_GDM, and why this progression matters clinically.", "source": "2hop", "edges": ["IMPROVES_OUTCOMES", "FAILURE_LEADS_TO_GDM"]}
+{"q": "Build a stepwise explanation connecting IMPROVES_OUTCOMES to FAILURE_LEADS_TO_GDM in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["IMPROVES_OUTCOMES", "FAILURE_LEADS_TO_GDM"]}
+{"q": "Using a mechanistic chain, connect IMPROVES_OUTCOMES and FAILURE_LEADS_TO_GDM with intermediate steps.", "source": "2hop", "edges": ["IMPROVES_OUTCOMES", "FAILURE_LEADS_TO_GDM"]}
+{"q": "Explain the causal chain: IMPROVES_OUTCOMES → STIMULATES_INSULIN, and why this progression matters clinically.", "source": "2hop", "edges": ["IMPROVES_OUTCOMES", "STIMULATES_INSULIN"]}
+{"q": "Build a stepwise explanation connecting IMPROVES_OUTCOMES to STIMULATES_INSULIN in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["IMPROVES_OUTCOMES", "STIMULATES_INSULIN"]}
+{"q": "Using a mechanistic chain, connect IMPROVES_OUTCOMES and STIMULATES_INSULIN with intermediate steps.", "source": "2hop", "edges": ["IMPROVES_OUTCOMES", "STIMULATES_INSULIN"]}
+{"q": "Explain the causal chain: VARIES_WITH_BACKGROUND_T2DM → TREATED_BY, and why this progression matters clinically.", "source": "2hop", "edges": ["VARIES_WITH_BACKGROUND_T2DM", "TREATED_BY"]}
+{"q": "Build a stepwise explanation connecting VARIES_WITH_BACKGROUND_T2DM to TREATED_BY in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["VARIES_WITH_BACKGROUND_T2DM", "TREATED_BY"]}
+{"q": "Using a mechanistic chain, connect VARIES_WITH_BACKGROUND_T2DM and TREATED_BY with intermediate steps.", "source": "2hop", "edges": ["VARIES_WITH_BACKGROUND_T2DM", "TREATED_BY"]}
+{"q": "Explain the causal chain: VARIES_WITH_BACKGROUND_T2DM → FAILURE_LEADS_TO_GDM, and why this progression matters clinically.", "source": "2hop", "edges": ["VARIES_WITH_BACKGROUND_T2DM", "FAILURE_LEADS_TO_GDM"]}
+{"q": "Build a stepwise explanation connecting VARIES_WITH_BACKGROUND_T2DM to FAILURE_LEADS_TO_GDM in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["VARIES_WITH_BACKGROUND_T2DM", "FAILURE_LEADS_TO_GDM"]}
+{"q": "Using a mechanistic chain, connect VARIES_WITH_BACKGROUND_T2DM and FAILURE_LEADS_TO_GDM with intermediate steps.", "source": "2hop", "edges": ["VARIES_WITH_BACKGROUND_T2DM", "FAILURE_LEADS_TO_GDM"]}
+{"q": "Explain the causal chain: STIMULATES_INSULIN → PERSISTENT_INSULIN_RESISTANCE, and why this progression matters clinically.", "source": "2hop", "edges": ["STIMULATES_INSULIN", "PERSISTENT_INSULIN_RESISTANCE"]}
+{"q": "Build a stepwise explanation connecting STIMULATES_INSULIN to PERSISTENT_INSULIN_RESISTANCE in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["STIMULATES_INSULIN", "PERSISTENT_INSULIN_RESISTANCE"]}
+{"q": "Using a mechanistic chain, connect STIMULATES_INSULIN and PERSISTENT_INSULIN_RESISTANCE with intermediate steps.", "source": "2hop", "edges": ["STIMULATES_INSULIN", "PERSISTENT_INSULIN_RESISTANCE"]}
+{"q": "Explain the causal chain: STIMULATES_INSULIN → MONITORING_TARGETS, and why this progression matters clinically.", "source": "2hop", "edges": ["STIMULATES_INSULIN", "MONITORING_TARGETS"]}
+{"q": "Build a stepwise explanation connecting STIMULATES_INSULIN to MONITORING_TARGETS in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["STIMULATES_INSULIN", "MONITORING_TARGETS"]}
+{"q": "Using a mechanistic chain, connect STIMULATES_INSULIN and MONITORING_TARGETS with intermediate steps.", "source": "2hop", "edges": ["STIMULATES_INSULIN", "MONITORING_TARGETS"]}
+{"q": "Explain the causal chain: STIMULATES_INSULIN → POSTPARTUM_T2DM_RISK, and why this progression matters clinically.", "source": "2hop", "edges": ["STIMULATES_INSULIN", "POSTPARTUM_T2DM_RISK"]}
+{"q": "Build a stepwise explanation connecting STIMULATES_INSULIN to POSTPARTUM_T2DM_RISK in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["STIMULATES_INSULIN", "POSTPARTUM_T2DM_RISK"]}
+{"q": "Using a mechanistic chain, connect STIMULATES_INSULIN and POSTPARTUM_T2DM_RISK with intermediate steps.", "source": "2hop", "edges": ["STIMULATES_INSULIN", "POSTPARTUM_T2DM_RISK"]}
+{"q": "Explain the causal chain: STIMULATES_INSULIN → IMPROVES_OUTCOMES, and why this progression matters clinically.", "source": "2hop", "edges": ["STIMULATES_INSULIN", "IMPROVES_OUTCOMES"]}
+{"q": "Build a stepwise explanation connecting STIMULATES_INSULIN to IMPROVES_OUTCOMES in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["STIMULATES_INSULIN", "IMPROVES_OUTCOMES"]}
+{"q": "Using a mechanistic chain, connect STIMULATES_INSULIN and IMPROVES_OUTCOMES with intermediate steps.", "source": "2hop", "edges": ["STIMULATES_INSULIN", "IMPROVES_OUTCOMES"]}
+{"q": "Explain the causal chain: POSTPARTUM_OGTT → MONITORING_TARGETS, and why this progression matters clinically.", "source": "2hop", "edges": ["POSTPARTUM_OGTT", "MONITORING_TARGETS"]}
+{"q": "Build a stepwise explanation connecting POSTPARTUM_OGTT to MONITORING_TARGETS in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["POSTPARTUM_OGTT", "MONITORING_TARGETS"]}
+{"q": "Using a mechanistic chain, connect POSTPARTUM_OGTT and MONITORING_TARGETS with intermediate steps.", "source": "2hop", "edges": ["POSTPARTUM_OGTT", "MONITORING_TARGETS"]}
+{"q": "Explain the causal chain: SCREEN_24_28_WEEKS → FAILURE_LEADS_TO_GDM, and why this progression matters clinically.", "source": "2hop", "edges": ["SCREEN_24_28_WEEKS", "FAILURE_LEADS_TO_GDM"]}
+{"q": "Build a stepwise explanation connecting SCREEN_24_28_WEEKS to FAILURE_LEADS_TO_GDM in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["SCREEN_24_28_WEEKS", "FAILURE_LEADS_TO_GDM"]}
+{"q": "Using a mechanistic chain, connect SCREEN_24_28_WEEKS and FAILURE_LEADS_TO_GDM with intermediate steps.", "source": "2hop", "edges": ["SCREEN_24_28_WEEKS", "FAILURE_LEADS_TO_GDM"]}
+{"q": "Explain the causal chain: SCREEN_24_28_WEEKS → THRESHOLD_CRITERIA, and why this progression matters clinically.", "source": "2hop", "edges": ["SCREEN_24_28_WEEKS", "THRESHOLD_CRITERIA"]}
+{"q": "Build a stepwise explanation connecting SCREEN_24_28_WEEKS to THRESHOLD_CRITERIA in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["SCREEN_24_28_WEEKS", "THRESHOLD_CRITERIA"]}
+{"q": "Using a mechanistic chain, connect SCREEN_24_28_WEEKS and THRESHOLD_CRITERIA with intermediate steps.", "source": "2hop", "edges": ["SCREEN_24_28_WEEKS", "THRESHOLD_CRITERIA"]}
+{"q": "Explain the causal chain: THRESHOLD_CRITERIA → SCREEN_24_28_WEEKS, and why this progression matters clinically.", "source": "2hop", "edges": ["THRESHOLD_CRITERIA", "SCREEN_24_28_WEEKS"]}
+{"q": "Build a stepwise explanation connecting THRESHOLD_CRITERIA to SCREEN_24_28_WEEKS in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["THRESHOLD_CRITERIA", "SCREEN_24_28_WEEKS"]}
+{"q": "Using a mechanistic chain, connect THRESHOLD_CRITERIA and SCREEN_24_28_WEEKS with intermediate steps.", "source": "2hop", "edges": ["THRESHOLD_CRITERIA", "SCREEN_24_28_WEEKS"]}
+{"q": "Explain the causal chain: INCREASES_RISK → FAILURE_LEADS_TO_GDM, and why this progression matters clinically.", "source": "2hop", "edges": ["INCREASES_RISK", "FAILURE_LEADS_TO_GDM"]}
+{"q": "Build a stepwise explanation connecting INCREASES_RISK to FAILURE_LEADS_TO_GDM in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["INCREASES_RISK", "FAILURE_LEADS_TO_GDM"]}
+{"q": "Using a mechanistic chain, connect INCREASES_RISK and FAILURE_LEADS_TO_GDM with intermediate steps.", "source": "2hop", "edges": ["INCREASES_RISK", "FAILURE_LEADS_TO_GDM"]}
+{"q": "Explain the causal chain: INCREASES_RISK → PERSISTENT_INSULIN_RESISTANCE, and why this progression matters clinically.", "source": "2hop", "edges": ["INCREASES_RISK", "PERSISTENT_INSULIN_RESISTANCE"]}
+{"q": "Build a stepwise explanation connecting INCREASES_RISK to PERSISTENT_INSULIN_RESISTANCE in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["INCREASES_RISK", "PERSISTENT_INSULIN_RESISTANCE"]}
+{"q": "Using a mechanistic chain, connect INCREASES_RISK and PERSISTENT_INSULIN_RESISTANCE with intermediate steps.", "source": "2hop", "edges": ["INCREASES_RISK", "PERSISTENT_INSULIN_RESISTANCE"]}
+{"q": "Explain the causal chain: INCREASES_RISK → SCREEN_24_28_WEEKS, and why this progression matters clinically.", "source": "2hop", "edges": ["INCREASES_RISK", "SCREEN_24_28_WEEKS"]}
+{"q": "Build a stepwise explanation connecting INCREASES_RISK to SCREEN_24_28_WEEKS in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["INCREASES_RISK", "SCREEN_24_28_WEEKS"]}
+{"q": "Using a mechanistic chain, connect INCREASES_RISK and SCREEN_24_28_WEEKS with intermediate steps.", "source": "2hop", "edges": ["INCREASES_RISK", "SCREEN_24_28_WEEKS"]}
+{"q": "Explain the causal chain: POSTPARTUM_T2DM_RISK → TREATED_BY, and why this progression matters clinically.", "source": "2hop", "edges": ["POSTPARTUM_T2DM_RISK", "TREATED_BY"]}
+{"q": "Build a stepwise explanation connecting POSTPARTUM_T2DM_RISK to TREATED_BY in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["POSTPARTUM_T2DM_RISK", "TREATED_BY"]}
+{"q": "Using a mechanistic chain, connect POSTPARTUM_T2DM_RISK and TREATED_BY with intermediate steps.", "source": "2hop", "edges": ["POSTPARTUM_T2DM_RISK", "TREATED_BY"]}
+{"q": "Explain the causal chain: POSTPARTUM_T2DM_RISK → FAILURE_LEADS_TO_GDM, and why this progression matters clinically.", "source": "2hop", "edges": ["POSTPARTUM_T2DM_RISK", "FAILURE_LEADS_TO_GDM"]}
+{"q": "Build a stepwise explanation connecting POSTPARTUM_T2DM_RISK to FAILURE_LEADS_TO_GDM in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["POSTPARTUM_T2DM_RISK", "FAILURE_LEADS_TO_GDM"]}
+{"q": "Using a mechanistic chain, connect POSTPARTUM_T2DM_RISK and FAILURE_LEADS_TO_GDM with intermediate steps.", "source": "2hop", "edges": ["POSTPARTUM_T2DM_RISK", "FAILURE_LEADS_TO_GDM"]}
+{"q": "Explain the causal chain: POSTPARTUM_T2DM_RISK → PERSISTENT_INSULIN_RESISTANCE, and why this progression matters clinically.", "source": "2hop", "edges": ["POSTPARTUM_T2DM_RISK", "PERSISTENT_INSULIN_RESISTANCE"]}
+{"q": "Build a stepwise explanation connecting POSTPARTUM_T2DM_RISK to PERSISTENT_INSULIN_RESISTANCE in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["POSTPARTUM_T2DM_RISK", "PERSISTENT_INSULIN_RESISTANCE"]}
+{"q": "Using a mechanistic chain, connect POSTPARTUM_T2DM_RISK and PERSISTENT_INSULIN_RESISTANCE with intermediate steps.", "source": "2hop", "edges": ["POSTPARTUM_T2DM_RISK", "PERSISTENT_INSULIN_RESISTANCE"]}
+{"q": "Explain the causal chain: POSTPARTUM_T2DM_RISK → SCREEN_24_28_WEEKS, and why this progression matters clinically.", "source": "2hop", "edges": ["POSTPARTUM_T2DM_RISK", "SCREEN_24_28_WEEKS"]}
+{"q": "Build a stepwise explanation connecting POSTPARTUM_T2DM_RISK to SCREEN_24_28_WEEKS in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["POSTPARTUM_T2DM_RISK", "SCREEN_24_28_WEEKS"]}
+{"q": "Using a mechanistic chain, connect POSTPARTUM_T2DM_RISK and SCREEN_24_28_WEEKS with intermediate steps.", "source": "2hop", "edges": ["POSTPARTUM_T2DM_RISK", "SCREEN_24_28_WEEKS"]}
+{"q": "Explain the causal chain: POSTPARTUM_T2DM_RISK → CROSSES_PLACENTA, and why this progression matters clinically.", "source": "2hop", "edges": ["POSTPARTUM_T2DM_RISK", "CROSSES_PLACENTA"]}
+{"q": "Build a stepwise explanation connecting POSTPARTUM_T2DM_RISK to CROSSES_PLACENTA in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["POSTPARTUM_T2DM_RISK", "CROSSES_PLACENTA"]}
+{"q": "Using a mechanistic chain, connect POSTPARTUM_T2DM_RISK and CROSSES_PLACENTA with intermediate steps.", "source": "2hop", "edges": ["POSTPARTUM_T2DM_RISK", "CROSSES_PLACENTA"]}
+{"q": "Explain the causal chain: TREATED_BY → POSTPARTUM_T2DM_RISK, and why this progression matters clinically.", "source": "2hop", "edges": ["TREATED_BY", "POSTPARTUM_T2DM_RISK"]}
+{"q": "Build a stepwise explanation connecting TREATED_BY to POSTPARTUM_T2DM_RISK in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["TREATED_BY", "POSTPARTUM_T2DM_RISK"]}
+{"q": "Using a mechanistic chain, connect TREATED_BY and POSTPARTUM_T2DM_RISK with intermediate steps.", "source": "2hop", "edges": ["TREATED_BY", "POSTPARTUM_T2DM_RISK"]}
+{"q": "Explain the causal chain: TREATED_BY → FAILURE_LEADS_TO_GDM, and why this progression matters clinically.", "source": "2hop", "edges": ["TREATED_BY", "FAILURE_LEADS_TO_GDM"]}
+{"q": "Build a stepwise explanation connecting TREATED_BY to FAILURE_LEADS_TO_GDM in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["TREATED_BY", "FAILURE_LEADS_TO_GDM"]}
+{"q": "Using a mechanistic chain, connect TREATED_BY and FAILURE_LEADS_TO_GDM with intermediate steps.", "source": "2hop", "edges": ["TREATED_BY", "FAILURE_LEADS_TO_GDM"]}
+{"q": "Explain the causal chain: TREATED_BY → SCREEN_24_28_WEEKS, and why this progression matters clinically.", "source": "2hop", "edges": ["TREATED_BY", "SCREEN_24_28_WEEKS"]}
+{"q": "Build a stepwise explanation connecting TREATED_BY to SCREEN_24_28_WEEKS in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["TREATED_BY", "SCREEN_24_28_WEEKS"]}
+{"q": "Using a mechanistic chain, connect TREATED_BY and SCREEN_24_28_WEEKS with intermediate steps.", "source": "2hop", "edges": ["TREATED_BY", "SCREEN_24_28_WEEKS"]}
+{"q": "Explain the causal chain: TREATED_BY → THRESHOLD_CRITERIA, and why this progression matters clinically.", "source": "2hop", "edges": ["TREATED_BY", "THRESHOLD_CRITERIA"]}
+{"q": "Build a stepwise explanation connecting TREATED_BY to THRESHOLD_CRITERIA in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["TREATED_BY", "THRESHOLD_CRITERIA"]}
+{"q": "Using a mechanistic chain, connect TREATED_BY and THRESHOLD_CRITERIA with intermediate steps.", "source": "2hop", "edges": ["TREATED_BY", "THRESHOLD_CRITERIA"]}
+{"q": "Explain the causal chain: FAILURE_LEADS_TO_GDM → STIMULATES_INSULIN, and why this progression matters clinically.", "source": "2hop", "edges": ["FAILURE_LEADS_TO_GDM", "STIMULATES_INSULIN"]}
+{"q": "Build a stepwise explanation connecting FAILURE_LEADS_TO_GDM to STIMULATES_INSULIN in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["FAILURE_LEADS_TO_GDM", "STIMULATES_INSULIN"]}
+{"q": "Using a mechanistic chain, connect FAILURE_LEADS_TO_GDM and STIMULATES_INSULIN with intermediate steps.", "source": "2hop", "edges": ["FAILURE_LEADS_TO_GDM", "STIMULATES_INSULIN"]}
+{"q": "Explain the causal chain: FAILURE_LEADS_TO_GDM → TREATED_BY, and why this progression matters clinically.", "source": "2hop", "edges": ["FAILURE_LEADS_TO_GDM", "TREATED_BY"]}
+{"q": "Build a stepwise explanation connecting FAILURE_LEADS_TO_GDM to TREATED_BY in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["FAILURE_LEADS_TO_GDM", "TREATED_BY"]}
+{"q": "Using a mechanistic chain, connect FAILURE_LEADS_TO_GDM and TREATED_BY with intermediate steps.", "source": "2hop", "edges": ["FAILURE_LEADS_TO_GDM", "TREATED_BY"]}
+{"q": "Explain the causal chain: FAILURE_LEADS_TO_GDM → INCREASES_RISK, and why this progression matters clinically.", "source": "2hop", "edges": ["FAILURE_LEADS_TO_GDM", "INCREASES_RISK"]}
+{"q": "Build a stepwise explanation connecting FAILURE_LEADS_TO_GDM to INCREASES_RISK in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["FAILURE_LEADS_TO_GDM", "INCREASES_RISK"]}
+{"q": "Using a mechanistic chain, connect FAILURE_LEADS_TO_GDM and INCREASES_RISK with intermediate steps.", "source": "2hop", "edges": ["FAILURE_LEADS_TO_GDM", "INCREASES_RISK"]}
+{"q": "Explain the causal chain: FAILURE_LEADS_TO_GDM → POSTPARTUM_T2DM_RISK, and why this progression matters clinically.", "source": "2hop", "edges": ["FAILURE_LEADS_TO_GDM", "POSTPARTUM_T2DM_RISK"]}
+{"q": "Build a stepwise explanation connecting FAILURE_LEADS_TO_GDM to POSTPARTUM_T2DM_RISK in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["FAILURE_LEADS_TO_GDM", "POSTPARTUM_T2DM_RISK"]}
+{"q": "Using a mechanistic chain, connect FAILURE_LEADS_TO_GDM and POSTPARTUM_T2DM_RISK with intermediate steps.", "source": "2hop", "edges": ["FAILURE_LEADS_TO_GDM", "POSTPARTUM_T2DM_RISK"]}
+{"q": "Explain the causal chain: FAILURE_LEADS_TO_GDM → MONITORING_TARGETS, and why this progression matters clinically.", "source": "2hop", "edges": ["FAILURE_LEADS_TO_GDM", "MONITORING_TARGETS"]}
+{"q": "Build a stepwise explanation connecting FAILURE_LEADS_TO_GDM to MONITORING_TARGETS in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["FAILURE_LEADS_TO_GDM", "MONITORING_TARGETS"]}
+{"q": "Using a mechanistic chain, connect FAILURE_LEADS_TO_GDM and MONITORING_TARGETS with intermediate steps.", "source": "2hop", "edges": ["FAILURE_LEADS_TO_GDM", "MONITORING_TARGETS"]}
+{"q": "Explain the causal chain: FAILURE_LEADS_TO_GDM → THRESHOLD_CRITERIA, and why this progression matters clinically.", "source": "2hop", "edges": ["FAILURE_LEADS_TO_GDM", "THRESHOLD_CRITERIA"]}
+{"q": "Build a stepwise explanation connecting FAILURE_LEADS_TO_GDM to THRESHOLD_CRITERIA in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["FAILURE_LEADS_TO_GDM", "THRESHOLD_CRITERIA"]}
+{"q": "Using a mechanistic chain, connect FAILURE_LEADS_TO_GDM and THRESHOLD_CRITERIA with intermediate steps.", "source": "2hop", "edges": ["FAILURE_LEADS_TO_GDM", "THRESHOLD_CRITERIA"]}
+{"q": "Explain the causal chain: BETA_CELL_LIMITATION → IMPROVES_OUTCOMES, and why this progression matters clinically.", "source": "2hop", "edges": ["BETA_CELL_LIMITATION", "IMPROVES_OUTCOMES"]}
+{"q": "Build a stepwise explanation connecting BETA_CELL_LIMITATION to IMPROVES_OUTCOMES in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["BETA_CELL_LIMITATION", "IMPROVES_OUTCOMES"]}
+{"q": "Using a mechanistic chain, connect BETA_CELL_LIMITATION and IMPROVES_OUTCOMES with intermediate steps.", "source": "2hop", "edges": ["BETA_CELL_LIMITATION", "IMPROVES_OUTCOMES"]}
+{"q": "Explain the causal chain: BETA_CELL_LIMITATION → SCREEN_24_28_WEEKS, and why this progression matters clinically.", "source": "2hop", "edges": ["BETA_CELL_LIMITATION", "SCREEN_24_28_WEEKS"]}
+{"q": "Build a stepwise explanation connecting BETA_CELL_LIMITATION to SCREEN_24_28_WEEKS in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["BETA_CELL_LIMITATION", "SCREEN_24_28_WEEKS"]}
+{"q": "Using a mechanistic chain, connect BETA_CELL_LIMITATION and SCREEN_24_28_WEEKS with intermediate steps.", "source": "2hop", "edges": ["BETA_CELL_LIMITATION", "SCREEN_24_28_WEEKS"]}
+{"q": "Explain the causal chain: PERSISTENT_INSULIN_RESISTANCE → INCREASES_RISK, and why this progression matters clinically.", "source": "2hop", "edges": ["PERSISTENT_INSULIN_RESISTANCE", "INCREASES_RISK"]}
+{"q": "Build a stepwise explanation connecting PERSISTENT_INSULIN_RESISTANCE to INCREASES_RISK in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["PERSISTENT_INSULIN_RESISTANCE", "INCREASES_RISK"]}
+{"q": "Using a mechanistic chain, connect PERSISTENT_INSULIN_RESISTANCE and INCREASES_RISK with intermediate steps.", "source": "2hop", "edges": ["PERSISTENT_INSULIN_RESISTANCE", "INCREASES_RISK"]}
+{"q": "Explain the causal chain: PERSISTENT_INSULIN_RESISTANCE → IMPROVES_OUTCOMES, and why this progression matters clinically.", "source": "2hop", "edges": ["PERSISTENT_INSULIN_RESISTANCE", "IMPROVES_OUTCOMES"]}
+{"q": "Build a stepwise explanation connecting PERSISTENT_INSULIN_RESISTANCE to IMPROVES_OUTCOMES in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["PERSISTENT_INSULIN_RESISTANCE", "IMPROVES_OUTCOMES"]}
+{"q": "Using a mechanistic chain, connect PERSISTENT_INSULIN_RESISTANCE and IMPROVES_OUTCOMES with intermediate steps.", "source": "2hop", "edges": ["PERSISTENT_INSULIN_RESISTANCE", "IMPROVES_OUTCOMES"]}
+{"q": "Explain the causal chain: PERSISTENT_INSULIN_RESISTANCE → VARIES_WITH_BACKGROUND_T2DM, and why this progression matters clinically.", "source": "2hop", "edges": ["PERSISTENT_INSULIN_RESISTANCE", "VARIES_WITH_BACKGROUND_T2DM"]}
+{"q": "Build a stepwise explanation connecting PERSISTENT_INSULIN_RESISTANCE to VARIES_WITH_BACKGROUND_T2DM in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["PERSISTENT_INSULIN_RESISTANCE", "VARIES_WITH_BACKGROUND_T2DM"]}
+{"q": "Using a mechanistic chain, connect PERSISTENT_INSULIN_RESISTANCE and VARIES_WITH_BACKGROUND_T2DM with intermediate steps.", "source": "2hop", "edges": ["PERSISTENT_INSULIN_RESISTANCE", "VARIES_WITH_BACKGROUND_T2DM"]}
+{"q": "Explain the causal chain: PERSISTENT_INSULIN_RESISTANCE → POSTPARTUM_T2DM_RISK, and why this progression matters clinically.", "source": "2hop", "edges": ["PERSISTENT_INSULIN_RESISTANCE", "POSTPARTUM_T2DM_RISK"]}
+{"q": "Build a stepwise explanation connecting PERSISTENT_INSULIN_RESISTANCE to POSTPARTUM_T2DM_RISK in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["PERSISTENT_INSULIN_RESISTANCE", "POSTPARTUM_T2DM_RISK"]}
+{"q": "Using a mechanistic chain, connect PERSISTENT_INSULIN_RESISTANCE and POSTPARTUM_T2DM_RISK with intermediate steps.", "source": "2hop", "edges": ["PERSISTENT_INSULIN_RESISTANCE", "POSTPARTUM_T2DM_RISK"]}
+{"q": "Explain the causal chain: PERSISTENT_INSULIN_RESISTANCE → SCREEN_24_28_WEEKS, and why this progression matters clinically.", "source": "2hop", "edges": ["PERSISTENT_INSULIN_RESISTANCE", "SCREEN_24_28_WEEKS"]}
+{"q": "Build a stepwise explanation connecting PERSISTENT_INSULIN_RESISTANCE to SCREEN_24_28_WEEKS in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["PERSISTENT_INSULIN_RESISTANCE", "SCREEN_24_28_WEEKS"]}
+{"q": "Using a mechanistic chain, connect PERSISTENT_INSULIN_RESISTANCE and SCREEN_24_28_WEEKS with intermediate steps.", "source": "2hop", "edges": ["PERSISTENT_INSULIN_RESISTANCE", "SCREEN_24_28_WEEKS"]}
+{"q": "Explain the causal chain: CROSSES_PLACENTA → IMPROVES_OUTCOMES, and why this progression matters clinically.", "source": "2hop", "edges": ["CROSSES_PLACENTA", "IMPROVES_OUTCOMES"]}
+{"q": "Build a stepwise explanation connecting CROSSES_PLACENTA to IMPROVES_OUTCOMES in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["CROSSES_PLACENTA", "IMPROVES_OUTCOMES"]}
+{"q": "Using a mechanistic chain, connect CROSSES_PLACENTA and IMPROVES_OUTCOMES with intermediate steps.", "source": "2hop", "edges": ["CROSSES_PLACENTA", "IMPROVES_OUTCOMES"]}
+{"q": "Explain the causal chain: CROSSES_PLACENTA → POSTPARTUM_T2DM_RISK, and why this progression matters clinically.", "source": "2hop", "edges": ["CROSSES_PLACENTA", "POSTPARTUM_T2DM_RISK"]}
+{"q": "Build a stepwise explanation connecting CROSSES_PLACENTA to POSTPARTUM_T2DM_RISK in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["CROSSES_PLACENTA", "POSTPARTUM_T2DM_RISK"]}
+{"q": "Using a mechanistic chain, connect CROSSES_PLACENTA and POSTPARTUM_T2DM_RISK with intermediate steps.", "source": "2hop", "edges": ["CROSSES_PLACENTA", "POSTPARTUM_T2DM_RISK"]}
+{"q": "Explain the causal chain: MONITORING_TARGETS → FAILURE_LEADS_TO_GDM, and why this progression matters clinically.", "source": "2hop", "edges": ["MONITORING_TARGETS", "FAILURE_LEADS_TO_GDM"]}
+{"q": "Build a stepwise explanation connecting MONITORING_TARGETS to FAILURE_LEADS_TO_GDM in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["MONITORING_TARGETS", "FAILURE_LEADS_TO_GDM"]}
+{"q": "Using a mechanistic chain, connect MONITORING_TARGETS and FAILURE_LEADS_TO_GDM with intermediate steps.", "source": "2hop", "edges": ["MONITORING_TARGETS", "FAILURE_LEADS_TO_GDM"]}
+{"q": "Explain the causal chain: IMPROVES_OUTCOMES → BETA_CELL_LIMITATION, and why this progression matters clinically.", "source": "2hop", "edges": ["IMPROVES_OUTCOMES", "BETA_CELL_LIMITATION"]}
+{"q": "Build a stepwise explanation connecting IMPROVES_OUTCOMES to BETA_CELL_LIMITATION in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["IMPROVES_OUTCOMES", "BETA_CELL_LIMITATION"]}
+{"q": "Using a mechanistic chain, connect IMPROVES_OUTCOMES and BETA_CELL_LIMITATION with intermediate steps.", "source": "2hop", "edges": ["IMPROVES_OUTCOMES", "BETA_CELL_LIMITATION"]}
+{"q": "Explain the causal chain: IMPROVES_OUTCOMES → PERSISTENT_INSULIN_RESISTANCE, and why this progression matters clinically.", "source": "2hop", "edges": ["IMPROVES_OUTCOMES", "PERSISTENT_INSULIN_RESISTANCE"]}
+{"q": "Build a stepwise explanation connecting IMPROVES_OUTCOMES to PERSISTENT_INSULIN_RESISTANCE in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["IMPROVES_OUTCOMES", "PERSISTENT_INSULIN_RESISTANCE"]}
+{"q": "Using a mechanistic chain, connect IMPROVES_OUTCOMES and PERSISTENT_INSULIN_RESISTANCE with intermediate steps.", "source": "2hop", "edges": ["IMPROVES_OUTCOMES", "PERSISTENT_INSULIN_RESISTANCE"]}
+{"q": "Explain the causal chain: IMPROVES_OUTCOMES → SCREEN_24_28_WEEKS, and why this progression matters clinically.", "source": "2hop", "edges": ["IMPROVES_OUTCOMES", "SCREEN_24_28_WEEKS"]}
+{"q": "Build a stepwise explanation connecting IMPROVES_OUTCOMES to SCREEN_24_28_WEEKS in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["IMPROVES_OUTCOMES", "SCREEN_24_28_WEEKS"]}
+{"q": "Using a mechanistic chain, connect IMPROVES_OUTCOMES and SCREEN_24_28_WEEKS with intermediate steps.", "source": "2hop", "edges": ["IMPROVES_OUTCOMES", "SCREEN_24_28_WEEKS"]}
+{"q": "Explain the causal chain: IMPROVES_OUTCOMES → CROSSES_PLACENTA, and why this progression matters clinically.", "source": "2hop", "edges": ["IMPROVES_OUTCOMES", "CROSSES_PLACENTA"]}
+{"q": "Build a stepwise explanation connecting IMPROVES_OUTCOMES to CROSSES_PLACENTA in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["IMPROVES_OUTCOMES", "CROSSES_PLACENTA"]}
+{"q": "Using a mechanistic chain, connect IMPROVES_OUTCOMES and CROSSES_PLACENTA with intermediate steps.", "source": "2hop", "edges": ["IMPROVES_OUTCOMES", "CROSSES_PLACENTA"]}
+{"q": "Explain the causal chain: VARIES_WITH_BACKGROUND_T2DM → PERSISTENT_INSULIN_RESISTANCE, and why this progression matters clinically.", "source": "2hop", "edges": ["VARIES_WITH_BACKGROUND_T2DM", "PERSISTENT_INSULIN_RESISTANCE"]}
+{"q": "Build a stepwise explanation connecting VARIES_WITH_BACKGROUND_T2DM to PERSISTENT_INSULIN_RESISTANCE in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["VARIES_WITH_BACKGROUND_T2DM", "PERSISTENT_INSULIN_RESISTANCE"]}
+{"q": "Using a mechanistic chain, connect VARIES_WITH_BACKGROUND_T2DM and PERSISTENT_INSULIN_RESISTANCE with intermediate steps.", "source": "2hop", "edges": ["VARIES_WITH_BACKGROUND_T2DM", "PERSISTENT_INSULIN_RESISTANCE"]}
+{"q": "Explain the causal chain: VARIES_WITH_BACKGROUND_T2DM → SCREEN_24_28_WEEKS, and why this progression matters clinically.", "source": "2hop", "edges": ["VARIES_WITH_BACKGROUND_T2DM", "SCREEN_24_28_WEEKS"]}
+{"q": "Build a stepwise explanation connecting VARIES_WITH_BACKGROUND_T2DM to SCREEN_24_28_WEEKS in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["VARIES_WITH_BACKGROUND_T2DM", "SCREEN_24_28_WEEKS"]}
+{"q": "Using a mechanistic chain, connect VARIES_WITH_BACKGROUND_T2DM and SCREEN_24_28_WEEKS with intermediate steps.", "source": "2hop", "edges": ["VARIES_WITH_BACKGROUND_T2DM", "SCREEN_24_28_WEEKS"]}
+{"q": "Explain the causal chain: STIMULATES_INSULIN → FAILURE_LEADS_TO_GDM, and why this progression matters clinically.", "source": "2hop", "edges": ["STIMULATES_INSULIN", "FAILURE_LEADS_TO_GDM"]}
+{"q": "Build a stepwise explanation connecting STIMULATES_INSULIN to FAILURE_LEADS_TO_GDM in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["STIMULATES_INSULIN", "FAILURE_LEADS_TO_GDM"]}
+{"q": "Using a mechanistic chain, connect STIMULATES_INSULIN and FAILURE_LEADS_TO_GDM with intermediate steps.", "source": "2hop", "edges": ["STIMULATES_INSULIN", "FAILURE_LEADS_TO_GDM"]}
+{"q": "Explain the causal chain: POSTPARTUM_OGTT → SCREEN_24_28_WEEKS, and why this progression matters clinically.", "source": "2hop", "edges": ["POSTPARTUM_OGTT", "SCREEN_24_28_WEEKS"]}
+{"q": "Build a stepwise explanation connecting POSTPARTUM_OGTT to SCREEN_24_28_WEEKS in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["POSTPARTUM_OGTT", "SCREEN_24_28_WEEKS"]}
+{"q": "Using a mechanistic chain, connect POSTPARTUM_OGTT and SCREEN_24_28_WEEKS with intermediate steps.", "source": "2hop", "edges": ["POSTPARTUM_OGTT", "SCREEN_24_28_WEEKS"]}
+{"q": "Explain the causal chain: POSTPARTUM_OGTT → THRESHOLD_CRITERIA, and why this progression matters clinically.", "source": "2hop", "edges": ["POSTPARTUM_OGTT", "THRESHOLD_CRITERIA"]}
+{"q": "Build a stepwise explanation connecting POSTPARTUM_OGTT to THRESHOLD_CRITERIA in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["POSTPARTUM_OGTT", "THRESHOLD_CRITERIA"]}
+{"q": "Using a mechanistic chain, connect POSTPARTUM_OGTT and THRESHOLD_CRITERIA with intermediate steps.", "source": "2hop", "edges": ["POSTPARTUM_OGTT", "THRESHOLD_CRITERIA"]}
+{"q": "Explain the causal chain: SCREEN_24_28_WEEKS → TREATED_BY, and why this progression matters clinically.", "source": "2hop", "edges": ["SCREEN_24_28_WEEKS", "TREATED_BY"]}
+{"q": "Build a stepwise explanation connecting SCREEN_24_28_WEEKS to TREATED_BY in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["SCREEN_24_28_WEEKS", "TREATED_BY"]}
+{"q": "Using a mechanistic chain, connect SCREEN_24_28_WEEKS and TREATED_BY with intermediate steps.", "source": "2hop", "edges": ["SCREEN_24_28_WEEKS", "TREATED_BY"]}
+{"q": "Explain the causal chain: SCREEN_24_28_WEEKS → INCREASES_RISK, and why this progression matters clinically.", "source": "2hop", "edges": ["SCREEN_24_28_WEEKS", "INCREASES_RISK"]}
+{"q": "Build a stepwise explanation connecting SCREEN_24_28_WEEKS to INCREASES_RISK in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["SCREEN_24_28_WEEKS", "INCREASES_RISK"]}
+{"q": "Using a mechanistic chain, connect SCREEN_24_28_WEEKS and INCREASES_RISK with intermediate steps.", "source": "2hop", "edges": ["SCREEN_24_28_WEEKS", "INCREASES_RISK"]}
+{"q": "Explain the causal chain: SCREEN_24_28_WEEKS → IMPROVES_OUTCOMES, and why this progression matters clinically.", "source": "2hop", "edges": ["SCREEN_24_28_WEEKS", "IMPROVES_OUTCOMES"]}
+{"q": "Build a stepwise explanation connecting SCREEN_24_28_WEEKS to IMPROVES_OUTCOMES in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["SCREEN_24_28_WEEKS", "IMPROVES_OUTCOMES"]}
+{"q": "Using a mechanistic chain, connect SCREEN_24_28_WEEKS and IMPROVES_OUTCOMES with intermediate steps.", "source": "2hop", "edges": ["SCREEN_24_28_WEEKS", "IMPROVES_OUTCOMES"]}
+{"q": "Explain the causal chain: SCREEN_24_28_WEEKS → VARIES_WITH_BACKGROUND_T2DM, and why this progression matters clinically.", "source": "2hop", "edges": ["SCREEN_24_28_WEEKS", "VARIES_WITH_BACKGROUND_T2DM"]}
+{"q": "Build a stepwise explanation connecting SCREEN_24_28_WEEKS to VARIES_WITH_BACKGROUND_T2DM in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["SCREEN_24_28_WEEKS", "VARIES_WITH_BACKGROUND_T2DM"]}
+{"q": "Using a mechanistic chain, connect SCREEN_24_28_WEEKS and VARIES_WITH_BACKGROUND_T2DM with intermediate steps.", "source": "2hop", "edges": ["SCREEN_24_28_WEEKS", "VARIES_WITH_BACKGROUND_T2DM"]}
+{"q": "Explain the causal chain: SCREEN_24_28_WEEKS → POSTPARTUM_T2DM_RISK, and why this progression matters clinically.", "source": "2hop", "edges": ["SCREEN_24_28_WEEKS", "POSTPARTUM_T2DM_RISK"]}
+{"q": "Build a stepwise explanation connecting SCREEN_24_28_WEEKS to POSTPARTUM_T2DM_RISK in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["SCREEN_24_28_WEEKS", "POSTPARTUM_T2DM_RISK"]}
+{"q": "Using a mechanistic chain, connect SCREEN_24_28_WEEKS and POSTPARTUM_T2DM_RISK with intermediate steps.", "source": "2hop", "edges": ["SCREEN_24_28_WEEKS", "POSTPARTUM_T2DM_RISK"]}
+{"q": "Explain the causal chain: SCREEN_24_28_WEEKS → BETA_CELL_LIMITATION, and why this progression matters clinically.", "source": "2hop", "edges": ["SCREEN_24_28_WEEKS", "BETA_CELL_LIMITATION"]}
+{"q": "Build a stepwise explanation connecting SCREEN_24_28_WEEKS to BETA_CELL_LIMITATION in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["SCREEN_24_28_WEEKS", "BETA_CELL_LIMITATION"]}
+{"q": "Using a mechanistic chain, connect SCREEN_24_28_WEEKS and BETA_CELL_LIMITATION with intermediate steps.", "source": "2hop", "edges": ["SCREEN_24_28_WEEKS", "BETA_CELL_LIMITATION"]}
+{"q": "Explain the causal chain: SCREEN_24_28_WEEKS → PERSISTENT_INSULIN_RESISTANCE, and why this progression matters clinically.", "source": "2hop", "edges": ["SCREEN_24_28_WEEKS", "PERSISTENT_INSULIN_RESISTANCE"]}
+{"q": "Build a stepwise explanation connecting SCREEN_24_28_WEEKS to PERSISTENT_INSULIN_RESISTANCE in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["SCREEN_24_28_WEEKS", "PERSISTENT_INSULIN_RESISTANCE"]}
+{"q": "Using a mechanistic chain, connect SCREEN_24_28_WEEKS and PERSISTENT_INSULIN_RESISTANCE with intermediate steps.", "source": "2hop", "edges": ["SCREEN_24_28_WEEKS", "PERSISTENT_INSULIN_RESISTANCE"]}
+{"q": "Explain the causal chain: SCREEN_24_28_WEEKS → POSTPARTUM_OGTT, and why this progression matters clinically.", "source": "2hop", "edges": ["SCREEN_24_28_WEEKS", "POSTPARTUM_OGTT"]}
+{"q": "Build a stepwise explanation connecting SCREEN_24_28_WEEKS to POSTPARTUM_OGTT in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["SCREEN_24_28_WEEKS", "POSTPARTUM_OGTT"]}
+{"q": "Using a mechanistic chain, connect SCREEN_24_28_WEEKS and POSTPARTUM_OGTT with intermediate steps.", "source": "2hop", "edges": ["SCREEN_24_28_WEEKS", "POSTPARTUM_OGTT"]}
+{"q": "Explain the causal chain: THRESHOLD_CRITERIA → POSTPARTUM_OGTT, and why this progression matters clinically.", "source": "2hop", "edges": ["THRESHOLD_CRITERIA", "POSTPARTUM_OGTT"]}
+{"q": "Build a stepwise explanation connecting THRESHOLD_CRITERIA to POSTPARTUM_OGTT in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["THRESHOLD_CRITERIA", "POSTPARTUM_OGTT"]}
+{"q": "Using a mechanistic chain, connect THRESHOLD_CRITERIA and POSTPARTUM_OGTT with intermediate steps.", "source": "2hop", "edges": ["THRESHOLD_CRITERIA", "POSTPARTUM_OGTT"]}
+{"q": "Explain the causal chain: THRESHOLD_CRITERIA → FAILURE_LEADS_TO_GDM, and why this progression matters clinically.", "source": "2hop", "edges": ["THRESHOLD_CRITERIA", "FAILURE_LEADS_TO_GDM"]}
+{"q": "Build a stepwise explanation connecting THRESHOLD_CRITERIA to FAILURE_LEADS_TO_GDM in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["THRESHOLD_CRITERIA", "FAILURE_LEADS_TO_GDM"]}
+{"q": "Using a mechanistic chain, connect THRESHOLD_CRITERIA and FAILURE_LEADS_TO_GDM with intermediate steps.", "source": "2hop", "edges": ["THRESHOLD_CRITERIA", "FAILURE_LEADS_TO_GDM"]}
+{"q": "Explain the causal chain: THRESHOLD_CRITERIA → TREATED_BY, and why this progression matters clinically.", "source": "2hop", "edges": ["THRESHOLD_CRITERIA", "TREATED_BY"]}
+{"q": "Build a stepwise explanation connecting THRESHOLD_CRITERIA to TREATED_BY in GDM physiology/pathophysiology.", "source": "2hop", "edges": ["THRESHOLD_CRITERIA", "TREATED_BY"]}
+{"q": "Using a mechanistic chain, connect THRESHOLD_CRITERIA and TREATED_BY with intermediate steps.", "source": "2hop", "edges": ["THRESHOLD_CRITERIA", "TREATED_BY"]}

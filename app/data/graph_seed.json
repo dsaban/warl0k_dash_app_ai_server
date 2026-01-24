@@ -1,0 +1,279 @@
+{
+  "nodes": [
+    "maternal_hyperglycemia",
+    "placental_glucose_transfer",
+    "GLUT1_expression",
+    "fetal_hyperinsulinemia",
+    "mTOR_activation",
+    "system_A_transport",
+    "system_L_transport",
+    "fetal_adipogenesis",
+    "fetal_macrosomia",
+    "maternal_obesity",
+    "chronic_low_grade_inflammation",
+    "adipokines",
+    "insulin_resistance",
+    "endothelial_dysfunction",
+    "oxidative_stress",
+    "lipotoxicity",
+    "postpartum_cardiometabolic_risk",
+    "pregnancy_insulin_resistance",
+    "beta_cell_compensation",
+    "beta_cell_stress",
+    "beta_cell_failure",
+    "type2_diabetes",
+    "metabolic_syndrome",
+    "postpartum_glucose_intolerance",
+    "gestational_diabetes"
+  ],
+  "edges": [
+    [
+      "maternal_hyperglycemia",
+      "placental_glucose_transfer",
+      "increases",
+      {
+        "tags": [
+          "glucose_transfer",
+          "placenta"
+        ]
+      }
+    ],
+    [
+      "placental_glucose_transfer",
+      "fetal_hyperinsulinemia",
+      "leads_to",
+      {
+        "tags": [
+          "placenta",
+          "fetal_insulin"
+        ]
+      }
+    ],
+    [
+      "GLUT1_expression",
+      "placental_glucose_transfer",
+      "increases",
+      {
+        "tags": [
+          "glucose_transfer",
+          "placenta"
+        ]
+      }
+    ],
+    [
+      "fetal_hyperinsulinemia",
+      "mTOR_activation",
+      "activates",
+      {
+        "tags": [
+          "mTOR",
+          "fetal_insulin"
+        ]
+      }
+    ],
+    [
+      "mTOR_activation",
+      "system_A_transport",
+      "upregulates",
+      {
+        "tags": [
+          "mTOR",
+          "placenta"
+        ]
+      }
+    ],
+    [
+      "mTOR_activation",
+      "system_L_transport",
+      "upregulates",
+      {
+        "tags": [
+          "mTOR",
+          "placenta"
+        ]
+      }
+    ],
+    [
+      "system_A_transport",
+      "fetal_adipogenesis",
+      "contributes_to",
+      {
+        "tags": [
+          "mTOR",
+          "macrosomia"
+        ]
+      }
+    ],
+    [
+      "system_L_transport",
+      "fetal_adipogenesis",
+      "contributes_to",
+      {
+        "tags": [
+          "mTOR",
+          "macrosomia"
+        ]
+      }
+    ],
+    [
+      "fetal_hyperinsulinemia",
+      "fetal_adipogenesis",
+      "contributes_to",
+      {
+        "tags": [
+          "fetal_insulin",
+          "macrosomia"
+        ]
+      }
+    ],
+    [
+      "fetal_adipogenesis",
+      "fetal_macrosomia",
+      "leads_to",
+      {
+        "tags": [
+          "macrosomia"
+        ]
+      }
+    ],
+    [
+      "maternal_obesity",
+      "chronic_low_grade_inflammation",
+      "leads_to",
+      {
+        "tags": [
+          "inflammation",
+          "adipokines"
+        ]
+      }
+    ],
+    [
+      "chronic_low_grade_inflammation",
+      "insulin_resistance",
+      "contributes_to",
+      {
+        "tags": [
+          "inflammation",
+          "insulin_resistance"
+        ]
+      }
+    ],
+    [
+      "adipokines",
+      "insulin_resistance",
+      "mediated_by",
+      {
+        "tags": [
+          "adipokines",
+          "insulin_resistance"
+        ]
+      }
+    ],
+    [
+      "insulin_resistance",
+      "endothelial_dysfunction",
+      "contributes_to",
+      {
+        "tags": [
+          "vascular_risk"
+        ]
+      }
+    ],
+    [
+      "oxidative_stress",
+      "endothelial_dysfunction",
+      "contributes_to",
+      {
+        "tags": [
+          "oxidative_stress",
+          "vascular_risk"
+        ]
+      }
+    ],
+    [
+      "lipotoxicity",
+      "beta_cell_stress",
+      "contributes_to",
+      {
+        "tags": [
+          "lipotoxicity",
+          "beta_cell_compensation"
+        ]
+      }
+    ],
+    [
+      "pregnancy_insulin_resistance",
+      "beta_cell_compensation",
+      "leads_to",
+      {
+        "tags": [
+          "insulin_resistance",
+          "beta_cell_compensation"
+        ]
+      }
+    ],
+    [
+      "beta_cell_compensation",
+      "beta_cell_stress",
+      "contributes_to",
+      {
+        "tags": [
+          "beta_cell_compensation",
+          "beta_cell_failure"
+        ]
+      }
+    ],
+    [
+      "beta_cell_stress",
+      "beta_cell_failure",
+      "leads_to",
+      {
+        "tags": [
+          "beta_cell_failure"
+        ]
+      }
+    ],
+    [
+      "beta_cell_failure",
+      "type2_diabetes",
+      "leads_to",
+      {
+        "tags": [
+          "t2d_risk"
+        ]
+      }
+    ],
+    [
+      "gestational_diabetes",
+      "postpartum_glucose_intolerance",
+      "associated_with",
+      {
+        "tags": [
+          "postpartum_risk"
+        ]
+      }
+    ],
+    [
+      "postpartum_glucose_intolerance",
+      "metabolic_syndrome",
+      "associated_with",
+      {
+        "tags": [
+          "metabolic_syndrome",
+          "postpartum_risk"
+        ]
+      }
+    ],
+    [
+      "metabolic_syndrome",
+      "postpartum_cardiometabolic_risk",
+      "contributes_to",
+      {
+        "tags": [
+          "postpartum_risk",
+          "vascular_risk"
+        ]
+      }
+    ]
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "CROSSES_PLACENTA": [
+    { "pattern": "glucose.*(cross|transfer|pass).*placenta", "strength": 3 }
+  ],
+  "STIMULATES_INSULIN": [
+    { "pattern": "(fetal|foetal).*insulin", "strength": 2 },
+    { "pattern": "(fetal|foetal).*(hyperinsulin|hyperinsulinaemia|hyperinsulinemia)", "strength": 3 }
+  ],
+  "PROMOTES_GROWTH": [
+    { "pattern": "(fetal|foetal).*insulin.*(anabolic|growth|macrosomia|lga|large for gestational)", "strength": 3 }
+  ],
+  "POSTPARTUM_OGTT": [
+    { "pattern": "(75\\s*g|75g).*(ogtt|oral glucose tolerance test).*6\\s*weeks.*(after delivery|postpartum)", "strength": 3 },
+    { "pattern": "(ogtt|oral glucose tolerance test).*6\\s*weeks.*(after delivery|postpartum)", "strength": 2 }
+  ],
+  "POSTPARTUM_T2DM_RISK": [
+    { "pattern": "(gdm|gestational diabetes).*(risk).*(type 2 diabetes|t2dm)", "strength": 3 }
+  ],
+  "RESOLVES_AFTER_DELIVERY": [
+    { "pattern": "(gdm|gestational diabetes).*(resolves|resolve).*(after delivery|postpartum|after giving birth)", "strength": 3 }
+  ],
+  "BETA_CELL_LIMITATION": [
+    { "pattern": "(beta[- ]?cell).*(declin|deteriorat|limited|reserve)", "strength": 2 }
+  ],
+  "PERSISTENT_INSULIN_RESISTANCE": [
+    { "pattern": "insulin resistance.*(persists|persistent|chronic|underlying)", "strength": 3 }
+  ],
+  "MONITORING_TARGETS": [
+    { "pattern": "(fasting blood glucose|post-prandial|hbA1c).*<", "strength": 3 }
+    ],
+  "INDUCES_RESISTANCE": [
+    { "pattern": "(placental|pregnan(c|t)y).*(hormone|hpl|human placental lactogen|placental lactogen|progesterone|estrogen|oestrogen|cortisol).*(insulin resistance|insulin\\s+resistance|decreased insulin sensitivity|reduced insulin sensitivity)", "strength": 4 },
+    { "pattern": "(insulin resistance|insulin\\s+resistance|decreased insulin sensitivity|reduced insulin sensitivity).*(pregnan(c|t)y)", "strength": 2 },
+    { "pattern": "(placental|pregnan(c|t)y).*(diabetogenic|anti-insulin|counter-regulatory)", "strength": 3 }
+  ],
+
+  "REQUIRES_COMPENSATION": [
+    { "pattern": "(insulin resistance|insulin\\s+resistance|decreased insulin sensitivity|reduced insulin sensitivity).*(require|requires|necessitat|leads to).*(increase|increased|higher).*(insulin secretion|insulin production|insulin)", "strength": 4 },
+    { "pattern": "(beta[- ]cell|pancreatic).*(compensat|adapt|increase).*(insulin secretion|insulin)", "strength": 3 },
+    { "pattern": "(compensatory).*(insulin secretion|hyperinsulinemia)", "strength": 2 }
+  ],
+
+  "FAILURE_LEADS_TO_GDM": [
+    { "pattern": "(beta[- ]cell|beta cell).*(fail|cannot|unable).*(adapt|compensat).*(gdm|gestational diabetes)", "strength": 4 },
+    { "pattern": "(when|if).*beta[- ]cells.*(cannot|fail).*(gdm|gestational diabetes)", "strength": 3 },
+    { "pattern": "gestational diabetes.*(results|occurs).*(beta[- ]cell|insulin secretion).*(inadequate|insufficient|fail)", "strength": 3 }
+  ]
+}

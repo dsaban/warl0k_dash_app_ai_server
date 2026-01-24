@@ -1,0 +1,36 @@
+# shellcheck disable=SC2287
+gdm_integrity_moe_bm25/
+  README.md
+  requirements.txt
+  app.py
+  docs/
+    README.txt
+    gdm_sample_1.txt
+  data/
+    README.txt
+    train_questions.jsonl
+    train_pairs.jsonl
+  models/
+    README.txt
+  core/
+    __init__.py
+    utils.py
+    schema.py
+    chunking.py
+    ingest.py
+    bm25.py
+    scoring.py
+    retrieve.py
+    qtype.py
+    gates.py
+    experts.py
+    moe_router.py
+    ebm_ranker.py
+    learned_rerank.py
+    pipeline.py
+  scripts/
+    build_index.py
+    make_synthetic_training.py
+    train_router.py
+    train_ebm.py
+    train_reranker.py

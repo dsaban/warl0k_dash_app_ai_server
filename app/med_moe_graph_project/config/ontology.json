@@ -1,0 +1,68 @@
+{
+  "qtypes": {
+    "fetal_growth_mechanism": {
+      "description": "Mechanistic pathway from maternal metabolic state to fetal growth outcomes (e.g., modified Pedersen hypothesis -> macrosomia)",
+      "required_tags": [
+        "maternal_glucose",
+        "placenta_transport",
+        "fetal_insulin",
+        "anabolism_growth"
+      ],
+      "integrity_checklist": [
+        "maternal_glucose_crosses_placenta",
+        "fetal_hyperinsulinemia",
+        "insulin_is_growth_factor",
+        "net_anabolic_storage"
+      ]
+    },
+    "maternal_long_term_risk": {
+      "description": "How pregnancy dysglycemia/inflammation maps to long-term maternal cardiometabolic outcomes",
+      "required_tags": ["inflammation", "insulin_resistance", "postpartum_risk"],
+      "integrity_checklist": [
+        "obesity_inflammation",
+        "persistent_insulin_resistance",
+        "endothelial_dysfunction",
+        "metabolic_syndrome_progression"
+      ]
+    },
+    "progression_model": {
+      "description": "GDM as a clinical model for transition from insulin resistance to overt diabetes",
+      "required_tags": ["pregnancy_insulin_resistance", "beta_cell_compensation", "decompensation", "postpartum_future_t2d"],
+      "integrity_checklist": [
+        "pregnancy_ir_rises",
+        "beta_cell_compensation",
+        "failure_leads_hyperglycemia",
+        "postpartum_unmasks_risk"
+      ]
+    },
+    "management_monitoring": {
+      "description": "Monitoring and management tools (e.g., SMBG vs CGM) and outcomes",
+      "required_tags": ["monitoring", "glycemic_targets", "treatment"],
+      "integrity_checklist": ["tool_described", "pros_cons", "clinical_outcome_link"]
+    },
+    "unknown": {
+      "description": "Fallback when qtype cannot be determined",
+      "required_tags": [],
+      "integrity_checklist": []
+    }
+  },
+  "tags": {
+    "maternal_glucose": ["maternal hyperglycemia", "high maternal glucose"],
+    "placenta_transport": ["placenta", "placental transport", "GLUT"],
+    "fetal_insulin": ["fetal insulin", "hyperinsulinemia"],
+    "anabolism_growth": ["fat deposition", "protein synthesis", "mTOR", "cell proliferation", "macrosomia"],
+
+    "inflammation": ["inflammation", "cytokines", "TNF", "IL-6"],
+    "insulin_resistance": ["insulin resistance", "IR"],
+    "postpartum_risk": ["postpartum", "long-term risk", "cardiometabolic"],
+
+    "pregnancy_insulin_resistance": ["pregnancy insulin resistance", "placental hormones"],
+    "beta_cell_compensation": ["beta-cell", "compensatory insulin secretion"],
+    "decompensation": ["beta-cell failure", "decompensation"],
+    "postpartum_future_t2d": ["type 2 diabetes", "future diabetes", "metabolic syndrome"],
+
+    "monitoring": ["CGM", "continuous glucose monitoring", "SMBG"],
+    "glycemic_targets": ["HbA1c", "targets", "time in range"],
+    "treatment": ["insulin therapy", "diet", "metformin"]
+  }
+}

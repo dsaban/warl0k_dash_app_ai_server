@@ -1,0 +1,197 @@
+{
+  "maternal_hyperglycemia": {
+    "type": "state",
+    "syn": [
+      "maternal hyperglycemia",
+      "high maternal glucose",
+      "uncontrolled glucose",
+      "hyperglycemia in pregnancy"
+    ]
+  },
+  "placental_glucose_transfer": {
+    "type": "process",
+    "syn": [
+      "glucose crosses placenta",
+      "transplacental glucose transport",
+      "placental glucose transfer",
+      "glucose transport across placenta"
+    ]
+  },
+  "GLUT1_expression": {
+    "type": "molecule",
+    "syn": [
+      "GLUT1",
+      "glucose transporter 1",
+      "placental GLUT"
+    ]
+  },
+  "fetal_hyperinsulinemia": {
+    "type": "state",
+    "syn": [
+      "fetal hyperinsulinemia",
+      "high fetal insulin",
+      "increased fetal insulin secretion"
+    ]
+  },
+  "mTOR_activation": {
+    "type": "pathway",
+    "syn": [
+      "mTOR",
+      "mTOR activation",
+      "mammalian target of rapamycin"
+    ]
+  },
+  "system_A_transport": {
+    "type": "process",
+    "syn": [
+      "system A",
+      "amino acid system a transport"
+    ]
+  },
+  "system_L_transport": {
+    "type": "process",
+    "syn": [
+      "system L",
+      "amino acid system l transport"
+    ]
+  },
+  "fetal_adipogenesis": {
+    "type": "process",
+    "syn": [
+      "fat deposition",
+      "adipogenesis",
+      "lipogenesis",
+      "fat accumulation"
+    ]
+  },
+  "fetal_macrosomia": {
+    "type": "outcome",
+    "syn": [
+      "macrosomia",
+      "large for gestational age",
+      "LGA",
+      "high birth weight"
+    ]
+  },
+  "maternal_obesity": {
+    "type": "risk_factor",
+    "syn": [
+      "obesity",
+      "maternal obesity",
+      "high BMI"
+    ]
+  },
+  "chronic_low_grade_inflammation": {
+    "type": "process",
+    "syn": [
+      "chronic inflammation",
+      "low grade inflammation",
+      "metaflammation"
+    ]
+  },
+  "adipokines": {
+    "type": "molecule",
+    "syn": [
+      "adipokines",
+      "leptin",
+      "adiponectin"
+    ]
+  },
+  "insulin_resistance": {
+    "type": "state",
+    "syn": [
+      "insulin resistance",
+      "IR",
+      "reduced insulin sensitivity"
+    ]
+  },
+  "endothelial_dysfunction": {
+    "type": "process",
+    "syn": [
+      "endothelial dysfunction",
+      "vascular dysfunction"
+    ]
+  },
+  "oxidative_stress": {
+    "type": "process",
+    "syn": [
+      "oxidative stress",
+      "ROS"
+    ]
+  },
+  "lipotoxicity": {
+    "type": "process",
+    "syn": [
+      "lipotoxicity",
+      "ectopic fat"
+    ]
+  },
+  "postpartum_cardiometabolic_risk": {
+    "type": "outcome",
+    "syn": [
+      "postpartum cardiometabolic risk",
+      "long-term cardiometabolic risk",
+      "future cardiovascular risk"
+    ]
+  },
+  "pregnancy_insulin_resistance": {
+    "type": "state",
+    "syn": [
+      "pregnancy insulin resistance",
+      "physiologic insulin resistance of pregnancy"
+    ]
+  },
+  "beta_cell_compensation": {
+    "type": "process",
+    "syn": [
+      "beta-cell compensation",
+      "increased insulin secretion",
+      "compensatory hyperinsulinemia"
+    ]
+  },
+  "beta_cell_stress": {
+    "type": "process",
+    "syn": [
+      "beta-cell stress",
+      "beta cell strain"
+    ]
+  },
+  "beta_cell_failure": {
+    "type": "process",
+    "syn": [
+      "beta-cell failure",
+      "beta cell dysfunction",
+      "loss of beta-cell function"
+    ]
+  },
+  "type2_diabetes": {
+    "type": "disease",
+    "syn": [
+      "type 2 diabetes",
+      "T2D",
+      "overt diabetes"
+    ]
+  },
+  "metabolic_syndrome": {
+    "type": "outcome",
+    "syn": [
+      "metabolic syndrome",
+      "MetS"
+    ]
+  },
+  "postpartum_glucose_intolerance": {
+    "type": "state",
+    "syn": [
+      "postpartum glucose intolerance",
+      "impaired glucose tolerance postpartum"
+    ]
+  },
+  "gestational_diabetes": {
+    "type": "disease",
+    "syn": [
+      "gestational diabetes",
+      "GDM",
+      "diabetes in pregnancy"
+    ]
+  }
+}

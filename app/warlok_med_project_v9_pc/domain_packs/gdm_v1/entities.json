@@ -1,0 +1,8 @@
+{
+  "hormone": ["placental lactogen", "hpl", "progesterone", "estrogen", "cortisol"],
+  "test": ["ogtt", "oral glucose tolerance test", "hba1c", "fasting blood glucose"],
+  "condition": ["gestational diabetes", "gdm", "type 2 diabetes", "t2dm", "prediabetes"],
+  "process": ["insulin resistance", "beta-cell", "beta cell", "hyperglycemia", "hyperinsulinemia", "placental glucose transfer"],
+  "outcome_fetal": ["macrosomia", "lga", "large for gestational age"],
+  "outcome_maternal": ["postpartum diabetes", "future diabetes", "metabolic syndrome"]
+}

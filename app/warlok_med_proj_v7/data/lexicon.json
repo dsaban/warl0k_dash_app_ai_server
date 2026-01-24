@@ -1,0 +1,130 @@
+{
+  "seeds": {
+    "hormone": [
+      "human placental lactogen",
+      "hpl",
+      "placental lactogen",
+      "placental hormones",
+      "progesterone",
+      "estrogen",
+      "cortisol",
+      "prolactin",
+      "growth hormone",
+      "tnf",
+      "tnf-alpha",
+      "il-6",
+      "adiponectin",
+      "leptin"
+    ],
+    "pathway": [
+      "insulin signaling",
+      "gluconeogenesis",
+      "lipolysis",
+      "adipogenesis",
+      "oxidative stress",
+      "inflammation"
+    ],
+    "tissue": [
+      "placenta",
+      "pancreas",
+      "beta cell",
+      "pancreatic beta-cells",
+      "liver",
+      "skeletal muscle",
+      "adipose",
+      "fetus",
+      "foetus",
+      "fetal pancreas",
+      "foetal pancreas"
+    ],
+    "condition": [
+      "gestational diabetes mellitus",
+      "gdm",
+      "type 1 diabetes",
+      "type 2 diabetes",
+      "t2dm",
+      "insulin resistance",
+      "hyperglycemia",
+      "hyperglycaemia",
+      "hypoglycemia",
+      "hypoglycaemia",
+      "prediabetes",
+      "metabolic syndrome",
+      "obesity",
+      "overweight",
+      "hypertension",
+      "preeclampsia"
+    ],
+    "test": [
+      "ogtt",
+      "oral glucose tolerance test",
+      "gct",
+      "glucose challenge test",
+      "fpg",
+      "fasting plasma glucose",
+      "hba1c",
+      "cgm",
+      "continuous glucose monitoring",
+      "smbg"
+    ],
+    "guideline_org": [
+      "ada",
+      "nice",
+      "who",
+      "iadpsg",
+      "idf",
+      "easd"
+    ],
+    "intervention": [
+      "diet",
+      "exercise",
+      "lifestyle",
+      "medical nutrition therapy",
+      "insulin",
+      "metformin",
+      "glyburide",
+      "glibenclamide"
+    ],
+    "drug": [
+      "insulin",
+      "metformin",
+      "glyburide",
+      "glibenclamide"
+    ],
+    "outcome_maternal": [
+      "preeclampsia",
+      "hypertension",
+      "type 2 diabetes",
+      "postpartum diabetes",
+      "cesarean",
+      "caesarean",
+      "c-section"
+    ],
+    "outcome_fetal": [
+      "macrosomia",
+      "large for gestational age",
+      "lga",
+      "shoulder dystocia",
+      "neonatal hypoglycemia",
+      "nicu",
+      "preterm birth",
+      "stillbirth"
+    ],
+    "outcome_longterm": [
+      "childhood obesity",
+      "offspring obesity",
+      "type 2 diabetes",
+      "cardiovascular disease"
+    ],
+    "risk_factor": [
+      "maternal age",
+      "age",
+      "bmi",
+      "family history",
+      "ethnicity",
+      "pcos",
+      "previous gdm",
+      "previous infant with macrosomia"
+    ]
+  }
+}

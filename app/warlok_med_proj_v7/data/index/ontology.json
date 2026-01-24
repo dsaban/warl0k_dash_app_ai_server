@@ -1,0 +1,1147 @@
+{
+  "meta": {
+    "name": "GDM ChainGraph v3",
+    "source_docs": [
+      "A Comprehensive_Review_of_Gestational_Diabetes_Mellitus.txt",
+      "Diabetes_mellitus_and_pregnancy.txt",
+      "Management_of_Diabetes_in_Pregnancy_A_Review_of_Clinical_Guidelines_Practices.txt"
+    ],
+    "node_count": 121,
+    "claim_count": 377
+  },
+  "node_types": [
+    "condition",
+    "drug",
+    "guideline_org",
+    "hormone",
+    "intervention",
+    "outcome_fetal",
+    "outcome_longterm",
+    "outcome_maternal",
+    "pathway",
+    "risk_factor",
+    "test",
+    "threshold_or_timing",
+    "tissue"
+  ],
+  "edge_types": [
+    "BETA_CELL_LIMITATION",
+    "CROSSES_PLACENTA",
+    "FAILURE_LEADS_TO_GDM",
+    "FOLLOWUP_GAP",
+    "IMPROVES_OUTCOMES",
+    "INCREASES_RISK",
+    "INDUCES_RESISTANCE",
+    "MISSED_DETECTION",
+    "MONITORING_TARGETS",
+    "PERSISTENT_INSULIN_RESISTANCE",
+    "POSTPARTUM_OGTT",
+    "POSTPARTUM_T2DM_RISK",
+    "PROMOTES_GROWTH",
+    "REQUIRES_COMPENSATION",
+    "RESOLVES_AFTER_DELIVERY",
+    "SCREEN_24_28_WEEKS",
+    "STIMULATES_INSULIN",
+    "THRESHOLD_CRITERIA",
+    "TREATED_BY",
+    "VARIES_WITH_BACKGROUND_T2DM"
+  ],
+  "nodes": [
+    {
+      "id": "condition:gestational diabetes mellitus",
+      "type": "condition",
+      "label": "gestational diabetes mellitus",
+      "aliases": [
+        "gestational diabetes mellitus"
+      ]
+    },
+    {
+      "id": "condition:gdm",
+      "type": "condition",
+      "label": "gdm",
+      "aliases": [
+        "gdm"
+      ]
+    },
+    {
+      "id": "condition:hyperglycemia",
+      "type": "condition",
+      "label": "hyperglycemia",
+      "aliases": [
+        "hyperglycemia"
+      ]
+    },
+    {
+      "id": "guideline_org:who",
+      "type": "guideline_org",
+      "label": "who",
+      "aliases": [
+        "who"
+      ]
+    },
+    {
+      "id": "tissue:beta cell",
+      "type": "tissue",
+      "label": "beta cell",
+      "aliases": [
+        "beta cell"
+      ]
+    },
+    {
+      "id": "condition:insulin resistance",
+      "type": "condition",
+      "label": "insulin resistance",
+      "aliases": [
+        "insulin resistance"
+      ]
+    },
+    {
+      "id": "intervention:insulin",
+      "type": "intervention",
+      "label": "insulin",
+      "aliases": [
+        "insulin"
+      ]
+    },
+    {
+      "id": "drug:insulin",
+      "type": "drug",
+      "label": "insulin",
+      "aliases": [
+        "insulin"
+      ]
+    },
+    {
+      "id": "condition:overweight",
+      "type": "condition",
+      "label": "overweight",
+      "aliases": [
+        "overweight"
+      ]
+    },
+    {
+      "id": "risk_factor:family history",
+      "type": "risk_factor",
+      "label": "family history",
+      "aliases": [
+        "family history"
+      ]
+    },
+    {
+      "id": "risk_factor:age",
+      "type": "risk_factor",
+      "label": "age",
+      "aliases": [
+        "age"
+      ]
+    },
+    {
+      "id": "tissue:liver",
+      "type": "tissue",
+      "label": "liver",
+      "aliases": [
+        "liver"
+      ]
+    },
+    {
+      "id": "condition:type 2 diabetes",
+      "type": "condition",
+      "label": "type 2 diabetes",
+      "aliases": [
+        "type 2 diabetes"
+      ]
+    },
+    {
+      "id": "outcome_maternal:type 2 diabetes",
+      "type": "outcome_maternal",
+      "label": "type 2 diabetes",
+      "aliases": [
+        "type 2 diabetes"
+      ]
+    },
+    {
+      "id": "outcome_fetal:macrosomia",
+      "type": "outcome_fetal",
+      "label": "macrosomia",
+      "aliases": [
+        "macrosomia"
+      ]
+    },
+    {
+      "id": "outcome_longterm:type 2 diabetes",
+      "type": "outcome_longterm",
+      "label": "type 2 diabetes",
+      "aliases": [
+        "type 2 diabetes"
+      ]
+    },
+    {
+      "id": "outcome_longterm:cardiovascular disease",
+      "type": "outcome_longterm",
+      "label": "cardiovascular disease",
+      "aliases": [
+        "cardiovascular disease"
+      ]
+    },
+    {
+      "id": "condition:obesity",
+      "type": "condition",
+      "label": "obesity",
+      "aliases": [
+        "obesity"
+      ]
+    },
+    {
+      "id": "condition:hypoglycemia",
+      "type": "condition",
+      "label": "hypoglycemia",
+      "aliases": [
+        "hypoglycemia"
+      ]
+    },
+    {
+      "id": "outcome_fetal:shoulder dystocia",
+      "type": "outcome_fetal",
+      "label": "shoulder dystocia",
+      "aliases": [
+        "shoulder dystocia"
+      ]
+    },
+    {
+      "id": "intervention:diet",
+      "type": "intervention",
+      "label": "diet",
+      "aliases": [
+        "diet"
+      ]
+    },
+    {
+      "id": "intervention:exercise",
+      "type": "intervention",
+      "label": "exercise",
+      "aliases": [
+        "exercise"
+      ]
+    },
+    {
+      "id": "intervention:lifestyle",
+      "type": "intervention",
+      "label": "lifestyle",
+      "aliases": [
+        "lifestyle"
+      ]
+    },
+    {
+      "id": "intervention:metformin",
+      "type": "intervention",
+      "label": "metformin",
+      "aliases": [
+        "metformin"
+      ]
+    },
+    {
+      "id": "intervention:glyburide",
+      "type": "intervention",
+      "label": "glyburide",
+      "aliases": [
+        "glyburide"
+      ]
+    },
+    {
+      "id": "drug:metformin",
+      "type": "drug",
+      "label": "metformin",
+      "aliases": [
+        "metformin"
+      ]
+    },
+    {
+      "id": "drug:glyburide",
+      "type": "drug",
+      "label": "glyburide",
+      "aliases": [
+        "glyburide"
+      ]
+    },
+    {
+      "id": "risk_factor:maternal age",
+      "type": "risk_factor",
+      "label": "maternal age",
+      "aliases": [
+        "maternal age"
+      ]
+    },
+    {
+      "id": "tissue:pancreas",
+      "type": "tissue",
+      "label": "pancreas",
+      "aliases": [
+        "pancreas"
+      ]
+    },
+    {
+      "id": "tissue:adipose",
+      "type": "tissue",
+      "label": "adipose",
+      "aliases": [
+        "adipose"
+      ]
+    },
+    {
+      "id": "hormone:placental hormones",
+      "type": "hormone",
+      "label": "placental hormones",
+      "aliases": [
+        "placental hormones"
+      ]
+    },
+    {
+      "id": "tissue:placenta",
+      "type": "tissue",
+      "label": "placenta",
+      "aliases": [
+        "placenta"
+      ]
+    },
+    {
+      "id": "tissue:fetus",
+      "type": "tissue",
+      "label": "fetus",
+      "aliases": [
+        "fetus"
+      ]
+    },
+    {
+      "id": "guideline_org:ada",
+      "type": "guideline_org",
+      "label": "ada",
+      "aliases": [
+        "ada"
+      ]
+    },
+    {
+      "id": "outcome_maternal:c-section",
+      "type": "outcome_maternal",
+      "label": "c-section",
+      "aliases": [
+        "c-section"
+      ]
+    },
+    {
+      "id": "outcome_maternal:cesarean",
+      "type": "outcome_maternal",
+      "label": "cesarean",
+      "aliases": [
+        "cesarean"
+      ]
+    },
+    {
+      "id": "intervention:glibenclamide",
+      "type": "intervention",
+      "label": "glibenclamide",
+      "aliases": [
+        "glibenclamide"
+      ]
+    },
+    {
+      "id": "drug:glibenclamide",
+      "type": "drug",
+      "label": "glibenclamide",
+      "aliases": [
+        "glibenclamide"
+      ]
+    },
+    {
+      "id": "condition:t2dm",
+      "type": "condition",
+      "label": "t2dm",
+      "aliases": [
+        "t2dm"
+      ]
+    },
+    {
+      "id": "condition:hypertension",
+      "type": "condition",
+      "label": "hypertension",
+      "aliases": [
+        "hypertension"
+      ]
+    },
+    {
+      "id": "outcome_maternal:hypertension",
+      "type": "outcome_maternal",
+      "label": "hypertension",
+      "aliases": [
+        "hypertension"
+      ]
+    },
+    {
+      "id": "outcome_maternal:postpartum diabetes",
+      "type": "outcome_maternal",
+      "label": "postpartum diabetes",
+      "aliases": [
+        "postpartum diabetes"
+      ]
+    },
+    {
+      "id": "condition:prediabetes",
+      "type": "condition",
+      "label": "prediabetes",
+      "aliases": [
+        "prediabetes"
+      ]
+    },
+    {
+      "id": "hormone:adiponectin",
+      "type": "hormone",
+      "label": "adiponectin",
+      "aliases": [
+        "adiponectin"
+      ]
+    },
+    {
+      "id": "condition:metabolic syndrome",
+      "type": "condition",
+      "label": "metabolic syndrome",
+      "aliases": [
+        "metabolic syndrome"
+      ]
+    },
+    {
+      "id": "threshold_or_timing:39 weeks",
+      "type": "threshold_or_timing",
+      "label": "39 weeks",
+      "aliases": [
+        "39 weeks"
+      ]
+    },
+    {
+      "id": "hormone:human placental lactogen",
+      "type": "hormone",
+      "label": "human placental lactogen",
+      "aliases": [
+        "human placental lactogen"
+      ]
+    },
+    {
+      "id": "hormone:placental lactogen",
+      "type": "hormone",
+      "label": "placental lactogen",
+      "aliases": [
+        "placental lactogen"
+      ]
+    },
+    {
+      "id": "risk_factor:bmi",
+      "type": "risk_factor",
+      "label": "bmi",
+      "aliases": [
+        "bmi"
+      ]
+    },
+    {
+      "id": "threshold_or_timing:95 mg/dL",
+      "type": "threshold_or_timing",
+      "label": "95 mg/dL",
+      "aliases": [
+        "95 mg/dL"
+      ]
+    },
+    {
+      "id": "threshold_or_timing:140 mg/dL",
+      "type": "threshold_or_timing",
+      "label": "140 mg/dL",
+      "aliases": [
+        "140 mg/dL"
+      ]
+    },
+    {
+      "id": "threshold_or_timing:120 mg/dL",
+      "type": "threshold_or_timing",
+      "label": "120 mg/dL",
+      "aliases": [
+        "120 mg/dL"
+      ]
+    },
+    {
+      "id": "outcome_fetal:preterm birth",
+      "type": "outcome_fetal",
+      "label": "preterm birth",
+      "aliases": [
+        "preterm birth"
+      ]
+    },
+    {
+      "id": "test:glucose challenge test",
+      "type": "test",
+      "label": "glucose challenge test",
+      "aliases": [
+        "glucose challenge test"
+      ]
+    },
+    {
+      "id": "test:gct",
+      "type": "test",
+      "label": "gct",
+      "aliases": [
+        "gct"
+      ]
+    },
+    {
+      "id": "outcome_fetal:large for gestational age",
+      "type": "outcome_fetal",
+      "label": "large for gestational age",
+      "aliases": [
+        "large for gestational age"
+      ]
+    },
+    {
+      "id": "outcome_fetal:lga",
+      "type": "outcome_fetal",
+      "label": "lga",
+      "aliases": [
+        "lga"
+      ]
+    },
+    {
+      "id": "outcome_longterm:offspring obesity",
+      "type": "outcome_longterm",
+      "label": "offspring obesity",
+      "aliases": [
+        "offspring obesity"
+      ]
+    },
+    {
+      "id": "test:oral glucose tolerance test",
+      "type": "test",
+      "label": "oral glucose tolerance test",
+      "aliases": [
+        "oral glucose tolerance test"
+      ]
+    },
+    {
+      "id": "hormone:leptin",
+      "type": "hormone",
+      "label": "leptin",
+      "aliases": [
+        "leptin"
+      ]
+    },
+    {
+      "id": "tissue:foetus",
+      "type": "tissue",
+      "label": "foetus",
+      "aliases": [
+        "foetus"
+      ]
+    },
+    {
+      "id": "condition:hypoglycaemia",
+      "type": "condition",
+      "label": "hypoglycaemia",
+      "aliases": [
+        "hypoglycaemia"
+      ]
+    },
+    {
+      "id": "condition:type 1 diabetes",
+      "type": "condition",
+      "label": "type 1 diabetes",
+      "aliases": [
+        "type 1 diabetes"
+      ]
+    },
+    {
+      "id": "hormone:cortisol",
+      "type": "hormone",
+      "label": "cortisol",
+      "aliases": [
+        "cortisol"
+      ]
+    },
+    {
+      "id": "hormone:growth hormone",
+      "type": "hormone",
+      "label": "growth hormone",
+      "aliases": [
+        "growth hormone"
+      ]
+    },
+    {
+      "id": "hormone:progesterone",
+      "type": "hormone",
+      "label": "progesterone",
+      "aliases": [
+        "progesterone"
+      ]
+    },
+    {
+      "id": "hormone:prolactin",
+      "type": "hormone",
+      "label": "prolactin",
+      "aliases": [
+        "prolactin"
+      ]
+    },
+    {
+      "id": "tissue:pancreatic beta-cells",
+      "type": "tissue",
+      "label": "pancreatic beta-cells",
+      "aliases": [
+        "pancreatic beta-cells"
+      ]
+    },
+    {
+      "id": "condition:hyperglycaemia",
+      "type": "condition",
+      "label": "hyperglycaemia",
+      "aliases": [
+        "hyperglycaemia"
+      ]
+    },
+    {
+      "id": "outcome_fetal:stillbirth",
+      "type": "outcome_fetal",
+      "label": "stillbirth",
+      "aliases": [
+        "stillbirth"
+      ]
+    },
+    {
+      "id": "test:hba1c",
+      "type": "test",
+      "label": "hba1c",
+      "aliases": [
+        "hba1c"
+      ]
+    },
+    {
+      "id": "hormone:estrogen",
+      "type": "hormone",
+      "label": "estrogen",
+      "aliases": [
+        "estrogen"
+      ]
+    },
+    {
+      "id": "threshold_or_timing:5.5 mmol/l",
+      "type": "threshold_or_timing",
+      "label": "5.5 mmol/l",
+      "aliases": [
+        "5.5 mmol/l"
+      ]
+    },
+    {
+      "id": "threshold_or_timing:95mg/dl",
+      "type": "threshold_or_timing",
+      "label": "95mg/dl",
+      "aliases": [
+        "95mg/dl"
+      ]
+    },
+    {
+      "id": "threshold_or_timing:7.8 mmol/l",
+      "type": "threshold_or_timing",
+      "label": "7.8 mmol/l",
+      "aliases": [
+        "7.8 mmol/l"
+      ]
+    },
+    {
+      "id": "threshold_or_timing:140 mg/dl",
+      "type": "threshold_or_timing",
+      "label": "140 mg/dl",
+      "aliases": [
+        "140 mg/dl"
+      ]
+    },
+    {
+      "id": "threshold_or_timing:140mg/dl",
+      "type": "threshold_or_timing",
+      "label": "140mg/dl",
+      "aliases": [
+        "140mg/dl"
+      ]
+    },
+    {
+      "id": "threshold_or_timing:30 weeks",
+      "type": "threshold_or_timing",
+      "label": "30 weeks",
+      "aliases": [
+        "30 weeks"
+      ]
+    },
+    {
+      "id": "threshold_or_timing:19 weeks",
+      "type": "threshold_or_timing",
+      "label": "19 weeks",
+      "aliases": [
+        "19 weeks"
+      ]
+    },
+    {
+      "id": "threshold_or_timing:22 weeks",
+      "type": "threshold_or_timing",
+      "label": "22 weeks",
+      "aliases": [
+        "22 weeks"
+      ]
+    },
+    {
+      "id": "threshold_or_timing:26 weeks",
+      "type": "threshold_or_timing",
+      "label": "26 weeks",
+      "aliases": [
+        "26 weeks"
+      ]
+    },
+    {
+      "id": "outcome_maternal:caesarean",
+      "type": "outcome_maternal",
+      "label": "caesarean",
+      "aliases": [
+        "caesarean"
+      ]
+    },
+    {
+      "id": "threshold_or_timing:36 weeks",
+      "type": "threshold_or_timing",
+      "label": "36 weeks",
+      "aliases": [
+        "36 weeks"
+      ]
+    },
+    {
+      "id": "risk_factor:ethnicity",
+      "type": "risk_factor",
+      "label": "ethnicity",
+      "aliases": [
+        "ethnicity"
+      ]
+    },
+    {
+      "id": "test:ogtt",
+      "type": "test",
+      "label": "ogtt",
+      "aliases": [
+        "ogtt"
+      ]
+    },
+    {
+      "id": "risk_factor:previous infant with macrosomia",
+      "type": "risk_factor",
+      "label": "previous infant with macrosomia",
+      "aliases": [
+        "previous infant with macrosomia"
+      ]
+    },
+    {
+      "id": "outcome_fetal:neonatal hypoglycemia",
+      "type": "outcome_fetal",
+      "label": "neonatal hypoglycemia",
+      "aliases": [
+        "neonatal hypoglycemia"
+      ]
+    },
+    {
+      "id": "threshold_or_timing:5.5mmol/l",
+      "type": "threshold_or_timing",
+      "label": "5.5mmol/l",
+      "aliases": [
+        "5.5mmol/l"
+      ]
+    },
+    {
+      "id": "threshold_or_timing:95 mg/dl",
+      "type": "threshold_or_timing",
+      "label": "95 mg/dl",
+      "aliases": [
+        "95 mg/dl"
+      ]
+    },
+    {
+      "id": "threshold_or_timing:6 weeks",
+      "type": "threshold_or_timing",
+      "label": "6 weeks",
+      "aliases": [
+        "6 weeks"
+      ]
+    },
+    {
+      "id": "test:fasting plasma glucose",
+      "type": "test",
+      "label": "fasting plasma glucose",
+      "aliases": [
+        "fasting plasma glucose"
+      ]
+    },
+    {
+      "id": "threshold_or_timing:110mg/dl",
+      "type": "threshold_or_timing",
+      "label": "110mg/dl",
+      "aliases": [
+        "110mg/dl"
+      ]
+    },
+    {
+      "id": "threshold_or_timing:7.8mmol/l",
+      "type": "threshold_or_timing",
+      "label": "7.8mmol/l",
+      "aliases": [
+        "7.8mmol/l"
+      ]
+    },
+    {
+      "id": "threshold_or_timing:125mg/dl",
+      "type": "threshold_or_timing",
+      "label": "125mg/dl",
+      "aliases": [
+        "125mg/dl"
+      ]
+    },
+    {
+      "id": "threshold_or_timing:199mg/dl",
+      "type": "threshold_or_timing",
+      "label": "199mg/dl",
+      "aliases": [
+        "199mg/dl"
+      ]
+    },
+    {
+      "id": "threshold_or_timing:126mg/dl",
+      "type": "threshold_or_timing",
+      "label": "126mg/dl",
+      "aliases": [
+        "126mg/dl"
+      ]
+    },
+    {
+      "id": "threshold_or_timing:11.1mmol/l",
+      "type": "threshold_or_timing",
+      "label": "11.1mmol/l",
+      "aliases": [
+        "11.1mmol/l"
+      ]
+    },
+    {
+      "id": "threshold_or_timing:200mg/dl",
+      "type": "threshold_or_timing",
+      "label": "200mg/dl",
+      "aliases": [
+        "200mg/dl"
+      ]
+    },
+    {
+      "id": "threshold_or_timing:18 mg/dl",
+      "type": "threshold_or_timing",
+      "label": "18 mg/dl",
+      "aliases": [
+        "18 mg/dl"
+      ]
+    },
+    {
+      "id": "guideline_org:nice",
+      "type": "guideline_org",
+      "label": "nice",
+      "aliases": [
+        "nice"
+      ]
+    },
+    {
+      "id": "test:continuous glucose monitoring",
+      "type": "test",
+      "label": "continuous glucose monitoring",
+      "aliases": [
+        "continuous glucose monitoring"
+      ]
+    },
+    {
+      "id": "test:cgm",
+      "type": "test",
+      "label": "cgm",
+      "aliases": [
+        "cgm"
+      ]
+    },
+    {
+      "id": "threshold_or_timing:4-12 weeks",
+      "type": "threshold_or_timing",
+      "label": "4-12 weeks",
+      "aliases": [
+        "4-12 weeks"
+      ]
+    },
+    {
+      "id": "condition:preeclampsia",
+      "type": "condition",
+      "label": "preeclampsia",
+      "aliases": [
+        "preeclampsia"
+      ]
+    },
+    {
+      "id": "outcome_maternal:preeclampsia",
+      "type": "outcome_maternal",
+      "label": "preeclampsia",
+      "aliases": [
+        "preeclampsia"
+      ]
+    },
+    {
+      "id": "test:fpg",
+      "type": "test",
+      "label": "fpg",
+      "aliases": [
+        "fpg"
+      ]
+    },
+    {
+      "id": "guideline_org:iadpsg",
+      "type": "guideline_org",
+      "label": "iadpsg",
+      "aliases": [
+        "iadpsg"
+      ]
+    },
+    {
+      "id": "guideline_org:idf",
+      "type": "guideline_org",
+      "label": "idf",
+      "aliases": [
+        "idf"
+      ]
+    },
+    {
+      "id": "threshold_or_timing:24-28 weeks",
+      "type": "threshold_or_timing",
+      "label": "24-28 weeks",
+      "aliases": [
+        "24-28 weeks"
+      ]
+    },
+    {
+      "id": "threshold_or_timing:15 weeks",
+      "type": "threshold_or_timing",
+      "label": "15 weeks",
+      "aliases": [
+        "15 weeks"
+      ]
+    },
+    {
+      "id": "threshold_or_timing:92 mg/dL",
+      "type": "threshold_or_timing",
+      "label": "92 mg/dL",
+      "aliases": [
+        "92 mg/dL"
+      ]
+    },
+    {
+      "id": "threshold_or_timing:5.1 mmol/L",
+      "type": "threshold_or_timing",
+      "label": "5.1 mmol/L",
+      "aliases": [
+        "5.1 mmol/L"
+      ]
+    },
+    {
+      "id": "threshold_or_timing:180 mg/dL",
+      "type": "threshold_or_timing",
+      "label": "180 mg/dL",
+      "aliases": [
+        "180 mg/dL"
+      ]
+    },
+    {
+      "id": "threshold_or_timing:153 mg/dL",
+      "type": "threshold_or_timing",
+      "label": "153 mg/dL",
+      "aliases": [
+        "153 mg/dL"
+      ]
+    },
+    {
+      "id": "threshold_or_timing:8.5 mmol/L",
+      "type": "threshold_or_timing",
+      "label": "8.5 mmol/L",
+      "aliases": [
+        "8.5 mmol/L"
+      ]
+    },
+    {
+      "id": "threshold_or_timing:5.3 mmol/L",
+      "type": "threshold_or_timing",
+      "label": "5.3 mmol/L",
+      "aliases": [
+        "5.3 mmol/L"
+      ]
+    },
+    {
+      "id": "threshold_or_timing:7.8 mmol/L",
+      "type": "threshold_or_timing",
+      "label": "7.8 mmol/L",
+      "aliases": [
+        "7.8 mmol/L"
+      ]
+    },
+    {
+      "id": "test:smbg",
+      "type": "test",
+      "label": "smbg",
+      "aliases": [
+        "smbg"
+      ]
+    },
+    {
+      "id": "outcome_fetal:nicu",
+      "type": "outcome_fetal",
+      "label": "nicu",
+      "aliases": [
+        "nicu"
+      ]
+    },
+    {
+      "id": "threshold_or_timing:39-40 weeks",
+      "type": "threshold_or_timing",
+      "label": "39-40 weeks",
+      "aliases": [
+        "39-40 weeks"
+      ]
+    },
+    {
+      "id": "threshold_or_timing:37-38 weeks",
+      "type": "threshold_or_timing",
+      "label": "37-38 weeks",
+      "aliases": [
+        "37-38 weeks"
+      ]
+    }
+  ],
+  "seeds": {
+    "hormone": [
+      "human placental lactogen",
+      "hpl",
+      "placental lactogen",
+      "placental hormones",
+      "progesterone",
+      "estrogen",
+      "cortisol",
+      "prolactin",
+      "growth hormone",
+      "tnf",
+      "tnf-alpha",
+      "il-6",
+      "adiponectin",
+      "leptin"
+    ],
+    "pathway": [
+      "insulin signaling",
+      "gluconeogenesis",
+      "lipolysis",
+      "adipogenesis",
+      "oxidative stress",
+      "inflammation"
+    ],
+    "tissue": [
+      "placenta",
+      "pancreas",
+      "beta cell",
+      "pancreatic beta-cells",
+      "liver",
+      "skeletal muscle",
+      "adipose",
+      "fetus",
+      "foetus",
+      "fetal pancreas",
+      "foetal pancreas"
+    ],
+    "condition": [
+      "gestational diabetes mellitus",
+      "gdm",
+      "type 1 diabetes",
+      "type 2 diabetes",
+      "t2dm",
+      "insulin resistance",
+      "hyperglycemia",
+      "hyperglycaemia",
+      "hypoglycemia",
+      "hypoglycaemia",
+      "prediabetes",
+      "metabolic syndrome",
+      "obesity",
+      "overweight",
+      "hypertension",
+      "preeclampsia"
+    ],
+    "test": [
+      "ogtt",
+      "oral glucose tolerance test",
+      "gct",
+      "glucose challenge test",
+      "fpg",
+      "fasting plasma glucose",
+      "hba1c",
+      "cgm",
+      "continuous glucose monitoring",
+      "smbg"
+    ],
+    "guideline_org": [
+      "ada",
+      "nice",
+      "who",
+      "iadpsg",
+      "idf",
+      "easd"
+    ],
+    "intervention": [
+      "diet",
+      "exercise",
+      "lifestyle",
+      "medical nutrition therapy",
+      "insulin",
+      "metformin",
+      "glyburide",
+      "glibenclamide"
+    ],
+    "drug": [
+      "insulin",
+      "metformin",
+      "glyburide",
+      "glibenclamide"
+    ],
+    "outcome_maternal": [
+      "preeclampsia",
+      "hypertension",
+      "type 2 diabetes",
+      "postpartum diabetes",
+      "cesarean",
+      "caesarean",
+      "c-section"
+    ],
+    "outcome_fetal": [
+      "macrosomia",
+      "large for gestational age",
+      "lga",
+      "shoulder dystocia",
+      "neonatal hypoglycemia",
+      "nicu",
+      "preterm birth",
+      "stillbirth"
+    ],
+    "outcome_longterm": [
+      "childhood obesity",
+      "offspring obesity",
+      "type 2 diabetes",
+      "cardiovascular disease"
+    ],
+    "risk_factor": [
+      "maternal age",
+      "age",
+      "bmi",
+      "family history",
+      "ethnicity",
+      "pcos",
+      "previous gdm",
+      "previous infant with macrosomia"
+    ]
+  }
+}

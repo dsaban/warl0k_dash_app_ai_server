@@ -1,0 +1,17 @@
+{
+  "name": "GDM Pack",
+  "version": "1.0.0",
+  "description": "GDM domain pack",
+  "files": {
+    "frames": "frames.json",
+    "edges": "edges.json",
+    "entities": "entities.json",
+    "ontology_spec": "ontology_spec.json",
+    "edge_patterns": "edge_patterns.json",
+    "infer_rules": "infer_rules.json",
+    "routing_rules": "routing_rules.json",
+    "question_templates": "question_templates.json",
+    "junk_filters": "junk_filters.json",
+    "scoring": "scoring.json"
+  }
+}

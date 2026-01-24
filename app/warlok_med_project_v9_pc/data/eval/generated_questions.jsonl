@@ -1,0 +1,28 @@
+{"q": "Using the modified Pedersen hypothesis, explain how maternal hyperglycemia leads to fetal macrosomia.", "source": "template_frame", "frame": "B"}
+{"q": "Why is postpartum OGTT recommended after GDM, and when should it be performed?", "source": "template_frame", "frame": "D"}
+{"q": "Based on the evidence presented, should GDM be reframed as a chronic metabolic risk marker rather than a transient pregnancy complication? Justify your reasoning.", "source": "template_frame", "frame": "G"}
+{"q": "Explain why postpartum OGTT is used after GDM and what it detects.", "source": "template_edge", "edge": "POSTPARTUM_OGTT"}
+{"q": "Explain the chain: POSTPARTUM_OGTT → POSTPARTUM_T2DM_RISK.", "source": "template_2hop"}
+{"q": "Explain the mechanism captured by FAILURE_LEADS_TO_GDM using a 4–6 step causal chain.", "source": "mined_edge", "edge": "FAILURE_LEADS_TO_GDM"}
+{"q": "What is the evidence-based rationale for FAILURE_LEADS_TO_GDM, and what intermediate steps link cause to outcome?", "source": "mined_edge", "edge": "FAILURE_LEADS_TO_GDM"}
+{"q": "Explain the mechanism captured by BETA_CELL_LIMITATION using a 4–6 step causal chain.", "source": "mined_edge", "edge": "BETA_CELL_LIMITATION"}
+{"q": "What is the evidence-based rationale for BETA_CELL_LIMITATION, and what intermediate steps link cause to outcome?", "source": "mined_edge", "edge": "BETA_CELL_LIMITATION"}
+{"q": "Explain the mechanism captured by CROSSES_PLACENTA using a 4–6 step causal chain.", "source": "mined_edge", "edge": "CROSSES_PLACENTA"}
+{"q": "What is the evidence-based rationale for CROSSES_PLACENTA, and what intermediate steps link cause to outcome?", "source": "mined_edge", "edge": "CROSSES_PLACENTA"}
+{"q": "Explain the mechanism captured by STIMULATES_INSULIN using a 4–6 step causal chain.", "source": "mined_edge", "edge": "STIMULATES_INSULIN"}
+{"q": "What is the evidence-based rationale for STIMULATES_INSULIN, and what intermediate steps link cause to outcome?", "source": "mined_edge", "edge": "STIMULATES_INSULIN"}
+{"q": "Explain the mechanism captured by POSTPARTUM_T2DM_RISK using a 4–6 step causal chain.", "source": "mined_edge", "edge": "POSTPARTUM_T2DM_RISK"}
+{"q": "What is the evidence-based rationale for POSTPARTUM_T2DM_RISK, and what intermediate steps link cause to outcome?", "source": "mined_edge", "edge": "POSTPARTUM_T2DM_RISK"}
+{"q": "Explain the mechanism captured by REQUIRES_COMPENSATION using a 4–6 step causal chain.", "source": "mined_edge", "edge": "REQUIRES_COMPENSATION"}
+{"q": "What is the evidence-based rationale for REQUIRES_COMPENSATION, and what intermediate steps link cause to outcome?", "source": "mined_edge", "edge": "REQUIRES_COMPENSATION"}
+{"q": "Explain the mechanism captured by MONITORING_TARGETS using a 4–6 step causal chain.", "source": "mined_edge", "edge": "MONITORING_TARGETS"}
+{"q": "What is the evidence-based rationale for MONITORING_TARGETS, and what intermediate steps link cause to outcome?", "source": "mined_edge", "edge": "MONITORING_TARGETS"}
+{"q": "Explain the mechanism captured by POSTPARTUM_OGTT using a 4–6 step causal chain.", "source": "mined_edge", "edge": "POSTPARTUM_OGTT"}
+{"q": "What is the evidence-based rationale for POSTPARTUM_OGTT, and what intermediate steps link cause to outcome?", "source": "mined_edge", "edge": "POSTPARTUM_OGTT"}
+{"q": "Explain the mechanism captured by INDUCES_RESISTANCE using a 4–6 step causal chain.", "source": "mined_edge", "edge": "INDUCES_RESISTANCE"}
+{"q": "What is the evidence-based rationale for INDUCES_RESISTANCE, and what intermediate steps link cause to outcome?", "source": "mined_edge", "edge": "INDUCES_RESISTANCE"}
+{"q": "Build a stepwise explanation connecting STIMULATES_INSULIN → PROMOTES_GROWTH, citing evidence for each step.", "source": "2hop_pair", "edges": ["STIMULATES_INSULIN", "PROMOTES_GROWTH"]}
+{"q": "Build a stepwise explanation connecting BETA_CELL_LIMITATION → PERSISTENT_INSULIN_RESISTANCE, citing evidence for each step.", "source": "2hop_pair", "edges": ["BETA_CELL_LIMITATION", "PERSISTENT_INSULIN_RESISTANCE"]}
+{"q": "Build a stepwise explanation connecting BETA_CELL_LIMITATION → REQUIRES_COMPENSATION, citing evidence for each step.", "source": "2hop_pair", "edges": ["BETA_CELL_LIMITATION", "REQUIRES_COMPENSATION"]}
+{"q": "Build a stepwise explanation connecting CROSSES_PLACENTA → STIMULATES_INSULIN, citing evidence for each step.", "source": "2hop_pair", "edges": ["CROSSES_PLACENTA", "STIMULATES_INSULIN"]}
+{"q": "Build a stepwise explanation connecting INDUCES_RESISTANCE → REQUIRES_COMPENSATION, citing evidence for each step.", "source": "2hop_pair", "edges": ["INDUCES_RESISTANCE", "REQUIRES_COMPENSATION"]}

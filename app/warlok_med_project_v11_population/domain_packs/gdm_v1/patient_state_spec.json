@@ -1,0 +1,127 @@
+{
+  "version": "1.0",
+  "description": "Patient State Graph (PSG) spec: how patient records map to states, events, derived states and alerts.",
+  "entity_types": [
+    {
+      "id": "patient",
+      "key_fields": ["patient_id"]
+    },
+    {
+      "id": "pregnancy_episode",
+      "key_fields": ["episode_id", "patient_id"]
+    },
+    {
+      "id": "encounter",
+      "key_fields": ["encounter_id", "episode_id", "date"]
+    },
+    {
+      "id": "lab_result",
+      "key_fields": ["lab_id", "encounter_id", "name", "value", "unit", "date"]
+    },
+    {
+      "id": "diagnosis",
+      "key_fields": ["dx_id", "episode_id", "code", "label", "date"]
+    },
+    {
+      "id": "treatment",
+      "key_fields": ["tx_id", "episode_id", "type", "date"]
+    },
+    {
+      "id": "state",
+      "key_fields": ["state_id", "episode_id", "name", "date"]
+    },
+    {
+      "id": "alert",
+      "key_fields": ["alert_id", "episode_id", "name", "severity", "date"]
+    }
+  ],
+
+  "relations": [
+    { "from": "patient", "to": "pregnancy_episode", "type": "HAS_EPISODE" },
+    { "from": "pregnancy_episode", "to": "encounter", "type": "HAS_ENCOUNTER" },
+    { "from": "encounter", "to": "lab_result", "type": "HAS_LAB" },
+    { "from": "pregnancy_episode", "to": "diagnosis", "type": "HAS_DIAGNOSIS" },
+    { "from": "pregnancy_episode", "to": "treatment", "type": "HAS_TREATMENT" },
+    { "from": "pregnancy_episode", "to": "state", "type": "HAS_STATE" },
+    { "from": "pregnancy_episode", "to": "alert", "type": "HAS_ALERT" },
+    { "from": "alert", "to": "state", "type": "DERIVED_FROM" }
+  ],
+
+  "canonical_fields": {
+    "pregnancy_episode": {
+      "lmp_date": { "type": "date", "optional": true },
+      "gestational_age_weeks": { "type": "number", "optional": true },
+      "edd_date": { "type": "date", "optional": true },
+      "parity": { "type": "text", "optional": true },
+      "gravida": { "type": "text", "optional": true }
+    },
+    "labs": {
+      "fasting_glucose_mgdl": { "type": "number", "optional": true },
+      "ogtt_1h_mgdl": { "type": "number", "optional": true },
+      "ogtt_2h_mgdl": { "type": "number", "optional": true },
+      "hba1c_percent": { "type": "number", "optional": true }
+    },
+    "risk_factors": {
+      "bmi": { "type": "number", "optional": true },
+      "age_years": { "type": "number", "optional": true },
+      "ethnicity": { "type": "text", "optional": true },
+      "prior_gdm": { "type": "bool", "optional": true },
+      "family_history_t2dm": { "type": "bool", "optional": true },
+      "pcos": { "type": "bool", "optional": true }
+    }
+  },
+
+  "state_definitions": [
+    {
+      "name": "GDM_RISK_HIGH",
+      "type": "derived",
+      "description": "Patient has elevated baseline risk for GDM based on risk factors."
+    },
+    {
+      "name": "SCREENING_DUE_24_28W",
+      "type": "derived",
+      "description": "Patient in typical screening window and lacks recorded OGTT."
+    },
+    {
+      "name": "GDM_SUSPECTED",
+      "type": "derived",
+      "description": "Labs suggest hyperglycemia pattern; requires clinician confirmation."
+    },
+    {
+      "name": "GDM_DIAGNOSED",
+      "type": "observed",
+      "description": "Diagnosis recorded by clinician."
+    },
+    {
+      "name": "GLYCEMIC_CONTROL_SUBOPTIMAL",
+      "type": "derived",
+      "description": "Evidence of poor control based on documented values/notes (pack-defined)."
+    },
+    {
+      "name": "INSULIN_TREATED",
+      "type": "observed",
+      "description": "Insulin treatment started/recorded."
+    },
+    {
+      "name": "POSTPARTUM_OGTT_DUE",
+      "type": "derived",
+      "description": "Postpartum OGTT should be scheduled within defined time window."
+    },
+    {
+      "name": "POSTPARTUM_FOLLOWUP_MISSED",
+      "type": "derived",
+      "description": "Postpartum OGTT window passed and no test recorded."
+    }
+  ],
+
+  "output_contract": {
+    "patient_summary_sections": [
+      "Key findings",
+      "Derived states",
+      "Triggered alerts",
+      "Evidence links",
+      "Recommended follow-up (pack templates)"
+    ],
+    "evidence_requirement": "Every alert or recommendation must cite at least one claim edge from the evidence graph when available."
+  }
+}

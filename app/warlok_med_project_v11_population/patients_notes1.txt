@@ -1,0 +1,13 @@
+Patient: 29 y/o, G2P1, 26+4 weeks gestation.
+BMI: 32.4
+History: prior pregnancy with gestational diabetes (diet controlled).
+Current pregnancy: weight gain higher than expected.
+Symptoms: increased thirst, fatigue.
+
+Screening:
+Fasting glucose: 102 mg/dl
+OGTT 1h: 186 mg/dl
+OGTT 2h: 163 mg/dl
+
+Concern for gestational diabetes mellitus (GDM) and insulin resistance of pregnancy.
+Plan: review diet/exercise, consider glucose monitoring targets, and plan postpartum follow-up OGTT 4-12 weeks.

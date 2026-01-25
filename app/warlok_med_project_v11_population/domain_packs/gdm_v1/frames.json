@@ -1,0 +1,37 @@
+[
+  {
+    "id": "B",
+    "name": "Maternal hyperglycemia → fetal macrosomia (Pedersen/HAPO)",
+    "required_edges": ["CROSSES_PLACENTA", "STIMULATES_INSULIN", "PROMOTES_GROWTH"],
+    "min_required_covered": 2,
+    "blocked_node_types": ["threshold_or_timing", "intervention", "outcome_maternal"],
+    "min_steps": 3,
+    "max_steps": 6
+  },
+  {
+    "id": "D",
+    "name": "Postpartum follow-up (GDM → T2DM risk + OGTT)",
+    "required_edges": ["POSTPARTUM_OGTT", "POSTPARTUM_T2DM_RISK"],
+    "min_required_covered": 1,
+    "blocked_node_types": ["outcome_fetal"],
+    "min_steps": 2,
+    "max_steps": 5
+  },
+  {
+    "id": "G",
+    "name": "Reframing: transient pregnancy complication vs chronic metabolic risk",
+    "required_edges": ["RESOLVES_AFTER_DELIVERY", "POSTPARTUM_OGTT", "POSTPARTUM_T2DM_RISK", "BETA_CELL_LIMITATION", "PERSISTENT_INSULIN_RESISTANCE"],
+    "min_required_covered": 3,
+    "blocked_node_types": ["threshold_or_timing", "intervention", "outcome_fetal"],
+    "min_steps": 4,
+    "max_steps": 6
+  },
+  {
+  "id": "A",
+  "name": "Pregnancy physiology → GDM (normal → pathology)",
+  "required_edges": ["INDUCES_RESISTANCE", "REQUIRES_COMPENSATION", "FAILURE_LEADS_TO_GDM"],
+    "chain_template": ["Pregnancy increases insulin resistance (physiologic).", "Beta-cells compensate by increasing insulin secretion to maintain euglycemia.", "If beta-cell compensation is inadequate, maternal hyperglycemia develops → GDM."],
+  "min_required_covered": 2
+}
+
+]

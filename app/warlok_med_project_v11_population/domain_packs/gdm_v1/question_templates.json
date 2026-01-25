@@ -1,0 +1,21 @@
+{
+  "by_frame": {
+    "B": [
+      "Using the modified Pedersen hypothesis, explain how maternal hyperglycemia leads to fetal macrosomia."
+    ],
+    "D": [
+      "Why is postpartum OGTT recommended after GDM, and when should it be performed?"
+    ],
+    "G": [
+      "Based on the evidence presented, should GDM be reframed as a chronic metabolic risk marker rather than a transient pregnancy complication? Justify your reasoning."
+    ]
+  },
+  "by_edge": {
+    "POSTPARTUM_OGTT": [
+      "Explain why postpartum OGTT is used after GDM and what it detects."
+    ]
+  },
+  "chain_2hop": [
+    "Explain the chain: POSTPARTUM_OGTT → POSTPARTUM_T2DM_RISK."
+  ]
+}

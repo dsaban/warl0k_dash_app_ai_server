@@ -1,0 +1,453 @@
+Gestational diabetes: update on screening,
+diagnosis and maternal management
+SUMMARY
+Gestational diabetes is common and increasing in prevalence in Australia.
+New Australasian consensus recommendations released in June 2025 include higher diagnostic
+thresholds for gestational diabetes and guidance on early pregnancy screening. Women with
+risk factors for hyperglycaemia in pregnancy are recommended to have glycated haemoglobin
+(HbA1c) measured in the first trimester. Women with a previous history of gestational diabetes
+or a first-trimester HbA1c of 6.0 to 6.4% should undergo a pregnancy oral glucose tolerance test
+(POGTT) before 20 weeks gestation.
+All pregnant women without early gestational diabetes or existing diabetes should undergo a
+POGTT at 24 to 28 weeks gestation.
+Insulin remains the mainstay of pharmacological therapy. Metformin may have a role, but its use
+should be evaluated on an individual basis. Other non-insulin antihyperglycaemic therapies are
+contraindicated in pregnancy.
+Gestational diabetes is a significant risk factor for the development of type 2 diabetes and
+cardiovascular disease, and long-term surveillance is indicated.
+The management of gestational diabetes
+continues to evolve as new data emerge, and
+many recommendations are consensus-driven in
+the absence of robust evidence. This article aims
+to provide an overview of current best-practice
+diagnosis and treatment of gestational diabetes in
+Australia, focusing on maternal management during
+pregnancy and postpartum. It takes into consideration
+new consensus recommendations of the Australasian
+Diabetes in Pregnancy Society (ADIPS) on screening,
+diagnosis and classification of gestational diabetes,
+released in June 2025.12
+Screening and diagnosis
+Recently updated guidelines maintain the
+recommendation that all pregnant women without
+early gestational diabetes or diabetes already detected
+undergo a 75-g 2-hour pregnancy oral glucose
+tolerance test (POGTT) at 24 to 28 weeks gestation.1,12
+In the updated diagnostic criteria for gestational
+diabetes (Table 1), the thresholds for fasting plasma
+glucose concentration and POGTT have been raised.4,12
+If measures of glycaemia in pregnancy meet the
+diagnostic thresholds for diabetes in nonpregnant
+adults (Table 1), a diagnosis of ‘overt diabetes
+in pregnancy’,12,14 also referred to as ‘diabetes in
+pregnancy’,13 is made. These thresholds remain
+unchanged in the updated guidelines. Women with
+Introduction
+Hyperglycaemia that is first noted in pregnancy is
+diagnosed as either gestational diabetes, or overt
+diabetes in pregnancy (if criteria for diabetes in
+nonpregnant adults are met).1
+ The incidence and
+prevalence of gestational diabetes is increasing
+in Australia;2
+ almost 54,000 women in 2021 were
+diagnosed with gestational diabetes, which has
+more than doubled since 2009.3-5 This has been
+driven by multiple factors, including increasing
+rates of obesity, maternal age and the proportion
+of women from ethnic groups with higher risk, and
+changes made to diagnostic criteria.6
+ The prevalence
+of gestational diabetes globally is estimated at
+14%, which is consistent with the estimates for the
+Australian population.2,7
+Gestational diabetes is associated with increased risk
+of maternal complications such as pre-eclampsia and,
+in the longer term, cardiometabolic disease (including
+type 2 diabetes),2
+ as well as adverse impacts on the
+fetus or neonate, including neonatal hypoglycaemia
+and macrosomia.8-10 Timely diagnosis and treatment
+according to guidelines is vital to reduce both maternal
+and fetal complications of hyperglycaemia.2,8-10 Models
+of care for gestational diabetes vary across Australia
+depending on local practices, which include step-up
+and step-down pathways between usual antenatal
+care and specialist antenatal care services.11
+168
+ARTICLE
+VOLUME 48 : NUMBER 5 : OCTOBER 2025
+Full text free online at australianprescriber.tg.org.au
+overt diabetes in pregnancy should be managed in
+pregnancy as if they have pre-existing diabetes.
+Early testing for gestational diabetes
+Women with risk factors for hyperglycaemia in
+pregnancy (Box 1) are recommended to have glycated
+haemoglobin (HbA1c) measured in the first trimester
+to exclude overt diabetes in pregnancy.12
+Women with a previous history of gestational diabetes
+or a first-trimester HbA1c of 6.0 to 6.4% (42 to
+47 mmol/mol) should have a POGTT before 20 weeks
+gestation, ideally between 10 and 14 weeks.1,12 ADIPS
+recommends the use of their 2025 diagnostic cut-offs
+(Table 1), irrespective of gestational age.12
+Clinicians may offer an early screening POGTT
+depending on individual risk and discussion with
+the patient, even in the absence of prior gestational
+diabetes or if HbA1c is below 6.0% (42 mmol/mol).12
+Women with risk factors who receive early testing
+and have normal glycaemic values should still have
+a POGTT at the usual screening period of 24 to
+28 weeks gestation.1,12 These individuals are then
+managed as per other women who are screened at
+24 to 28 weeks.
+While early screening for overt diabetes in pregnancy
+in women with risk factors is recommended with
+broad consensus,1,12 prior to the 2025 ADIPS
+recommendations, there were no clear guidelines
+on what to do if diagnostic criteria for gestational
+diabetes were met earlier than 24 to 28 weeks.1,16 An
+Australian-led randomised controlled trial showed that
+women diagnosed with gestational diabetes before
+20 weeks gestation (using the 2014 ADIPS criteria),
+who received immediate treatment compared with
+deferred or no treatment, had fewer adverse neonatal
+outcomes (24.9% versus 30.5%, adjusted mean
+difference −5.6%, 95% confidence interval [CI] −10.1 to
+−1.2). These included birth before 37 weeks gestation,
+birth trauma, birth weight of 4500 g or greater,
+respiratory distress, phototherapy, stillbirth, neonatal
+death and shoulder dystocia.17 Greater benefit was
+seen among the women with glycaemic values in
+the higher end of the diagnostic range at the time of
+randomisation (fasting glucose 5.3 to 6.0 mmol/L,
+1-hour POGTT 10.6 mmol/L or greater, 2-hour POGTT
+9.0 to 11.0 mmol/L) compared with those in the lower
+end of the range. Early treatment had no effect on
+the occurrence of maternal hypertensive disorders in
+pregnancy; however, perineal trauma was reduced
+by about 78% (0.8% versus 3.6%, adjusted mean
+difference −2.8%, 95% CI −4.1 to −1.5).17
+With respect to the use of HbA1c in early pregnancy,
+a cut-off of 5.4% (35 mmol/mol) was shown to have
+low sensitivity (0.55) and specificity (0.67) to predict
+fasting or post-load plasma glucose above the 90th
+percentile in early POGTT testing, but had modest
+value for predicting the need for antihyperglycaemic
+drugs (sensitivity 0.75, specificity 0.65).18 HbA1c
+cut-offs of 5.7% and 5.9% (39 and 41 mmol/mol,
+Table 1 Diagnostic criteria for gestational diabetes and
+overt diabetes in pregnancy
+Glycaemic parameter Concentration
+Gestational diabetes12
+Fasting plasma glucose 5.3 to 6.9 mmol/L
+(previously 5.1 to 6.9 mmol/L)
+OR
+Plasma glucose 1 hour post 75-g
+oral glucose tolerance test
+10.6 mmol/L or more
+(previously 10.0 mmol/L)
+OR
+Plasma glucose 2 hours post 75-g
+oral glucose tolerance test
+9.0 to 11.0 mmol/L
+(previously 8.6 to 11.0 mmol/L)
+Overt diabetes in pregnancy (same criteria as diabetes in nonpregnant adults)12,13
+Fasting plasma glucose 7.0 mmol/L or more
+OR
+Random plasma glucose 11.1 mmol/L or more
+OR
+Plasma glucose 2 hours post 75-g
+oral glucose tolerance test
+11.1 mmol/L or more
+OR
+Glycated haemoglobin (HbA1c) 6.5% (48 mmol/mol) or more
+Box 1 Risk factors that
+indicate early testing for
+gestational diabetes1,12,15
+• Previous gestational diabetes
+• Pre-pregnancy overweight or obesity (body mass
+index above 25 kg/m2
+)
+• Family history of diabetes mellitus
+• Maternal age of 30 years or above
+• Polycystic ovary syndrome
+• Hypothyroidism
+• History of previous adverse pregnancy outcomes:
+macrosomia, preterm delivery, congenital anomaly,
+stillbirth, pregnancy-induced hypertension
+• Multiparity (2 or more previous births at 20 weeks
+gestation or beyond)
+• Medications: glucocorticoids, antipsychotics
+Gestational diabetes: update on screening, diagnosis and maternal management
+169
+ARTICLE
+VOLUME 48 : NUMBER 5 : OCTOBER 2025
+Full text free online at australianprescriber.tg.org.au
+respectively) in early pregnancy have poor sensitivity
+for diagnosis of gestational diabetes and, in some
+studies, are associated with higher rates of adverse
+pregnancy outcomes (e.g. congenital anomaly, preeclampsia, shoulder dystocia, perinatal death).19,20 Use
+of HbA1c for screening for gestational diabetes is not
+recommended later in pregnancy.12
+Management
+Management of gestational diabetes includes
+patient education, self-monitoring of blood glucose
+concentrations, optimising glycaemic management
+through lifestyle modifications and, if necessary,
+adding antihyperglycaemic therapy.2,21-23 Women
+who register for the National Diabetes Services
+Scheme (NDSS) get their details added to the
+National Gestational Diabetes Register (unless they
+opt out). The register provides information, access to
+subsidised equipment, advice, and after-pregnancy
+reminders to undertake follow-up screening for the
+development of permanent diabetes. Management
+often utilises a multidisciplinary approach,
+with involvement of diabetes nurse educators,
+dietitians, general practitioners, endocrinologists
+and obstetricians.
+Education
+Women should be provided with education on
+gestational diabetes – what it is, the potential shortterm implications for their own health and that of
+their baby in pregnancy (e.g. pregnancy-induced
+hypertension, pre-eclampsia, large-for-gestational-age
+babies, neonatal hypoglycaemia), as well as the longer
+term implications, such as increased risk of type 2
+diabetes and cardiovascular disease.2,11,23 They should
+also be educated on the need for management and
+what this involves, including self-monitoring of blood
+glucose concentrations, lifestyle modifications and
+addressing modifiable risk factors for cardiovascular
+disease.2,11,23 Patient resources are available through
+Diabetes Australia and NDSS.
+Blood glucose monitoring
+The key to management of gestational diabetes is
+blood glucose monitoring to ensure glycaemic targets
+are met (Table 2). Self-monitoring should be performed
+using capillary (finger-prick) blood testing at least
+4 times a day, including a fasting concentration, and
+a concentration taken 1 or 2 hours after each meal
+(breakfast, lunch and dinner). However, due to the
+lack of high-quality evidence on optimal targets, there
+is some variation across centres in Australia, and local
+guidelines may be referred to.11 If targets are not being
+achieved following diet and lifestyle modifications,
+antihyperglycaemic pharmacological therapy is the
+next step in management.
+Lifestyle modifications
+First-line treatment for optimising glycaemic
+management is lifestyle modifications, including
+providing advice on physical activity, nutrition, and
+weight management, depending on the patient’s prepregnancy weight.2,23 Cultural dietary preferences
+need to be taken into consideration when providing
+nutritional advice, with a focus on modest intake
+of low–glycaemic index carbohydrates.24 Pooled
+data from trials that implemented modified dietary
+interventions in women with gestational diabetes
+found there was a greater reduction in fasting and
+postprandial glucose concentrations, and a lower
+need for pharmacological therapy, compared with no
+dietary intervention. There was also an improvement
+in neonatal outcomes, such as lower birth weight and
+reduced macrosomia; however, quality of evidence
+was low because of limitations in the design of the
+trials.25 In a survey of diabetes in pregnancy services
+in Australia and New Zealand, diet alone was used
+for glycaemic management in 39.4% (ranging from
+28.8 to 57.3% across centres) of women diagnosed
+with gestational diabetes.26
+Pharmacological therapies
+In Australia, insulin is the pharmacological therapy of
+choice in most centres; however, metformin is also
+sometimes used.4
+ Other antihyperglycaemic therapies
+should not be used in pregnancy.
+Insulin
+In Australia, insulin is most commonly administered
+as multiple daily injections of rapid-acting insulin
+analogues, or a single longer acting injection, or
+both. Multiple daily injections can be administered
+before meals (e.g. NovoRapid [insulin aspart],
+Humalog [insulin lispro]) and a longer acting insulin
+at night (e.g. Humulin NPH [insulin isophane]).27
+Depending on the availability of Humulin NPH,
+Optisulin (insulin glargine U100) for the management
+of fasting hyperglycaemia may need to be
+Table 2 Glycaemic targets for
+gestational diabetes23
+Glycaemic parameter Blood glucose target
+fasting capillary blood
+glucose concentration
+less than 5.3 mmol/L
+AND EITHER
+1-hour postprandial glucose less than 7.8 mmol/L
+OR
+2-hour postprandial glucose less than 6.7 mmol/L
+170
+ARTICLE
+VOLUME 48 : NUMBER 5 : OCTOBER 2025
+Full text free online at australianprescriber.tg.org.au
+Gestational diabetes: update on screening, diagnosis and maternal management
+considered. Fixed‑dose biphasic insulin, such as
+NovoMix 30 (insulin aspart and insulin aspart
+protamine) and Humalog Mix25 (insulin lispro and
+insulin lispro protamine), may be considered for
+patients unable to use multiple daily injections.
+There are limited data on the safety and effectiveness
+of newer insulin analogues in gestational diabetes,
+such as Fiasp (fast-acting insulin aspart), Toujeo
+(insulin glargine U300) and Ryzodeg (insulin degludec
+and insulin aspart), such that they are not routinely
+used for this condition in Australia.
+The number of injections and doses depends on the
+individual’s glycaemic profile, with rapid-acting insulin
+used to manage elevated postprandial glucose and
+longer acting insulin used to manage elevated fasting
+glucose. Protocols that guide self-titration of insulin
+doses are increasingly being used when appropriate.
+Metformin
+Metformin has been widely used in the treatment
+of hyperglycaemia.28 However, there is conflicting
+evidence regarding its safety and efficacy in
+gestational diabetes. Metformin alone has been
+found to be insufficient to achieve adequate
+glycaemic management in 14 to 46% of women
+with gestational diabetes, necessitating the addition
+of insulin therapy.23 However, metformin has been
+associated with less maternal weight gain and lower
+rates of neonatal hypoglycaemia when compared
+with insulin.29
+Although metformin crosses the placenta, clinical trial
+and observational data have not shown any evidence
+of teratogenicity.28 In an open-label randomised
+controlled trial of women with gestational diabetes
+(n=363), metformin (either alone or in combination
+with insulin) was not associated with increased
+perinatal complications compared with insulin alone
+(32.0% versus 32.2%, respectively).30 In a follow-up
+trial, children of women treated with metformin were
+assessed at 9 years of age (n=45), and were found
+to be larger by various anthropometric measures
+(e.g. body weight, waist circumference) than the
+children exposed to insulin (n=54).31 However, this
+outcome was not observed among children assessed
+at 7 years of age (n=58 metformin, n=51 insulin).31
+While these findings raise some concern about the
+longer term impacts of metformin on the offspring,
+interpretation needs to be with caution as there was
+incomplete participant follow-up.
+A large retrospective, register-based cohort study
+found that maternal exposure to metformin (alone
+or in combination with insulin) was not correlated
+with long-term obesity, dysglycaemia, or diabetes
+risk in children compared with insulin alone, but was
+associated with increased risk of small-for-gestationalage infants.32 This finding was also reported in a metaanalysis.33 Metformin should therefore be avoided
+in the setting of intrauterine growth restriction, in
+women with low body mass index and inadequate
+weight gain, and in women with pre-eclampsia.
+While not currently endorsed by ADIPS for routine
+use in the treatment of gestational diabetes, the
+appropriateness of metformin use should be
+evaluated on an individual basis.4
+ Metformin may
+be appropriate in the presence of maternal needle
+phobia, for limiting insulin use, or in context of
+excessive maternal weight gain with insulin. A detailed
+discussion with individual women is warranted, clearly
+outlining the potential benefits and harms with use
+during pregnancy.28
+Other antihyperglycaemic therapies
+Other non-insulin antihyperglycaemic drugs used for
+the treatment of diabetes are not recommended for
+the treatment of gestational diabetes in Australia.34
+These include sodium-glucose co-transporter 2
+inhibitors, glucagon-like peptide-1 (GLP‑1) receptor
+agonists, dual glucose-dependent insulinotropic
+polypeptide and GLP-1 receptor agonists, and
+dipeptidyl peptidase-4 inhibitors. These drugs have
+limited data on their use in pregnancy and, through
+known mechanisms of action, have potential to cause
+fetal harm.
+Sulfonylureas, with glibenclamide mostly studied, have
+been associated with adverse neonatal outcomes,
+including macrosomia, hypoglycaemia and respiratory
+distress, and are not recommended in Australia.34
+Maternal postpartum care and
+follow‑up
+Approximately 85% of women with gestational
+diabetes have resolution of hyperglycaemia following
+delivery.35 Insulin therapy, when required, is usually
+stopped when active labour starts or delivery via
+caesarean section occurs. In the early stages of
+labour, or if fasting for a caesarean section, insulin
+doses may be reduced (e.g. by about one-third
+depending on individual patient factors).
+All women diagnosed with gestational diabetes
+should undergo a 75-g 2-hour oral glucose tolerance
+test 6 to 12 weeks postpartum to check for persistent
+hyperglycaemia using the nonpregnant diagnostic
+cut-offs (Table 1).1,4 Women who develop gestational
+diabetes often have a predisposition to underlying
+islet beta cell dysfunction or insulin resistance, which
+is unmasked by the added physiological stress
+of pregnancy.8
+ The recurrence rate of gestational
+diabetes in subsequent pregnancies is reported to be
+between 39 and 73%.36
+171
+ARTICLE
+VOLUME 48 : NUMBER 5 : OCTOBER 2025
+Full text free online at australianprescriber.tg.org.au
+Women diagnosed with overt diabetes in pregnancy
+should also be re-evaluated after pregnancy, as only
+some will meet the diagnostic criteria for diabetes
+after pregnancy.37
+Lifelong surveillance is recommended following
+diagnosis of gestational diabetes, as there is increased
+risk of developing type 2 diabetes in 50 to 60% of
+women 10 years after their pregnancy.2
+ Registrants
+of the National Gestational Diabetes Register will
+receive a ‘Life after gestational diabetes’ booklet
+and reminders for diabetes screening. Assessment
+of glycaemic management using HbA1c, fasting
+plasma glucose or oral glucose tolerance test should
+be performed every 1 to 3 years depending on risk
+stratification and future pregnancy plans.4,23 In women
+planning another pregnancy after gestational diabetes,
+the oral glucose tolerance test is the optimal test for
+diagnosis of prediabetes. As gestational diabetes is
+also associated with an increased risk of cardiovascular
+disease (twofold), cardiovascular disease risk factors
+should be regularly assessed and managed.38
+Optimisation of lifestyle factors remains key in
+prevention of progression to type 2 diabetes.
+Surveillance provides an avenue for early detection
+and subsequent commencement of appropriate
+therapies to prevent progression to uncontrolled
+hyperglycaemia and diabetes-related complications.
+Conclusion
+All women should be screened at 24 to 28 weeks
+gestation, and those with high-risk features should be
+tested in early pregnancy. Lifestyle modifications, plus
+insulin if pharmacological therapy is required, remain
+the mainstay of treatment. All women diagnosed
+with gestational diabetes should be screened
+lifelong for the development of type 2 diabetes and
+cardiovascular disease.
+This article was finalised on 15 September 2025.
+Conflicts of interest: Christopher Nolan was a chief
+investigator on the Treatment of Booking Gestational
+Diabetes Mellitus study, which was funded by the
+National Health and Medical Research Council.
+Christopher has received support from the Canberra
+Hospital Private Practice Fund to attend conferences
+related to diabetes in pregnancy and has contributed
+to the development of various guidelines on diabetes,
+including the Australian Evidence-based Clinical
+Guidelines for Diabetes. Christopher received an
+honorarium for his role as a Diabetologia advisory
+board member from 2020 to 2022.
+Stephanie Baddock and Carolyn Petersons have no
+conflicts of interest to declare.

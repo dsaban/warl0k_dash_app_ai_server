@@ -1,0 +1,13 @@
+{
+  "hormone": ["placental hormones","progesterone","estrogen","cortisol","human placental lactogen","placental lactogen"],
+  "pathway": ["insulin resistance","inflammation","adipogenesis","gluconeogenesis"],
+  "tissue": ["placenta","pancreas","beta cell","fetus","fetal pancreas","adipose","liver","skeletal muscle"],
+  "condition": ["gestational diabetes mellitus","gdm","hyperglycemia","type 2 diabetes","t2dm","prediabetes","metabolic syndrome","obesity"],
+  "test": ["ogtt","oral glucose tolerance test","hba1c","fpg","cgm","smbg"],
+  "guideline_org": ["ada","nice","who","iadpsg"],
+  "intervention": ["diet","exercise","lifestyle","insulin","metformin","glyburide","glibenclamide"],
+  "drug": ["insulin","metformin","glyburide","glibenclamide"],
+  "outcome_maternal": ["type 2 diabetes","preeclampsia","hypertension"],
+  "outcome_fetal": ["macrosomia","large for gestational age","lga","neonatal hypoglycemia"],
+  "risk_factor": ["age","bmi","ethnicity","family history","previous gdm","pcos"]
+}

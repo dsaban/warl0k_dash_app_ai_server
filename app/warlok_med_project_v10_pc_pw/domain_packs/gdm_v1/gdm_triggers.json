@@ -1,0 +1,121 @@
+{
+  "version": "1.0",
+  "description": "GDM care pathway triggers: deterministic derived states + alerts.",
+  "rules": [
+    {
+      "id": "RISK_HIGH_BMI",
+      "name": "High baseline risk (BMI)",
+      "when_all": [
+        { "field": "risk_factors.bmi", "op": ">=", "value": 30 }
+      ],
+      "emit_state": {
+        "name": "GDM_RISK_HIGH",
+        "severity": "info",
+        "rationale": "BMI >= 30 increases GDM risk."
+      },
+      "evidence_edges_any": ["RISK_FACTOR_OBESITY"]
+    },
+
+    {
+      "id": "SCREENING_WINDOW_24_28",
+      "name": "Screening due in 24–28 week window",
+      "when_all": [
+        { "field": "pregnancy_episode.gestational_age_weeks", "op": ">=", "value": 24 },
+        { "field": "pregnancy_episode.gestational_age_weeks", "op": "<=", "value": 28 }
+      ],
+      "when_none": [
+        { "field": "labs.ogtt_1h_mgdl", "op": "exists" },
+        { "field": "labs.ogtt_2h_mgdl", "op": "exists" }
+      ],
+      "emit_state": {
+        "name": "SCREENING_DUE_24_28W",
+        "severity": "warning",
+        "rationale": "Typical screening window reached but OGTT not recorded."
+      },
+      "evidence_edges_any": ["SCREENING_TIMING"]
+    },
+
+    {
+      "id": "SUSPECT_FASTING_HIGH",
+      "name": "Suspected hyperglycemia (fasting glucose elevated)",
+      "when_all": [
+        { "field": "labs.fasting_glucose_mgdl", "op": ">=", "value": 95 }
+      ],
+      "emit_state": {
+        "name": "GDM_SUSPECTED",
+        "severity": "warning",
+        "rationale": "Fasting glucose >= 95 mg/dl suggests hyperglycemia pattern; requires clinician confirmation."
+      },
+      "evidence_edges_any": ["MONITORING_TARGETS", "DIAGNOSTIC_THRESHOLD"]
+    },
+
+    {
+      "id": "GDM_DIAGNOSIS_RECORDED",
+      "name": "GDM diagnosed (clinician recorded)",
+      "when_all": [
+        { "field": "diagnosis.gdm", "op": "==", "value": true }
+      ],
+      "emit_state": {
+        "name": "GDM_DIAGNOSED",
+        "severity": "warning",
+        "rationale": "GDM diagnosis recorded."
+      },
+      "evidence_edges_any": ["FAILURE_LEADS_TO_GDM"]
+    },
+
+    {
+      "id": "INSULIN_STARTED",
+      "name": "Insulin treatment recorded",
+      "when_all": [
+        { "field": "treatment.insulin", "op": "==", "value": true }
+      ],
+      "emit_state": {
+        "name": "INSULIN_TREATED",
+        "severity": "info",
+        "rationale": "Insulin therapy recorded."
+      },
+      "evidence_edges_any": ["TREATED_BY"]
+    },
+
+    {
+      "id": "POSTPARTUM_OGTT_DUE",
+      "name": "Postpartum OGTT due (4–12 weeks)",
+      "when_all": [
+        { "field": "episode_status.postpartum", "op": "==", "value": true }
+      ],
+      "when_none": [
+        { "field": "postpartum.ogtt_done", "op": "==", "value": true }
+      ],
+      "emit_state": {
+        "name": "POSTPARTUM_OGTT_DUE",
+        "severity": "warning",
+        "rationale": "Postpartum OGTT is due within 4–12 weeks to detect persistent diabetes."
+      },
+      "evidence_edges_any": ["POSTPARTUM_OGTT", "POSTPARTUM_T2DM_RISK"]
+    },
+
+    {
+      "id": "POSTPARTUM_FOLLOWUP_MISSED",
+      "name": "Postpartum follow-up missed",
+      "when_all": [
+        { "field": "episode_status.postpartum_weeks", "op": ">", "value": 12 }
+      ],
+      "when_none": [
+        { "field": "postpartum.ogtt_done", "op": "==", "value": true }
+      ],
+      "emit_alert": {
+        "name": "POSTPARTUM_FOLLOWUP_MISSED",
+        "severity": "high",
+        "rationale": "Postpartum OGTT window passed; systemic care gap risk."
+      },
+      "evidence_edges_any": ["POSTPARTUM_OGTT", "POSTPARTUM_T2DM_RISK"]
+    }
+  ],
+
+  "severity_levels": ["info", "warning", "high"],
+
+  "notes": [
+    "Threshold numbers are placeholders; make thresholds pack-configurable per guideline source.",
+    "Rules emit derived states/alerts; they do not diagnose or prescribe."
+  ]
+}

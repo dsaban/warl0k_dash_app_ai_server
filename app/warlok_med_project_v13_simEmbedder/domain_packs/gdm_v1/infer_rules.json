@@ -1,0 +1,14 @@
+{
+  "POSTPARTUM_OGTT": [
+    {
+      "pattern": "((75\\s*g|75g)?.{0,80}?(ogtt|oral glucose tolerance test).{0,200}?(6\\s*weeks|4\\s*-\\s*12\\s*weeks|6\\s*weeks\\s*or\\s*more).{0,200}?(after delivery|postpartum|after giving birth))|((after delivery|postpartum|after giving birth).{0,200}?(75\\s*g|75g)?.{0,80}?(ogtt|oral glucose tolerance test).{0,200}?(6\\s*weeks|4\\s*-\\s*12\\s*weeks|6\\s*weeks\\s*or\\s*more))",
+      "strength": 3
+    }
+  ],
+  "INDUCES_RESISTANCE": [
+    { "pattern": "(diabetogenic|anti-insulin|counter-regulatory).*(pregnan(c|t)y|placent)", "strength": 2 }
+  ],
+  "REQUIRES_COMPENSATION": [
+    { "pattern": "(insulin resistance|decreased insulin sensitivity|reduced insulin sensitivity).*(compensat|adapt|beta[- ]cell|insulin secretion)", "strength": 2 }
+  ]
+}

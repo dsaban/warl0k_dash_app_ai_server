@@ -1,0 +1,15 @@
+{
+  "max_len": 384,
+  "d_model": 160,
+  "n_heads": 5,
+  "d_ff": 384,
+  "n_layers": 4,
+  "emb_dim": 192,
+  "n_classes": 4,
+  "labels": [
+    "entailment",
+    "neutral",
+    "contradiction",
+    "positive_qa"
+  ]
+}

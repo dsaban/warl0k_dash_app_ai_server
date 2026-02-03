@@ -1,0 +1,46 @@
+[
+  {
+    "frame_id": "A",
+    "any_keywords": [
+      "placental hormones",
+      "hormones",
+      "human placental lactogen",
+      "hpl",
+      "cortisol",
+      "progesterone",
+      "estrogen",
+      "insulin resistance",
+      "physiological",
+      "normal pregnancy",
+      "beta-cell",
+      "beta cell",
+      "compensation",
+      "pathological",
+      "becomes pathological",
+      "why this becomes"
+    ]
+  },
+  {
+    "frame_id": "B",
+    "any_keywords": [
+      "pedersen",
+      "macrosomia",
+      "large for gestational age",
+      "lga",
+      "fetal hyperinsulin",
+      "foetal hyperinsulin"
+    ]
+  },
+  {
+    "frame_id": "D",
+    "any_keywords": [
+      "postpartum",
+      "follow-up",
+      "ogtt",
+      "4-12 weeks",
+      "future diabetes",
+      "type 2",
+      "t2dm"
+    ]
+  }
+]

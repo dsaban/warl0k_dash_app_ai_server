@@ -1,0 +1,14 @@
+{
+  "CROSSES_PLACENTA": { "node_type": "pathway" },
+  "STIMULATES_INSULIN": { "node_type": "pathway" },
+  "PROMOTES_GROWTH": { "node_type": "outcome_fetal" },
+
+  "POSTPARTUM_OGTT": { "node_type": "test" },
+  "POSTPARTUM_T2DM_RISK": { "node_type": "outcome_maternal" },
+  "RESOLVES_AFTER_DELIVERY": { "node_type": "condition" },
+
+  "BETA_CELL_LIMITATION": { "node_type": "pathway" },
+  "PERSISTENT_INSULIN_RESISTANCE": { "node_type": "pathway" },
+
+  "MONITORING_TARGETS": { "node_type": "threshold_or_timing" }
+}

@@ -1,0 +1,80 @@
+{
+  "version": "1.0",
+  "concepts": [
+    {
+      "id": "insulin_resistance_pregnancy",
+      "label": "Pregnancy insulin resistance",
+      "default_query_terms": ["gestational diabetes", "gdm", "pregnancy", "insulin resistance"],
+
+      "phrases": [
+        "insulin resistance of pregnancy",
+        "reduced insulin sensitivity during pregnancy",
+        "physiologic insulin resistance in pregnancy"
+      ],
+      "edges_hint": ["INDUCES_RESISTANCE", "REQUIRES_COMPENSATION"]
+    },
+    {
+      "id": "beta_cell_failure",
+      "label": "Beta-cell compensation failure",
+      "phrases": [
+        "beta cells cannot adapt",
+        "inadequate beta-cell compensation",
+        "beta-cell failure to compensate"
+      ],
+      "edges_hint": ["FAILURE_LEADS_TO_GDM"]
+    },
+    {
+      "id": "postpartum_followup",
+      "label": "Postpartum follow-up OGTT",
+      "phrases": [
+        "postpartum OGTT 4-12 weeks",
+        "75 g oral glucose tolerance test postpartum",
+        "postpartum screening for diabetes"
+      ],
+      "edges_hint": ["POSTPARTUM_OGTT", "POSTPARTUM_T2DM_RISK"]
+    }
+  ],
+
+  "field_extractors": [
+    {
+      "field": "bmi",
+      "type": "number",
+      "regex": "(?:BMI|bmi)\\s*[:=]\\s*(\\d+(?:\\.\\d+)?)"
+    },
+    {
+      "field": "fasting_glucose_mgdl",
+      "type": "number",
+      "regex": "(?:fasting glucose|fasting blood glucose)\\s*[:=]\\s*(\\d+(?:\\.\\d+)?)\\s*(?:mg/dl|mgdl)"
+    },
+    {
+      "field": "ogtt_1h_mgdl",
+      "type": "number",
+      "regex": "(?:1\\s*h|1h|one hour)\\s*(?:ogtt)\\s*[:=]\\s*(\\d+(?:\\.\\d+)?)\\s*(?:mg/dl|mgdl)"
+    },
+    {
+      "field": "ogtt_2h_mgdl",
+      "type": "number",
+      "regex": "(?:2\\s*h|2h|two hour)\\s*(?:ogtt)\\s*[:=]\\s*(\\d+(?:\\.\\d+)?)\\s*(?:mg/dl|mgdl)"
+    }
+  ],
+
+  "surveillance_templates": [
+    {
+      "id": "gdm_postpartum_core",
+      "label": "Postpartum follow-up core",
+      "triggers_any_concepts": ["postpartum_followup", "beta_cell_failure"],
+      "items": [
+        {
+          "title": "Postpartum OGTT",
+          "text": "Ensure postpartum visit with 75g OGTT at 4–12 weeks (per guideline sources in pack).",
+          "edges": ["POSTPARTUM_OGTT"]
+        },
+        {
+          "title": "Future pregnancy screening",
+          "text": "Women with prior GDM should be screened in subsequent pregnancies.",
+          "edges": ["POSTPARTUM_T2DM_RISK"]
+        }
+      ]
+    }
+  ]
+}

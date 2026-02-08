@@ -1,0 +1,198 @@
+import streamlit as st
+from core.store import DataStore
+from core.retrieval import Retriever
+from core.qa import QAEvaluator
+from core.patient_state import PatientStateEngine
+import networkx as nx
+import matplotlib.pyplot as plt
+
+st.set_page_config(page_title="WARL0K GDM Integrity Demo", layout="wide")
+
+@st.cache_resource
+def load_store():
+    return DataStore.load_default()
+
+store = load_store()
+retriever = Retriever(store.passages)
+qa_eval = QAEvaluator(store)
+ps_engine = PatientStateEngine(store, retriever)
+
+
+def render_patient_graph(patient: dict, results: list):
+    """Visualize a patient state graph: patient -> episode -> checks -> evidence-locked actions."""
+    G = nx.DiGraph()
+    pid = patient.get("pid","PATIENT")
+    pname = patient.get("name","")
+    pnode = f"{pid}\n{pname}".strip()
+    G.add_node(pnode, kind="patient")
+
+    # Episode nodes
+    ep = "PregnancyEpisode"
+    G.add_node(ep, kind="episode")
+    G.add_edge(pnode, ep)
+
+    # Add key facts as nodes (optional, compact)
+    ga = patient.get("gestational_age_weeks")
+    pp = patient.get("postpartum_weeks")
+    risk = patient.get("risk_level")
+    facts = []
+    if risk is not None: facts.append(f"Risk: {risk}")
+    if ga is not None: facts.append(f"GA: {ga}")
+    if pp is not None: facts.append(f"PP: {pp}")
+    if patient.get("history_gdm"): facts.append("Hx: GDM")
+    for f in facts[:4]:
+        G.add_node(f, kind="fact")
+        G.add_edge(ep, f)
+
+    # Event nodes
+    for e in patient.get("events", []):
+        et = e.get("type","event")
+        label = et
+        if e.get("name"): label += f"\n{e['name']}"
+        if e.get("date"): label += f"\n{e['date']}"
+        G.add_node(label, kind="event")
+        G.add_edge(ep, label)
+
+    # Check nodes with status
+    for r in results:
+        sid = r.get("sid")
+        title = r.get("title")
+        status = r.get("status","UNKNOWN")
+        node = f"{sid}\n{title}\n[{status}]"
+        G.add_node(node, kind="check", status=status)
+        G.add_edge(ep, node)
+        rec = r.get("recommendation","")
+        if rec:
+            rec_node = f"Action:\n{rec[:80]}{'…' if len(rec)>80 else ''}"
+            G.add_node(rec_node, kind="action", status=status)
+            G.add_edge(node, rec_node)
+
+    # Layout
+    pos = nx.spring_layout(G, seed=7, k=0.7)
+
+    # Node styling
+    def node_style(n):
+        kind = G.nodes[n].get("kind")
+        status = G.nodes[n].get("status")
+        if kind == "patient": return ("#111827", "white", 1400)
+        if kind == "episode": return ("#374151", "white", 1100)
+        if kind == "fact": return ("#6B7280", "white", 900)
+        if kind == "event": return ("#2563EB", "white", 900)
+        if kind == "check":
+            col = {"OK":"#16A34A","DUE":"#F59E0B","OVERDUE":"#DC2626","UNKNOWN":"#9CA3AF","NOT_APPLICABLE":"#64748B"}.get(status,"#9CA3AF")
+            return (col, "white", 1100)
+        if kind == "action":
+            col = {"OK":"#22C55E","DUE":"#FBBF24","OVERDUE":"#EF4444","UNKNOWN":"#D1D5DB","NOT_APPLICABLE":"#94A3B8"}.get(status,"#D1D5DB")
+            return (col, "black" if status in ("UNKNOWN","NOT_APPLICABLE") else "black", 1000)
+        return ("#9CA3AF", "black", 900)
+
+    node_colors, font_colors, sizes = [], [], []
+    for n in G.nodes():
+        c, fc, s = node_style(n)
+        node_colors.append(c)
+        font_colors.append(fc)
+        sizes.append(s)
+
+    fig = plt.figure(figsize=(12, 7))
+    ax = fig.add_subplot(111)
+    ax.axis("off")
+
+    nx.draw_networkx_edges(G, pos, ax=ax, arrows=True, arrowstyle="-|>", arrowsize=10, width=1.0, alpha=0.6)
+    nx.draw_networkx_nodes(G, pos, ax=ax, node_color=node_colors, node_size=sizes, linewidths=1.2, edgecolors="#111827", alpha=0.95)
+    nx.draw_networkx_labels(G, pos, ax=ax, font_size=8)
+
+    st.pyplot(fig, clear_figure=True)
+
+
+st.sidebar.title("WARL0K • GDM Integrity")
+mode = st.sidebar.radio("Mode", ["Evidence Search", "Q/A Validator", "Patient State"], index=2)
+
+st.sidebar.markdown("---")
+st.sidebar.caption("Integrity rule: answers must be supported by retrieved evidence (or the system refuses).")
+
+if mode == "Evidence Search":
+    st.title("Evidence Search (BM25 + TF‑IDF semantic)")
+    q = st.text_input("Query", "low risk pregnancy screening window 24 28 weeks OGTT")
+    k = st.slider("Top‑K", 3, 15, 8)
+
+    if st.button("Search"):
+        results = retriever.search(q, k=k)
+        for r in results:
+            with st.expander(f"{r['rank']}. {r['doc']} • {r['pid']} • score={r['score']:.3f}"):
+                st.write(r["text"])
+                st.code(r["highlights"], language="text")
+
+elif mode == "Q/A Validator":
+    st.title("Q/A Validator (locked answers + variants)")
+    qs = store.questions
+    qids = [q["qid"] for q in qs]
+    selected = st.selectbox("Question ID", qids, index=0)
+    qobj = next(q for q in qs if q["qid"] == selected)
+
+    st.subheader("Question")
+    st.write(qobj["question"])
+
+    st.subheader("Locked answer (gold)")
+    st.write(qobj["locked_answer"])
+
+    st.subheader("Try a variant / custom answer")
+    variant = st.selectbox("Example", ["locked_answer", "contradictory_example", "bad_example", "neutral_example", "entangled_example", "custom"])
+    if variant == "custom":
+        answer = st.text_area("Answer to validate", value="", height=140)
+    else:
+        answer = qobj[variant] if variant != "locked_answer" else qobj["locked_answer"]
+        st.info(answer)
+
+    k = st.slider("Evidence Top‑K", 3, 20, 10)
+    if st.button("Validate"):
+        report = qa_eval.validate(qobj, answer, retriever, k=k)
+
+        col1, col2 = st.columns([1,1])
+        with col1:
+            st.subheader("Result")
+            st.metric("Integrity score", f"{report['score']:.2f}")
+            st.write("**Verdict:**", report["verdict"])
+            st.write("**Reasons:**")
+            for x in report["reasons"]:
+                st.write(f"- {x}")
+
+        with col2:
+            st.subheader("Evidence used")
+            for e in report["evidence"]:
+                with st.expander(f"{e['rank']}. {e['doc']} • {e['pid']} • score={e['score']:.3f}"):
+                    st.write(e["text"])
+
+        st.subheader("Field checks")
+        st.json(report["field_checks"])
+
+elif mode == "Patient State":
+    st.title("Patient State (Gold care checks + evidence‑locked recommendations)")
+    pats = store.patients
+    pid = st.selectbox("Patient", [p["pid"] + " — " + p.get("name","") for p in pats], index=0)
+    pid = pid.split(" — ")[0]
+    patient = next(p for p in pats if p["pid"] == pid)
+
+    st.subheader("Patient snapshot")
+    c1,c2,c3,c4 = st.columns(4)
+    c1.metric("Risk level", str(patient.get("risk_level", "—")))
+    c2.metric("GA weeks", str(patient.get("gestational_age_weeks", "—")))
+    c3.metric("Postpartum weeks", str(patient.get("postpartum_weeks", "—")))
+    c4.metric("History GDM", "Yes" if patient.get("history_gdm") else "No")
+
+    st.subheader("Patient state graph")
+    render_patient_graph(patient, results)
+
+    st.markdown("---")
+    st.subheader("Checklist")
+    results = ps_engine.evaluate_patient(patient, k=8)
+
+    for res in results:
+        status = res["status"]
+        icon = {"DUE":"🟠","OVERDUE":"🔴","OK":"🟢","UNKNOWN":"⚪","NOT_APPLICABLE":"➖"}.get(status,"⚪")
+        with st.expander(f"{icon} {res['sid']} • {res['title']} — {status}"):
+            st.write(res["description"])
+            st.write("**Recommendation:**", res["recommendation"])
+            st.write("**Why (evidence‑locked):**")
+            for ev in res["evidence"]:
+                st.write(f"- {ev['doc']} • {ev['pid']} (score={ev['score']:.3f})")
+                st.caption(ev["text"])

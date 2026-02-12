@@ -24,7 +24,7 @@ local_med_moe/
     pipeline.py
 
 #local_med_moe/
-#  app.py
+#  app1.py
 #  train_router_ebm.py
 #  docs/
 #    example_gdm.txt

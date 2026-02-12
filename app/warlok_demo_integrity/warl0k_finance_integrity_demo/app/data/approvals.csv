@@ -1,0 +1,3 @@
+approval_id,invoice_id,approver_role,approver_name,approved,approved_date
+A2001,I1001,Manager,Dana,YES,2026-01-22
+A2002,I1004,Manager,Dana,YES,2026-01-12

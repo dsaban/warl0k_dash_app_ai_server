@@ -1,0 +1,5 @@
+{"pack_id": "PK_SCREENING", "title": "Screening window and test selection", "entity_ids": ["E_SCREEN_WINDOW", "E_OGTT"], "claim_ids": ["c0094", "c0095", "c0162"]}
+{"pack_id": "PK_POSTPARTUM", "title": "Postpartum follow-up testing and long-term risk", "entity_ids": ["E_POSTPARTUM_OGTT", "E_TYPE2_RISK", "E_OGTT"], "claim_ids": ["c0171", "c0083", "c0194", "c0024"]}
+{"pack_id": "PK_OGTT_THRESH", "title": "OGTT diagnostic approach and thresholds", "entity_ids": ["E_OGTT", "E_FPG"], "claim_ids": ["c0110", "c0122", "c0190"]}
+{"pack_id": "PK_RISKS", "title": "Maternal and neonatal risks", "entity_ids": ["E_MACROSOMIA", "E_NEONATAL_HYPOGLYC", "E_PREECLAMPSIA", "E_CSECTION"], "claim_ids": ["c0023", "c0076", "c0114", "c0007"]}
+{"pack_id": "PK_MECH", "title": "Mechanism: placental hormones and beta-cell compensation", "entity_ids": ["E_PLACENTAL_HORMONES", "E_INSULIN_RESIST", "E_BETACELL"], "claim_ids": ["c0140", "c0121", "c0181"]}

@@ -1,4 +1,4 @@
-# app.py
+# app1.py
 # Streamlit WARL0K demo (no Rust / no external crypto libs):
 # - Pure-Python DH Group-14 session bootstrap (no seed shipping)
 # - HKDF/HMAC per-message keys + device-unique nano-AI pepper

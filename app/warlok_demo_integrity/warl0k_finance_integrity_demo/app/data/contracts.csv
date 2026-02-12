@@ -1,0 +1,4 @@
+contract_id,vendor_id,start_date,end_date,currency,rate_card_ref,requires_po,max_single_payment_without_cfo_usd,security_addendum
+C001,V001,2025-01-01,2026-12-31,USD,RC001,YES,5000,YES
+C002,V002,2025-06-01,2026-06-01,USD,RC002,NO,10000,N/A
+C003,V003,2024-09-01,2026-09-01,USD,RC003,YES,3000,YES

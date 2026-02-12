@@ -10,7 +10,7 @@ This is a **proof-first** evidence-based demo for gestational diabetes (GDM):
 
 ```bash
 cd app
-streamlit run app.py
+streamlit run app1.py
 ```
 
 ## Data

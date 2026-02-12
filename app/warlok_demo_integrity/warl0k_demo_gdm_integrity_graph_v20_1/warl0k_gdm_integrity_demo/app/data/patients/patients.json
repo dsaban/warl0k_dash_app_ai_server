@@ -1,0 +1,89 @@
+[
+  {
+    "id": "P001",
+    "name": "Demo Patient A",
+    "high_risk": true,
+    "gdm_confirmed": false,
+    "on_medication": false,
+    "delivered": false,
+    "ga_weeks": 12,
+    "ga_days": 3,
+    "events": [
+      {
+        "type": "visit",
+        "ga": "12w+3d",
+        "date": "2026-02-11",
+        "note": "First prenatal visit; BMI\u226530; FHx T2D"
+      }
+    ]
+  },
+  {
+    "id": "P002",
+    "name": "Demo Patient B",
+    "high_risk": false,
+    "gdm_confirmed": true,
+    "on_medication": false,
+    "delivered": false,
+    "ga_weeks": 26,
+    "ga_days": 2,
+    "events": [
+      {
+        "type": "ogtt_75g_done",
+        "ga": "25w+6d",
+        "date": "2026-02-01",
+        "result": "Positive",
+        "note": "Meets diagnostic thresholds"
+      },
+      {
+        "type": "smbg",
+        "ga": "26w+0d",
+        "date": "2026-02-05",
+        "when": "fasting",
+        "value": 103,
+        "unit": "mg/dL"
+      },
+      {
+        "type": "smbg",
+        "ga": "26w+1d",
+        "date": "2026-02-06",
+        "when": "2h postprandial",
+        "value": 155,
+        "unit": "mg/dL"
+      },
+      {
+        "type": "smbg",
+        "ga": "26w+2d",
+        "date": "2026-02-07",
+        "when": "fasting",
+        "value": 100,
+        "unit": "mg/dL"
+      },
+      {
+        "type": "smbg",
+        "ga": "26w+2d",
+        "date": "2026-02-08",
+        "when": "2h postprandial",
+        "value": 150,
+        "unit": "mg/dL"
+      }
+    ]
+  },
+  {
+    "id": "P003",
+    "name": "Demo Patient C",
+    "high_risk": true,
+    "gdm_confirmed": true,
+    "on_medication": true,
+    "delivered": true,
+    "ga_weeks": 0,
+    "ga_days": 0,
+    "events": [
+      {
+        "type": "delivery",
+        "ga": "39w+0d",
+        "date": "2026-01-10",
+        "note": "Delivered"
+      }
+    ]
+  }
+]

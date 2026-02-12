@@ -45,7 +45,7 @@ def main():
         print(f"[AutoImprove] iter={i+1} added_terms={upd['added_terms']}")
 
     print("\nLaunching UI...\n")
-    cmd = [sys.executable, "-m", "streamlit", "run", str(root / "app.py")]
+    cmd = [sys.executable, "-m", "streamlit", "run", str(root / "app1.py")]
     raise SystemExit(subprocess.call(cmd))
 
 if __name__ == "__main__":

@@ -1,0 +1,4 @@
+task_id,close_period,task_name,owner,due_date,status
+T001,2026-01,AP subledger reconciliation,Controller,2026-02-03,IN_PROGRESS
+T002,2026-01,Accrual review (material variances),FP&A,2026-02-04,NOT_STARTED
+T003,2026-01,SOX control sign-off (AP approvals),Compliance,2026-02-05,NOT_STARTED

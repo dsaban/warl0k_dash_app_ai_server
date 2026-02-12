@@ -1,0 +1,3 @@
+{"rule_id": "R001", "trigger": {"sid": "S_SCREENING", "status_in": ["DUE", "OVERDUE"]}, "task": {"task_type": "ORDER_TEST", "title": "Order GDM screening test (per guideline)", "priority": "HIGH", "owner": "Clinic"}, "due_days": 7}
+{"rule_id": "R002", "trigger": {"sid": "S_POSTPARTUM_OGTT", "status_in": ["DUE", "OVERDUE"]}, "task": {"task_type": "ORDER_TEST", "title": "Schedule postpartum 75g 2h OGTT", "priority": "HIGH", "owner": "Clinic"}, "due_days": 14}
+{"rule_id": "R003", "trigger": {"sid": "S_LIFESTYLE_COUNSELING", "status_in": ["DUE", "OVERDUE"]}, "task": {"task_type": "EDUCATION", "title": "Provide diet/exercise counseling and SMBG plan", "priority": "MED", "owner": "Nurse"}, "due_days": 10}

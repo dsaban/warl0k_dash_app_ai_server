@@ -1,0 +1,284 @@
+
+US Patent & Trademark Office
+Patent Public Search | Text View
+United States Patent
+12547981
+Kind Code
+B2
+Date of Patent
+February 10, 2026
+Inventor(s)
+Janis; James Andrew et al.
+Access authentication and/or item process management using identification codes
+Abstract
+Methods and systems using unique item identifiers and a wireless device to (a) authenticate authorization to take possession of an item and (b) specifying and/or tracking service processing of the item.
+
+Inventors:
+
+Janis; James Andrew (Pittsburgh, PA), Conklin; David Dwane (Washington, PA), Young; Robert Alan (Palm Beach Gardens, FL)
+
+Applicant:
+
+The Laundry Chute LLC (Palm Beach Gardens, FL)
+
+Family ID:
+
+1000009088377
+
+Assignee:
+
+The Laundry Chute LLC (Palm Beach Gardens, FL)
+
+Appl. No.:
+
+18/587277
+
+Filed:
+
+February 26, 2024
+
+Prior Publication Data
+Document Identifier
+Publication Date
+US 20240193545 A1
+Jun. 13, 2024
+Related U.S. Application Data
+continuation parent-doc US 15933188 20180322 US 11941578 child-doc US 18587277
+continuation parent-doc US 15447238 20170302 US 9984356 20180529 child-doc US 15933188
+continuation-in-part parent-doc US 14597813 20150115 US 9589249 20170307 child-doc US 15447238
+us-provisional-application US 61928666 20140117
+
+Publication Classification
+Int. Cl.:
+
+G06K7/10 (20060101); G06Q10/087 (20230101); H04L9/40 (20220101); H04W4/80 (20180101); H04W12/062 (20210101)
+
+U.S. Cl.:
+
+CPC
+
+G06Q10/087 (20130101); G06K7/10861 (20130101); H04L63/083 (20130101); H04W4/80 (20180201); H04W12/062 (20210101);
+
+Field of Classification Search
+CPC:
+
+G06Q (10/087); G06K (7/10861); H04L (63/083); H04W (4/80); H04W (12/062)
+
+References Cited
+U.S. PATENT DOCUMENTS
+Patent No.
+Issued Date
+Patentee Name
+U.S. Cl.
+CPC
+6259367
+12/2000
+Klein
+N/A
+N/A
+6496112
+12/2001
+Vega
+N/A
+N/A
+6769611
+12/2003
+Miller et al.
+N/A
+N/A
+9230230
+12/2015
+Gupta et al.
+N/A
+N/A
+2003/0189094
+12/2002
+Trabitz
+N/A
+N/A
+2004/0124982
+12/2003
+Kovach
+N/A
+N/A
+2005/0035860
+12/2004
+Taylor et al.
+N/A
+N/A
+2007/0215685
+12/2006
+Self et al.
+N/A
+N/A
+2010/0005003
+12/2009
+Cassaday et al.
+N/A
+N/A
+2010/0250384
+12/2009
+Bhargava
+N/A
+N/A
+2012/0187185
+12/2011
+Sayan
+N/A
+N/A
+2012/0278096
+12/2011
+Holness
+N/A
+N/A
+2012/0316950
+12/2011
+Laporte et al.
+N/A
+N/A
+2012/0319815
+12/2011
+Feldman
+N/A
+N/A
+2013/0031623
+12/2012
+Sanders
+N/A
+N/A
+2013/0054271
+12/2012
+Langford et al.
+N/A
+N/A
+2013/0145446
+12/2012
+Dorso et al.
+N/A
+N/A
+2015/0186840
+12/2014
+Torres
+705/339
+A47F 10/02
+Primary Examiner: Franklin; Jamara A
+
+Attorney, Agent or Firm: Shook, Hardy & Bacon L.L.P.
+
+Background/Summary
+CROSS REFERENCE TO RELATED APPLICATIONS (1) This application is a continuation of and claims priority to U.S. application Ser. No. 15/933,188, filed Mar. 22, 2018, entitled “ACCESS AUTHENTICATION AND/OR ITEM PROCESS MANAGEMENT USING IDENTIFICATION CODES,” which is a continuation of U.S. application Ser. No. 15/447,238, filed Mar. 2, 2017, now U.S. Pat. No. 9,984,356, entitled “ACCESS AUTHENTICATION AND/OR ITEM PROCESS MANAGEMENT USING IDENTIFICATION CODES”, which is a continuation-in-part of U.S. application Ser. No. 14/597,813, filed Jan. 15, 2015, now U.S. Pat. No. 9,589,249 entitled “ACCESS AUTHENTICATION AND/OR ITEM PROCESS MANAGEMENT USING IDENTIFICATION CODES”; which claims the benefit of U.S. Provisional Patent Application No. 61/928,666, filed Jan. 17, 2014, entitled “ACCESS AUTHENTICATION AND/OR ITEM PROCESS MANAGEMENT USING IDENTIFICATION CODES”, the entire contents of each of which are hereby incorporated by reference.
+
+FIELD
+(1) This patent application relates to electronic systems for managing access to an item and for services to be applied to an item.
+BACKGROUND
+(2) Certain businesses provide a service where a physical object owned by someone else is taken in for handling or processing and then returned. One such business is a laundry service. Institutions such as restaurants, hotels and hospitals, delivery services, emergency responders, indeed any organization that dresses their public-facing personnel in uniforms, requires a constant flow of clean linens and garments. A similar challenge is presented in a university or hotel valet where there may be thousands of students or hotel guests needing their personal garments washed on a regular and timely basis.
+(3) Organized collection, sorting, laundering, packaging, and timely return of articles in these environments is critical to smooth operation of the institution as a whole.
+(4) It is also important to correctly associate a specific customer with each piece of personal property being serviced so that items are not returned to people who are not authorized to receive them.
+(5) A customer of such a service would also prefer to be notified of certain events, such as the stage of processing, and when their items are ready to be picked up.
+SUMMARY
+(6) In one implementation, a physical item that is to be submitted for handling by a service provider is associated with a unique identifying code that is electronically readable, such as a Quick Response (QR) code. The electronic identifying code may be placed on the item itself, or placed on a container for the item. For example, in the case where the service is a laundry service, the identifying code is preferably placed on the outside of a laundry bag issued to an individual end customer.
+(7) In one example implementation, a customer having item(s) for service is expected to have a smartphone or other personal portable computing device that is capable of executing a mobile application software program to interact with the customer; being electrically queried to retrieve a Universal Device Identifier (UDID) associated with the smartphone; taking a digital photo of the identifying code associated with the item (laundry bag); and/or taking digital photos of the service item(s) themselves (such as a garment) to further support any special instructions to be used in rendering the service.
+(8) Prior to a customer dropping off their items for service, the smartphone application is executed to initiate collection of information needed to initiate a service order. Using the smartphone application, the customer may take pictures of any items needing special processing. For example, a picture may be taken of an article of clothing that is stained, and that picture is stored with the special order instructions.
+(9) It is also possible to provide authentication before a customer is permitted to take possession of a processed article. For example, once the articles are processed (laundered) by the service provider, they may be returned to a pick up location. At this point, the customer arrives to pick up their items and runs a smartphone application. After physically identifying their items (for example, their laundry bag), the smartphone is used to scan/electronically detect the unique item identification code (the QR code on the bag) and to upload the item ID and the smartphone UDID to a server. The service checks the item ID and UDID data pair against its stored information to verify the identity of the customer. At this point additional authentication information such as an access code may be required to be provided via the smartphone application. It is only after the verification and authentication of the customer is the customer permitted to take the item away from the pick up location.
+(10) The use of QR codes on or associated with the item itself also provides a way to track the progress items. For example, when items are dropped off for service, the identifying code for the item may be scanned to initiate automated tracking. From there, each state a laundering process can be recorded, from laundry pickup through travel to a processing plant, through all laundering stages, to packaging, to return delivery at the point where it is claimed by the customer. This allows for both the operator and customer to have real-time insight into the status of laundry orders at any point of the processing cycle.
+(11) Other features and advantages will become evident after reviewing the detailed description that follows.
+
+Description
+BRIEF DESCRIPTION OF THE DRAWINGS
+(1) The description below refers to the accompanying drawings, of which:
+(2) FIG. 1 is a high level graphic depiction of a laundry service from the perspective of an end customer;
+(3) FIG. 2 is a work flow for initiating a new laundry service order;
+(4) FIG. 3 is a work flow from the perspective of the laundry service provider;
+(5) FIG. 4 is a work flow for a returning customer picking up their laundry;
+(6) FIG. 5A is a sequence diagram for an authentication process;
+(7) FIG. 5B is a sequence diagram for a drop-off and pickup process;
+(8) FIG. 6 is an example data structure for a customer record; and
+(9) FIG. 7 is an example data structure for an order record.
+DESCRIPTION OF AN EXAMPLE EMBODIMENT
+(10) As will be understood after reviewing the detailed description below, a system and method can be provided that uses electronically readable identifying information placed on an item, such as a Quick Response (QR) code, bar code or other information that identifies the item, in connection with authentication data, such as unique identifier for a personal portable computing device associated with the customer (that is, the smartphone's unique device identifier (UDID)), data made available by the smartphone via Near Field Communication (NFC) or some other protocol, and/or a unique identifier for the customer, such as a biometric (fingerprint, photograph, signature), or some other information that identifies the customer, such as a passcode. The item identifier and authentication data are used for the purpose of identifying and authenticating the owner or other authorized person to access the physical item at the time it is dropped off and/or claimed, as well as to track the status of submitting that same item through a service process.
+(11) A particular implementation for tracking a laundry bag item is discussed below. This implementation illustrates the use of the system and method from both the perspective of a customer of a laundry service as well as the perspective of a laundry service provider, and describes a sequence of operations performed by associated smartphones, servers, and databases. It will be understood however that other types of services that take in articles to be processed can make use of the techniques described herein.
+(12) FIG. 1 generally illustrates a smartphone driven laundry service from the perspective of a customer. Here a customer 110 (who, for example, may be a college student or other institutional customer) brings their dirty laundry 112 and smart phone 114 to a drop-off location 120. The customer may have been assigned a scheduled date and time to drop off their laundry at location 120, or the time may be been chosen by the customer. The customer 110 has previously signed up to use a laundry service 140 either by using their smartphone 114 or via some other internet-capable device. The sign up process can be through any known process. The customer 110 may for example have previously interacted using their smartphone 114 with a server (called a service provider server 130 herein) to provide certain personal information such as their name and contact info, and billing information such as a payment, which is then stored in database 150.
+(13) During the sign-up process, the personal information for customer 110 is identified and associated in the database 150 with a customer record that may include (i) an identifier their smart phone 114. During the process, or at some later time such as at the drop off location, such as by storing (a) the item identifier for the laundry bag 112 and some other authentication information such as a unique device identifier (UDID) for the customers' smartphone 114, NFC data generated by the smartphone 114, and/or (b) customer authentication information such as a biometric or a passcode given to the customer.
+(14) An identifier tag 116 may carry the item identifier associated with the laundry bag 112. The tag 116 may thus conveniently takes the form of a QR code, barcode, or other visual indicia for the item which can be digitally scanned or otherwise electronically detected by the smartphone 114 camera or other available scanning device. The indicia associated with the tag 116 may be printed or located on or within the bag itself, or may be printed or located on a fob attached to the bag. The tag 116 may thus either be permanently or temporarily associated with the bag, depending on the needs of the customer 110 and/or the laundry service provider.
+(15) In one example implementation, a clerk 122 is located at the drop-off location 120 and assures orderly collection (and later delivery) of laundry bags from and to multiple customers 110. The clerk 122, via mobile device and software application running on a computer, tablet, or smartphone 124, scans or electronically detects the unique QR code on the tag 116 of the laundry bag 112 for the customer 110 that is bringing their laundry for processing. This detection of the QR code (or other item identifier) is forwarded and stored in database 150 and can represent liability transfer of the laundry items from the customer 110 to the laundry service 140. From the perspective of the customer 110, all they typically need to interact with is the clerk 122 at the pick-up location and their smartphone 114.
+(16) In other embodiments, the drop-off location 120 may be an electronically controlled lock box 127 that is not attended by a clerk 122. In that arrangement, the customer 110 may gain access to the lock box 127 at any time (or only at scheduled times) by arriving at the drop off location 120. The customer 110 then calls up the smartphone application to exchange information wirelessly and electronically to identify themselves and to cause the lock box 127 to unlock. The unlocking may occur, for example, electronically via commands sent by server 130 to the lock box 127, or by an unlock code to the customer via the smartphone application which is then used to manually manipulate a lock on the box 127.
+(17) The customer 110 themselves can then scan the tag 116 and deposit the bag 112 in the lock box 127. This event can be detected and reported to the server 130. An access code or password may also be associated with the lock box 127 and scanned or typed into the smartphone 114 application by customer 110 to access the lock box 127 and/or inform server 130 that a bag has been dropped into the lock box 127. In any event, the server 130 can now record the fact that the lock box location 127 has a new bag 112 now needing laundry services.
+(18) In instances where a lock box 127 is used for drop-off, system generated passcodes may be used for both authentication and/or authorization of the customer. The drop off and pick up locations may include more than one lock box 127 that are shared from time to time among different customers.
+(19) In one implementation using a lock box 127, the smart phone 114 application may further assist with instructing the customer 110 on how to proceed. For example, the information exchanged with the customer 110 may indicate which of several locations currently have available empty lock boxes 127. Here, the information exchanged may include a system-generated passcode that can be used to access the lock box 127. The passcode may be made unique to the both the available location and the tag 116 that was previously associated with the customer's bag 112.
+(20) If a passcode is used for authentication, it may be generated in many different ways. It may be a short pass code of four or five digits, but shorter or longer. It may use alphanumeric characters and not just digits. Passcodes may also be permanently assigned to a customer as opposed to being generated on each transaction.
+(21) It is also possible that passcodes are not used at the lockbox location for authentication, but rather other authentication data such as Near Field Communications (NFC), Bluetooth, or other technologies that allows the customer's smartphone to communicate directly with and be uniquely identified by the lockbox system. Thus, there are other ways to cause the lockbox to unlock without the customer having to utilize a kiosk or a passcode.
+(22) Other information may also be collected for authentication of the customer, in the place of, or in addition to that mentioned above, such as biometrics provided by the user (a fingerprint, facial photograph, signature, etc.)
+(23) Upon arrival at a location of an available lock box 127, the customer then provides the passcode or other authentication information to gain access. The passcode or other authentication may be provided such as via a kiosk at the lock box location or in some other way (such as via the smartphone 114). The customer then places their bag in 112 in any available open lock box 127 and closes the lock box 127. The customer 110 may then use the smartphone 114 to report that they have dropped their bag 112 off for service.
+(24) A number of other systems and entities exist behind the scenes that the end customers 110 do not typically see.
+(25) For example, at a subsequent time a laundry service provider 140 sends a vehicle 142 to the drop off location 120 to retrieve multiple laundry bags 112. The vehicle 142 transports the bags to a laundry processing plant 144 containing laundry machines 146. It is understood that the QR tags 116 on the bags 112 may at various times be further scanned. For example, the clerk 122 or driver of the vehicle 142 may scan them as they are loaded onto the vehicle 142 at the drop off location 120, or they may be scanned as part of intake processing at the plant 144, when items are processed by the laundry machines 146 or at other instances and places. The additional scanning information enables the service provider server 130 or other data processing machine such as one or more other machine(s) 160 to keep track of the status of each laundry bag 112. In different implementations, other data processing machines (s) 160 may access the database 150 through the service provider server 130 or may have direct access to database 150. For example, a laundry service operator version of the software application located at plant 144 may be used by service personnel to review order status and order details, such as to carry out any special processing instructions.
+(26) At some point the laundry is processed 146, and the clean items are shrink wrapped with the bag 112 on top (or the shrink wrapped laundry is placed inside the bag) in any case, so that the QR code 116 is visible. The vehicle 142 then returns to the drop off location with the processed bags 112.
+(27) At this subsequent time, which may be a prearranged time or in response to receiving a message that the laundry is ready, the customer returns to location 120 (or some other designated location). At this time the customer 110 (with or without help from clerk 122) identifies their laundry bag 112 from among many other laundry bags that may have been dropped off. This identification by the customer may be recognizing a human-readable label 118 on the bag 112 such as a name tag. Having the QR code and other identification on a single ID tag is advantageous, so that it becomes more difficult to have bags switched/lost/etc. The customer 110 then again scans the QR code 116 on the identified bag 112 with their smart phone 114. The smartphone 114 and service provider server 130 then exchange information (UDID, QR Code, and authentication information, etc.) to confirm that the customer 110 is indeed authenticated as the owner of the bag 112 and provides a visual and/or audible indication to that effect. Upon recognizing the confirmation, the clerk 122 can now confirm that it is approved for the particular individual appearing before them in person to claim possession of the bag 112. The claimed status of the laundry order is now stored in the database 150 to represent liability transfer from laundry service 140 to customer 110.
+(28) In the case where lock boxes 127 are used to return the bag 112 to the customer 110, the notice provided via the smartphone 114 that laundry is ready for pickup may include notification of the pickup location. This notification may also include a system generated passcode if that is being used for authentication. The passcode may be unique to a specific lock box 127 (or locker) and the customer's bag 112. The notice may be delivered via a smartphone application, text message, email, push notifications, or in other ways.
+(29) The customer then travels to the pickup location and provides the authentication data (such as the passcode or their biometrics, or by automated reading of the UUID or NFC data from their smartphone) to the system. The passcode, if utilized, may be entered into a kiosk located at the lock box location on via the mobile application. Once authenticated to the system, the customer is then provided with information as to which specific lock box 127 their bag 112 is in, and given access to that lock box in some way, such as by unlocking it. The customer then picks up their bag 112, and may then again use the smartphone 114 to indicate to the system that they have picked up their bag 112. Alternatively, the lock box system can communicate to the server provider 130 that the bag has been picked up and that particular lock box is now available for use by another customer.
+(30) FIG. 2 is a more detailed view of an example work flow performed when a customer 110 is beginning a new laundry order. From an initial state 200 the customer 110 realizes that they have laundry to be processed in state 202. In state 204 the customer collects their laundry. In state 206 if no special processing instructions are needed for the items collected, then the customer can proceed to state 220.
+(31) However if any of the items require special processing then a state 208 is entered. Here the customer accesses a website operated by the service provider server 130. This access may typically occur on the smartphone 114 using a mobile application. In state 210 the customer starts a new order in the context of the mobile application and may in state 212 select a type of garment to be processed. In state 214 the customer may indicate the special instructions for the garment. The special instructions may include for example indicating the garment is to be dry cleaned, spot treated, only light starched, etc. Certain special instructions may activate additional charges processing in the mobile application, but other special instructions may not activate special charges.
+(32) In state 216 certain special instructions may request the customer 110 to take a photograph of the garment. For example, if a stain on the garment is to be spot treated the customer 110 may be asked to take a picture of the location surrounding the stain on the garment. In state 217 the picture is taken using the smartphone and saved as part of the order instructions being collected by the application running on the smartphone 114. In this step, the photograph may be itself annotated, such as by electronically circling, marking, or otherwise indicating the stained area on the picture of the garment needing attention.
+(33) Processing returns in either event to state 218, where if more garments need special instructions then state 212 is entered again. However, if no more garments need special instructions, then processing proceeds through state 219. The order with special instructions can be submitted at this time, or maintained by the smartphone 114 until a later time, such as when the customer arrives at the pickup location 120. In this step, the order details including any special instructions and/or photographs of articles are sent to an electronic order processing system such as via service provider server 130 and/or another server 160, and billing can occur at this point as well. Note that the special instructions and taking of photographs, etc., is conveniently done back in the dormitory or at home, before the appointment time. Thus at the appointment time, all the customer needs to do is to drop off the bag 112 and optionally confirm drop off with their smartphone 114.
+(34) In state 220 the customer can then fill the bag with the laundry items and in state 220 proceed to the drop off point 120. If the customer had no special processing instructions, then a standard order is initiated. Order initiation may typically by the customer interacting with their smartphone application, which can happen anytime prior to the bag 112 being left at the pick up location 120. Optionally, even if the customer does not initiate an order via their smartphone 114, a standard order might also be initiated at the time the bag 112 is scanned when it is loaded onto vehicle 142 or arrives at plant 144.
+(35) FIG. 3 is a sequence of workflow events that may occur from the perspective of the laundry service provider 140. In a first state 302 a customer 110 arrives at the drop-off location 120 (at an appointed time or some other time the location 120 is open for business) and leaves a laundry bag 112. At some later point in time in state 304 a driver arrives at the drop-off location. Here the driver will scan the laundry bags 112 before or while loading them on the vehicle. In state 306 the bags are then delivered to the plant 144.
+(36) In state 308 the garments are processed at the plant. In state 310 any details for any special items are identified, such as by laundry service personnel accessing database 150 via the order information via other server(s) 160. If any items require special processing then laundry service personnel can access digital photographs associated with the order such as via computer, tablet, smartphone, or other device 190 located in the processing plant 144. The photographs can be retrieved to ensure that special instructions are properly carried out as previously indicated for each specially handled garment by the end customer 110 who directly did so. Finally in a state 314 the laundry order is packaged with the bag 112 for return delivery to the drop off location 120.
+(37) FIG. 4 is a sequence of events that occur when the laundry is returned to a manned drop off location 120 in a state 400. At some later time in state 402 the customer arrives such as at an appointment time to pick up their bag 112. In state 404 customer 110 identifies their laundry bag 112 such as by visually noting their name tag 118 on the side of a bag from among a number of bags that may be present.
+(38) Once the customer 110 finds their bag 112 they then initiate an authentication process, such as by scanning the QR code 116 on the bag 112 with the application running on a smartphone 114. The QR code and the UDID electronically stored by the smartphone are then sent to the service provider server 130. The service provider server 130 then proceeds to a state 408 where an authentication process using the QR code and UDID is performed. It is possible at this point, before state 408 that additional authentication such as a passcode (such as four digit Personal Identification Number (PIN)) may be requested in state 407. This passcode may be entered by the customer 110 via the smartphone 114 and passed to the server 130 with the QR code and UDID in state 408.
+(39) In a state 410 it is determined if there is a match between the QR code scan and the UDID (and the passcode/PIN, if included) with the stored prior records for the order in process for that particular bag 112. If there is a match, then a positive visual and/or aural indication can be presented in state 412 on the smartphone 114 and shown to the clerk 122. The indication is taken by the clerk that the system has confirmed that it is OK for the person who has scanned the bag to take possession of the bag. In state 414 the confirmation notation that the bag has been picked up may be entered in the database maintained by the service provider server 130 for the purpose of tracking the state of the order.
+(40) If however back in state 410 there was no match between the QR code and UDID, or a failure of the passcode/PIN, indicating that the bag should not be taken, then a number of following states 416 can entered. For a state 420 may be entered where a question is asked via the smartphone to confirm if the user is trying to pick up a laundry bag. This can provide the customer a “way out” of a deviation in the normal expected pickup process flow; if they scanned an incorrect bag, an option can be presented for them to try again. Alternatively an optional state 422 can be entered in which the service can assume that the person scanning the bag is not yet a customer of the service, and an advertisement for the service can be presented on the smartphone. Also, an optional state 424 can be entered in which a display can be presented on the smart phone telling the customer that their bag has been delayed in processing. Also, in state 426, a screen may be optionally displayed allowing the user to indicate that some apparent mistake was made with the laundry processing (for example a garment was damaged) that will need further attention. However, this may also occur after the customer leaves the pick-up location, such as when the customer returns home and opens up the bag to inspect the processed laundry items.
+(41) Still other states 430 may be entered by the system to process any leftover bags that are not picked up at the appointment time. These may be noted by the clerk 122 scanning the leftover bags with the other computer 124 which may be a tablet. This information can then be entered into the service provider server 130 to keep track of the fact that the processed laundry bags were not picked up as expected at the appointment time.
+(42) FIG. 5A is a sequence diagram for messages exchanged between and/or actions performed by the customer 110, the customer's smartphone 114, the service provider server 130, and the database 150. This sequence diagram indicates the authentication process flow using a pin or passcode (which controls access to higher level secured functions such as “Laundry Pickup” via an application tiered security implementation model) coupled with the QR Code and the UDID to authenticate and authorize the customer 110 to take possession of laundry bag 112.
+(43) In a first state 501 the customer 110 opens the application on their smartphone 114, and in state 502 the smartphone loads the smart phone application. In state 503 the user enters an input within the context of the application such as by clicking on a request to pick up their laundry. A test is then performed to determine if the user session is authenticated in step 504; if the session is already authenticated in state 505 then in state 520 the laundry pickup page is displayed; otherwise, if the session is not already authenticated in state 505 then a passcode entry page is displayed on the mobile device in state 506. The customer then enters a passcode in state 507 which is then passed for validation in state 510 along with the UDID for the mobile phone in state 511. If the validation code returned in state 512 and 513 is invalid in state 514, then a passcode entry page can be displayed in state 515. These steps can be repeated in state 516 if further necessary to validate passcode entry.
+(44) In state 520 a point is reached where a pick up laundry page is displayed on the smartphone device 114. The customer then uses the smartphone 114 to focus on and scan a QR code of the bag 112 in state 521. Here the smartphone may capture the QR code such as via a digital photograph. The application next, in state 522, deciphers the QR code from the photograph and forwards it to the server 130. At state 523 the QR code (and optionally UDID) are sent through a network connection such as the Internet to the database 523. The database 523 maintains a mapping of these values as authentication factors and then returns a QR validation code in state 524. This QR validation code is then returned to the smartphone in state 525. If the QR code is valid in state 526 then a visual indication of acceptance of the customers request to pick up the bag is displayed in state 527 on the smartphone 114.
+(45) At this point in state 528 the customer 110 shows the visual indication of acceptance to the clerk 122 for confirmation and then the customer may claim the laundry bag and accept it; alternatively visual indication of rejection of the customers request to pick up the bag is displayed to the customer 110 in state 529. If the acceptance is rejected, then a sequence of states 530 and 531 and 532 may be repeated to try to successfully complete the pick up process again.
+(46) FIG. 5B illustrates a similar sequence of messages exchanged between and/or actions performed by the customer 110, the smartphone 114, and the service provider system 130, when an unmanned lock box system is used to coordinate drop-off and pickup. In general, system-generated value such as passcode (or other authentication data such as NFC or biometrics) is used in certain steps of the process to indicate status and authorization; in this implementation, the passcode may depend on the lock box location and the bag identifier.
+(47) In a first state 550, the customer 110 starts the smartphone application and indicates they have laundry to be processed. As before, the customer then uses their smartphone in state 551 to capture a QR code or other identifier for the bag 112 and the captured identifier is reported in state 552 to the system, and the system acknowledges receipt of the item identifier in state 553.
+(48) In state 555 (which may occur before or after the customer scans the bag), the customer 112 also uses the smart phone application to request the availability of an open lock box at a nearby locker location. In states 556 and 557 available locations are reported to and the selected by the customer (based on the availability of an empty lock box 127).
+(49) At this point in state 558, the system generates a unique random passcode (which may be 5 digits long). This passcode is preferably unique to both the available lock box location and the bag 112; that is, the passcode only works for the selected location and is associated with the identifier for the particular bag 112. This passcode is then presented to the customer via the smartphone in state 559.
+(50) In state 560, the customer takes her bag 112 to the location of the available locker system and, using an input device such as a kiosk located at the locker system, then enters the drop-off passcode to authenticate themselves. Alternatively, the customer may use their smartphone to present the code via Near Field Communications or Bluetooth or via the internet. Additionally the customer may use biometrics provided by the user (a fingerprint, facial photograph, signature, etc.) to cause the lock box to be unlocked and or biometrics.
+(51) In state 561, the customer selects any available lock box 127, opens that lock box 127, places their bag 112 inside, and closes it. In state 562, the customer uses the kiosk (or clicks OK on their smartphone) to confirm drop off to the service provider system 130; in state 563, an acknowledgement of the drop off may be returned to and displayed on the customer's smartphone. It is possible that information initially displayed on the kiosk can be later viewed on the smartphone.
+(52) In state 570, the system is now aware that the bag 112 needs processing, and the bag is eventually picked up, processed, and returned as in the implementations described previously.
+(53) In state 580, the customer 110 is notified that their bag 112 is ready and has been delivered to a lock box 127. At this point, the specific lock box 127 may not necessarily be identified to the customer, just the location of the lock box.
+(54) In state 582, in a case where the authentication information is another unique system generated passcode, that information is provided to the customer, or some. This passcode may be unique to a specific lock box 127 in which the customer's bag 112 has been placed and which is associated to the identifier for that bag 112.
+(55) The customer travels to the pickup location, and in state 584 using an input device such as a kiosk located at the lock boxes, enters the pickup passcode to authenticate themselves. In state 585, the customer is told which lock box has their bag, either via the kiosk or their smartphone, opens the lock box, takes their bag out, and then closes the lock box.
+(56) It should be understood that in other embodiments, where the authentication information is NFC- or device-specific, or based on user biometrics, a different information exchange takes place.
+(57) In state 586, once authentication is complete, the customer may then indicate to the service provider system they have picked up their bag such as by clicking on the smartphone application, and the system may acknowledge that in state 588.
+(58) System operation with both manned drop-off/pick up location and an unmanned lock box locations have been described above. However other arrangements are possible, for example:
+(59) Static Manned Drop-off and Pickup Location (the locations being “Static” refers to a desk or other location that stays in the same place day after day)
+(60) Mobile Manned Drop-off and Pickup Location (i.e. “Mobile” referring to a collection vehicle that moves between locations based on a communicated schedule)
+(61) Drop Bin Location with Manned Pickup Location (i.e. “Drop Bin” refers to a location like a Goodwill type collection bin that is sized to accommodate more than 1 bag at a time)
+(62) Lockbox Drop-off and Pickup Location (i.e. “Lockbox” refers to a locker type system where each receptacle is sized to only handle 1 bag at a time)
+(63) Handoff of the bag between the customer and an independent representative of the laundry service (such as an Uber driver).
+(64) Variations using the above can also be supported.
+(65) FIG. 6 is an example data structure for the information in a customer record maintained in the database 150.
+(66) FIG. 7 is an example data structure for the information in an order record in the database 150.
+(67) Implementation Options
+(68) It will be understood that the data processing elements such as the wireless devices, smartphones, servers, file systems, and databases described herein may further include infrastructure elements that are not shown, such as other types of physical networking equipment such as routers, switches, and firewalls, or other data processing equipment such as servers, load balancers, storage subsystems, and the like. The servers may include web servers, database servers, application servers, storage servers, security appliances or other type of machines. Each server typically includes an operating system, application software, and other data processing services, features, functions, software, and other aspects.
+(69) It should be understood that the example embodiments described above may be implemented in many different ways. In some instances, the various smartphones and servers include “data processors” that may each be implemented by a physical or virtual general purpose computer having a central processor, memory, disk or other mass storage, communication interface(s), input/output (I/O) device(s), and other peripherals. The general purpose computer is transformed into the processors and executes the processes described above, for example, by loading software instructions into the processor, and then causing execution of the instructions to carry out the functions described. Network interface(s) allow the computer to connect to various other devices attached to a network. Memory provides volatile storage for computer software instructions and data used to implement an embodiment. Disk or other mass storage provides non-volatile storage for computer software instructions and data used to implement, for example, the various procedures described herein.
+(70) Embodiments may therefore typically be implemented in hardware, firmware, software, or any combination thereof.
+(71) In certain embodiments, the procedures, devices, and processes described herein are a computer program product that provides at least a portion of the software instructions for the system. Such a computer program product can be installed by any suitable software installation procedure, as is well known in the art. In another embodiment, at least a portion of the software instructions may also be downloaded over a cable, communication and/or wireless connection. Embodiments may thus also be implemented as instructions stored on a non-transient machine-readable medium, which may be read and executed by one or more procedures. A non-transient machine-readable medium may include any mechanism for storing or transmitting information in a form readable by a machine (e.g., a computing device). For example, a non-transient machine-readable medium may include read only memory (ROM); random access memory (RAM); magnetic disk storage media; optical storage media; flash memory devices; and others.
+(72) It should therefore be appreciated that such descriptions contained herein are merely for convenience and that such actions in fact result from computing devices, processors, controllers, or other devices executing the firmware, software, routines, instructions, etc.
+(73) It also should be understood that the block and network diagrams may include more or fewer elements, be arranged differently, or be represented differently. But it further should be understood that certain implementations may dictate the block and network diagrams and the number of block and network diagrams illustrating the execution of the embodiments be implemented in a particular way.
+(74) While this invention has been particularly shown and described with references to example embodiments thereof, it will be understood by those skilled in the art that various changes in form and details may be made therein without departing from the scope of the invention encompassed by the appended claims.
+
+Claims
+1. A method for preparing a lockbox for a customer user comprising: triggering, by a service provider server, preparation of an item for the customer user based on receiving a customer order; sending, by the service provider server, authentication information to the customer user, the authentication information related to at least one of either the customer user or to the item associated with the lockbox, or both, wherein the authentication information is communicated to a device associated with the customer user; receiving, by the service provider server, input information from the customer user, the input information corresponding to the authentication information; verifying that the input information matches the authentication information; and upon verifying that the input information matches the authentication, unlocking the lockbox.
+2. The method of claim 1, wherein the input information is received from a device corresponding to the customer user via near field communication.
+3. The method of claim 1, wherein the input information is received from a device corresponding to the customer user via Bluetooth.
+4. The method of claim 1, wherein the input information is a unique device identifier (UDID) corresponding to a device of the customer user.
+5. The method of claim 1, wherein the input information is received via biometrics provided by the customer user.
+6. The method of claim 1, further comprising generating the authentication information, the authentication information comprising a passcode that can be used to unlock the lockbox.
+7. The method of claim 1, further comprising receiving an indication the item has been retrieved from the lockbox.
+8. The method of claim 1, further comprising receiving an indication the lockbox is available for another customer user.
+9. The method of claim 1, further comprising receiving special processing instructions from the customer user before the item is prepared.
+10. The method of claim 1, further comprising communicating a location of the lockbox to the customer user.
+11. The method of claim 1, further comprising initiating automated tracking of the item.
+12. One or more computer-readable media having computer-executable instructions embodied thereon that, when executed, perform a method of preparing a lockbox for a customer user comprising: sending, by a service provider, authentication information to the customer user, the authentication information related to at least one of either the customer user or to an item associated with the lockbox, or both, wherein the authentication information is communicated to a device associated with the customer user; receiving, by the service provider server, input information from the customer user, the input information corresponding to the authentication information; verifying that the input information matches the authentication information; and upon verifying that the input information matches the authentication, unlocking the lockbox.
+13. The media of claim 12, further comprising receiving an indication the item has been retrieved from the lockbox.
+14. The media of claim 12, further comprising receiving an indication the lockbox is available for another customer user.
+15. The media of claim 12, further comprising communicating a location of the lockbox to the customer user.
+16. The media of claim 12, further comprising initiating automated tracking of the item.
+17. A system for preparing a lockbox for a customer user, the system comprising: the lockbox; and a service provider server configured to wirelessly communicate with the lockbox, wherein the service provider server is configured to: send authentication information to the customer user, the authentication information related to at least one of either the customer user or to an item associated with the lockbox, or both, wherein the authentication information is communicated to a device associated with the customer user; receive input information from the customer user, the input information corresponding to the authentication information; verify that the input information matches the authentication information; and upon verifying that the input information matches the authentication, unlock the lockbox.
+18. The system of claim 17, further comprising receiving an indication the item has been retrieved from the lockbox and is available for another customer user.
+19. The system of claim 17, further comprising communicating a location of the lockbox to the customer user.
+20. The system of claim 17, further comprising initiating automated tracking of the item.

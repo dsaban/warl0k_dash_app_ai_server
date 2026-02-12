@@ -1,0 +1,4 @@
+vendor_id,vendor_name,payment_terms,country,risk_tier,contract_id
+V001,Acme Industrial Supplies,NET30,US,MED,C001
+V002,BlueRiver Consulting,NET15,IL,LOW,C002
+V003,CloudOps Hosting Ltd,NET45,UK,HIGH,C003

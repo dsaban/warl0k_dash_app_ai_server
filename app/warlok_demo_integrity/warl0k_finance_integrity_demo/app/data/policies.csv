@@ -1,0 +1,6 @@
+policy_id,title,tag,clause,keywords
+P001,AP Approval Matrix,AP_APPROVALS,"Payments ≥ $10,000 require CFO approval in addition to manager approval.",approval CFO threshold 10000 payments
+P002,3-Way Match Policy,PO_MATCH,Invoices requiring a PO must match an approved PO and a receiving confirmation prior to payment.,three way match PO receiving invoice
+P003,Duplicate Invoice Prevention,DUPLICATE,Duplicate vendor invoice numbers must be investigated and resolved before posting/payment.,duplicate invoice number vendor
+P004,Close Checklist,CLOSE,"Month-end close requires completion of reconciliations, accrual review, and SOX control sign-off before close approval.",close checklist reconciliations accrual SOX sign off
+P005,GL Coding Requirement,GL_CODING,All invoices must be coded with a valid GL account and cost center before posting.,GL coding cost center required

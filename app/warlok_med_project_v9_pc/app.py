@@ -1,4 +1,4 @@
-# app.py — rebuilt from scratch (v8), includes:
+# app1.py — rebuilt from scratch (v8), includes:
 # - Upload docs
 # - Build index
 # - Ask (QA)

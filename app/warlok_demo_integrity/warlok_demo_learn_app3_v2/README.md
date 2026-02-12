@@ -5,7 +5,7 @@ This demo wraps the evidence-locked Q&A prototype into a simple Streamlit app.
 ## Run
 ```bash
 pip install -r requirements.txt
-streamlit run app.py
+streamlit run app1.py
 ```
 
 ## What you can do

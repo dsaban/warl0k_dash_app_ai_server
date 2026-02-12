@@ -34,7 +34,7 @@ pip install -r requirements.txt
 python -m core.cli ingest --docs data/docs --out data/graph/graph.json
 
 # run UI
-streamlit run app/app.py
+streamlit run app/app1.py
 ```
 
 ## What’s inside

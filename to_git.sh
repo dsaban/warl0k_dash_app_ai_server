@@ -10,7 +10,7 @@
 
 # Initialize a new Git repository
 git add .
-git commit -m "added warlok_pim_mlei_llm_demo fix cloud attack, to gitignore"
+git commit -m "added WARL0K PIM + MLEI — Smart Agents Demo (Session Gateway / Execution Guard / Cloud Planner), to gitignore"
 git remote add origin git@github.com:dsaban/warl0k_dash_app_ai_server.git
 git branch -M main
 git push -u origin main

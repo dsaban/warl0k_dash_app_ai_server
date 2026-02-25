@@ -10,7 +10,7 @@ A lightweight GDM-like demo for **evidence-locked patent claim mining**:
 ## Run
 ```bash
 cd patent_integrity_demo
-streamlit run app.py
+streamlit run app1.py
 ```
 
 ## Requirements

@@ -218,14 +218,43 @@ def exec_tool(db: CsvStore, payload: Dict[str, Any]) -> Any:
         #     return {"error": "policy: invalid result format"}
         db.append_row(row)
         return {"written": True, "row": row}
-
+    
     if tool == "summarize":
-        rows = args.get("rows") or []
-        # HARD POLICY: prevent summarize being used as a “tool confusion” channel
+        rows = args.get("rows")
+        
+        # HARD POLICY: block tool confusion attempts
         txt = (payload.get("text") or "").lower()
         if "write_db" in txt or "exec" in txt:
             return {"error": "policy: tool confusion detected in summarize"}
-        return {"summary": f"{len(rows)} rows, last_id={rows[-1].get('id') if rows else 'n/a'}"}
+        
+        # Normalize rows into a list of dicts
+        if rows is None:
+            rows_list = []
+        elif isinstance(rows, list):
+            rows_list = rows
+        elif isinstance(rows, str):
+            # if it's a JSON string, try parse; otherwise treat as no rows
+            try:
+                parsed = json.loads(rows)
+                rows_list = parsed if isinstance(parsed, list) else []
+            except Exception:
+                rows_list = []
+        else:
+            rows_list = []
+        
+        last_id = "n/a"
+        if rows_list and isinstance(rows_list[-1], dict):
+            last_id = rows_list[-1].get("id", "n/a")
+        
+        return {"summary": f"{len(rows_list)} rows, last_id={last_id}"}
+
+    # if tool == "summarize":
+    #     rows = args.get("rows") or []
+    #     # HARD POLICY: prevent summarize being used as a “tool confusion” channel
+    #     txt = (payload.get("text") or "").lower()
+    #     if "write_db" in txt or "exec" in txt:
+    #         return {"error": "policy: tool confusion detected in summarize"}
+    #     return {"summary": f"{len(rows)} rows, last_id={rows[-1].get('id') if rows else 'n/a'}"}
 
     if tool == "llm_query":
         q = str(args.get("q", ""))
@@ -403,6 +432,7 @@ def apply_cloud_attack(plan: List[Dict[str, Any]], cloud_attack: Any) -> List[Di
 # Runner (single-machine simulation)
 # -----------------------------
 def run_flow(
+    # last_tool_output: Any,
     task_prompt: str,
     mle_i_attack: Optional[Callable[[Dict[str, Any]], Dict[str, Any]]],
     pim_attack: Any,
@@ -412,6 +442,7 @@ def run_flow(
     max_skew_s: float,
     window_size: int,
 ) -> List[Dict[str, Any]]:
+    last_tool_output = None
     sid = f"SID-{uuid.uuid4().hex[:8]}"
     box = CryptoBox.new()
     chan = SecureChannel(crypto=box)
@@ -479,6 +510,20 @@ def run_flow(
                 "tool_after": injected_call.get("tool"),
                 "payload_after": injected_call,
             })
+        # Resolve placeholder chaining: allow summarize to use prior read_db output safely
+        if isinstance(injected_call, dict):
+            args = injected_call.get("args") or {}
+            if args.get("rows") == "__PREV_OUTPUT__":
+                # only allow passing through if previous output is a dict containing "rows"
+                if isinstance(last_tool_output, dict) and "rows" in last_tool_output:
+                    injected_call = dict(injected_call)
+                    injected_call["args"] = dict(args)
+                    injected_call["args"]["rows"] = last_tool_output["rows"]
+                else:
+                    # no previous rows available -> make it empty
+                    injected_call = dict(injected_call)
+                    injected_call["args"] = dict(args)
+                    injected_call["args"]["rows"] = []
 
         # Build envelope and advance NEAR
         env = build_env(near, injected_call)
@@ -532,6 +577,7 @@ def run_flow(
             transcript.append({"who": "FAR", "event": "EXEC_RESULT", "step": i, "tool": payload.get("tool"), "is_error": True, "result": {"error": "blocked_by_gate"}})
         else:
             result = exec_tool(db, payload)
+            last_tool_output = result
             is_error = isinstance(result, dict) and ("error" in result)
             transcript.append({"who": "FAR", "event": "EXEC_RESULT", "step": i, "tool": payload.get("tool"), "is_error": bool(is_error), "result": result})
             reply_payload = {"tool": "result", "text": "ok", "args": {"result": result}} if not is_error else {"tool": "error", "text": "exec error", "args": {"result": result}}
@@ -1024,7 +1070,8 @@ with left:
 
         st.subheader("2) PIM Chain Ribbon (FAR accepted envelopes)")
         nodes = build_chain_ribbon(tr)
-        st.markdown(ribbon_html(nodes, focus_step=focus), unsafe_allow_html=True)
+        components.html(ribbon_html(nodes, focus_step=focus), height=90, scrolling=True)
+        # st.markdown(ribbon_html(nodes, focus_step=focus), unsafe_allow_html=True)
 
         st.divider()
 

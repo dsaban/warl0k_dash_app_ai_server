@@ -1032,7 +1032,71 @@ def run_flow(
 st.set_page_config(page_title="WARL0K PIM+MLEI Demo", layout="wide")
 st.title("WARL0K PIM + MLEI — Smart Agents Demo (Session Gateway / Execution Guard / Cloud Planner)")
 st.caption("Cloud plan attacks • Per-step gating • Proof-in-Motion chain • Encrypted tunnel • Asset-side execution guard")
+st.expander("What this demo shows (WARL0K PIM + MLEI)", expanded=True).markdown("""
+### WARL0K Smart-Agents Demo — PIM + MLEI over a Cloud LLM Planner
 
+This demo shows how WARL0K protects an agentic session where a **cloud LLM** generates tool plans, while WARL0K enforces **Message-Level Execution Integrity (MLEI)** and **Proof-in-Motion (PIM)** across every step **before any protected action executes**.
+
+#### Components
+- **Cloud LLM Planner (untrusted):** produces a tool-call plan (e.g., `read_db`, `summarize`, `write_db`). A “Cloud attack” simulates the planner emitting malicious steps.
+- **Session Gateway (outbound choke point):** first enforcement point. Applies an **MLEI nano-gate** to each planned action, then builds a **PIM envelope** and seals it into the tunnel.
+- **Execution Guard (asset-side choke point):** second enforcement point. Decrypts inbound messages, verifies the **PIM chain**, applies MLEI again + hard policies, then executes allowed tools against the asset.
+- **Protected Asset:** a CSV-backed “DB” used to demonstrate safe read/write operations.
+
+#### What PIM adds (Proof-in-Motion)
+Every message is wrapped in a verifiable envelope containing:
+- `sid` session id
+- `ctr` monotonic counter
+- `ts` timestamp
+- `dts` delta-time since the previous message (plus verifier-derived delta for audit)
+- `prev` previous step hash
+- `h` hash of the canonical envelope core (binds metadata + payload)
+
+At the **Execution Guard**, PIM verifies:
+- session id match
+- counter continuity
+- `prev` hash continuity
+- timestamp window / skew
+- recomputed hash equals `h`
+
+If any check fails, the message is **dropped before execution**.
+
+#### What MLEI adds (Message-Level Execution Integrity)
+MLEI is a per-step “nano-gate” decision that blocks:
+- suspicious tool choices (`exec`, tool swap attempts)
+- risky payloads (tampered args, injection-like content)
+- policy violations (enforced independently at **both** Session Gateway and Execution Guard)
+
+#### Attacks you can simulate
+- **Cloud planner attack:** malicious plan output (exfiltration, unauthorized tools, stealth payloads)
+- **MLEI injection:** tool swap / prompt injection / arg tampering inside the session
+- **PIM attacks:** replay/reorder/timing skew/payload mutation that breaks chain continuity
+
+#### Audit & Forensics
+The UI surfaces:
+- **Steps × Checks heatmap** (PIM + gates)
+- **Chain Audit Table** (ctr, ts, dts, prev/h prefixes, computed hash, skew, gate scores)
+- **Downloadable JSON audit bundle** containing the full transcript + chain audit + buckets + heatmap snapshot
+
+---
+### Suggested runs (quick demo recipes)
+
+**1) Cloud is malicious → denied**
+- Cloud attack: *Policy bypass (unauthorized tool exec)*
+- Expected: denied at Session Gateway gate and/or Execution Guard gate.
+
+**2) Exfil attempt via legitimate tool → hard policy deny**
+- Cloud attack: *Exfil via read_db (huge limit)*
+- Expected: denied by Execution Guard policy (`read_db limit too large`) even if gates allow.
+
+**3) In-session tampering → integrity drop**
+- PIM attack: *Payload mutation (hash mismatch)* or *Counter replay*
+- Expected: dropped at Execution Guard PIM verification (hash/ctr/prev fail).
+
+**4) Tool swap injection → MLEI deny**
+- MLEI attack: *Tool swap to unauthorized exec*
+- Expected: blocked by Session Gateway and/or Execution Guard nano-gate.
+""")
 if "authed" not in st.session_state:
     st.session_state.authed = False
 if "transcript" not in st.session_state:

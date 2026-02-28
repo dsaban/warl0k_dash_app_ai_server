@@ -10,7 +10,7 @@
 
 # Initialize a new Git repository
 git add .
-git commit -m "added: app_LLM6_with_HUB, to gitignore"
+git commit -m "added: app_LLM8_with_HUB, to gitignore"
 git remote add origin git@github.com:dsaban/warl0k_dash_app_ai_server.git
 git branch -M main
 git push -u origin main

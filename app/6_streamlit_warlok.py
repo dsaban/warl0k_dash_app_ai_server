@@ -598,7 +598,7 @@ def _predict(p: dict, trace: List[Dict]) -> Dict[str,Any]:
 # ══════════════════════════════════════════════════════════════════════════════
 
 st.set_page_config(page_title="WARL0K — Live Attack Predictor", layout="wide")
-st.title("⚔️ WARL0K — Live Manual Attack Editor + Real-time RNN Predictor")
+st.title("WARL0K — Live Attack Editor + Real-time RNN Predictor")
 st.caption(
     "Edit individual protocol messages, run the simulation, watch the RNN "
     "retrain from scratch (7 classes: 6 named + your manual attack), "

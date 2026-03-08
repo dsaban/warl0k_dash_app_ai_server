@@ -1,6 +1,6 @@
 # app.py — WARL0K Proof-in-Motion · Full 5-Tab Streamlit UI
-import sys, os
-sys.path.insert(0, os.path.dirname(__file__))
+# import sys, os
+# sys.path.insert(0, os.path.dirname(__file__))
 
 import time
 from typing import Dict, List, Any, Optional, Tuple

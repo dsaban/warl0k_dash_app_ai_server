@@ -1,0 +1,29 @@
+# WARL0K — Proof-in-Motion
+# requirements.txt
+#
+# Python >= 3.8 required (developed and tested on 3.8 / 3.12)
+#
+# Install:
+#   pip install -r requirements.txt
+#
+# Run:
+#   cd <project_dir>
+#   streamlit run app.py
+
+# ── UI ────────────────────────────────────────────────────────────────────────
+streamlit>=1.32.0
+
+# ── Numerics (GRU, featuriser, dataset builder) ───────────────────────────────
+numpy>=1.24.0
+
+# ── Standard library only (no extra installs needed) ─────────────────────────
+# hashlib      — SHA-256, HMAC  (crypto.py)
+# hmac         — HMAC-SHA256    (crypto.py)
+# base64       — b64e/b64d      (crypto.py)
+# secrets      — rand_bytes     (crypto.py)
+# dataclasses  — @dataclass     (all modules)
+# typing       — type hints     (all modules)
+# time         — timestamps     (anchor.py, chain.py, hub.py)
+# queue        — DuplexWire     (anchor.py)
+# itertools    — combinations   (hub.py)
+# sys, os      — path setup     (app.py)

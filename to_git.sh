@@ -10,7 +10,7 @@
 
 # Initialize a new Git repository
 git add .
-git commit -m "added: 9_streamlit_multiAttacks_warlok, to gitignore"
+git commit -m "added: WARLOK_PIM_HUB_AI, to gitignore"
 git remote add origin git@github.com:dsaban/warl0k_dash_app_ai_server.git
 git branch -M main
 git push -u origin main

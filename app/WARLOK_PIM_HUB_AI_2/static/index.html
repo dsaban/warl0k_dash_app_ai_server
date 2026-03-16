@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WARL0K · PIM Auth Engine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#080b0f;--bg2:#0d1117;--bg3:#111820;
+  --border:#1e2d3d;--border2:#243344;
+  --green:#00ff88;--green2:#00c96a;--green3:#007a40;
+  --red:#ff2d55;--red2:#c01f3e;
+  --amber:#ffb800;--amber2:#cc9200;
+  --cyan:#00d4ff;--cyan2:#0099cc;
+  --text:#c8d6e5;--text2:#7a9ab5;--text3:#3d566e;
+  --mono:'Share Tech Mono',monospace;
+  --sans:'Rajdhani',sans-serif;
+  --glow-g:0 0 12px rgba(0,255,136,.35);
+  --glow-r:0 0 12px rgba(255,45,85,.35);
+  --glow-c:0 0 12px rgba(0,212,255,.35);
+  --glow-a:0 0 12px rgba(255,184,0,.35);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--sans);font-size:15px;overflow-x:hidden}
+
+/* scanline overlay */
+body::before{
+  content:'';position:fixed;inset:0;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.08) 2px,rgba(0,0,0,.08) 4px);
+  pointer-events:none;z-index:9999;
+}
+
+/* grid noise grain */
+body::after{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity:.4;pointer-events:none;z-index:9998;
+}
+
+/* ── Layout ── */
+.app{display:grid;grid-template-rows:auto 1fr;height:100vh}
+
+/* ── Header ── */
+header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 24px;
+  border-bottom:1px solid var(--border);
+  background:linear-gradient(135deg,#080b0f 60%,#0a1018);
+  position:relative;overflow:hidden;
+}
+header::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--green),var(--cyan),var(--green),transparent);
+  animation:scanH 4s linear infinite;
+}
+@keyframes scanH{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+
+.logo{display:flex;align-items:center;gap:12px}
+.logo-hex{
+  width:42px;height:42px;display:flex;align-items:center;justify-content:center;
+  border:1px solid var(--green3);clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
+  background:rgba(0,255,136,.05);
+}
+.logo-hex svg{width:22px;height:22px;fill:var(--green)}
+.logo-text{font-family:var(--mono);font-size:1.3rem;letter-spacing:4px;color:var(--green);text-shadow:var(--glow-g)}
+.logo-sub{font-size:.7rem;color:var(--text2);letter-spacing:3px;font-family:var(--mono)}
+
+.header-right{display:flex;align-items:center;gap:16px}
+.badge{
+  font-family:var(--mono);font-size:.7rem;padding:4px 10px;
+  border:1px solid;letter-spacing:1px;
+}
+.badge-crypto{border-color:var(--cyan2);color:var(--cyan);background:rgba(0,212,255,.05)}
+.badge-model{border-color:var(--green3);color:var(--green2);background:rgba(0,255,136,.05)}
+.badge-model.off{border-color:var(--text3);color:var(--text3)}
+
+/* ── Main grid ── */
+main{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;overflow:hidden}
+
+/* panel */
+.panel{
+  border-right:1px solid var(--border);overflow-y:auto;
+  display:flex;flex-direction:column;
+}
+.panel:last-child{border-right:none}
+
+.panel-header{
+  padding:14px 18px;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:10px;
+  background:var(--bg2);flex-shrink:0;
+  position:sticky;top:0;z-index:10;
+}
+.panel-icon{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.panel-title{font-family:var(--mono);font-size:.8rem;letter-spacing:2px;color:var(--text2);text-transform:uppercase}
+.panel-body{padding:18px;flex:1;overflow-y:auto}
+
+/* ── Training Panel ── */
+.section{margin-bottom:20px}
+.label{font-family:var(--mono);font-size:.7rem;color:var(--text3);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px}
+
+.config-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.cfg-row{
+  font-family:var(--mono);font-size:.72rem;padding:5px 8px;
+  background:var(--bg3);border:1px solid var(--border);
+  display:flex;justify-content:space-between;
+}
+.cfg-key{color:var(--text3)}
+.cfg-val{color:var(--cyan)}
+
+.progress-bar-wrap{
+  height:6px;background:var(--bg3);border:1px solid var(--border);margin:10px 0;overflow:hidden;
+}
+.progress-bar{height:100%;background:linear-gradient(90deg,var(--green3),var(--green));transition:width .3s;width:0%}
+
+.log-box{
+  font-family:var(--mono);font-size:.7rem;line-height:1.7;
+  background:var(--bg3);border:1px solid var(--border);
+  padding:10px;max-height:220px;overflow-y:auto;
+  color:var(--text2);
+}
+.log-box .lg{color:var(--green2)}
+.log-box .la{color:var(--amber)}
+.log-box .lr{color:var(--red)}
+.log-entry{display:flex;gap:8px}
+.log-ts{color:var(--text3);flex-shrink:0}
+
+.btn{
+  font-family:var(--mono);font-size:.8rem;letter-spacing:2px;
+  padding:10px 18px;border:1px solid;cursor:pointer;
+  text-transform:uppercase;transition:all .15s;background:transparent;
+  display:flex;align-items:center;gap:8px;justify-content:center;
+}
+.btn-green{border-color:var(--green3);color:var(--green);background:rgba(0,255,136,.04)}
+.btn-green:hover:not(:disabled){background:rgba(0,255,136,.12);box-shadow:var(--glow-g)}
+.btn-cyan{border-color:var(--cyan2);color:var(--cyan);background:rgba(0,212,255,.04)}
+.btn-cyan:hover:not(:disabled){background:rgba(0,212,255,.12);box-shadow:var(--glow-c)}
+.btn-amber{border-color:var(--amber2);color:var(--amber);background:rgba(255,184,0,.04)}
+.btn-amber:hover:not(:disabled){background:rgba(255,184,0,.12);box-shadow:var(--glow-a)}
+.btn:disabled{opacity:.3;cursor:not-allowed}
+
+.btn-row{display:flex;gap:8px;margin-top:10px}
+
+/* metric row */
+.metric-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
+.metric-key{font-family:var(--mono);font-size:.7rem;color:var(--text3)}
+.metric-val{font-family:var(--mono);font-size:.9rem;font-weight:600}
+.c-green{color:var(--green)}
+.c-red{color:var(--red)}
+.c-amber{color:var(--amber)}
+.c-cyan{color:var(--cyan)}
+.c-text{color:var(--text2)}
+
+/* chart area */
+.chart-wrap{height:100px;background:var(--bg3);border:1px solid var(--border);position:relative;overflow:hidden;margin-bottom:16px}
+canvas.loss-chart{width:100%;height:100%;display:block}
+
+/* ── Verify Panel ── */
+.verify-form{display:flex;flex-direction:column;gap:12px}
+.form-row{display:flex;gap:10px;align-items:flex-end}
+.form-group{flex:1}
+.form-group label{display:block;font-family:var(--mono);font-size:.68rem;color:var(--text3);letter-spacing:2px;margin-bottom:6px;text-transform:uppercase}
+.form-group input, .form-group select{
+  width:100%;background:var(--bg3);border:1px solid var(--border2);color:var(--text);
+  font-family:var(--mono);font-size:.8rem;padding:8px 10px;outline:none;
+}
+.form-group input:focus,.form-group select:focus{border-color:var(--green3)}
+.form-group select option{background:var(--bg2)}
+
+/* result card */
+.result-card{
+  border:1px solid var(--border);background:var(--bg2);padding:14px;
+  margin-top:14px;
+}
+.result-card.ok{border-color:var(--green3);box-shadow:0 0 20px rgba(0,255,136,.08)}
+.result-card.fail{border-color:var(--red2);box-shadow:0 0 20px rgba(255,45,85,.08)}
+
+.result-verdict{
+  font-family:var(--mono);font-size:1.4rem;font-weight:700;letter-spacing:4px;
+  margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:12px;
+}
+.verdict-ok{color:var(--green);text-shadow:var(--glow-g)}
+.verdict-fail{color:var(--red);text-shadow:var(--glow-r)}
+
+.gates-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin:12px 0}
+.gate{
+  font-family:var(--mono);font-size:.68rem;padding:6px 8px;text-align:center;
+  border:1px solid;letter-spacing:1px;
+}
+.gate.g-pass{border-color:var(--green3);color:var(--green);background:rgba(0,255,136,.05)}
+.gate.g-fail{border-color:var(--red2);color:var(--red);background:rgba(255,45,85,.05)}
+
+.scores-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:10px}
+.score-cell{background:var(--bg3);border:1px solid var(--border);padding:8px;text-align:center}
+.score-label{font-family:var(--mono);font-size:.6rem;color:var(--text3);letter-spacing:1px}
+.score-num{font-family:var(--mono);font-size:1.1rem;font-weight:600}
+
+/* ── Chain Panel ── */
+.chain-state{
+  font-family:var(--mono);font-size:.7rem;word-break:break-all;
+  padding:10px;background:var(--bg3);border:1px solid var(--border);
+  color:var(--cyan);line-height:1.8;margin-bottom:14px;
+}
+.chain-valid{color:var(--green);margin-bottom:6px;font-family:var(--mono);font-size:.8rem;letter-spacing:2px}
+.chain-invalid{color:var(--red);margin-bottom:6px;font-family:var(--mono);font-size:.8rem;letter-spacing:2px}
+
+.event-list{display:flex;flex-direction:column;gap:6px}
+.event-item{
+  font-family:var(--mono);font-size:.68rem;padding:8px;
+  background:var(--bg3);border:1px solid var(--border);
+  border-left:3px solid;
+}
+.event-item.ev-ok{border-left-color:var(--green)}
+.event-item.ev-fail{border-left-color:var(--red)}
+.event-header{display:flex;justify-content:space-between;margin-bottom:4px;color:var(--text2)}
+.event-proof{color:var(--text3);word-break:break-all;margin-top:4px}
+.event-fields{display:flex;gap:10px;flex-wrap:wrap;color:var(--text)}
+
+/* encrypt demo */
+.enc-block{
+  font-family:var(--mono);font-size:.65rem;word-break:break-all;
+  padding:10px;background:var(--bg3);border:1px solid var(--border);
+  color:var(--text3);line-height:1.7;max-height:180px;overflow-y:auto;
+}
+.enc-block .k{color:var(--amber)}
+.enc-block .v{color:var(--text2)}
+
+/* scrollbar */
+::-webkit-scrollbar{width:4px;height:4px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--border2)}
+
+/* pulse animation for live indicator */
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.live-dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 1.4s ease infinite}
+.live-dot.off{background:var(--text3);animation:none}
+
+/* spinner */
+@keyframes spin{to{transform:rotate(360deg)}}
+.spinner{width:14px;height:14px;border:2px solid var(--border2);border-top-color:var(--green);border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
+
+/* separators */
+.sep{height:1px;background:var(--border);margin:14px 0}
+</style>
+</head>
+<body>
+<div class="app">
+<!-- ── HEADER ── -->
+<header>
+  <div class="logo">
+    <div class="logo-hex">
+      <svg viewBox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.3L20 8.5v7L12 19.7 4 15.5v-7L12 4.3z"/></svg>
+    </div>
+    <div>
+      <div class="logo-text">WARL0K</div>
+      <div class="logo-sub">PIM AUTH ENGINE · GRU+ATTN · CHAIN-PROOF</div>
+    </div>
+  </div>
+  <div class="header-right">
+    <span class="badge badge-crypto" id="cryptoBadge">⬡ CRYPTO</span>
+    <span class="badge badge-model off" id="modelBadge">◇ MODEL OFFLINE</span>
+  </div>
+</header>
+
+<!-- ── MAIN ── -->
+<main>
+
+<!-- ════════════════════ PANEL 1: TRAINING ════════════════════ -->
+<div class="panel">
+  <div class="panel-header">
+    <div class="panel-icon" style="background:var(--green)"></div>
+    <span class="panel-title">Neural Core · Train</span>
+    <div class="live-dot off" id="trainDot" style="margin-left:auto"></div>
+  </div>
+  <div class="panel-body">
+
+    <div class="section">
+      <div class="label">Model Config</div>
+      <div class="config-grid" id="cfgGrid"></div>
+    </div>
+
+    <div class="section">
+      <div class="label">Training Progress</div>
+      <div class="progress-bar-wrap"><div class="progress-bar" id="progressBar"></div></div>
+      <div class="metric-row">
+        <span class="metric-key">Phase</span>
+        <span class="metric-val c-cyan" id="metaPhase">—</span>
+      </div>
+      <div class="metric-row">
+        <span class="metric-key">Epoch</span>
+        <span class="metric-val c-text" id="metaEpoch">—</span>
+      </div>
+      <div class="metric-row">
+        <span class="metric-key">Avg Loss</span>
+        <span class="metric-val c-amber" id="metaLoss">—</span>
+      </div>
+      <div class="metric-row">
+        <span class="metric-key">Train Time</span>
+        <span class="metric-val c-text" id="metaTime">—</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="label">Loss Curve</div>
+      <div class="chart-wrap"><canvas id="lossChart"></canvas></div>
+    </div>
+
+    <div class="section">
+      <div class="label">Console</div>
+      <div class="log-box" id="logBox">
+        <div class="log-entry"><span class="log-ts">[SYS]</span><span class="lg">WARL0K PIM engine ready. Train or load a model.</span></div>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-green" id="btnTrain" style="flex:1" onclick="startTrain()">
+        <div class="spinner" id="trainSpinner" style="display:none"></div>
+        ⬡ TRAIN
+      </button>
+      <button class="btn btn-cyan" onclick="loadModel()" style="flex:1">↓ LOAD</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════════════════ PANEL 2: VERIFY ════════════════════ -->
+<div class="panel">
+  <div class="panel-header">
+    <div class="panel-icon" style="background:var(--amber)"></div>
+    <span class="panel-title">Chain Verify · Auth</span>
+  </div>
+  <div class="panel-body">
+
+    <div class="verify-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Claimed ID</label>
+          <input type="number" id="vClaimedId" value="0" min="0" max="1">
+        </div>
+        <div class="form-group">
+          <label>Expected Window</label>
+          <input type="number" id="vExpectedW" value="3" min="0" max="47">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Tamper Mode</label>
+        <select id="vTamper">
+          <option value="none">None — Legit chain</option>
+          <option value="shuffle">Shuffle (replay attack)</option>
+          <option value="truncate">Truncate (dropped steps)</option>
+          <option value="wrong_win">Wrong window (counter drift)</option>
+          <option value="wrong_id">Wrong identity (impersonation)</option>
+          <option value="oob">Out-of-range window (hard break)</option>
+        </select>
+      </div>
+      <button class="btn btn-amber" onclick="doVerify()" style="width:100%" id="btnVerify">
+        ⬡ VERIFY CHAIN
+      </button>
+    </div>
+
+    <div id="resultCard" style="display:none"></div>
+
+    <div class="sep"></div>
+
+    <div class="section">
+      <div class="label">Bulk Demo — All Tamper Cases</div>
+      <button class="btn btn-cyan" onclick="bulkDemo()" style="width:100%">▶ RUN ALL CASES</button>
+      <div id="bulkResults" style="margin-top:12px"></div>
+    </div>
+
+    <div class="sep"></div>
+
+    <div class="section">
+      <div class="label">Inference Benchmark</div>
+      <button class="btn btn-green" onclick="doBench()" style="width:100%">⚡ BENCHMARK 50×</button>
+      <div id="benchResult" style="margin-top:10px;font-family:var(--mono);font-size:.8rem;color:var(--text2)"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════════════════ PANEL 3: CHAIN + CRYPTO ════════════════════ -->
+<div class="panel">
+  <div class="panel-header">
+    <div class="panel-icon" style="background:var(--cyan)"></div>
+    <span class="panel-title">Chain Proof · Crypto</span>
+  </div>
+  <div class="panel-body">
+
+    <div class="section">
+      <div class="label">Chain State</div>
+      <div id="chainStatus">
+        <div style="font-family:var(--mono);font-size:.75rem;color:var(--text3)">No session active</div>
+      </div>
+      <div style="margin-top:10px">
+        <button class="btn btn-cyan" style="width:100%" onclick="refreshChain()">↻ REFRESH CHAIN</button>
+      </div>
+    </div>
+
+    <div class="sep"></div>
+
+    <div class="section">
+      <div class="label">Recent Events</div>
+      <div id="eventList" class="event-list">
+        <div style="font-family:var(--mono);font-size:.72rem;color:var(--text3)">No events yet</div>
+      </div>
+    </div>
+
+    <div class="sep"></div>
+
+    <div class="section">
+      <div class="label">Encryption Demo · AES-256-GCM</div>
+      <div class="form-row" style="margin-bottom:10px">
+        <div class="form-group">
+          <label>ID</label>
+          <input type="number" id="encId" value="0" min="0" max="1">
+        </div>
+        <div class="form-group">
+          <label>Window</label>
+          <input type="number" id="encW" value="0" min="0" max="47">
+        </div>
+      </div>
+      <button class="btn btn-green" style="width:100%" onclick="doEncrypt()">⬡ ENCRYPT TOKENS</button>
+      <div id="encResult" style="margin-top:10px"></div>
+    </div>
+
+  </div>
+</div>
+
+</main>
+</div>
+
+<script>
+// ── Loss history ──────────────────────────────────────────────────────────
+const lossHistory = {p1:[], p2:[]};
+let totalEpochs = 0;
+const CFG_TOTAL_EP = 190; // 90 + 100
+
+// ── Canvas chart ──────────────────────────────────────────────────────────
+const canvas = document.getElementById('lossChart');
+const ctx2d = canvas.getContext('2d');
+function drawChart() {
+  const W = canvas.parentElement.clientWidth, H = 100;
+  canvas.width = W; canvas.height = H;
+  ctx2d.clearRect(0,0,W,H);
+  ctx2d.fillStyle='#111820'; ctx2d.fillRect(0,0,W,H);
+
+  const all = [...lossHistory.p1.map(v=>({v,p:1})), ...lossHistory.p2.map(v=>({v,p:2}))];
+  if(all.length < 2) return;
+
+  const maxV = Math.max(...all.map(a=>a.v))||1;
+  ctx2d.strokeStyle='#1e2d3d';
+  [0.25,0.5,0.75].forEach(f=>{
+    const y = H - f*H*0.85 - 4;
+    ctx2d.beginPath();ctx2d.moveTo(0,y);ctx2d.lineTo(W,y);ctx2d.stroke();
+  });
+
+  // phase 1 line
+  if(lossHistory.p1.length>1){
+    ctx2d.strokeStyle='#00c96a'; ctx2d.lineWidth=1.5;
+    ctx2d.beginPath();
+    lossHistory.p1.forEach((v,i)=>{
+      const x = (i/(lossHistory.p1.length-1||1))*W*0.5;
+      const y = H - (v/maxV)*H*0.85 - 4;
+      i===0?ctx2d.moveTo(x,y):ctx2d.lineTo(x,y);
+    });
+    ctx2d.stroke();
+  }
+  // phase 2 line
+  if(lossHistory.p2.length>1){
+    ctx2d.strokeStyle='#00d4ff'; ctx2d.lineWidth=1.5;
+    ctx2d.beginPath();
+    lossHistory.p2.forEach((v,i)=>{
+      const x = W*0.5 + (i/(lossHistory.p2.length-1||1))*W*0.5;
+      const y = H - (v/maxV)*H*0.85 - 4;
+      i===0?ctx2d.moveTo(x,y):ctx2d.lineTo(x,y);
+    });
+    ctx2d.stroke();
+  }
+  // phase label
+  ctx2d.fillStyle='#007a40'; ctx2d.font='10px Share Tech Mono';
+  ctx2d.fillText('P1',4,14);
+  ctx2d.fillStyle='#0099cc'; ctx2d.fillText('P2',W/2+4,14);
+}
+window.addEventListener('resize', drawChart);
+
+// ── Log ───────────────────────────────────────────────────────────────────
+function log(msg, cls='') {
+  const box = document.getElementById('logBox');
+  const ts = new Date().toTimeString().slice(0,8);
+  const d = document.createElement('div');
+  d.className = 'log-entry';
+  d.innerHTML = `<span class="log-ts">[${ts}]</span><span class="${cls}">${msg}</span>`;
+  box.appendChild(d);
+  box.scrollTop = box.scrollHeight;
+}
+
+// ── Status poll ───────────────────────────────────────────────────────────
+async function pollStatus() {
+  try {
+    const r = await fetch('/api/status').then(r=>r.json());
+    const cryptoBadge = document.getElementById('cryptoBadge');
+    const modelBadge = document.getElementById('modelBadge');
+    cryptoBadge.textContent = r.has_crypto ? '⬡ AES-256-GCM' : '⬡ HMAC-FALLBACK';
+    if(r.model_loaded){
+      modelBadge.className='badge badge-model';
+      modelBadge.textContent='◆ MODEL ONLINE';
+    }
+    if(r.cfg && !document.getElementById('cfgGrid').children.length){
+      renderCfg(r.cfg);
+    }
+  } catch(e){}
+}
+setInterval(pollStatus, 3000);
+pollStatus();
+
+function renderCfg(cfg) {
+  const keys = ['N_IDENTITIES','N_WINDOWS_PER_ID','HIDDEN_DIM','ATTN_DIM','MS_DIM','SEQ_LEN','EPOCHS_PHASE1','EPOCHS_PHASE2'];
+  const g = document.getElementById('cfgGrid');
+  g.innerHTML = keys.map(k=>`
+    <div class="cfg-row">
+      <span class="cfg-key">${k.replace(/_/g,' ')}</span>
+      <span class="cfg-val">${cfg[k]??'—'}</span>
+    </div>`).join('');
+}
+
+// ── Train ─────────────────────────────────────────────────────────────────
+let trainSSE = null;
+function startTrain() {
+  document.getElementById('btnTrain').disabled = true;
+  document.getElementById('trainSpinner').style.display='block';
+  document.getElementById('trainDot').classList.remove('off');
+  lossHistory.p1=[]; lossHistory.p2=[]; totalEpochs=0;
+  log('Starting training...', 'lg');
+
+  fetch('/api/train', {method:'POST'});
+
+  if(trainSSE) trainSSE.close();
+  trainSSE = new EventSource('/api/train/stream');
+  trainSSE.onmessage = e => {
+    const d = JSON.parse(e.data);
+    if(d.type==='progress'){
+      const ph = d.phase; const ep = d.epoch; const loss = d.loss;
+      document.getElementById('metaPhase').textContent = `Phase ${ph}`;
+      const total_ep = ph===1?90:100;
+      document.getElementById('metaEpoch').textContent = `${ep}/${total_ep}`;
+      document.getElementById('metaLoss').textContent = (loss||0).toFixed(4);
+      totalEpochs++;
+      const pct = Math.min(99, (totalEpochs/CFG_TOTAL_EP)*100);
+      document.getElementById('progressBar').style.width = pct+'%';
+      (ph===1?lossHistory.p1:lossHistory.p2).push(loss);
+      drawChart();
+    } else if(d.type==='log'){
+      log(d.msg, 'lg');
+    } else if(d.type==='done'){
+      const err = d.error;
+      if(err){ log('ERROR: '+err,'lr'); }
+      else {
+        log(`Training complete in ${d.train_s?.toFixed(2)}s`, 'lg');
+        document.getElementById('progressBar').style.width='100%';
+        document.getElementById('metaTime').textContent = d.train_s?.toFixed(2)+'s';
+        document.getElementById('modelBadge').className='badge badge-model';
+        document.getElementById('modelBadge').textContent='◆ MODEL ONLINE';
+      }
+      document.getElementById('btnTrain').disabled=false;
+      document.getElementById('trainSpinner').style.display='none';
+      document.getElementById('trainDot').classList.add('off');
+      trainSSE.close();
+    }
+  };
+}
+
+async function loadModel() {
+  log('Loading saved model...','la');
+  try {
+    const r = await fetch('/api/load',{method:'POST'}).then(r=>r.json());
+    if(r.error){ log('Load error: '+r.error,'lr'); return; }
+    log(`Model loaded — ${r.param_kb} KB`, 'lg');
+    document.getElementById('modelBadge').className='badge badge-model';
+    document.getElementById('modelBadge').textContent='◆ MODEL ONLINE';
+  } catch(e){ log('Load failed: '+e,'lr'); }
+}
+
+// ── Verify ────────────────────────────────────────────────────────────────
+async function doVerify() {
+  const cid = parseInt(document.getElementById('vClaimedId').value)||0;
+  const ew  = parseInt(document.getElementById('vExpectedW').value)||0;
+  const tam = document.getElementById('vTamper').value;
+  const r = await fetch('/api/verify',{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({claimed_id:cid,expected_w:ew,tamper:tam})}).then(r=>r.json());
+  if(r.error){ log('Verify error: '+r.error,'lr'); return; }
+  renderResult(r);
+  refreshChain();
+}
+
+function gateLabel(k){
+  const m={pn:'PN PILOT',p_valid:'P_VALID',id_match:'ID MATCH',w_match:'WIN MATCH',pid:'PID MIN',pw:'PW MIN'};
+  return m[k]||k;
+}
+
+function renderResult(r) {
+  const card = document.getElementById('resultCard');
+  card.style.display='block';
+  card.className = 'result-card ' + (r.ok?'ok':'fail');
+  const vLabel = r.ok
+    ? `<span class="verdict-ok">◆ AUTHORIZED</span>`
+    : `<span class="verdict-fail">◇ DENIED</span>`;
+  const tamperTag = r.tamper!=='none' ? `<span style="font-size:.7rem;color:var(--amber);letter-spacing:2px">[${r.tamper.toUpperCase()}]</span>`:'';
+  const gates = r.gates||{};
+  const gateHtml = Object.entries(gates).map(([k,v])=>
+    `<div class="gate ${v?'g-pass':'g-fail'}">${gateLabel(k)}<br>${v?'✓':'✗'}</div>`
+  ).join('');
+
+  const scores = [
+    {label:'P_VALID',  val:r.p_valid,    color: r.p_valid>=.8?'c-green':'c-red'},
+    {label:'PID',      val:r.pid,        color: r.pid>=.7?'c-green':'c-amber'},
+    {label:'PW',       val:r.pw,         color: r.pw>=.4?'c-green':'c-amber'},
+    {label:'PILOT ρ',  val:r.pilot_corr, color: r.pilot_corr>=.02?'c-cyan':'c-red'},
+    {label:'L2(MS)',   val:r.l2ms>=0?r.l2ms:null, color:'c-text'},
+    {label:'LAT (µs)', val:r.latency_us, color:'c-cyan'},
+  ];
+  const scoresHtml = scores.map(s=>`
+    <div class="score-cell">
+      <div class="score-label">${s.label}</div>
+      <div class="score-num ${s.color}">${s.val!=null?Number(s.val).toFixed(3):'—'}</div>
+    </div>`).join('');
+
+  card.innerHTML = `
+    <div class="result-verdict">${vLabel} ${tamperTag}</div>
+    <div style="font-family:var(--mono);font-size:.7rem;color:var(--text3);margin-bottom:8px">
+      CLAIM: ID=${r.id_pred} · WIN=${r.w_pred} · SEQ#${r.seq||'?'} · PROOF:${(r.proof||'').slice(0,12)}…
+    </div>
+    <div class="gates-grid">${gateHtml}</div>
+    <div class="scores-grid">${scoresHtml}</div>`;
+}
+
+async function bulkDemo() {
+  const cases = ['none','shuffle','truncate','wrong_win','wrong_id','oob'];
+  const wrap = document.getElementById('bulkResults');
+  wrap.innerHTML = '<div style="font-family:var(--mono);font-size:.7rem;color:var(--text3)">Running…</div>';
+  const rows = [];
+  for(const tam of cases){
+    const r = await fetch('/api/verify',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({claimed_id:0,expected_w:3,tamper:tam})}).then(r=>r.json());
+    rows.push({tam, ok:r.ok, pv:r.p_valid, pid:r.pid, pw:r.pw});
+  }
+  wrap.innerHTML = rows.map(row=>`
+    <div style="display:flex;justify-content:space-between;align-items:center;
+                font-family:var(--mono);font-size:.7rem;padding:5px 8px;
+                border:1px solid var(--border);margin-bottom:4px;
+                border-left:3px solid ${row.ok?'var(--green)':'var(--red)'};">
+      <span style="color:${row.ok?'var(--green)':'var(--red)'}">${row.ok?'✓':'✗'}</span>
+      <span style="color:var(--text2);flex:1;margin-left:8px">${row.tam}</span>
+      <span style="color:var(--amber)">${row.pv?.toFixed(3)??'—'}</span>
+    </div>`).join('');
+  refreshChain();
+}
+
+async function doBench() {
+  const div = document.getElementById('benchResult');
+  div.textContent = 'Running…';
+  try {
+    const r = await fetch('/api/benchmark',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({n:50})}).then(r=>r.json());
+    div.innerHTML = `
+      <div class="metric-row"><span class="metric-key">MEAN</span><span class="metric-val c-cyan">${r.mean_us?.toFixed(1)} µs</span></div>
+      <div class="metric-row"><span class="metric-key">MIN</span><span class="metric-val c-green">${r.min_us?.toFixed(1)} µs</span></div>
+      <div class="metric-row"><span class="metric-key">P95</span><span class="metric-val c-amber">${r.p95_us?.toFixed(1)} µs</span></div>`;
+  } catch(e){ div.textContent = 'Error: '+e; }
+}
+
+// ── Chain ─────────────────────────────────────────────────────────────────
+async function refreshChain() {
+  try {
+    const r = await fetch('/api/chain').then(r=>r.json());
+    if(r.error) return;
+    const statusDiv = document.getElementById('chainStatus');
+    statusDiv.innerHTML = `
+      <div class="${r.valid?'chain-valid':'chain-invalid'}">${r.valid?'◆ CHAIN INTACT':'◇ CHAIN BROKEN'}</div>
+      <div class="chain-state">
+        <span style="color:var(--text3)">events:</span> <span style="color:var(--green)">${r.events}</span><br>
+        <span style="color:var(--text3)">state:</span> <span style="color:var(--cyan)">${r.state}…</span>
+      </div>`;
+
+    const evtList = document.getElementById('eventList');
+    if(r.recent_events?.length){
+      evtList.innerHTML = r.recent_events.slice().reverse().map(ev=>{
+        const e = ev.event;
+        return `<div class="event-item ${e.ok?'ev-ok':'ev-fail'}">
+          <div class="event-header">
+            <span style="color:var(--text3)">#${ev.seq}</span>
+            <span style="color:${e.ok?'var(--green)':'var(--red)'}">${e.ok?'OK':'FAIL'}</span>
+          </div>
+          <div class="event-fields">
+            <span>ID:<b>${e.claimed_id}</b></span>
+            <span>W:<b>${e.expected_w}</b></span>
+            <span>pV:<b>${e.p_valid}</b></span>
+            <span>${e.latency_us}µs</span>
+          </div>
+          <div class="event-proof">proof:${ev.proof?.slice(0,24)}…</div>
+        </div>`;
+      }).join('');
+    } else {
+      evtList.innerHTML = '<div style="font-family:var(--mono);font-size:.72rem;color:var(--text3)">No events yet — verify a chain</div>';
+    }
+  } catch(e){}
+}
+
+// ── Encrypt demo ──────────────────────────────────────────────────────────
+async function doEncrypt() {
+  const cid = parseInt(document.getElementById('encId').value)||0;
+  const w   = parseInt(document.getElementById('encW').value)||0;
+  try {
+    const r = await fetch('/api/encrypt',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({claimed_id:cid,expected_w:w})}).then(r=>r.json());
+    const enc = r.encrypted||{};
+    const div = document.getElementById('encResult');
+    const rt = r.roundtrip_ok;
+    div.innerHTML = `
+      <div style="font-family:var(--mono);font-size:.7rem;margin-bottom:6px;color:${rt?'var(--green)':'var(--red)'}">
+        ${rt?'◆ ROUNDTRIP OK — Encrypt→Decrypt verified':'◇ ROUNDTRIP FAIL'}
+        &nbsp;·&nbsp; ${r.has_crypto?'AES-256-GCM':'HMAC-XOR fallback'}
+      </div>
+      <div class="enc-block">
+        <span class="k">SALT:</span> <span class="v">${enc.salt||'—'}</span><br>
+        <span class="k">NONCE:</span> <span class="v">${enc.nonce||'—'}</span><br>
+        <span class="k">TAG:</span> <span class="v">${enc.tag||'—'}</span><br>
+        <span class="k">CHAIN_HASH:</span> <span class="v">${enc.chain_hash||'—'}</span><br>
+        <span class="k">CIPHERTEXT:</span> <span class="v">${(enc.ciphertext||'').slice(0,64)}…</span>
+      </div>`;
+  } catch(e){ log('Encrypt error: '+e,'lr'); }
+}
+
+// Init
+drawChart();
+</script>
+</body>
+</html>

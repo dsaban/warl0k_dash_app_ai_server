@@ -1,0 +1,5 @@
+fastapi>=0.110
+uvicorn[standard]>=0.29
+numpy>=1.24
+# Optional — enables AES-256-GCM encryption (recommended):
+# cryptography>=41.0

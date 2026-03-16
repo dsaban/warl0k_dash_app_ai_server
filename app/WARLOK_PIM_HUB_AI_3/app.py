@@ -399,8 +399,7 @@ c1, c2, c3 = st.columns(3, gap="small")
 
 # ── COLUMN 1 — NEURAL CORE ───────────────────────────────────────────
 with c1:
-    panel_header("#00ff88", "Neural Core · Train",
-                 live=st.session_state["training"])
+    panel_header("#00ff88", "Neural Core · Train", live=st.session_state["training"])
 
     slabel("Model Config")
     g1, g2 = st.columns(2)

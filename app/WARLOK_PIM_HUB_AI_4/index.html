@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WARL0K · PIM Auth Engine v2</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#080b0f;--bg2:#0d1117;--bg3:#111820;
+  --border:#1e2d3d;--border2:#243344;
+  --green:#00ff88;--green2:#00c96a;--green3:#007a40;
+  --red:#ff2d55;--red2:#c01f3e;
+  --amber:#ffb800;--amber2:#cc9200;
+  --cyan:#00d4ff;--cyan2:#0099cc;
+  --purple:#b44fff;--purple2:#7a2db5;
+  --text:#c8d6e5;--text2:#7a9ab5;--text3:#3d566e;
+  --mono:'Share Tech Mono',monospace;
+  --sans:'Rajdhani',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--sans);overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.07) 2px,rgba(0,0,0,.07) 4px);
+  pointer-events:none;z-index:9999}
+.app{display:grid;grid-template-rows:auto 1fr;height:100vh}
+
+/* ── Header ── */
+header{display:flex;align-items:center;justify-content:space-between;
+  padding:10px 20px;border-bottom:1px solid var(--border);
+  background:linear-gradient(135deg,#080b0f 60%,#0a1018);position:relative;overflow:hidden}
+header::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--green),var(--cyan),var(--purple),var(--green),transparent);
+  animation:scanH 5s linear infinite}
+@keyframes scanH{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-hex{width:38px;height:38px;display:flex;align-items:center;justify-content:center;
+  border:1px solid var(--green3);background:rgba(0,255,136,.05);
+  clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%)}
+.logo-hex span{color:var(--green);font-size:1.1rem}
+.logo-text{font-family:var(--mono);font-size:1.15rem;letter-spacing:4px;color:var(--green);
+  text-shadow:0 0 10px rgba(0,255,136,.4)}
+.logo-sub{font-size:.62rem;color:var(--text2);letter-spacing:3px;font-family:var(--mono)}
+.header-right{display:flex;align-items:center;gap:10px}
+.badge{font-family:var(--mono);font-size:.68rem;padding:3px 9px;border:1px solid;letter-spacing:1px}
+.badge-crypto{border-color:var(--cyan2);color:var(--cyan);background:rgba(0,212,255,.05)}
+.badge-model{border-color:var(--green3);color:var(--green2);background:rgba(0,255,136,.05)}
+.badge-model.off{border-color:var(--text3);color:var(--text3);background:transparent}
+.badge-v2{border-color:var(--purple2);color:var(--purple);background:rgba(180,79,255,.05)}
+
+/* ── 4-column main ── */
+main{display:grid;grid-template-columns:1fr 1fr 1.2fr 1fr;height:100%;overflow:hidden}
+.panel{border-right:1px solid var(--border);overflow-y:auto;display:flex;flex-direction:column}
+.panel:last-child{border-right:none}
+.panel-header{padding:10px 14px;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:8px;background:var(--bg2);
+  position:sticky;top:0;z-index:10;flex-shrink:0}
+.panel-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.panel-title{font-family:var(--mono);font-size:.74rem;letter-spacing:2px;color:var(--text2);text-transform:uppercase}
+.panel-body{padding:14px;flex:1}
+
+/* ── Widgets ── */
+.slabel{font-family:var(--mono);font-size:.62rem;color:var(--text3);letter-spacing:2px;
+  text-transform:uppercase;margin:8px 0 5px}
+.cfg-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-bottom:10px}
+.cfg-row{font-family:var(--mono);font-size:.68rem;padding:3px 7px;
+  background:var(--bg3);border:1px solid var(--border);
+  display:flex;justify-content:space-between}
+.cfg-key{color:var(--text3)}.cfg-val{color:var(--cyan)}
+.mrow{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px}
+.mkey{font-family:var(--mono);font-size:.68rem;color:var(--text3)}
+.mval{font-family:var(--mono);font-size:.86rem;font-weight:600}
+.prog-wrap{height:5px;background:var(--bg3);border:1px solid var(--border);margin:8px 0;overflow:hidden}
+.prog-bar{height:100%;background:linear-gradient(90deg,var(--green3),var(--green));transition:width .3s;width:0%}
+.log-box{font-family:var(--mono);font-size:.68rem;line-height:1.65;background:var(--bg3);
+  border:1px solid var(--border);padding:8px;max-height:180px;overflow-y:auto;color:var(--text2)}
+.sep{height:1px;background:var(--border);margin:10px 0}
+
+/* ── Buttons ── */
+.btn{font-family:var(--mono);font-size:.76rem;letter-spacing:2px;padding:8px 14px;
+  border:1px solid;cursor:pointer;text-transform:uppercase;background:transparent;
+  display:flex;align-items:center;gap:6px;justify-content:center;transition:all .15s;width:100%}
+.btn-g{border-color:var(--green3);color:var(--green)}
+.btn-g:hover:not(:disabled){background:rgba(0,255,136,.1);box-shadow:0 0 10px rgba(0,255,136,.25)}
+.btn-c{border-color:var(--cyan2);color:var(--cyan)}
+.btn-c:hover:not(:disabled){background:rgba(0,212,255,.1);box-shadow:0 0 10px rgba(0,212,255,.25)}
+.btn-a{border-color:var(--amber2);color:var(--amber)}
+.btn-a:hover:not(:disabled){background:rgba(255,184,0,.1);box-shadow:0 0 10px rgba(255,184,0,.25)}
+.btn-p{border-color:var(--purple2);color:var(--purple)}
+.btn-p:hover:not(:disabled){background:rgba(180,79,255,.1);box-shadow:0 0 10px rgba(180,79,255,.25)}
+.btn:disabled{opacity:.3;cursor:not-allowed}
+.btn-row{display:flex;gap:6px;margin-top:8px}
+.loss-wrap{height:75px;background:var(--bg3);border:1px solid var(--border);margin-bottom:8px}
+
+/* ── Verdict card ── */
+.verdict-card{border:1px solid;padding:11px;margin-top:10px}
+.verdict-card.ok{border-color:var(--green3);background:rgba(0,255,136,.03);box-shadow:0 0 14px rgba(0,255,136,.1)}
+.verdict-card.fail{border-color:var(--red2);background:rgba(255,45,85,.03);box-shadow:0 0 14px rgba(255,45,85,.1)}
+.verdict-txt{font-family:var(--mono);font-size:1.2rem;font-weight:700;letter-spacing:4px;margin-bottom:7px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+.verdict-ok{color:var(--green)}.verdict-fail{color:var(--red)}
+.verdict-meta{font-family:var(--mono);font-size:.64rem;color:var(--text3)}
+.gates-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:3px;margin:8px 0}
+.gate{border:1px solid;padding:4px 2px;text-align:center;font-family:var(--mono)}
+.gate-ok{border-color:var(--green3);background:rgba(0,255,136,.05)}
+.gate-fail{border-color:var(--red2);background:rgba(255,45,85,.05)}
+.gate-lbl{font-size:.58rem;letter-spacing:.5px}
+.gate-mk{font-size:.9rem;font-weight:700}
+.scores-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:6px}
+.score-cell{background:var(--bg2);border:1px solid var(--border);padding:5px 3px;text-align:center}
+.score-lbl{font-family:var(--mono);font-size:.58rem;color:var(--text3)}
+.score-num{font-family:var(--mono);font-size:.9rem;font-weight:600}
+
+/* ── Peer hub ── */
+.peer-card{border:1px solid var(--border);background:var(--bg2);padding:10px;margin-bottom:6px}
+.peer-card.handshake-ok{border-color:var(--green3)}
+.peer-card.handshake-fail{border-color:var(--border)}
+.peer-header{display:flex;justify-content:space-between;align-items:center;
+  font-family:var(--mono);font-size:.74rem;margin-bottom:6px}
+.peer-id{color:var(--purple)}.peer-status-ok{color:var(--green)}.peer-status-pending{color:var(--amber)}
+.peer-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;margin:6px 0}
+.step{padding:4px;text-align:center;font-family:var(--mono);font-size:.6rem;
+  border:1px solid var(--border);color:var(--text3)}
+.step.done{border-color:var(--green3);color:var(--green);background:rgba(0,255,136,.05)}
+.step.active{border-color:var(--amber2);color:var(--amber);background:rgba(255,184,0,.05)}
+.step.locked{border-color:var(--text3);color:var(--text3)}
+.recon-bars{margin:6px 0}
+.recon-bar-row{display:flex;align-items:center;gap:4px;margin-bottom:2px}
+.recon-bar-label{font-family:var(--mono);font-size:.6rem;color:var(--text3);width:28px;flex-shrink:0}
+.recon-bar-outer{flex:1;height:5px;background:var(--bg3);border:1px solid var(--border)}
+.recon-bar-inner{height:100%;background:var(--green3)}
+.recon-bar-inner.bad{background:var(--red2)}
+.recon-val{font-family:var(--mono);font-size:.6rem;color:var(--text2);width:40px;text-align:right}
+
+/* ── Chain events ── */
+.event-item{font-family:var(--mono);font-size:.65rem;padding:6px 8px;
+  background:var(--bg3);border:1px solid var(--border);border-left:3px solid;margin-bottom:3px}
+.event-ok{border-left-color:var(--green)}.event-fail{border-left-color:var(--red)}
+.event-info{border-left-color:var(--cyan)}.event-anchor{border-left-color:var(--purple)}
+.event-header{display:flex;justify-content:space-between;color:var(--text2);margin-bottom:2px}
+.event-fields{display:flex;gap:8px;flex-wrap:wrap;color:var(--text)}
+.event-proof{color:var(--text3);margin-top:2px;word-break:break-all}
+.chain-state{font-family:var(--mono);font-size:.68rem;word-break:break-all;
+  padding:8px;background:var(--bg3);border:1px solid var(--border);
+  color:var(--cyan);line-height:1.8;margin-bottom:10px}
+.enc-block{font-family:var(--mono);font-size:.62rem;word-break:break-all;
+  padding:8px;background:var(--bg3);border:1px solid var(--border);
+  color:var(--text3);line-height:1.7;max-height:150px;overflow-y:auto}
+.enc-k{color:var(--amber)}.enc-v{color:var(--text2)}
+input,select{width:100%;background:var(--bg3);border:1px solid var(--border2);color:var(--text);
+  font-family:var(--mono);font-size:.78rem;padding:6px 8px;outline:none;margin-bottom:6px}
+input:focus,select:focus{border-color:var(--green3)}
+select option{background:var(--bg2)}
+label{display:block;font-family:var(--mono);font-size:.62rem;color:var(--text3);
+  letter-spacing:2px;margin-bottom:4px;text-transform:uppercase}
+.form-row{display:flex;gap:8px}
+.form-col{flex:1}
+::-webkit-scrollbar{width:3px;height:3px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--border2)}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+.live-dot{width:7px;height:7px;border-radius:50%;background:var(--green);display:inline-block;animation:pulse 1.4s ease infinite;margin-left:auto}
+.live-dot.off{background:var(--text3);animation:none}
+</style>
+</head>
+<body>
+<div class="app">
+
+<!-- ── HEADER ── -->
+<header>
+  <div class="logo">
+    <div class="logo-hex"><span>⬡</span></div>
+    <div>
+      <div class="logo-text">WARL0K</div>
+      <div class="logo-sub">PIM AUTH ENGINE v2 · GRU+ATTN · PEER HUB · CHAIN-PROOF</div>
+    </div>
+  </div>
+  <div class="header-right">
+    <span class="badge badge-v2">⬡ PEER HUB v2</span>
+    <span class="badge badge-crypto" id="cryptoBadge">⬡ CRYPTO</span>
+    <span class="badge badge-model off" id="modelBadge">◇ OFFLINE</span>
+  </div>
+</header>
+
+<main>
+
+<!-- ═══════════════════════ PANEL 1 — TRAIN ═══════════════════════ -->
+<div class="panel">
+  <div class="panel-header">
+    <div class="panel-dot" style="background:var(--green)"></div>
+    <span class="panel-title">Neural Core · Train</span>
+    <div class="live-dot off" id="trainDot"></div>
+  </div>
+  <div class="panel-body">
+    <div class="slabel">Model Config</div>
+    <div class="cfg-grid" id="cfgGrid"></div>
+    <div class="sep"></div>
+    <div class="slabel">Training Progress</div>
+    <div class="mrow"><span class="mkey">Phase</span><span class="mval" id="mPhase" style="color:var(--cyan)">—</span></div>
+    <div class="mrow"><span class="mkey">Epoch</span><span class="mval" id="mEpoch" style="color:var(--text)">—</span></div>
+    <div class="mrow"><span class="mkey">Avg Loss</span><span class="mval" id="mLoss" style="color:var(--amber)">—</span></div>
+    <div class="mrow"><span class="mkey">Train Time</span><span class="mval" id="mTime" style="color:var(--text)">—</span></div>
+    <div class="prog-wrap"><div class="prog-bar" id="progBar"></div></div>
+    <div class="slabel">Loss Curve</div>
+    <div class="loss-wrap"><canvas id="lossCanvas" style="width:100%;height:75px;display:block"></canvas></div>
+    <div class="slabel">Console</div>
+    <div class="log-box" id="logBox"><span style="color:var(--text3)">WARL0K PIM v2 ready.</span></div>
+    <div class="btn-row">
+      <button class="btn btn-g" id="btnTrain" onclick="startTrain()" style="flex:1">⬡ TRAIN</button>
+      <button class="btn btn-c" onclick="loadModel()" style="flex:1">↓ LOAD</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ PANEL 2 — VERIFY ═══════════════════════ -->
+<div class="panel">
+  <div class="panel-header">
+    <div class="panel-dot" style="background:var(--amber)"></div>
+    <span class="panel-title">Chain Verify · Auth</span>
+  </div>
+  <div class="panel-body">
+    <div class="slabel">Verification Input</div>
+    <div class="form-row">
+      <div class="form-col"><label>Claimed ID</label><input type="number" id="vCid" value="0" min="0" max="1"></div>
+      <div class="form-col"><label>Expected Window</label><input type="number" id="vEw" value="3" min="0" max="47"></div>
+    </div>
+    <label>Tamper Mode</label>
+    <select id="vTamper">
+      <option value="none">None — Legit chain</option>
+      <option value="shuffle">Shuffle (replay attack)</option>
+      <option value="truncate">Truncate (dropped steps)</option>
+      <option value="wrong_win">Wrong window (counter drift)</option>
+      <option value="wrong_id">Wrong identity (impersonation)</option>
+      <option value="oob">Out-of-range (hard break)</option>
+    </select>
+    <button class="btn btn-a" onclick="doVerify()" id="btnVerify">⬡ VERIFY CHAIN</button>
+    <div id="resultCard"></div>
+    <div class="sep"></div>
+    <div class="slabel">Bulk Demo</div>
+    <button class="btn btn-c" onclick="bulkDemo()" id="btnBulk">▶ RUN ALL CASES</button>
+    <div id="bulkResults" style="margin-top:8px"></div>
+    <div class="sep"></div>
+    <div class="slabel">Inference Benchmark</div>
+    <button class="btn btn-g" onclick="doBench()" id="btnBench">⚡ BENCHMARK 50×</button>
+    <div id="benchResult" style="margin-top:8px;font-family:var(--mono);font-size:.8rem"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ PANEL 3 — PEER HUB ═══════════════════════ -->
+<div class="panel">
+  <div class="panel-header">
+    <div class="panel-dot" style="background:var(--purple)"></div>
+    <span class="panel-title">Peer Hub · Dual Handshake</span>
+  </div>
+  <div class="panel-body">
+
+    <div class="slabel">Register Peers</div>
+    <div class="form-row">
+      <div class="form-col"><label>Peer ID</label><input type="text" id="pPeerId" value="PEER_A" placeholder="PEER_A"></div>
+      <div class="form-col"><label>Identity ID</label><input type="number" id="pIdentId" value="0" min="0" max="1"></div>
+    </div>
+    <label>Shared Session Key (hex, leave blank to auto-generate)</label>
+    <input type="text" id="pSessionKey" placeholder="leave blank — auto-generated for first peer">
+    <button class="btn btn-p" onclick="initPeer()" style="margin-bottom:6px">⬡ INIT PEER</button>
+
+    <div class="sep"></div>
+    <div class="slabel">Active Peers</div>
+    <div id="hubStatus" style="font-family:var(--mono);font-size:.72rem;color:var(--text3)">No peers registered</div>
+    <div id="peerCards" style="margin-top:8px"></div>
+
+    <div class="sep"></div>
+    <div class="slabel">Handshake Pipeline</div>
+    <div class="form-row" style="margin-bottom:6px">
+      <div class="form-col"><label>Peer A</label><input type="text" id="hsA" value="PEER_A"></div>
+      <div class="form-col"><label>Peer B</label><input type="text" id="hsB" value="PEER_B"></div>
+    </div>
+    <button class="btn btn-p" onclick="runFullHandshake()" id="btnHandshake">⬡ RUN FULL HANDSHAKE A↔B</button>
+    <div id="handshakeResult" style="margin-top:8px"></div>
+
+    <div class="sep"></div>
+    <div class="slabel">48-OS Reconstruction</div>
+    <div class="form-row">
+      <div class="form-col"><label>Peer ID</label><input type="text" id="reconPeer" value="PEER_A"></div>
+    </div>
+    <button class="btn btn-c" onclick="doReconstruct()" id="btnRecon">⬡ RECONSTRUCT MS (48 OS)</button>
+    <div id="reconResult" style="margin-top:8px"></div>
+
+    <div class="sep"></div>
+    <div class="slabel">Live Chain Feed (WebSocket)</div>
+    <div id="wsFeed" style="font-family:var(--mono);font-size:.65rem;max-height:160px;overflow-y:auto;
+      background:var(--bg3);border:1px solid var(--border);padding:8px;color:var(--text3)">
+      <div>WebSocket disconnected</div>
+    </div>
+    <button class="btn btn-c" onclick="connectWS()" style="margin-top:6px">⬡ CONNECT WS FEED</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════ PANEL 4 — CHAIN + CRYPTO ═══════════════════════ -->
+<div class="panel">
+  <div class="panel-header">
+    <div class="panel-dot" style="background:var(--cyan)"></div>
+    <span class="panel-title">Chain Proof · Crypto</span>
+  </div>
+  <div class="panel-body">
+    <div class="slabel">Chain State</div>
+    <div id="chainStatus" style="font-family:var(--mono);font-size:.72rem;color:var(--text3)">No session</div>
+    <div class="chain-state" id="chainStateBox">—</div>
+    <button class="btn btn-c" onclick="refreshChain()" style="margin-bottom:10px">↻ REFRESH CHAIN</button>
+
+    <div class="slabel">Recent Events</div>
+    <div id="eventList"><div style="font-family:var(--mono);font-size:.7rem;color:var(--text3)">No events yet</div></div>
+
+    <div class="sep"></div>
+    <div class="slabel">Encryption Demo · AES-256-GCM</div>
+    <div class="form-row">
+      <div class="form-col"><label>ID</label><input type="number" id="encId" value="0" min="0" max="1"></div>
+      <div class="form-col"><label>Window</label><input type="number" id="encW" value="0" min="0" max="47"></div>
+    </div>
+    <button class="btn btn-g" onclick="doEncrypt()">⬡ ENCRYPT TOKENS</button>
+    <div id="encResult" style="margin-top:8px"></div>
+  </div>
+</div>
+
+</main>
+</div>
+
+<script>
+// ── Loss history ──────────────────────────────────────────────────
+const lossP1=[], lossP2=[];
+let totalEp=0;
+const TOTAL_EP = 190;
+
+function drawLoss(){
+  const canvas=document.getElementById('lossCanvas');
+  const ctx=canvas.getContext('2d');
+  canvas.width=canvas.parentElement.clientWidth; canvas.height=75;
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle='#111820'; ctx.fillRect(0,0,canvas.width,canvas.height);
+  const W=canvas.width, H=75;
+  const all=[...lossP1,...lossP2]; if(all.length<2) return;
+  const mx=Math.max(...all)||1;
+  [.25,.5,.75].forEach(f=>{
+    const y=H-f*H*.82-4;
+    ctx.strokeStyle='#1e2d3d'; ctx.lineWidth=.5;
+    ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(W,y); ctx.stroke();
+  });
+  const seg=(pts,x0,x1,col)=>{
+    if(pts.length<2) return;
+    ctx.strokeStyle=col; ctx.lineWidth=1.5; ctx.beginPath();
+    pts.forEach((v,i)=>{
+      const x=x0+(x1-x0)*i/(pts.length-1), y=H-(v/mx)*H*.82-4;
+      i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+    });
+    ctx.stroke();
+  };
+  seg(lossP1,0,W*.5,'#00c96a'); seg(lossP2,W*.5,W,'#00d4ff');
+  ctx.fillStyle='#007a40'; ctx.font='10px Share Tech Mono';
+  ctx.fillText('P1',4,13);
+  ctx.fillStyle='#0099cc'; ctx.fillText('P2',W/2+4,13);
+}
+window.addEventListener('resize',drawLoss);
+
+// ── Log ───────────────────────────────────────────────────────────
+function log(msg,type='info'){
+  const box=document.getElementById('logBox');
+  const ts=new Date().toTimeString().slice(0,8);
+  const c=type==='ok'?'#00c96a':type==='err'?'#ff2d55':type==='warn'?'#ffb800':'#7a9ab5';
+  const d=document.createElement('div');
+  d.innerHTML=`<span style="color:#3d566e">[${ts}]</span> <span style="color:${c}">${msg}</span>`;
+  box.appendChild(d); box.scrollTop=box.scrollHeight;
+}
+
+// ── Status poll ───────────────────────────────────────────────────
+async function pollStatus(){
+  try{
+    const r=await fetch('/api/status').then(r=>r.json());
+    document.getElementById('cryptoBadge').textContent=r.has_crypto?'⬡ AES-256-GCM':'⬡ HMAC-FALLBACK';
+    const mb=document.getElementById('modelBadge');
+    if(r.model_loaded){ mb.className='badge badge-model'; mb.textContent='◆ MODEL ONLINE'; }
+    else { mb.className='badge badge-model off'; mb.textContent='◇ OFFLINE'; }
+    if(r.cfg && !document.getElementById('cfgGrid').children.length) renderCfg(r.cfg);
+    updateHubStatus(r);
+  }catch(e){}
+}
+setInterval(pollStatus,3000); pollStatus();
+
+function updateHubStatus(r){
+  const d=document.getElementById('hubStatus');
+  if(r.peer_count===0){ d.textContent='No peers registered'; return; }
+  d.innerHTML=`<span style="color:var(--purple)">◆ ${r.peer_count} peer(s) active</span>: ${r.active_peers.join(', ')}`;
+}
+
+function renderCfg(cfg){
+  const keys=['N_IDENTITIES','N_WINDOWS_PER_ID','HIDDEN_DIM','ATTN_DIM','MS_DIM','SEQ_LEN','EPOCHS_PHASE1','EPOCHS_PHASE2'];
+  document.getElementById('cfgGrid').innerHTML=keys.map(k=>`
+    <div class="cfg-row"><span class="cfg-key">${k.replace(/_/g,' ')}</span><span class="cfg-val">${cfg[k]??'—'}</span></div>`).join('');
+}
+
+// ── Train ─────────────────────────────────────────────────────────
+let trainSSE=null;
+function startTrain(){
+  document.getElementById('btnTrain').disabled=true;
+  document.getElementById('trainDot').classList.remove('off');
+  lossP1.length=0; lossP2.length=0; totalEp=0;
+  log('Starting training…','warn');
+  fetch('/api/train',{method:'POST'});
+  if(trainSSE) trainSSE.close();
+  trainSSE=new EventSource('/api/train/stream');
+  trainSSE.onmessage=e=>{
+    const d=JSON.parse(e.data);
+    if(d.type==='progress'){
+      const ph=d.phase, ep=d.epoch, loss=d.loss;
+      document.getElementById('mPhase').textContent=`Phase ${ph}`;
+      document.getElementById('mEpoch').textContent=`${ep}/${ph===1?90:100}`;
+      document.getElementById('mLoss').textContent=(loss||0).toFixed(4);
+      totalEp++; document.getElementById('progBar').style.width=Math.min(99,totalEp/TOTAL_EP*100)+'%';
+      (ph===1?lossP1:lossP2).push(loss); drawLoss();
+    } else if(d.type==='log'){ log(d.msg,'ok'); }
+    else if(d.type==='done'){
+      if(d.error){ log('ERROR: '+d.error,'err'); }
+      else { log(`Training done in ${d.train_s?.toFixed(2)}s`,'ok'); document.getElementById('progBar').style.width='100%'; document.getElementById('mTime').textContent=d.train_s?.toFixed(2)+'s'; pollStatus(); }
+      document.getElementById('btnTrain').disabled=false;
+      document.getElementById('trainDot').classList.add('off');
+      trainSSE.close();
+    }
+  };
+}
+async function loadModel(){
+  log('Loading model…','warn');
+  const r=await fetch('/api/load',{method:'POST'}).then(r=>r.json()).catch(()=>({error:'failed'}));
+  if(r.error){ log('Load error: '+r.error,'err'); return; }
+  log(`Loaded — ${r.param_kb} KB`,'ok'); pollStatus();
+}
+
+// ── Verify ────────────────────────────────────────────────────────
+async function doVerify(){
+  const cid=+document.getElementById('vCid').value;
+  const ew=+document.getElementById('vEw').value;
+  const tam=document.getElementById('vTamper').value;
+  const r=await fetch('/api/verify',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({claimed_id:cid,expected_w:ew,tamper:tam})}).then(r=>r.json());
+  if(r.error){ log('Verify error: '+r.error,'err'); return; }
+  renderResult(r); refreshChain();
+}
+
+function renderResult(r){
+  const ok=r.ok;
+  const vc=ok?'#00ff88':'#ff2d55'; const vtxt=ok?'◆ AUTHORIZED':'◇ DENIED';
+  const tam=r.tamper&&r.tamper!=='none'?` <span style="font-size:.68rem;color:#ffb800">[${r.tamper.toUpperCase()}]</span>`:'';
+  const gates=r.gates||{};
+  const gLbls={pn:'PN PILOT',p_valid:'P_VALID',id_match:'ID MATCH',w_match:'WIN MATCH',pid:'PID MIN',pw:'PW MIN'};
+  const gHtml=Object.entries(gates).map(([k,v])=>`
+    <div class="gate ${v?'gate-ok':'gate-fail'}">
+      <div class="gate-lbl" style="color:${v?'#00ff88':'#ff2d55'}">${gLbls[k]||k}</div>
+      <div class="gate-mk" style="color:${v?'#00ff88':'#ff2d55'}">${v?'✓':'✗'}</div>
+    </div>`).join('');
+  const sc=[
+    ['P_VALID',r.p_valid,r.p_valid>=.8?'#00ff88':'#ff2d55'],
+    ['PID',r.pid,r.pid>=.7?'#00ff88':'#ffb800'],
+    ['PW',r.pw,r.pw>=.4?'#00ff88':'#ffb800'],
+    ['PILOT ρ',r.pilot_corr,r.pilot_corr>=.02?'#00d4ff':'#ff2d55'],
+    ['L2(MS)',r.l2ms>=0?r.l2ms:null,'#c8d6e5'],
+    ['LAT µs',r.latency_us,'#00d4ff'],
+  ];
+  const sHtml=sc.map(([l,v,c])=>`
+    <div class="score-cell"><div class="score-lbl">${l}</div>
+    <div class="score-num" style="color:${c}">${v!=null?Number(v).toFixed(3):'—'}</div></div>`).join('');
+  const ctrInfo=r.counter!=null?`CTR:${r.counter} Δ${r.delta_ms?.toFixed(0)}ms SEQ#${r.seq}`:'';
+  document.getElementById('resultCard').innerHTML=`
+    <div class="verdict-card ${ok?'ok':'fail'}">
+      <div class="verdict-txt ${ok?'verdict-ok':'verdict-fail'}">${vtxt}${tam}</div>
+      <div class="verdict-meta">ID=${r.id_pred} · W=${r.w_pred} · ${ctrInfo} · PROOF:${(r.proof||'').slice(0,12)}…</div>
+      <div class="gates-grid">${gHtml}</div>
+      <div class="scores-grid">${sHtml}</div>
+    </div>`;
+}
+
+async function bulkDemo(){
+  const cases=['none','shuffle','truncate','wrong_win','wrong_id','oob'];
+  const wrap=document.getElementById('bulkResults');
+  wrap.innerHTML='<div style="font-family:var(--mono);font-size:.7rem;color:var(--text3)">Running…</div>';
+  const rows=[];
+  for(const tam of cases){
+    const r=await fetch('/api/verify',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({claimed_id:0,expected_w:3,tamper:tam})}).then(r=>r.json());
+    rows.push({tam,ok:r.ok,pv:r.p_valid});
+  }
+  wrap.innerHTML=rows.map(row=>`
+    <div style="display:flex;justify-content:space-between;align-items:center;
+      font-family:var(--mono);font-size:.7rem;padding:4px 7px;border:1px solid var(--border);
+      border-left:3px solid ${row.ok?'var(--green)':'var(--red)'};background:var(--bg2);margin-bottom:3px">
+      <span style="color:${row.ok?'var(--green)':'var(--red)'}">${row.ok?'✓':'✗'}</span>
+      <span style="color:var(--text2);flex:1;margin:0 8px">${row.tam}</span>
+      <span style="color:var(--amber)">${row.pv?.toFixed(3)??'—'}</span>
+    </div>`).join('');
+  refreshChain();
+}
+
+async function doBench(){
+  const d=document.getElementById('benchResult');
+  d.textContent='Running…';
+  const r=await fetch('/api/benchmark',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({n:50})}).then(r=>r.json());
+  d.innerHTML=`
+    <div class="mrow"><span class="mkey">MEAN</span><span class="mval" style="color:var(--cyan)">${r.mean_us?.toFixed(1)} µs</span></div>
+    <div class="mrow"><span class="mkey">MIN</span><span class="mval" style="color:var(--green)">${r.min_us?.toFixed(1)} µs</span></div>
+    <div class="mrow"><span class="mkey">P95</span><span class="mval" style="color:var(--amber)">${r.p95_us?.toFixed(1)} µs</span></div>`;
+}
+
+// ── PEER HUB ──────────────────────────────────────────────────────
+const peerState={};  // local cache of peer states
+
+async function initPeer(){
+  const pid=document.getElementById('pPeerId').value.trim()||'PEER_'+Date.now();
+  const iid=+document.getElementById('pIdentId').value;
+  const sk=document.getElementById('pSessionKey').value.trim()||null;
+  const body={peer_id:pid,identity_id:iid};
+  if(sk) body.session_key=sk;
+  const r=await fetch('/api/peer/init',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}).then(r=>r.json());
+  if(r.error){ log('Peer init error: '+r.error,'err'); return; }
+  log(`Peer ${pid} registered (id=${iid} key=${r.session_key.slice(0,12)}…)`,'ok');
+  // auto-fill session key for next peer
+  document.getElementById('pSessionKey').value=r.session_key;
+  document.getElementById('pPeerId').value=pid==='PEER_A'?'PEER_B':'PEER_A';
+  peerState[pid]={peer_id:pid,identity_id:iid,recon:null,anchor:null,handshake:null,session_key:r.session_key};
+  renderPeerCards(); pollStatus();
+}
+
+function renderPeerCards(){
+  const wrap=document.getElementById('peerCards');
+  wrap.innerHTML=Object.values(peerState).map(p=>{
+    const hs=p.handshake;
+    const statusTxt=hs?.handshake_ok?'◆ HANDSHAKE OK':'◇ PENDING';
+    const statusCls=hs?.handshake_ok?'peer-status-ok':'peer-status-pending';
+    const stepsDone={recon:!!p.recon,anchor:!!p.anchor,verify:hs?.handshake_ok};
+    return `<div class="peer-card ${hs?.handshake_ok?'handshake-ok':''}">
+      <div class="peer-header">
+        <span class="peer-id">⬡ ${p.peer_id}</span>
+        <span style="color:var(--text3)">ID:${p.identity_id}</span>
+        <span class="${statusCls}">${statusTxt}</span>
+      </div>
+      <div class="peer-steps">
+        <div class="step ${stepsDone.recon?'done':'active'}">1.RECON</div>
+        <div class="step ${stepsDone.anchor?'done':stepsDone.recon?'active':'locked'}">2.ANCHOR</div>
+        <div class="step ${stepsDone.verify?'done':stepsDone.anchor?'active':'locked'}">3.VERIFY</div>
+        <div class="step ${stepsDone.verify?'done':'locked'}">4.DONE</div>
+      </div>
+      ${p.recon?renderReconMini(p.recon):''}
+    </div>`;
+  }).join('');
+}
+
+function renderReconMini(recon){
+  const l2s=recon.per_window_l2||[];
+  const maxL2=Math.max(...l2s,0.01);
+  const TOL=0.35;
+  const bars=l2s.slice(0,12).map((v,i)=>`
+    <div class="recon-bar-row">
+      <span class="recon-bar-label">W${i}</span>
+      <div class="recon-bar-outer"><div class="recon-bar-inner ${v>TOL?'bad':''}" style="width:${Math.min(100,v/maxL2*100).toFixed(0)}%"></div></div>
+      <span class="recon-bar-val">${v.toFixed(3)}</span>
+    </div>`).join('');
+  return `<div style="font-family:var(--mono);font-size:.62rem;color:${recon.accepted?'var(--green)':'var(--red)'};margin-bottom:4px">
+    MS consensus L2: ${recon.consensus_l2?.toFixed(4)} — ${recon.accepted?'ACCEPTED':'REJECTED'}
+    (${recon.windows_ok}/${recon.windows_used} windows OK)
+  </div>
+  <div class="recon-bars">${bars}${l2s.length>12?`<div style="color:var(--text3);font-family:var(--mono);font-size:.6rem">…+${l2s.length-12} more</div>`:''}</div>`;
+}
+
+async function doReconstruct(){
+  const pid=document.getElementById('reconPeer').value.trim();
+  if(!pid){ log('Enter a peer ID','err'); return; }
+  document.getElementById('btnRecon').disabled=true;
+  log(`Reconstructing MS from 48 OS windows for ${pid}…`,'warn');
+  const r=await fetch(`/api/peer/reconstruct?peer_id=${encodeURIComponent(pid)}`,{method:'POST'}).then(r=>r.json());
+  document.getElementById('btnRecon').disabled=false;
+  if(r.error){ log('Recon error: '+r.error,'err'); return; }
+  log(`${pid} recon: L2=${r.consensus_l2?.toFixed(4)} ok=${r.windows_ok}/${r.windows_used} ${r.accepted?'✓ ACCEPTED':'✗ REJECTED'}`,'ok');
+  if(peerState[pid]) peerState[pid].recon=r;
+  renderPeerCards();
+  document.getElementById('reconResult').innerHTML=`
+    <div style="font-family:var(--mono);font-size:.7rem;border:1px solid ${r.accepted?'var(--green3)':'var(--red2)'};padding:8px;background:var(--bg2)">
+      <div style="color:${r.accepted?'var(--green)':'var(--red)'};margin-bottom:5px">
+        ${r.accepted?'◆ RECONSTRUCTION ACCEPTED':'◇ RECONSTRUCTION REJECTED'}
+      </div>
+      <div class="mrow"><span class="mkey">Consensus L2</span><span class="mval" style="color:${r.accepted?'var(--green)':'var(--red)'}">${r.consensus_l2?.toFixed(5)}</span></div>
+      <div class="mrow"><span class="mkey">Mean L2</span><span class="mval" style="color:var(--text)">${r.mean_l2?.toFixed(5)}</span></div>
+      <div class="mrow"><span class="mkey">Windows OK</span><span class="mval" style="color:var(--cyan)">${r.windows_ok} / ${r.windows_used}</span></div>
+      <div class="mrow"><span class="mkey">Latency</span><span class="mval" style="color:var(--amber)">${r.latency_ms?.toFixed(1)} ms</span></div>
+    </div>`;
+}
+
+async function runFullHandshake(){
+  const pidA=document.getElementById('hsA').value.trim();
+  const pidB=document.getElementById('hsB').value.trim();
+  if(!pidA||!pidB){ log('Enter both peer IDs','err'); return; }
+  document.getElementById('btnHandshake').disabled=true;
+  const wrap=document.getElementById('handshakeResult');
+  wrap.innerHTML='<div style="font-family:var(--mono);font-size:.7rem;color:var(--amber)">Running handshake…</div>';
+  log(`Full handshake: ${pidA} ↔ ${pidB}`,'warn');
+
+  const steps=[];
+  const step=async(label, fn)=>{
+    try{
+      const r=await fn();
+      steps.push({label,ok:!r.error,r});
+      return r;
+    }catch(e){ steps.push({label,ok:false,r:{error:e.message}}); return {error:e.message}; }
+  };
+
+  // 1. Reconstruct both
+  const rA=await step(`${pidA}: reconstruct`, ()=>fetch(`/api/peer/reconstruct?peer_id=${encodeURIComponent(pidA)}`,{method:'POST'}).then(r=>r.json()));
+  const rB=await step(`${pidB}: reconstruct`, ()=>fetch(`/api/peer/reconstruct?peer_id=${encodeURIComponent(pidB)}`,{method:'POST'}).then(r=>r.json()));
+  if(peerState[pidA]) peerState[pidA].recon=rA;
+  if(peerState[pidB]) peerState[pidB].recon=rB;
+
+  // 2. Build anchors
+  const aA=await step(`${pidA}: build anchor`, ()=>fetch(`/api/peer/anchor/build?peer_id=${encodeURIComponent(pidA)}`,{method:'POST'}).then(r=>r.json()));
+  const aB=await step(`${pidB}: build anchor`, ()=>fetch(`/api/peer/anchor/build?peer_id=${encodeURIComponent(pidB)}`,{method:'POST'}).then(r=>r.json()));
+  if(peerState[pidA]) peerState[pidA].anchor=aA;
+  if(peerState[pidB]) peerState[pidB].anchor=aB;
+
+  // 3. Cross-verify anchors
+  const vA=await step(`${pidA} verifies ${pidB}`, ()=>fetch('/api/peer/anchor/verify',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({peer_id:pidA,remote_peer_id:pidB})}).then(r=>r.json()));
+  const vB=await step(`${pidB} verifies ${pidA}`, ()=>fetch('/api/peer/anchor/verify',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({peer_id:pidB,remote_peer_id:pidA})}).then(r=>r.json()));
+  if(peerState[pidA]) peerState[pidA].handshake=vA;
+  if(peerState[pidB]) peerState[pidB].handshake=vB;
+
+  const mutual=vA.handshake_ok && vB.handshake_ok;
+  log(`Handshake result: ${mutual?'◆ MUTUAL PROOF ESTABLISHED':'◇ HANDSHAKE FAILED'} A→B:${vA.handshake_ok} B→A:${vB.handshake_ok}`, mutual?'ok':'err');
+
+  wrap.innerHTML=`
+    <div style="border:1px solid ${mutual?'var(--green3)':'var(--red2)'};padding:10px;background:var(--bg2)">
+      <div style="font-family:var(--mono);font-size:1rem;font-weight:700;letter-spacing:3px;
+        color:${mutual?'var(--green)':'var(--red)'};margin-bottom:8px">
+        ${mutual?'◆ MUTUAL PROOF OK':'◇ HANDSHAKE FAILED'}
+      </div>
+      ${steps.map(s=>`
+        <div style="display:flex;gap:8px;font-family:var(--mono);font-size:.68rem;margin-bottom:3px">
+          <span style="color:${s.ok?'var(--green)':'var(--red)'}">${s.ok?'✓':'✗'}</span>
+          <span style="color:var(--text2)">${s.label}</span>
+          ${s.r.consensus_l2!=null?`<span style="color:var(--amber);margin-left:auto">L2=${s.r.consensus_l2?.toFixed(4)}</span>`:''}
+          ${s.r.l2_distance!=null?`<span style="color:var(--cyan);margin-left:auto">dist=${s.r.l2_distance?.toFixed(4)}</span>`:''}
+        </div>`).join('')}
+    </div>`;
+
+  renderPeerCards();
+  document.getElementById('btnHandshake').disabled=false;
+  refreshChain();
+}
+
+// ── Chain ─────────────────────────────────────────────────────────
+async function refreshChain(){
+  try{
+    const r=await fetch('/api/chain').then(r=>r.json());
+    if(r.error) return;
+    const ok=r.valid;
+    document.getElementById('chainStatus').innerHTML=`
+      <span style="color:${ok?'var(--green)':'var(--red)'}">
+        ${ok?'◆ CHAIN INTACT':'◇ CHAIN BROKEN'}
+      </span> · reason: ${r.reason||'ok'} · ctr: ${r.counter||0}`;
+    document.getElementById('chainStateBox').innerHTML=
+      `<span style="color:var(--text3)">events:</span> <span style="color:var(--green)">${r.events}</span><br>`+
+      `<span style="color:var(--text3)">state:</span> ${r.state||'—'}…<br>`+
+      `<span style="color:var(--text3)">counter:</span> <span style="color:var(--amber)">${r.counter||0}</span>`;
+    const evts=r.recent_events||[];
+    if(evts.length){
+      document.getElementById('eventList').innerHTML=evts.slice().reverse().map(ev=>{
+        const e=ev.event||{}; const ok2=e.ok;
+        const eType=e.event||'VERIFY';
+        const cls=eType.includes('ANCHOR')?'event-anchor':eType.includes('RECONSTRUCT')?'event-info':ok2?'event-ok':'event-fail';
+        return `<div class="event-item ${cls}">
+          <div class="event-header">
+            <span style="color:var(--text3)">#${ev.seq} [${eType}]</span>
+            <span style="color:${ok2?'var(--green)':'var(--red)'}">CTR:${e.counter||'?'} Δ${e.delta_ms?.toFixed(0)||'?'}ms</span>
+          </div>
+          <div class="event-fields">
+            ${e.claimed_id!=null?`<span>ID:<b>${e.claimed_id}</b></span>`:''}
+            ${e.expected_w!=null?`<span>W:<b>${e.expected_w}</b></span>`:''}
+            ${e.p_valid!=null?`<span>pV:<b>${e.p_valid}</b></span>`:''}
+            ${e.consensus_l2!=null?`<span>L2:<b>${e.consensus_l2}</b></span>`:''}
+            ${e.latency_us!=null?`<span>${e.latency_us?.toFixed(0)}µs</span>`:''}
+          </div>
+          <div class="event-proof">proof:${ev.proof?.slice(0,22)}…</div>
+        </div>`;
+      }).join('');
+    }
+  }catch(e){}
+}
+
+// ── Encrypt ───────────────────────────────────────────────────────
+async function doEncrypt(){
+  const cid=+document.getElementById('encId').value;
+  const w=+document.getElementById('encW').value;
+  const r=await fetch('/api/encrypt',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({claimed_id:cid,expected_w:w})}).then(r=>r.json());
+  const enc=r.encrypted||{};
+  const rt=r.roundtrip_ok;
+  document.getElementById('encResult').innerHTML=`
+    <div style="font-family:var(--mono);font-size:.7rem;margin-bottom:6px;color:${rt?'var(--green)':'var(--red)'}">
+      ${rt?'◆ ROUNDTRIP OK':'◇ FAIL'} · ${r.has_crypto?'AES-256-GCM':'HMAC-XOR fallback'}
+    </div>
+    <div class="enc-block">
+      <span class="enc-k">SALT:</span> <span class="enc-v">${enc.salt||'—'}</span><br>
+      <span class="enc-k">NONCE:</span> <span class="enc-v">${enc.nonce||'—'}</span><br>
+      <span class="enc-k">TAG:</span> <span class="enc-v">${enc.tag||'—'}</span><br>
+      <span class="enc-k">CHAIN_HASH:</span> <span class="enc-v">${enc.chain_hash||'—'}</span><br>
+      <span class="enc-k">CIPHERTEXT:</span> <span class="enc-v">${(enc.ct||enc.ciphertext||'').slice(0,64)}…</span>
+    </div>`;
+}
+
+// ── WebSocket feed ────────────────────────────────────────────────
+let ws=null;
+function connectWS(){
+  if(ws) ws.close();
+  const proto=location.protocol==='https:'?'wss:':'ws:';
+  ws=new WebSocket(`${proto}//${location.host}/ws/chain`);
+  ws.onopen=()=>{
+    document.getElementById('wsFeed').innerHTML='<div style="color:var(--green)">◆ WebSocket connected</div>';
+  };
+  ws.onmessage=e=>{
+    const d=JSON.parse(e.data); const feed=document.getElementById('wsFeed');
+    const ev=d.event||{}; const eType=ev.event||'?';
+    const ok=ev.ok; const c=eType.includes('ANCHOR')?'var(--purple)':ok?'var(--green)':ev.ok===false?'var(--red)':'var(--cyan)';
+    const div=document.createElement('div');
+    div.style.cssText=`color:${c};border-bottom:1px solid var(--border);padding:2px 0`;
+    div.textContent=`#${d.seq} [${d.peer_id}] ${eType} ctr:${ev.counter} Δ${ev.delta_ms?.toFixed(0)}ms`;
+    feed.prepend(div);
+    while(feed.children.length>30) feed.removeChild(feed.lastChild);
+  };
+  ws.onclose=()=>{ document.getElementById('wsFeed').innerHTML+='<div style="color:var(--red)">◇ Disconnected</div>'; };
+}
+
+// Init
+drawLoss();
+</script>
+</body>
+</html>

@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>WARLOK — Pilot Console</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&display=swap');
+
+  :root {
+    --bg0: #050709;
+    --bg1: #0a0d13;
+    --bg2: #0f1520;
+    --bg3: #141c2e;
+    --surface: #111827;
+    --border: #1e2d47;
+    --border-bright: #243858;
+    --cyan: #00e5ff;
+    --cyan-dim: #0099bb;
+    --cyan-glow: rgba(0,229,255,0.15);
+    --green: #00ff88;
+    --green-dim: #00994d;
+    --red: #ff3355;
+    --red-dim: #991122;
+    --amber: #ffbb00;
+    --amber-dim: #996600;
+    --purple: #9933ff;
+    --text: #c8d8f0;
+    --text-dim: #5a7a9a;
+    --text-bright: #e8f4ff;
+    --font-mono: 'Share Tech Mono', monospace;
+    --font-ui: 'Rajdhani', sans-serif;
+    --font-display: 'Orbitron', monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg0);
+    color: var(--text);
+    font-family: var(--font-ui);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Scanline overlay */
+  body::before {
+    content: '';
+    position: fixed; inset: 0; z-index: 9999;
+    background: repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.03) 2px,rgba(0,0,0,0.03) 4px);
+    pointer-events: none;
+  }
+
+  /* Grid bg */
+  body::after {
+    content: '';
+    position: fixed; inset: 0; z-index: 0;
+    background-image:
+      linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+  }
+
+  /* ─── HEADER ─── */
+  header {
+    position: relative; z-index: 10;
+    background: linear-gradient(180deg, #080c14 0%, var(--bg1) 100%);
+    border-bottom: 1px solid var(--border-bright);
+    padding: 0 24px;
+    display: flex; align-items: center; gap: 24px;
+    height: 60px;
+    box-shadow: 0 2px 40px rgba(0,229,255,0.08);
+  }
+
+  .logo {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 900;
+    letter-spacing: 4px;
+    color: var(--cyan);
+    text-shadow: 0 0 20px var(--cyan), 0 0 40px rgba(0,229,255,0.3);
+  }
+
+  .logo span { color: var(--text-dim); font-weight: 400; font-size: 11px; letter-spacing: 2px; display: block; margin-top: -4px; }
+
+  .header-divider { width: 1px; height: 30px; background: var(--border-bright); }
+
+  .status-bar {
+    display: flex; align-items: center; gap: 16px;
+    font-family: var(--font-mono); font-size: 11px; color: var(--text-dim);
+  }
+
+  .status-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 8px var(--green);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%,100% { opacity: 1; box-shadow: 0 0 8px var(--green); }
+    50% { opacity: 0.5; box-shadow: 0 0 3px var(--green); }
+  }
+
+  .header-actions { margin-left: auto; display: flex; gap: 8px; }
+
+  /* ─── LAYOUT ─── */
+  .layout {
+    position: relative; z-index: 1;
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    height: calc(100vh - 60px);
+  }
+
+  /* ─── SIDEBAR ─── */
+  nav {
+    background: var(--bg1);
+    border-right: 1px solid var(--border);
+    padding: 20px 0;
+    display: flex; flex-direction: column; gap: 4px;
+    overflow-y: auto;
+  }
+
+  .nav-section {
+    padding: 6px 16px 4px;
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    font-family: var(--font-mono);
+    margin-top: 12px;
+  }
+  .nav-section:first-child { margin-top: 0; }
+
+  .nav-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 9px 16px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    color: var(--text-dim);
+    border-left: 2px solid transparent;
+    transition: all 0.15s;
+    text-transform: uppercase;
+  }
+
+  .nav-item:hover { background: var(--bg2); color: var(--text); }
+
+  .nav-item.active {
+    background: linear-gradient(90deg, var(--cyan-glow), transparent);
+    border-left-color: var(--cyan);
+    color: var(--cyan);
+  }
+
+  .nav-icon { font-size: 14px; width: 18px; text-align: center; }
+
+  /* ─── MAIN CONTENT ─── */
+  main {
+    overflow-y: auto;
+    padding: 24px;
+    background: var(--bg0);
+  }
+
+  .page { display: none; }
+  .page.active { display: block; animation: fadeIn 0.2s; }
+
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+
+  /* ─── PAGE HEADER ─── */
+  .page-header {
+    display: flex; align-items: flex-start; justify-content: space-between;
+    margin-bottom: 24px;
+  }
+
+  .page-title {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--text-bright);
+  }
+
+  .page-subtitle {
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-top: 4px;
+    font-family: var(--font-mono);
+  }
+
+  /* ─── CARDS ─── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 16px;
+    margin-bottom: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--cyan-dim), transparent);
+    opacity: 0.4;
+  }
+
+  .card-title {
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    font-family: var(--font-mono);
+    margin-bottom: 12px;
+  }
+
+  /* ─── GRID LAYOUTS ─── */
+  .grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin-bottom: 16px; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+
+  /* ─── STAT TILES ─── */
+  .stat-tile {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 14px 16px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stat-tile::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+  }
+
+  .stat-tile.cyan::after { background: var(--cyan); }
+  .stat-tile.green::after { background: var(--green); }
+  .stat-tile.red::after { background: var(--red); }
+  .stat-tile.amber::after { background: var(--amber); }
+
+  .stat-label {
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    font-family: var(--font-mono);
+  }
+
+  .stat-value {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-top: 4px;
+  }
+
+  .stat-tile.cyan .stat-value { color: var(--cyan); text-shadow: 0 0 20px rgba(0,229,255,0.4); }
+  .stat-tile.green .stat-value { color: var(--green); text-shadow: 0 0 20px rgba(0,255,136,0.4); }
+  .stat-tile.red .stat-value { color: var(--red); text-shadow: 0 0 20px rgba(255,51,85,0.4); }
+  .stat-tile.amber .stat-value { color: var(--amber); text-shadow: 0 0 20px rgba(255,187,0,0.4); }
+
+  /* ─── BUTTONS ─── */
+  .btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 8px 16px;
+    font-family: var(--font-ui);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    border: 1px solid;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.15s;
+    background: transparent;
+  }
+
+  .btn-primary {
+    border-color: var(--cyan);
+    color: var(--cyan);
+  }
+  .btn-primary:hover {
+    background: var(--cyan-glow);
+    box-shadow: 0 0 16px rgba(0,229,255,0.2);
+  }
+
+  .btn-success {
+    border-color: var(--green);
+    color: var(--green);
+  }
+  .btn-success:hover {
+    background: rgba(0,255,136,0.1);
+    box-shadow: 0 0 16px rgba(0,255,136,0.2);
+  }
+
+  .btn-danger {
+    border-color: var(--red);
+    color: var(--red);
+  }
+  .btn-danger:hover {
+    background: rgba(255,51,85,0.1);
+    box-shadow: 0 0 16px rgba(255,51,85,0.2);
+  }
+
+  .btn-ghost {
+    border-color: var(--border-bright);
+    color: var(--text-dim);
+  }
+  .btn-ghost:hover { border-color: var(--text-dim); color: var(--text); }
+
+  .btn:active { transform: scale(0.97); }
+  .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  /* ─── INPUTS ─── */
+  .field { margin-bottom: 12px; }
+
+  .field label {
+    display: block;
+    font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--text-dim); font-family: var(--font-mono);
+    margin-bottom: 6px;
+  }
+
+  input[type=text], textarea, select {
+    width: 100%;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 8px 12px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.15s;
+  }
+
+  input[type=text]:focus, textarea:focus, select:focus {
+    border-color: var(--cyan-dim);
+    box-shadow: 0 0 0 2px rgba(0,229,255,0.08);
+  }
+
+  /* ─── TAGS / BADGES ─── */
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    font-size: 9px;
+    font-family: var(--font-mono);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-radius: 2px;
+    border: 1px solid;
+  }
+
+  .badge-active { border-color: var(--green-dim); color: var(--green); background: rgba(0,255,136,0.06); }
+  .badge-invalid { border-color: var(--red-dim); color: var(--red); background: rgba(255,51,85,0.06); }
+  .badge-valid { border-color: var(--cyan-dim); color: var(--cyan); background: rgba(0,229,255,0.06); }
+
+  /* ─── HASH DISPLAY ─── */
+  .hash {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--cyan-dim);
+    background: var(--bg2);
+    padding: 2px 6px;
+    border-radius: 2px;
+    border: 1px solid var(--border);
+    cursor: pointer;
+  }
+  .hash:hover { color: var(--cyan); border-color: var(--cyan-dim); }
+
+  /* ─── EVENTS LOG ─── */
+  .events-log {
+    background: var(--bg1);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    height: 360px;
+    overflow-y: auto;
+    padding: 8px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+  }
+
+  .event-row {
+    display: flex; gap: 8px; align-items: flex-start;
+    padding: 4px 6px;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+    line-height: 1.4;
+    animation: slideIn 0.2s;
+  }
+
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateX(-4px); }
+    to { opacity: 1; transform: none; }
+  }
+
+  .event-row:last-child { border-bottom: none; }
+
+  .event-type {
+    min-width: 110px;
+    padding: 1px 6px;
+    border-radius: 2px;
+    font-size: 9px;
+    letter-spacing: 1px;
+    text-align: center;
+  }
+
+  .et-HSM_SIGN { background: rgba(153,51,255,0.2); color: var(--purple); border: 1px solid rgba(153,51,255,0.3); }
+  .et-HSM_VERIFY { background: rgba(153,51,255,0.15); color: #bb66ff; border: 1px solid rgba(153,51,255,0.2); }
+  .et-HUB_CREATE { background: rgba(0,229,255,0.1); color: var(--cyan); border: 1px solid rgba(0,229,255,0.2); }
+  .et-HASH { background: rgba(0,229,255,0.08); color: var(--cyan-dim); border: 1px solid rgba(0,229,255,0.15); }
+  .et-SIGNED { background: rgba(0,255,136,0.1); color: var(--green); border: 1px solid rgba(0,255,136,0.2); }
+  .et-DAG_ADD { background: rgba(0,255,136,0.08); color: var(--green-dim); border: 1px solid rgba(0,255,136,0.15); }
+  .et-PIPELINE_STEP { background: rgba(255,187,0,0.1); color: var(--amber); border: 1px solid rgba(255,187,0,0.2); }
+  .et-ATTACK { background: rgba(255,51,85,0.15); color: var(--red); border: 1px solid rgba(255,51,85,0.3); animation: flashRed 0.5s; }
+
+  @keyframes flashRed {
+    0% { background: rgba(255,51,85,0.4); }
+    100% { background: rgba(255,51,85,0.15); }
+  }
+
+  .event-data { color: var(--text-dim); font-size: 10px; word-break: break-all; }
+
+  /* ─── DAG CANVAS ─── */
+  #dag-canvas {
+    width: 100%; height: 480px;
+    background: var(--bg1);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+    cursor: grab;
+  }
+
+  #dag-canvas.grabbing { cursor: grabbing; }
+
+  canvas { position: absolute; top: 0; left: 0; }
+
+  /* ─── NODE TABLE ─── */
+  .node-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    font-family: var(--font-mono);
+  }
+
+  .node-table th {
+    text-align: left;
+    padding: 8px 10px;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    border-bottom: 1px solid var(--border-bright);
+    background: var(--bg2);
+  }
+
+  .node-table td {
+    padding: 8px 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+    vertical-align: middle;
+    color: var(--text);
+    font-size: 11px;
+  }
+
+  .node-table tr:hover td { background: var(--bg2); }
+
+  .node-table .actions { display: flex; gap: 6px; }
+
+  /* ─── TOAST ─── */
+  #toast {
+    position: fixed; bottom: 24px; right: 24px; z-index: 9999;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+
+  .toast-item {
+    background: var(--bg3);
+    border: 1px solid var(--border-bright);
+    border-left: 3px solid var(--cyan);
+    padding: 10px 16px;
+    font-size: 12px;
+    font-family: var(--font-mono);
+    min-width: 260px;
+    animation: toastIn 0.2s, toastOut 0.3s 2.7s forwards;
+    border-radius: 2px;
+  }
+
+  .toast-item.success { border-left-color: var(--green); }
+  .toast-item.error { border-left-color: var(--red); }
+  .toast-item.warn { border-left-color: var(--amber); }
+
+  @keyframes toastIn { from { opacity: 0; transform: translateX(12px); } to { opacity: 1; transform: none; } }
+  @keyframes toastOut { to { opacity: 0; transform: translateX(12px); } }
+
+  /* ─── INSPECT MODAL ─── */
+  .modal-overlay {
+    display: none;
+    position: fixed; inset: 0; z-index: 1000;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(2px);
+    align-items: center; justify-content: center;
+  }
+
+  .modal-overlay.open { display: flex; }
+
+  .modal {
+    background: var(--bg2);
+    border: 1px solid var(--border-bright);
+    border-top: 2px solid var(--cyan);
+    border-radius: 4px;
+    width: 560px; max-width: 90vw;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 24px;
+    position: relative;
+  }
+
+  .modal-title {
+    font-family: var(--font-display);
+    font-size: 14px; letter-spacing: 2px;
+    color: var(--cyan);
+    margin-bottom: 16px;
+  }
+
+  .modal-close {
+    position: absolute; top: 16px; right: 16px;
+    background: none; border: none;
+    color: var(--text-dim); font-size: 18px;
+    cursor: pointer; padding: 4px;
+  }
+  .modal-close:hover { color: var(--text); }
+
+  .kv-row {
+    display: grid; grid-template-columns: 140px 1fr;
+    gap: 8px; padding: 6px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    font-size: 12px;
+    font-family: var(--font-mono);
+  }
+
+  .kv-key { color: var(--text-dim); }
+  .kv-val { color: var(--text-bright); word-break: break-all; }
+
+  /* ─── ATTACK PAGE ─── */
+  .attack-banner {
+    background: linear-gradient(135deg, rgba(255,51,85,0.1), rgba(255,51,85,0.03));
+    border: 1px solid rgba(255,51,85,0.3);
+    border-left: 3px solid var(--red);
+    border-radius: 4px;
+    padding: 12px 16px;
+    margin-bottom: 16px;
+    font-size: 12px;
+    color: var(--red);
+    font-family: var(--font-mono);
+    letter-spacing: 1px;
+  }
+
+  /* scrollbar */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg1); }
+  ::-webkit-scrollbar-thumb { background: var(--border-bright); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--text-dim); }
+
+  /* ─── PIPELINE VIZ ─── */
+  .pipeline-viz {
+    display: flex; align-items: center; gap: 0;
+    margin: 16px 0;
+    padding: 16px;
+    background: var(--bg1);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow-x: auto;
+  }
+
+  .pipeline-agent {
+    display: flex; flex-direction: column; align-items: center;
+    min-width: 100px;
+  }
+
+  .agent-box {
+    background: var(--bg2);
+    border: 1px solid var(--border-bright);
+    border-radius: 4px;
+    padding: 8px 12px;
+    text-align: center;
+    font-size: 11px; font-family: var(--font-mono);
+    color: var(--text);
+    transition: all 0.3s;
+    position: relative;
+  }
+
+  .agent-box.running {
+    border-color: var(--amber);
+    color: var(--amber);
+    box-shadow: 0 0 12px rgba(255,187,0,0.2);
+    animation: agentPulse 0.6s infinite;
+  }
+
+  .agent-box.done {
+    border-color: var(--green);
+    color: var(--green);
+    box-shadow: 0 0 12px rgba(0,255,136,0.2);
+  }
+
+  @keyframes agentPulse {
+    0%,100% { box-shadow: 0 0 12px rgba(255,187,0,0.2); }
+    50% { box-shadow: 0 0 24px rgba(255,187,0,0.4); }
+  }
+
+  .agent-arrow {
+    width: 32px; height: 1px;
+    background: linear-gradient(90deg, var(--border-bright), var(--cyan-dim));
+    position: relative; margin: 0 4px;
+    flex-shrink: 0;
+    align-self: center;
+    margin-bottom: 12px;
+  }
+
+  .agent-arrow::after {
+    content: '';
+    position: absolute; right: -4px; top: -3px;
+    border-left: 6px solid var(--cyan-dim);
+    border-top: 3px solid transparent;
+    border-bottom: 3px solid transparent;
+  }
+
+  .agent-hash {
+    font-family: var(--font-mono);
+    font-size: 8px;
+    color: var(--text-dim);
+    margin-top: 4px;
+    max-width: 80px;
+    overflow: hidden; text-overflow: ellipsis;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">WARLOK <span>Pilot Console v2.0</span></div>
+  <div class="header-divider"></div>
+  <div class="status-bar">
+    <div class="status-dot" id="conn-dot"></div>
+    <span id="conn-label">CONNECTING...</span>
+    <span style="color:var(--border-bright)">|</span>
+    <span id="dag-count">0 blocks</span>
+    <span style="color:var(--border-bright)">|</span>
+    <span id="event-count">0 events</span>
+  </div>
+  <div class="header-actions">
+    <button class="btn btn-ghost" onclick="resetAll()">↺ RESET</button>
+    <button class="btn btn-primary" onclick="refreshAll()">⟳ REFRESH</button>
+  </div>
+</header>
+
+<div class="layout">
+  <nav>
+    <div class="nav-section">Monitor</div>
+    <div class="nav-item active" data-page="dashboard" onclick="goPage('dashboard')">
+      <span class="nav-icon">⬡</span> Dashboard
+    </div>
+    <div class="nav-item" data-page="graph" onclick="goPage('graph')">
+      <span class="nav-icon">◈</span> DAG Graph
+    </div>
+    <div class="nav-section">Operations</div>
+    <div class="nav-item" data-page="execution" onclick="goPage('execution')">
+      <span class="nav-icon">▶</span> Execution
+    </div>
+    <div class="nav-item" data-page="pipeline" onclick="goPage('pipeline')">
+      <span class="nav-icon">⟿</span> Pipeline
+    </div>
+    <div class="nav-section">Analysis</div>
+    <div class="nav-item" data-page="inspector" onclick="goPage('inspector')">
+      <span class="nav-icon">◎</span> Inspector
+    </div>
+    <div class="nav-item" data-page="blocks" onclick="goPage('blocks')">
+      <span class="nav-icon">▦</span> Blocks
+    </div>
+    <div class="nav-section">Security</div>
+    <div class="nav-item" data-page="attack" onclick="goPage('attack')">
+      <span class="nav-icon">⚠</span> Attack Sim
+    </div>
+  </nav>
+
+  <main>
+    <!-- DASHBOARD -->
+    <div id="page-dashboard" class="page active">
+      <div class="page-header">
+        <div>
+          <div class="page-title">SYSTEM DASHBOARD</div>
+          <div class="page-subtitle">Real-time DAG integrity monitor</div>
+        </div>
+        <button class="btn btn-success" onclick="runPipeline()">▶ RUN PIPELINE</button>
+      </div>
+
+      <div class="grid-4">
+        <div class="stat-tile cyan">
+          <div class="stat-label">Total Blocks</div>
+          <div class="stat-value" id="s-total">0</div>
+        </div>
+        <div class="stat-tile green">
+          <div class="stat-label">Active</div>
+          <div class="stat-value" id="s-active">0</div>
+        </div>
+        <div class="stat-tile red">
+          <div class="stat-label">Compromised</div>
+          <div class="stat-value" id="s-invalid">0</div>
+        </div>
+        <div class="stat-tile amber">
+          <div class="stat-label">Events</div>
+          <div class="stat-value" id="s-events">0</div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">Create Block</div>
+          <div class="field">
+            <label>Payload</label>
+            <input type="text" id="d-payload" placeholder="block payload data..."/>
+          </div>
+          <div class="field">
+            <label>Parent Hash (optional)</label>
+            <input type="text" id="d-parent" placeholder="parent hash..."/>
+          </div>
+          <button class="btn btn-primary" onclick="createBlock()">+ CREATE BLOCK</button>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Quick Validate</div>
+          <div class="field">
+            <label>Block Hash</label>
+            <input type="text" id="d-valhash" placeholder="enter hash to validate..."/>
+          </div>
+          <button class="btn btn-success" onclick="quickValidate()" style="margin-bottom:12px">◎ VALIDATE</button>
+          <div id="d-valresult" style="font-family:var(--font-mono);font-size:12px;"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Live Event Stream</div>
+        <div class="events-log" id="dash-events"></div>
+      </div>
+    </div>
+
+    <!-- DAG GRAPH -->
+    <div id="page-graph" class="page">
+      <div class="page-header">
+        <div>
+          <div class="page-title">DAG TOPOLOGY</div>
+          <div class="page-subtitle">Directed acyclic graph — drag to pan, scroll to zoom</div>
+        </div>
+        <button class="btn btn-ghost" onclick="renderDAG()">↺ REDRAW</button>
+      </div>
+      <div id="dag-canvas">
+        <canvas id="dag-cvs"></canvas>
+      </div>
+      <div style="margin-top:8px;font-size:10px;font-family:var(--font-mono);color:var(--text-dim);display:flex;gap:16px">
+        <span><span style="color:var(--green)">●</span> ACTIVE</span>
+        <span><span style="color:var(--red)">●</span> INVALID</span>
+        <span>Click a node to inspect</span>
+      </div>
+    </div>
+
+    <!-- EXECUTION LOG -->
+    <div id="page-execution" class="page">
+      <div class="page-header">
+        <div>
+          <div class="page-title">EXECUTION LOG</div>
+          <div class="page-subtitle">Chronological event stream from all components</div>
+        </div>
+        <button class="btn btn-ghost" onclick="loadEvents()">↺ REFRESH</button>
+      </div>
+      <div class="card" style="margin-bottom:0">
+        <div class="card-title">Event stream — most recent first</div>
+        <div class="events-log" id="exec-events" style="height:520px"></div>
+      </div>
+    </div>
+
+    <!-- PIPELINE -->
+    <div id="page-pipeline" class="page">
+      <div class="page-header">
+        <div>
+          <div class="page-title">PIPELINE RUNNER</div>
+          <div class="page-subtitle">Execute multi-agent pipeline: Collector → Analyzer → Decision → Executor</div>
+        </div>
+      </div>
+
+      <div class="pipeline-viz" id="pipeline-viz">
+        <div class="pipeline-agent"><div class="agent-box" id="pa-Collector">Collector</div><div class="agent-hash" id="ph-Collector">—</div></div>
+        <div class="agent-arrow"></div>
+        <div class="pipeline-agent"><div class="agent-box" id="pa-Analyzer">Analyzer</div><div class="agent-hash" id="ph-Analyzer">—</div></div>
+        <div class="agent-arrow"></div>
+        <div class="pipeline-agent"><div class="agent-box" id="pa-Decision">Decision</div><div class="agent-hash" id="ph-Decision">—</div></div>
+        <div class="agent-arrow"></div>
+        <div class="pipeline-agent"><div class="agent-box" id="pa-Executor">Executor</div><div class="agent-hash" id="ph-Executor">—</div></div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Pipeline Control</div>
+        <button class="btn btn-success" onclick="runPipelineAnimated()" id="run-btn">▶ EXECUTE PIPELINE</button>
+        <div id="pipeline-result" style="margin-top:12px;font-family:var(--font-mono);font-size:11px;color:var(--text-dim)"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Pipeline Events</div>
+        <div class="events-log" id="pipeline-events" style="height:260px"></div>
+      </div>
+    </div>
+
+    <!-- INSPECTOR -->
+    <div id="page-inspector" class="page">
+      <div class="page-header">
+        <div>
+          <div class="page-title">BLOCK INSPECTOR</div>
+          <div class="page-subtitle">Deep-dive validation and block metadata</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Hash Lookup</div>
+        <div style="display:flex;gap:8px">
+          <input type="text" id="insp-hash" placeholder="enter full block hash..." style="flex:1"/>
+          <button class="btn btn-primary" onclick="inspectBlock()">INSPECT</button>
+          <button class="btn btn-success" onclick="validateInspect()">VALIDATE</button>
+        </div>
+      </div>
+
+      <div id="insp-result" style="display:none">
+        <div class="grid-2">
+          <div class="card" id="insp-meta"></div>
+          <div class="card" id="insp-validation"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BLOCKS TABLE -->
+    <div id="page-blocks" class="page">
+      <div class="page-header">
+        <div>
+          <div class="page-title">BLOCK REGISTRY</div>
+          <div class="page-subtitle">All blocks in the DAG</div>
+        </div>
+        <button class="btn btn-ghost" onclick="loadBlocks()">↺ REFRESH</button>
+      </div>
+      <div class="card" style="padding:0;overflow:hidden">
+        <table class="node-table" id="blocks-table">
+          <thead>
+            <tr>
+              <th>Hash</th>
+              <th>Agent</th>
+              <th>Parents</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="blocks-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ATTACK SIM -->
+    <div id="page-attack" class="page">
+      <div class="page-header">
+        <div>
+          <div class="page-title">ATTACK SIMULATOR</div>
+          <div class="page-subtitle">Adversarial testing — demo mode only</div>
+        </div>
+      </div>
+
+      <div class="attack-banner">
+        ⚠ WARNING — This module performs adversarial operations. All actions are logged.
+      </div>
+
+      <div class="grid-2">
+        <div class="card" style="border-color:rgba(255,51,85,0.3)">
+          <div class="card-title" style="color:var(--red)">Payload Tamper</div>
+          <p style="font-size:12px;color:var(--text-dim);margin-bottom:12px;line-height:1.6">
+            Appends <code style="color:var(--text)">"tampered"</code> bytes to block payload. Forces INVALID status. Subsequent validation will detect the hash mismatch.
+          </p>
+          <div class="field">
+            <label>Target Hash</label>
+            <input type="text" id="atk-tamper-hash" placeholder="block hash..."/>
+          </div>
+          <button class="btn btn-danger" onclick="doTamper()">⚡ TAMPER PAYLOAD</button>
+        </div>
+
+        <div class="card" style="border-color:rgba(255,51,85,0.3)">
+          <div class="card-title" style="color:var(--red)">Signature Break</div>
+          <p style="font-size:12px;color:var(--text-dim);margin-bottom:12px;line-height:1.6">
+            Replaces the HSM signature with invalid bytes. The HSM verify call will fail, exposing compromised chain-of-custody.
+          </p>
+          <div class="field">
+            <label>Target Hash</label>
+            <input type="text" id="atk-sig-hash" placeholder="block hash..."/>
+          </div>
+          <button class="btn btn-danger" onclick="doBreakSig()">⚡ BREAK SIGNATURE</button>
+        </div>
+      </div>
+
+      <div class="card" style="border-color:rgba(255,51,85,0.2)">
+        <div class="card-title">Select Target from DAG</div>
+        <div id="attack-node-list" style="font-family:var(--font-mono);font-size:11px;color:var(--text-dim)">
+          Run a pipeline first to generate blocks.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Attack Log</div>
+        <div class="events-log" id="attack-events" style="height:220px"></div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- INSPECT MODAL -->
+<div class="modal-overlay" id="modal" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <div class="modal-title" id="modal-title">BLOCK DETAILS</div>
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+<script>
+const API = '';
+let dagData = {};
+let eventsData = [];
+
+// ─── NAVIGATION ───
+function goPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  document.querySelector(`[data-page="${name}"]`).classList.add('active');
+  if (name === 'graph') renderDAG();
+  if (name === 'execution') loadEvents();
+  if (name === 'blocks') loadBlocks();
+  if (name === 'attack') loadAttackTargets();
+  if (name === 'pipeline') loadPipelineEvents();
+}
+
+// ─── API CALLS ───
+async function api(method, path, body) {
+  try {
+    const opts = { method, headers: {'Content-Type':'application/json'} };
+    if (body) opts.body = JSON.stringify(body);
+    const r = await fetch(API + path, opts);
+    return await r.json();
+  } catch(e) {
+    toast('API error: ' + e.message, 'error');
+    return null;
+  }
+}
+
+// ─── REFRESH ALL ───
+async function refreshAll() {
+  const [dag, events] = await Promise.all([
+    api('GET', '/dag'),
+    api('GET', '/events')
+  ]);
+  if (dag) {
+    dagData = dag.nodes;
+    updateStats(dag);
+  }
+  if (events) {
+    eventsData = events.events;
+    document.getElementById('event-count').textContent = events.count + ' events';
+    renderDashEvents();
+  }
+  updateConnStatus(true);
+}
+
+function updateStats(dag) {
+  const nodes = Object.values(dag.nodes);
+  const active = nodes.filter(n => n.status === 'ACTIVE').length;
+  const invalid = nodes.filter(n => n.status === 'INVALID').length;
+  document.getElementById('s-total').textContent = nodes.length;
+  document.getElementById('s-active').textContent = active;
+  document.getElementById('s-invalid').textContent = invalid;
+  document.getElementById('dag-count').textContent = nodes.length + ' blocks';
+}
+
+function updateConnStatus(ok) {
+  const dot = document.getElementById('conn-dot');
+  const label = document.getElementById('conn-label');
+  dot.style.background = ok ? 'var(--green)' : 'var(--red)';
+  dot.style.boxShadow = ok ? '0 0 8px var(--green)' : '0 0 8px var(--red)';
+  label.textContent = ok ? 'ONLINE' : 'OFFLINE';
+}
+
+// ─── EVENTS ───
+function renderEventRow(ev) {
+  const typeClass = 'et-' + ev.type.replace(/[^A-Z_]/g,'');
+  const data = typeof ev.data === 'object' ? JSON.stringify(ev.data) : String(ev.data);
+  return `<div class="event-row">
+    <span class="event-type ${typeClass}">${ev.type}</span>
+    <span class="event-data">${escHtml(data.substring(0,120))}</span>
+  </div>`;
+}
+
+function renderDashEvents() {
+  const el = document.getElementById('dash-events');
+  const recent = eventsData.slice(-40).reverse();
+  el.innerHTML = recent.map(renderEventRow).join('');
+  document.getElementById('s-events').textContent = eventsData.length;
+}
+
+async function loadEvents() {
+  const r = await api('GET', '/events');
+  if (!r) return;
+  eventsData = r.events;
+  const el = document.getElementById('exec-events');
+  el.innerHTML = [...r.events].reverse().map(renderEventRow).join('');
+}
+
+// ─── CREATE BLOCK ───
+async function createBlock() {
+  const payload = document.getElementById('d-payload').value || 'manual-block';
+  const parent = document.getElementById('d-parent').value.trim();
+  const parents = parent ? [parent] : [];
+  const r = await api('POST', '/create_block', {parents, payload});
+  if (r) {
+    toast('Block created: ' + r.hash.substring(0,16) + '...', 'success');
+    document.getElementById('d-payload').value = '';
+    document.getElementById('d-parent').value = '';
+    refreshAll();
+  }
+}
+
+// ─── VALIDATE ───
+async function quickValidate() {
+  const hash = document.getElementById('d-valhash').value.trim();
+  if (!hash) return;
+  const r = await api('POST', '/validate', {hash});
+  if (!r) return;
+  const el = document.getElementById('d-valresult');
+  if (r.valid) {
+    el.innerHTML = `<span style="color:var(--green)">✓ VALID</span> — ${escHtml(r.msg)}`;
+  } else {
+    el.innerHTML = `<span style="color:var(--red)">✗ INVALID</span> — ${escHtml(r.msg)}`;
+  }
+}
+
+// ─── PIPELINE ───
+async function runPipeline() {
+  toast('Running pipeline...', 'info');
+  const r = await api('POST', '/pipeline');
+  if (r) {
+    toast(`Pipeline complete — ${r.count} blocks created`, 'success');
+    refreshAll();
+  }
+}
+
+async function runPipelineAnimated() {
+  const btn = document.getElementById('run-btn');
+  btn.disabled = true;
+  btn.textContent = '◌ RUNNING...';
+  const agents = ['Collector','Analyzer','Decision','Executor'];
+  agents.forEach(a => {
+    document.getElementById('pa-'+a).className = 'agent-box';
+    document.getElementById('ph-'+a).textContent = '—';
+  });
+  document.getElementById('pipeline-result').textContent = '';
+
+  const r = await api('POST', '/pipeline');
+  if (r && r.created) {
+    for (let i = 0; i < agents.length; i++) {
+      document.getElementById('pa-'+agents[i]).className = 'agent-box done';
+      document.getElementById('ph-'+agents[i]).textContent = r.created[i] ? r.created[i].substring(0,10)+'...' : '?';
+      await sleep(180);
+    }
+    document.getElementById('pipeline-result').textContent = '✓ All ' + r.count + ' agents completed.';
+  }
+  btn.disabled = false;
+  btn.textContent = '▶ EXECUTE PIPELINE';
+  refreshAll();
+  loadPipelineEvents();
+}
+
+async function loadPipelineEvents() {
+  const r = await api('GET', '/events');
+  if (!r) return;
+  const filtered = r.events.filter(e => ['PIPELINE_STEP','HUB_CREATE','SIGNED','DAG_ADD'].includes(e.type));
+  document.getElementById('pipeline-events').innerHTML = [...filtered].reverse().map(renderEventRow).join('');
+}
+
+// ─── DAG GRAPH ───
+async function renderDAG() {
+  const canvas = document.getElementById('dag-cvs');
+  const container = document.getElementById('dag-canvas');
+  canvas.width = container.clientWidth;
+  canvas.height = container.clientHeight;
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  const nodes = Object.entries(dagData);
+  if (!nodes.length) {
+    ctx.fillStyle = '#3a5070';
+    ctx.font = '13px Share Tech Mono';
+    ctx.textAlign = 'center';
+    ctx.fillText('No blocks in DAG — run a pipeline to begin', canvas.width/2, canvas.height/2);
+    return;
+  }
+
+  // Layout: topological levels
+  const levels = {};
+  const visited = new Set();
+  function assign(hash, level) {
+    if (visited.has(hash)) return;
+    visited.add(hash);
+    levels[hash] = Math.max(levels[hash] || 0, level);
+    const node = dagData[hash];
+    if (node) node.parents.forEach(p => assign(p, level - 1));
+  }
+  nodes.forEach(([h]) => assign(h, nodes.length));
+
+  // Normalize levels
+  const minLevel = Math.min(...Object.values(levels));
+  Object.keys(levels).forEach(k => levels[k] -= minLevel);
+  const maxLevel = Math.max(...Object.values(levels));
+
+  // Group by level
+  const byLevel = {};
+  Object.entries(levels).forEach(([h, l]) => {
+    if (!byLevel[l]) byLevel[l] = [];
+    byLevel[l].push(h);
+  });
+
+  const W = canvas.width, H = canvas.height;
+  const marginX = 80, marginY = 60;
+  const nodeW = 90, nodeH = 36;
+
+  const positions = {};
+  const numLevels = maxLevel + 1;
+  Object.entries(byLevel).forEach(([lvl, hashes]) => {
+    const x = marginX + (parseInt(lvl) / Math.max(numLevels - 1, 1)) * (W - marginX*2);
+    hashes.forEach((h, i) => {
+      const y = marginY + (i + 0.5) / hashes.length * (H - marginY*2);
+      positions[h] = {x, y};
+    });
+  });
+
+  // Draw edges
+  ctx.lineWidth = 1.5;
+  nodes.forEach(([h, node]) => {
+    node.parents.forEach(p => {
+      if (!positions[p] || !positions[h]) return;
+      const from = positions[p], to = positions[h];
+      const grad = ctx.createLinearGradient(from.x, from.y, to.x, to.y);
+      grad.addColorStop(0, 'rgba(0,153,187,0.3)');
+      grad.addColorStop(1, 'rgba(0,229,255,0.6)');
+      ctx.strokeStyle = grad;
+      ctx.beginPath();
+      ctx.moveTo(from.x + nodeW/2, from.y);
+      const mx = (from.x + to.x) / 2;
+      ctx.bezierCurveTo(mx + nodeW/2, from.y, mx - nodeW/2, to.y, to.x - nodeW/2, to.y);
+      ctx.stroke();
+    });
+  });
+
+  // Draw nodes
+  nodes.forEach(([h, node]) => {
+    if (!positions[h]) return;
+    const {x, y} = positions[h];
+    const active = node.status === 'ACTIVE';
+    const color = active ? '#00ff88' : '#ff3355';
+    const colorDim = active ? 'rgba(0,255,136,0.15)' : 'rgba(255,51,85,0.15)';
+
+    // Shadow
+    ctx.shadowColor = color;
+    ctx.shadowBlur = 12;
+
+    // Box
+    ctx.fillStyle = '#111827';
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 1.5;
+    roundRect(ctx, x - nodeW/2, y - nodeH/2, nodeW, nodeH, 4);
+    ctx.fill();
+    ctx.stroke();
+    ctx.shadowBlur = 0;
+
+    // Agent label
+    ctx.fillStyle = active ? '#00e5ff' : '#ff6688';
+    ctx.font = '11px Rajdhani';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(node.agent || 'BLOCK', x, y - 7);
+
+    // Hash
+    ctx.fillStyle = '#5a7a9a';
+    ctx.font = '9px Share Tech Mono';
+    ctx.fillText(h.substring(0,10) + '...', x, y + 8);
+  });
+
+  // Click to inspect
+  canvas.onclick = (e) => {
+    const rect = canvas.getBoundingClientRect();
+    const mx = e.clientX - rect.left, my = e.clientY - rect.top;
+    for (const [h] of nodes) {
+      const {x, y} = positions[h] || {};
+      if (!x) continue;
+      if (mx >= x - nodeW/2 && mx <= x + nodeW/2 && my >= y - nodeH/2 && my <= y + nodeH/2) {
+        openModal(h);
+        return;
+      }
+    }
+  };
+}
+
+function roundRect(ctx, x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x+r, y);
+  ctx.lineTo(x+w-r, y);
+  ctx.arcTo(x+w, y, x+w, y+r, r);
+  ctx.lineTo(x+w, y+h-r);
+  ctx.arcTo(x+w, y+h, x+w-r, y+h, r);
+  ctx.lineTo(x+r, y+h);
+  ctx.arcTo(x, y+h, x, y+h-r, r);
+  ctx.lineTo(x, y+r);
+  ctx.arcTo(x, y, x+r, y, r);
+  ctx.closePath();
+}
+
+// ─── INSPECT ───
+async function openModal(hash) {
+  const node = dagData[hash];
+  if (!node) return;
+  const valR = await api('POST', '/validate', {hash});
+  document.getElementById('modal-title').textContent = 'BLOCK // ' + hash.substring(0,16) + '...';
+  document.getElementById('modal-body').innerHTML = `
+    <div class="kv-row"><div class="kv-key">Hash</div><div class="kv-val" style="color:var(--cyan)">${hash}</div></div>
+    <div class="kv-row"><div class="kv-key">Agent</div><div class="kv-val">${node.agent || '—'}</div></div>
+    <div class="kv-row"><div class="kv-key">Status</div><div class="kv-val"><span class="badge badge-${node.status.toLowerCase()}">${node.status}</span></div></div>
+    <div class="kv-row"><div class="kv-key">Parents</div><div class="kv-val">${node.parents.length ? node.parents.map(p=>'<span class="hash">'+p.substring(0,12)+'...</span>').join(' ') : '<span style="color:var(--text-dim)">genesis</span>'}</div></div>
+    <div class="kv-row"><div class="kv-key">Validation</div><div class="kv-val" style="color:${valR?.valid?'var(--green)':'var(--red)'}">
+      ${valR ? (valR.valid ? '✓ VALID' : '✗ ' + valR.msg) : '...'}
+    </div></div>
+  `;
+  document.getElementById('modal').classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('modal').classList.remove('open');
+}
+
+async function inspectBlock() {
+  const hash = document.getElementById('insp-hash').value.trim();
+  if (!hash || !dagData[hash]) { toast('Hash not found in DAG', 'warn'); return; }
+  const node = dagData[hash];
+  document.getElementById('insp-result').style.display = 'block';
+  document.getElementById('insp-meta').innerHTML = `
+    <div class="card-title">Block Metadata</div>
+    <div class="kv-row"><div class="kv-key">Hash</div><div class="kv-val" style="color:var(--cyan);font-size:10px">${hash}</div></div>
+    <div class="kv-row"><div class="kv-key">Agent</div><div class="kv-val">${node.agent||'—'}</div></div>
+    <div class="kv-row"><div class="kv-key">Status</div><div class="kv-val"><span class="badge badge-${node.status.toLowerCase()}">${node.status}</span></div></div>
+    <div class="kv-row"><div class="kv-key">Parents</div><div class="kv-val" style="word-break:break-all">${node.parents.join(', ') || '(genesis)'}</div></div>
+  `;
+}
+
+async function validateInspect() {
+  const hash = document.getElementById('insp-hash').value.trim();
+  if (!hash) return;
+  const r = await api('POST', '/validate', {hash});
+  if (!r) return;
+  document.getElementById('insp-validation').innerHTML = `
+    <div class="card-title">Validation Result</div>
+    <div style="font-size:32px;margin:12px 0;color:${r.valid?'var(--green)':'var(--red)'}">
+      ${r.valid ? '✓' : '✗'}
+    </div>
+    <div style="font-size:14px;color:${r.valid?'var(--green)':'var(--red)'};font-family:var(--font-mono)">${r.msg}</div>
+    <div style="margin-top:12px;font-size:10px;color:var(--text-dim);font-family:var(--font-mono)">Hash: ${r.hash?.substring(0,24)}...</div>
+  `;
+  document.getElementById('insp-result').style.display = 'block';
+}
+
+// ─── BLOCKS TABLE ───
+async function loadBlocks() {
+  const r = await api('GET', '/dag');
+  if (!r) return;
+  dagData = r.nodes;
+  const tbody = document.getElementById('blocks-tbody');
+  tbody.innerHTML = '';
+  Object.entries(r.nodes).forEach(([hash, node]) => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><span class="hash" onclick="setInspect('${hash}')">${hash.substring(0,20)}...</span></td>
+      <td>${node.agent || '—'}</td>
+      <td>${node.parents.length ? node.parents.length + ' parent(s)' : '<span style="color:var(--text-dim)">genesis</span>'}</td>
+      <td><span class="badge badge-${node.status.toLowerCase()}">${node.status}</span></td>
+      <td class="actions">
+        <button class="btn btn-ghost" style="padding:3px 8px;font-size:10px" onclick="openModal('${hash}')">INSPECT</button>
+        <button class="btn btn-ghost" style="padding:3px 8px;font-size:10px" onclick="setAttackHash('${hash}')">TARGET</button>
+      </td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+// ─── ATTACK ───
+async function loadAttackTargets() {
+  const r = await api('GET', '/dag');
+  if (!r) return;
+  dagData = r.nodes;
+  const el = document.getElementById('attack-node-list');
+  if (!Object.keys(r.nodes).length) { el.textContent = 'No blocks in DAG.'; return; }
+  el.innerHTML = Object.entries(r.nodes).map(([h, n]) =>
+    `<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.04)">
+      <span class="badge badge-${n.status.toLowerCase()}">${n.status}</span>
+      <span class="hash" onclick="setAttackHash('${h}')">${h.substring(0,24)}...</span>
+      <span style="color:var(--text-dim)">${n.agent||'—'}</span>
+      <button class="btn btn-danger" style="padding:2px 8px;font-size:10px;margin-left:auto" onclick="setAttackHash('${h}')">SELECT</button>
+    </div>`
+  ).join('');
+}
+
+function setAttackHash(h) {
+  document.getElementById('atk-tamper-hash').value = h;
+  document.getElementById('atk-sig-hash').value = h;
+  goPage('attack');
+}
+
+function setInspect(h) {
+  document.getElementById('insp-hash').value = h;
+  goPage('inspector');
+  inspectBlock();
+}
+
+async function doTamper() {
+  const hash = document.getElementById('atk-tamper-hash').value.trim();
+  if (!hash) { toast('Enter a target hash', 'warn'); return; }
+  const r = await api('POST', '/attack/tamper', {hash});
+  if (r) {
+    toast('⚡ Payload tampered: ' + hash.substring(0,16) + '...', 'error');
+    refreshAll(); loadAttackTargets(); loadAttackEvents();
+  }
+}
+
+async function doBreakSig() {
+  const hash = document.getElementById('atk-sig-hash').value.trim();
+  if (!hash) { toast('Enter a target hash', 'warn'); return; }
+  const r = await api('POST', '/attack/signature', {hash});
+  if (r) {
+    toast('⚡ Signature broken: ' + hash.substring(0,16) + '...', 'error');
+    refreshAll(); loadAttackTargets(); loadAttackEvents();
+  }
+}
+
+async function loadAttackEvents() {
+  const r = await api('GET', '/events');
+  if (!r) return;
+  const attacks = r.events.filter(e => e.type === 'ATTACK');
+  document.getElementById('attack-events').innerHTML = [...attacks].reverse().map(renderEventRow).join('');
+}
+
+// ─── RESET ───
+async function resetAll() {
+  if (!confirm('Reset all blocks and events?')) return;
+  const r = await api('POST', '/reset');
+  if (r) {
+    dagData = {};
+    eventsData = [];
+    toast('System reset', 'info');
+    refreshAll();
+    ['Collector','Analyzer','Decision','Executor'].forEach(a => {
+      document.getElementById('pa-'+a).className = 'agent-box';
+      document.getElementById('ph-'+a).textContent = '—';
+    });
+  }
+}
+
+// ─── TOAST ───
+function toast(msg, type='info') {
+  const el = document.createElement('div');
+  el.className = 'toast-item ' + (type==='error'?'error':type==='success'?'success':type==='warn'?'warn':'');
+  el.textContent = msg;
+  document.getElementById('toast').appendChild(el);
+  setTimeout(() => el.remove(), 3100);
+}
+
+// ─── HELPERS ───
+function escHtml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+// ─── INIT ───
+async function init() {
+  try {
+    const r = await api('GET', '/health');
+    updateConnStatus(!!r);
+  } catch { updateConnStatus(false); }
+  await refreshAll();
+  setInterval(refreshAll, 5000);
+}
+
+init();
+</script>
+</body>
+</html>

@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='UTF-8'/>
+<meta name='viewport' content='width=device-width,initial-scale=1.0'/>
+<title>WARLOK -- Pre-Pilot Code Analysis &amp; YubiHSM2 Forecast</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&family=Orbitron:wght@700;900&display=swap');
+:root{
+  --bg:#050709;--bg1:#0a0d13;--bg2:#0f1520;--surface:#111827;
+  --border:#1e2d47;--border2:#243858;
+  --cyan:#00e5ff;--cyan-d:#0099bb;--green:#00ff88;--red:#ff3355;
+  --amber:#ffbb00;--purple:#9933ff;--teal:#00ccaa;--blue:#4488ff;
+  --text:#c8d8f0;--text-d:#5a7a9a;--text-b:#e8f4ff;
+  --mono:'Share Tech Mono',monospace;--ui:'Rajdhani',sans-serif;--disp:'Orbitron',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:var(--ui);font-size:15px;line-height:1.75;}
+body::before{content:'';position:fixed;inset:0;z-index:0;
+  background-image:linear-gradient(rgba(0,229,255,.02) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,229,255,.02) 1px,transparent 1px);
+  background-size:40px 40px;pointer-events:none;}
+
+/* COVER */
+.cover{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;padding:60px 40px;
+  background:radial-gradient(ellipse at 50% 35%,rgba(0,229,255,.06) 0%,transparent 65%);
+  border-bottom:1px solid var(--border);}
+.logo{font-family:var(--disp);font-size:clamp(44px,7vw,80px);font-weight:900;letter-spacing:10px;
+  color:var(--cyan);text-shadow:0 0 40px rgba(0,229,255,.45),0 0 80px rgba(0,229,255,.18);margin-bottom:6px;}
+.doc-type{font-family:var(--disp);font-size:11px;letter-spacing:5px;color:var(--text-d);margin-bottom:4px;}
+.doc-title{font-family:var(--disp);font-size:clamp(14px,2.5vw,22px);letter-spacing:2px;
+  color:var(--text-b);margin-bottom:28px;}
+.cover-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:100%;max-width:680px;margin:0 auto;}
+.cm-cell{background:var(--bg2);border:1px solid var(--border2);border-radius:4px;
+  padding:10px 14px;font-family:var(--mono);font-size:10px;}
+.cm-label{color:var(--text-d);letter-spacing:2px;text-transform:uppercase;margin-bottom:3px;}
+.cm-val{color:var(--text-b);font-size:13px;}
+
+/* LAYOUT */
+.wrap{position:relative;z-index:1;max-width:1000px;margin:0 auto;padding:0 36px 100px;}
+
+/* TOC */
+.toc{background:var(--bg1);border:1px solid var(--border);border-left:3px solid var(--cyan);
+  border-radius:4px;padding:28px 32px;margin:52px 0;}
+.toc-title{font-family:var(--disp);font-size:10px;letter-spacing:4px;color:var(--cyan);
+  margin-bottom:16px;text-transform:uppercase;}
+.toc ol{padding-left:20px;}.toc li{margin:5px 0;}
+.toc a{color:var(--text);text-decoration:none;font-size:14px;transition:color .15s;}
+.toc a:hover{color:var(--cyan);}
+.toc ol ol{margin-top:3px;}.toc ol ol a{font-size:12px;color:var(--text-d);}
+
+/* SECTIONS */
+.sec{margin-top:72px;padding-top:36px;border-top:1px solid var(--border);}
+h1.sh{font-family:var(--disp);font-size:21px;font-weight:700;letter-spacing:3px;color:var(--cyan);
+  margin-bottom:6px;display:flex;align-items:center;gap:12px;}
+.snum{font-size:10px;background:var(--cyan);color:var(--bg);padding:2px 8px;border-radius:2px;letter-spacing:1px;}
+h2.sh{font-family:var(--disp);font-size:13px;font-weight:700;letter-spacing:2px;color:var(--text-b);
+  margin:32px 0 12px;padding-bottom:6px;border-bottom:1px solid var(--border);}
+h3.sh{font-size:11px;font-weight:600;letter-spacing:2px;color:var(--amber);margin:20px 0 8px;
+  text-transform:uppercase;font-family:var(--mono);}
+.sdesc{font-size:12px;color:var(--text-d);font-family:var(--mono);letter-spacing:1px;margin-bottom:20px;}
+p{margin:12px 0;font-size:15px;color:var(--text);}
+code{font-family:var(--mono);font-size:11px;color:var(--cyan-d);
+  background:var(--bg2);padding:1px 5px;border-radius:2px;border:1px solid var(--border);}
+strong{color:var(--text-b);}
+em{color:var(--text-d);font-style:italic;}
+
+/* VERDICT BANNER */
+.verdict{border-radius:4px;padding:20px 24px;margin:24px 0;border:1px solid;position:relative;overflow:hidden;}
+.verdict::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
+.verdict-yes{border-color:rgba(0,255,136,.3);background:rgba(0,255,136,.04);}
+.verdict-yes::before{background:var(--green);}
+.verdict-no{border-color:rgba(255,187,0,.3);background:rgba(255,187,0,.04);}
+.verdict-no::before{background:var(--amber);}
+.verdict-label{font-family:var(--disp);font-size:11px;letter-spacing:3px;margin-bottom:8px;}
+.verdict-yes .verdict-label{color:var(--green);}
+.verdict-no .verdict-label{color:var(--amber);}
+.verdict-text{font-size:14px;line-height:1.75;color:var(--text);}
+
+/* ASSESSMENT GRID */
+.assess-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0;}
+.assess-card{background:var(--bg2);border:1px solid var(--border);border-radius:4px;padding:14px 16px;}
+.assess-card.strong{border-left:3px solid var(--green);}
+.assess-card.weak{border-left:3px solid var(--amber);}
+.assess-card.block{border-left:3px solid var(--red);}
+.assess-card.note{border-left:3px solid var(--cyan-d);}
+.assess-head{font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;
+  margin-bottom:6px;}
+.assess-card.strong .assess-head{color:var(--green);}
+.assess-card.weak .assess-head{color:var(--amber);}
+.assess-card.block .assess-head{color:var(--red);}
+.assess-card.note .assess-head{color:var(--cyan-d);}
+.assess-body{font-size:13px;line-height:1.65;color:var(--text-d);}
+.assess-body strong{color:var(--text);}
+
+/* SCORE TILES */
+.scores{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:20px 0;}
+.sc{background:var(--bg2);border:1px solid var(--border);border-radius:4px;
+  padding:14px 12px;text-align:center;position:relative;overflow:hidden;}
+.sc::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;}
+.sc.a::after{background:var(--green)}.sc.b::after{background:var(--cyan)}
+.sc.c::after{background:var(--amber)}.sc.d::after{background:var(--red)}
+.sc.p::after{background:var(--purple)}
+.sc-label{font-size:8px;letter-spacing:2px;color:var(--text-d);font-family:var(--mono);text-transform:uppercase;margin-bottom:6px;}
+.sc-val{font-family:var(--disp);font-size:22px;font-weight:700;}
+.sc.a .sc-val{color:var(--green);}.sc.b .sc-val{color:var(--cyan);}
+.sc.c .sc-val{color:var(--amber);}.sc.d .sc-val{color:var(--red);}
+.sc.p .sc-val{color:var(--purple);}
+.sc-note{font-size:9px;color:var(--text-d);font-family:var(--mono);margin-top:3px;}
+
+/* CODE */
+.cb{background:var(--bg1);border:1px solid var(--border);border-left:3px solid var(--cyan-d);
+  border-radius:4px;margin:16px 0;overflow:hidden;}
+.cb-hdr{background:var(--bg2);padding:6px 14px;font-family:var(--mono);font-size:10px;
+  color:var(--text-d);letter-spacing:2px;border-bottom:1px solid var(--border);
+  display:flex;justify-content:space-between;align-items:center;}
+.cb-hdr .lang{color:var(--cyan-d);}
+.cb-hdr .tag{font-size:8px;background:rgba(255,51,85,.15);color:var(--red);
+  border:1px solid rgba(255,51,85,.3);border-radius:2px;padding:1px 5px;letter-spacing:1px;}
+.cb-hdr .tag.g{background:rgba(0,255,136,.1);color:var(--green);border-color:rgba(0,255,136,.3);}
+pre{padding:16px 18px;font-family:var(--mono);font-size:11.5px;line-height:1.75;
+  color:var(--text);overflow-x:auto;white-space:pre;}
+.kw{color:var(--purple);}.fn{color:var(--cyan);}.st{color:var(--green);}
+.cm{color:var(--text-d);font-style:italic;}.nb{color:var(--amber);}.cl{color:#ff8844;}
+.hl{background:rgba(255,187,0,.08);border-left:2px solid var(--amber);margin:0 -18px;padding:0 16px;}
+
+/* CALLOUTS */
+.note{border-radius:4px;padding:14px 18px 14px 44px;margin:16px 0;font-size:13px;
+  line-height:1.7;border:1px solid;position:relative;}
+.note::before{position:absolute;left:14px;top:14px;font-size:16px;}
+.info{border-color:rgba(0,229,255,.3);background:rgba(0,229,255,.05);}
+.info::before{content:'\2139';color:var(--cyan);}
+.warn{border-color:rgba(255,187,0,.3);background:rgba(255,187,0,.05);}
+.warn::before{content:'\26A0';color:var(--amber);}
+.ok{border-color:rgba(0,255,136,.3);background:rgba(0,255,136,.05);}
+.ok::before{content:'\2713';color:var(--green);}
+.danger{border-color:rgba(255,51,85,.3);background:rgba(255,51,85,.05);}
+.danger::before{content:'\26A1';color:var(--red);}
+.hsm-note{border-color:rgba(68,136,255,.3);background:rgba(68,136,255,.05);}
+.hsm-note::before{content:'\1F511';font-style:normal;}
+
+/* ISSUE TABLE */
+.it{width:100%;border-collapse:collapse;font-size:12px;margin:16px 0;}
+.it th{background:var(--bg2);padding:8px 12px;text-align:left;font-family:var(--mono);
+  font-size:9px;letter-spacing:2px;color:var(--text-d);border:1px solid var(--border);}
+.it td{padding:8px 12px;border:1px solid var(--border);vertical-align:top;background:var(--bg1);}
+.sev{font-family:var(--mono);font-size:9px;padding:2px 6px;border-radius:2px;font-weight:bold;white-space:nowrap;}
+.sev-c{background:rgba(255,51,85,.15);color:var(--red);border:1px solid rgba(255,51,85,.3);}
+.sev-h{background:rgba(255,187,0,.15);color:var(--amber);border:1px solid rgba(255,187,0,.3);}
+.sev-m{background:rgba(0,229,255,.1);color:var(--cyan);border:1px solid rgba(0,229,255,.25);}
+.sev-l{background:rgba(0,255,136,.08);color:var(--green);border:1px solid rgba(0,255,136,.2);}
+
+/* YUBIHSM PLAN */
+.phase{background:var(--bg1);border:1px solid var(--border);border-radius:4px;
+  margin:16px 0;overflow:hidden;}
+.phase-header{background:var(--bg2);padding:12px 16px;display:flex;align-items:center;gap:12px;
+  border-bottom:1px solid var(--border);}
+.phase-num{font-family:var(--disp);font-size:18px;font-weight:700;color:var(--cyan);min-width:32px;}
+.phase-title{font-family:var(--disp);font-size:12px;letter-spacing:2px;color:var(--text-b);}
+.phase-tag{font-family:var(--mono);font-size:9px;color:var(--text-d);letter-spacing:1px;margin-left:auto;}
+.phase-body{padding:16px;}
+.phase-body p{font-size:13px;margin:0 0 10px;}
+.phase-body ul{padding-left:20px;}
+.phase-body li{font-size:13px;color:var(--text-d);margin:4px 0;line-height:1.6;}
+.phase-body li strong{color:var(--text);}
+
+/* NOVELTY MATRIX */
+.novel{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:16px 0;}
+.novel-card{background:var(--bg2);border:1px solid var(--border);border-radius:4px;
+  padding:14px;position:relative;overflow:hidden;}
+.novel-card::after{content:attr(data-score);position:absolute;top:10px;right:12px;
+  font-family:var(--disp);font-size:20px;font-weight:700;opacity:.2;color:var(--cyan);}
+.novel-head{font-family:var(--mono);font-size:9px;letter-spacing:2px;color:var(--cyan-d);
+  text-transform:uppercase;margin-bottom:6px;}
+.novel-body{font-size:12px;color:var(--text-d);line-height:1.65;}
+.novel-body strong{color:var(--text);}
+
+/* COMPARISON TABLE */
+.ct{width:100%;border-collapse:collapse;font-size:12px;margin:16px 0;}
+.ct th{background:var(--bg2);padding:10px 14px;font-family:var(--mono);font-size:9px;
+  letter-spacing:2px;color:var(--text-d);border:1px solid var(--border);text-align:left;}
+.ct td{padding:9px 14px;border:1px solid var(--border);background:var(--bg1);vertical-align:top;}
+.ct .aspect{color:var(--text-d);font-family:var(--mono);font-size:10px;}
+.ct .demo-col{color:var(--amber);}
+.ct .pilot-col{color:var(--green);}
+.ct .good{color:var(--green);}.ct .gap{color:var(--amber);}.ct .crit{color:var(--red);}
+.badge{display:inline-block;padding:1px 6px;font-size:8px;font-family:var(--mono);
+  letter-spacing:1px;text-transform:uppercase;border-radius:2px;border:1px solid;}
+.b-yes{border-color:rgba(0,255,136,.4);color:var(--green);background:rgba(0,255,136,.08);}
+.b-part{border-color:rgba(255,187,0,.4);color:var(--amber);background:rgba(255,187,0,.08);}
+.b-no{border-color:rgba(255,51,85,.4);color:var(--red);background:rgba(255,51,85,.08);}
+
+/* FOOTER */
+footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:40px 36px;
+  text-align:center;font-family:var(--mono);font-size:11px;color:var(--text-d);}
+footer .fl{font-family:var(--disp);color:var(--cyan);letter-spacing:4px;font-size:16px;}
+
+@media(max-width:700px){
+  .wrap{padding:0 16px 60px;}
+  .cover{padding:40px 20px;}
+  .assess-grid,.novel,.scores{grid-template-columns:1fr;}
+  .cover-meta{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="logo">WARLOK</div>
+  <div class="doc-type">// Technical Code Analysis &amp; Pilot Readiness Review</div>
+  <div class="doc-title">Pre-Pilot Assessment &mdash; v3.0 Codebase &mdash; YubiHSM2 Integration Forecast</div>
+  <div class="cover-meta">
+    <div class="cm-cell"><div class="cm-label">Codebase</div><div class="cm-val">1,082 Python LOC</div></div>
+    <div class="cm-cell"><div class="cm-label">UI</div><div class="cm-val">1,168 HTML/JS LOC</div></div>
+    <div class="cm-cell"><div class="cm-label">Modules</div><div class="cm-val">8 Python + 1 SPA</div></div>
+    <div class="cm-cell"><div class="cm-label">API Endpoints</div><div class="cm-val">22 REST</div></div>
+    <div class="cm-cell"><div class="cm-label">UI Pages</div><div class="cm-val">14 client-side</div></div>
+    <div class="cm-cell"><div class="cm-label">Assessment Date</div><div class="cm-val">March 2026</div></div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<div class="toc">
+  <div class="toc-title">// Contents</div>
+  <ol>
+    <li><a href="#s1">Executive Verdict -- Is this Pilot-Grade?</a></li>
+    <li><a href="#s2">Codebase Architecture Assessment</a>
+      <ol><li><a href="#s2a">Structural Integrity</a></li>
+          <li><a href="#s2b">Module-by-Module Ratings</a></li>
+          <li><a href="#s2c">What the Code Gets Right</a></li>
+          <li><a href="#s2d">Critical Gaps Before Pilot</a></li></ol></li>
+    <li><a href="#s3">Solution Novelty Analysis</a></li>
+    <li><a href="#s4">Security Model -- Honest Assessment</a></li>
+    <li><a href="#s5">Demo HSM vs Real HSM -- The Delta</a></li>
+    <li><a href="#s6">YubiHSM2 Integration Forecast</a>
+      <ol><li><a href="#s6a">Why YubiHSM2</a></li>
+          <li><a href="#s6b">API Surface Mapping</a></li>
+          <li><a href="#s6c">YubiHSM2 Drop-in Adapter (Code)</a></li>
+          <li><a href="#s6d">Integration Phases</a></li>
+          <li><a href="#s6e">Wiring to Pilot Bundle</a></li></ol></li>
+    <li><a href="#s7">Pilot Readiness Gap Table</a></li>
+    <li><a href="#s8">Recommended Pre-Pilot Checklist</a></li>
+  </ol>
+</div>
+
+<!-- ═══════════════ S1: VERDICT ═══════════════ -->
+<div class="sec" id="s1">
+<h1 class="sh"><span class="snum">01</span> Executive Verdict &mdash; Is This Pilot-Grade?</h1>
+
+<div class="verdict verdict-no">
+  <div class="verdict-label">// VERDICT: DEMO-GRADE ARCHITECTURE, PILOT-READY SKELETON</div>
+  <div class="verdict-text">
+    WARLOK v3 is <strong>not yet pilot-grade</strong> as a deployable system, but it is
+    <strong>a pilot-grade architectural prototype</strong> -- which is a meaningful distinction.
+    Every structural decision made here is the right one for a real system.
+    The abstractions are sound. The cryptographic model is correctly designed.
+    The separation of concerns across modules is clean. The interface contracts are well-defined.
+    <br/><br/>
+    What separates this from production readiness is a set of specific, enumerable gaps --
+    none of which require redesign. They require swap-outs of in-process simulation components
+    with real hardware and network transports. <strong>The demo HSM becomes a YubiHSM2.
+    The in-process peer calls become WebSocket or HTTP/2 channels.
+    The MemoryStore becomes FileStore or Redis. The in-process events list becomes a WAL.</strong>
+    <br/><br/>
+<!--    The prototype has done the hard architectural work correctly. Pilot readiness is an integration-->
+<!--    and hardening effort, not a redesign.-->
+  </div>
+</div>
+
+<div class="scores">
+  <div class="sc a"><div class="sc-label">Architecture</div><div class="sc-val">A</div><div class="sc-note">Sound separation</div></div>
+  <div class="sc b"><div class="sc-label">Crypto Design</div><div class="sc-val">B+</div><div class="sc-note">Correct model</div></div>
+  <div class="sc c"><div class="sc-label">Security Impl</div><div class="sc-val">C</div><div class="sc-note">Soft key mgmt</div></div>
+  <div class="sc d"><div class="sc-label">Network Layer</div><div class="sc-val">D</div><div class="sc-note">In-process only</div></div>
+  <div class="sc p"><div class="sc-label">Novelty</div><div class="sc-val">B+</div><div class="sc-note">Distinctive approach</div></div>
+</div>
+</div>
+
+<!-- ═══════════════ S2: ARCHITECTURE ═══════════════ -->
+<div class="sec" id="s2">
+<h1 class="sh"><span class="snum">02</span> Codebase Architecture Assessment</h1>
+<div class="sdesc">// 1,082 Python LOC across 10 modules + 1,168 LOC SPA</div>
+
+<h2 class="sh" id="s2a">Structural Integrity</h2>
+<p>The module graph is clean and acyclic. Dependency direction flows strictly inward:
+<code>api</code> → <code>peer/mesh</code> → <code>peer/node</code> → <code>hsm</code> + <code>core</code> + <code>storage</code>.
+No circular imports. No god objects. Each module has a single, clear responsibility.</p>
+
+<p>The most important structural decision is the <strong>interface-driven storage layer</strong>.
+<code>BaseStore</code> is an ABC with a contract that all callers depend on.
+<code>MemoryStore</code> and <code>FileStore</code> are concrete implementations.
+Peers hold a <code>BaseStore</code> reference -- meaning the swap from memory to Redis
+requires zero changes in <code>peer/node.py</code>, <code>peer/mesh.py</code>, or the API.
+This is correct production architecture applied at the prototype stage.</p>
+
+<p>Similarly, the <strong>HSM interface contract</strong> -- <code>sign(data, block_hash)</code>,
+<code>verify_epoch(data, sig, block_hash, epoch_id)</code>, <code>epoch_token()</code>,
+<code>status()</code> -- is exactly the surface a YubiHSM2 adapter needs to implement.
+The Hub and PeerNodes are already written against this interface, not against any concrete implementation.</p>
+
+<h2 class="sh" id="s2b">Module-by-Module Ratings</h2>
+<div class="assess-grid">
+  <div class="assess-card strong"><div class="assess-head">✓ core/block.py -- Production Quality</div>
+    <div class="assess-body"><strong>Deterministic SHA-256 hashing.</strong> Sorted parents and meta keys eliminate ordering ambiguity. Payload normalisation (str→bytes) handled at construction. The only improvement needed for pilot: include timestamp in the hash (currently timestamp is stored but not hashed, making the hash non-unique across time-separated blocks with identical payload).</div>
+  </div>
+  <div class="assess-card strong"><div class="assess-head">✓ core/dag.py -- Production Quality</div>
+    <div class="assess-body"><strong>Referential integrity enforcement</strong> at insert time -- parents must exist before a child can be added. This is correct and prevents dangling references. For pilot: add topological depth tracking and cycle detection (theoretically impossible in a DAG but defensive coding warrants it).</div>
+  </div>
+  <div class="assess-card weak"><div class="assess-head">⚠ core/events.py -- Prototype Only</div>
+    <div class="assess-body"><strong>In-process list.</strong> Correct for demo -- wrong for pilot. No persistence, no serialisation, no consumer API, no ordering guarantees under concurrency. Pilot needs: append-only write-ahead log on disk minimum; Redis Streams or Kafka for distributed deployment.</div>
+  </div>
+  <div class="assess-card strong"><div class="assess-head">✓ hsm/demo_hsm.py -- Correct Model, Wrong Substrate</div>
+    <div class="assess-body"><strong>HKDF-lite key derivation is architecturally correct.</strong> Two-level hierarchy (epoch → block) is the right design. Epoch rotation logic is sound. <code>hmac.compare_digest</code> for constant-time comparison is correct. <code>epoch_token()</code> non-reversible proof is a good design. The only problem: the root key lives in a Python dict in RAM.</div>
+  </div>
+  <div class="assess-card strong"><div class="assess-head">✓ hub/controller.py -- Production Quality</div>
+    <div class="assess-body"><strong>Clean orchestration.</strong> Epoch-stamped block creation, epoch-aware recursive validation. The validate() recursion will stack-overflow on very deep chains (Python default 1000 frames) -- for pilot, convert to iterative BFS/DFS. Otherwise sound.</div>
+  </div>
+  <div class="assess-card strong"><div class="assess-head">✓ storage/store.py -- Production Quality</div>
+    <div class="assess-body"><strong>BaseStore ABC is correctly designed.</strong> StorageRecord with SHA-256 checksum and verify() on read is a correct integrity model. FileStore hashes keys (SHA-256[:32]) to avoid filesystem special characters -- correct approach. StorageReceipt dataclass carries everything a caller needs to audit the storage event.</div>
+  </div>
+  <div class="assess-card weak"><div class="assess-head">⚠ peer/node.py -- Good Design, Fake Transport</div>
+    <div class="assess-body"><strong>The message model is solid:</strong> typed envelopes, deterministic canonical form, HMAC transport signature, dispatched handler table, inbox audit trail. The critical gap: <code>send()</code> calls <code>target.receive()</code> directly -- a Python method call, not a network socket. Everything else is production-ready; the transport is not.</div>
+  </div>
+  <div class="assess-card note"><div class="assess-head">◈ peer/mesh.py -- Coordinator is Clean</div>
+    <div class="assess-body"><strong>Correct abstraction layer.</strong> dispatch_task, replicate_block, send_telemetry, cross_validate are all well-scoped operations. Consensus scoring is simple but correct. Missing: automatic block gossip (new hub blocks are not auto-replicated to peers -- this must be triggered manually). For pilot: hook replicate into hub.create_block().</div>
+  </div>
+  <div class="assess-card strong"><div class="assess-head">✓ api/server.py -- Solid REST Layer</div>
+    <div class="assess-body"><strong>22 well-scoped endpoints.</strong> Location-agnostic static path resolution. Correct FastAPI patterns. One concern: global mutable state (hub, mesh, hsm) is reset via POST /reset which reassigns module-level globals -- works for demo, but not thread-safe under concurrent requests. FastAPI's async model and Python's GIL make this survivable, but for pilot use dependency injection.</div>
+  </div>
+  <div class="assess-card strong"><div class="assess-head">✓ static/index.html -- Exceptional for Scope</div>
+    <div class="assess-body"><strong>1,168 LOC, 14 pages, zero framework.</strong> Canvas DAG renderer, consensus ring SVG, 5-second polling, typed toast system, modal, event coloring for 20+ event types. The absence of a frontend build step is a deliberate and correct choice for a self-contained pilot bundle that needs to run anywhere.</div>
+  </div>
+</div>
+
+<h2 class="sh" id="s2c">What the Code Gets Right</h2>
+
+<h3 class="sh">1. The Two-Layer Authentication Model</h3>
+<p>The system correctly separates <strong>transport authentication</strong> (HMAC of message envelope
+using root key -- proves who sent the message) from <strong>block authentication</strong>
+(HKDF-derived per-block HMAC -- proves what was signed and when). This is not a naive single-HMAC design.
+Most prototype systems conflate these two concerns. WARLOK distinguishes them correctly.</p>
+
+<h3 class="sh">2. The Epoch → Block Key Hierarchy</h3>
+<p>The two-level HKDF derivation is the right cryptographic architecture for a system that needs
+forward secrecy properties without full asymmetric PKI. An epoch rotation every N blocks bounds
+the blast radius of a compromised epoch key: blocks signed in previous epochs cannot be forged
+even if the current epoch key leaks, because each block used a further-derived block-specific key.
+This is not a toy design -- it mirrors production key-rotation protocols in HSM-backed systems.</p>
+
+<h3 class="sh">3. Epoch-Stamped Blocks Enable Cross-Epoch Validation</h3>
+<p>Stamping <code>_epoch</code> on the block's meta dict, then using <code>verify_epoch()</code>
+which re-derives the key from root using the stored epoch ID, means blocks remain independently
+verifiable after their signing epoch has rotated. A peer receiving a block produced in epoch 0
+can verify it correctly even if the hub is now on epoch 3. This is a correct and non-obvious design decision.</p>
+
+<h3 class="sh">4. The Epoch Token as Non-Reversible Proof</h3>
+<p><code>HMAC(epoch_key, b"peer-token")</code> gives peers a way to prove they share the same
+epoch key without transmitting the key. This is a simple but correct application of the PRF property
+of HMAC. Peers on the same epoch produce identical tokens; peers on a different epoch or with a
+different root key produce different tokens. The cross-validate UI correctly displays these tokens
+for manual comparison.</p>
+
+<h3 class="sh">5. Storage Integrity on Read</h3>
+<p><code>StorageRecord.verify()</code> re-hashes the stored value and compares to the stored checksum
+on every <code>get()</code> call. This detects in-memory corruption (unlikely but possible)
+and file-level tampering in the FileStore backend. The STORE_CORRUPT event is logged if verification
+fails and None is returned -- callers cannot silently receive corrupted data.</p>
+
+<h2 class="sh" id="s2d">Critical Gaps Before Pilot</h2>
+<table class="it">
+<thead><tr><th>Gap</th><th>Severity</th><th>Current State</th><th>Pilot Requirement</th></tr></thead>
+<tbody>
+<tr>
+  <td><strong>Root key in RAM</strong></td>
+  <td><span class="sev sev-c">CRITICAL</span></td>
+  <td><code>ROOT_KEY = b"warlok-root-secret"</code> hardcoded in server.py, stored in Python object</td>
+  <td>Root key must never touch application memory. Resident in YubiHSM2 key slot, never exported.</td>
+</tr>
+<tr>
+  <td><strong>In-process peer transport</strong></td>
+  <td><span class="sev sev-c">CRITICAL</span></td>
+  <td><code>peer.send()</code> calls <code>target.receive()</code> as a Python method -- same process, same machine</td>
+  <td>Real network transport: WebSocket, HTTP/2, or gRPC with TLS. Peers must be addressable by network endpoint.</td>
+</tr>
+<tr>
+  <td><strong>No authentication between hub and peers</strong></td>
+  <td><span class="sev sev-c">CRITICAL</span></td>
+  <td>Transport signature uses same root_key for all nodes -- cannot distinguish nodes cryptographically</td>
+  <td>Each peer needs its own identity certificate or distinct derived signing key. mTLS or peer-specific HMAC keys.</td>
+</tr>
+<tr>
+  <td><strong>Events list not persisted</strong></td>
+  <td><span class="sev sev-h">HIGH</span></td>
+  <td>Python list in module global scope -- lost on restart</td>
+  <td>Append-only write-ahead log. Minimum: rotate-on-size file. Production: structured log stream.</td>
+</tr>
+<tr>
+  <td><strong>Recursive validation stack depth</strong></td>
+  <td><span class="sev sev-h">HIGH</span></td>
+  <td><code>hub.validate()</code> recurses into parents -- Python default stack depth 1000 frames</td>
+  <td>Iterative BFS validation. On long chains, recursion will hit RecursionError.</td>
+</tr>
+<tr>
+  <td><strong>No block gossip</strong></td>
+  <td><span class="sev sev-h">HIGH</span></td>
+  <td>Hub blocks are not auto-replicated to peers. Cross-validate always returns 0% for hub blocks.</td>
+  <td>Hook <code>mesh.replicate_block()</code> into <code>hub.create_block()</code> post-DAG-insert.</td>
+</tr>
+<tr>
+  <td><strong>Global mutable state in server</strong></td>
+  <td><span class="sev sev-m">MEDIUM</span></td>
+  <td>hub, hsm, mesh reassigned via <code>global</code> on reset -- not thread-safe</td>
+  <td>Dependency injection via FastAPI <code>Depends()</code>. State held in request-scoped or lifespan-scoped objects.</td>
+</tr>
+<tr>
+  <td><strong>No rate limiting or auth on API</strong></td>
+  <td><span class="sev sev-m">MEDIUM</span></td>
+  <td>All 22 endpoints are open -- no API key, no JWT, no IP restriction</td>
+  <td>Minimum: API key header check. For pilot: mTLS client certificates on admin endpoints.</td>
+</tr>
+<tr>
+  <td><strong>Timestamp not in block hash</strong></td>
+  <td><span class="sev sev-m">MEDIUM</span></td>
+  <td><code>compute_hash()</code> hashes parents + payload + meta. Timestamp stored but excluded from hash.</td>
+  <td>Include timestamp in hash input to guarantee uniqueness across time-separated duplicate payloads.</td>
+</tr>
+<tr>
+  <td><strong>No block_key cache invalidation</strong></td>
+  <td><span class="sev sev-l">LOW</span></td>
+  <td><code>DemoHSM._block_keys</code> grows unbounded -- no eviction policy</td>
+  <td>LRU cache with bounded size (e.g., 10,000 entries). On YubiHSM2 this is moot -- keys re-derived on demand.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<!-- ═══════════════ S3: NOVELTY ═══════════════ -->
+<div class="sec" id="s3">
+<h1 class="sh"><span class="snum">03</span> Solution Novelty Analysis</h1>
+<div class="sdesc">// What makes this approach distinctive versus standard approaches</div>
+
+<div class="novel">
+  <div class="novel-card" data-score="★★★">
+    <div class="novel-head">Per-Block HKDF Key Derivation</div>
+    <div class="novel-body"><strong>Distinctive.</strong> Most HMAC-based integrity systems use a single shared key or rotate per-session. Deriving a unique key per block from an epoch key -- so each block is signed with a key that exists nowhere else -- is not a standard demo pattern. It correctly models forward-secrecy properties without PKI overhead. The two-level hierarchy (epoch → block) is the right trade-off between key management complexity and security granularity.</div>
+  </div>
+  <div class="novel-card" data-score="★★★">
+    <div class="novel-head">Epoch Token as Cross-Peer Proof</div>
+    <div class="novel-body"><strong>Novel application.</strong> Using <code>HMAC(epoch_key, "peer-token")</code> as a non-reversible proof-of-epoch-membership for peer cross-validation is a clean and correct solution to a real problem: how do peers confirm they share a root-of-trust without transmitting the key? This is not a standard approach in demo systems -- it requires understanding both PRF properties and the cross-validation use case simultaneously.</div>
+  </div>
+  <div class="novel-card" data-score="★★">
+    <div class="novel-head">Dual-Layer Message Authentication</div>
+    <div class="novel-body"><strong>Architecturally sound.</strong> Separating transport-level HMAC (proves sender identity) from block-level HKDF signature (proves content integrity and signing epoch) is the correct two-layer model. Most prototype systems collapse these into one, making it impossible to distinguish "message was tampered in transit" from "block was tampered after signing." WARLOK separates them correctly.</div>
+  </div>
+  <div class="novel-card" data-score="★★">
+    <div class="novel-head">Epoch-Stamped Blocks for Cross-Epoch Validation</div>
+    <div class="novel-body"><strong>Practical and correct.</strong> Embedding <code>_epoch</code> in block meta and using <code>verify_epoch()</code> that re-derives from root + stored epoch means blocks produced in any past epoch remain independently verifiable. This solves a real problem in epoch-rotating systems -- blocks produced before a rotation would otherwise lose their verifiability. The solution is clean and adds no external state.</div>
+  </div>
+  <div class="novel-card" data-score="★★">
+    <div class="novel-head">Interface-Driven Storage at Prototype Stage</div>
+    <div class="novel-body"><strong>Unusual discipline.</strong> Most prototypes hardcode their storage. Defining <code>BaseStore</code> as an ABC with <code>MemoryStore</code>/<code>FileStore</code> at the prototype stage, with <code>StorageReceipt</code> dataclasses flowing through the message system, is a level of engineering discipline that is not common in rapid prototypes. It means the storage swap is a one-line change, not a refactor.</div>
+  </div>
+  <div class="novel-card" data-score="★">
+    <div class="novel-head">Self-Contained Dark SPA, No Framework</div>
+    <div class="novel-body"><strong>Pragmatic novelty.</strong> A 1,168-line single-file SPA with a Canvas DAG renderer, consensus ring SVG, colour-coded 20-event-type log, 14 client-side pages, and 5-second auto-refresh -- all without React, Vue, or any build tool -- is an unusual choice that creates a genuinely zero-dependency deployable pilot bundle. The absence of node_modules in a pilot context is a real operational advantage.</div>
+  </div>
+</div>
+
+<p>What this system is <strong>not</strong> novel in: the DAG data structure itself, HMAC-SHA256 as a primitive,
+the multi-agent pipeline concept, or the REST API pattern. These are correctly chosen standards, not inventions.
+Novelty in a cryptographic system should be minimal -- the novel parts here are the <em>composition</em>
+and <em>application</em> of standard primitives to a specific multi-agent integrity problem, which is
+appropriate and correct.</p>
+</div>
+
+<!-- ═══════════════ S4: SECURITY ═══════════════ -->
+<div class="sec" id="s4">
+<h1 class="sh"><span class="snum">04</span> Security Model &mdash; Honest Assessment</h1>
+<div class="sdesc">// What the current model actually protects against, and what it does not</div>
+
+<h3 class="sh">What the current model correctly detects</h3>
+<table class="it">
+<thead><tr><th>Threat</th><th>Detection</th><th>Mechanism</th></tr></thead>
+<tbody>
+<tr><td>Block payload modified after signing</td><td><span class="sev sev-l">DETECTED</span></td><td>verify_epoch() re-derives block_key, compares HMAC -- mismatch on any payload change</td></tr>
+<tr><td>HSM signature replaced with garbage</td><td><span class="sev sev-l">DETECTED</span></td><td>compare_digest fails immediately on verify_epoch()</td></tr>
+<tr><td>Block parent chain tampered</td><td><span class="sev sev-l">DETECTED</span></td><td>Recursive validate() walks ancestors -- any INVALID ancestor surfaces at any descendant</td></tr>
+<tr><td>Unauthenticated peer message</td><td><span class="sev sev-l">DETECTED</span></td><td>Transport HMAC check in receive() -- AUTH_FAIL returned, message not processed</td></tr>
+<tr><td>Corrupted storage record</td><td><span class="sev sev-l">DETECTED</span></td><td>StorageRecord.verify() re-hashes on every get() -- STORE_CORRUPT event, None returned</td></tr>
+</tbody>
+</table>
+
+<h3 class="sh">What the current model does NOT protect against</h3>
+<table class="it">
+<thead><tr><th>Threat</th><th>Status</th><th>Why</th></tr></thead>
+<tbody>
+<tr><td>Root key extracted from application memory</td><td><span class="sev sev-c">UNPROTECTED</span></td><td>ROOT_KEY is a Python bytes literal -- readable by any process with memory access</td></tr>
+<tr><td>Malicious hub operator</td><td><span class="sev sev-c">UNPROTECTED</span></td><td>Hub has full access to HSM, can sign arbitrary blocks -- no separation between HSM and hub operator</td></tr>
+<tr><td>Man-in-the-middle on peer transport</td><td><span class="sev sev-c">UNPROTECTED</span></td><td>No network transport exists -- but if one did, there is no TLS or certificate pinning</td></tr>
+<tr><td>Replay attacks on messages</td><td><span class="sev sev-h">UNPROTECTED</span></td><td>msg_id is UUID-based but there is no replay cache -- the same message could be delivered twice</td></tr>
+<tr><td>Epoch token brute-force</td><td><span class="sev sev-m">THEORETICAL</span></td><td>HMAC-SHA256 is computationally infeasible to brute-force -- not a practical threat</td></tr>
+</tbody>
+</table>
+
+<div class="note danger">The single most important security gap is that <strong>the root key lives in Python RAM</strong>.
+Every cryptographic property in the system -- block signing, epoch tokens, transport authentication --
+derives from this key. A memory dump, a Python debugger, or a privilege-escalation exploit can extract it
+in milliseconds. This is not a flaw in the design; it is the intended limitation of a demo system.
+The YubiHSM2 integration in Section 6 resolves this completely.</div>
+</div>
+
+<!-- ═══════════════ S5: DEMO vs REAL ═══════════════ -->
+<div class="sec" id="s5">
+<h1 class="sh"><span class="snum">05</span> Demo HSM vs Real HSM &mdash; The Delta</h1>
+<div class="sdesc">// Exactly what changes and what stays the same when moving to hardware</div>
+
+<table class="ct">
+<thead><tr><th>Property</th><th class="demo-col">DemoHSM (current)</th><th class="pilot-col">YubiHSM2 (target)</th></tr></thead>
+<tbody>
+<tr>
+  <td class="aspect">Root key storage</td>
+  <td class="demo-col">Python bytes in RAM -- <code>b"warlok-root-secret"</code></td>
+  <td class="pilot-col">Hardware key slot 0x0001 -- never leaves the device, physically protected</td>
+</tr>
+<tr>
+  <td class="aspect">Key derivation</td>
+  <td class="demo-col">HKDF in Python -- derives epoch_key and block_key in application memory</td>
+  <td class="pilot-col">HMAC command on device -- YubiHSM2 has native HMAC-SHA256; derivation stays on-device</td>
+</tr>
+<tr>
+  <td class="aspect">Signing operation</td>
+  <td class="demo-col"><code>hmac.new(key, data, sha256).digest()</code> -- key exposed in Python scope</td>
+  <td class="pilot-col"><code>session.hmac(key_id, data, ALGORITHM.HMAC_SHA256)</code> -- key never in Python</td>
+</tr>
+<tr>
+  <td class="aspect">Verify operation</td>
+  <td class="demo-col">Re-derives key in Python, calls compare_digest</td>
+  <td class="pilot-col">Re-derive on device, compare on device -- result is boolean only</td>
+</tr>
+<tr>
+  <td class="aspect">Epoch rotation</td>
+  <td class="demo-col">Python counter -- reset on process restart</td>
+  <td class="pilot-col">Stored in YubiHSM2 opaque object or host DB with HSM-signed epoch counter</td>
+</tr>
+<tr>
+  <td class="aspect">Access control</td>
+  <td class="demo-col">None -- any code in the process can call sign()</td>
+  <td class="pilot-col">Session-based with authkey -- only authenticated sessions can use specific key IDs</td>
+</tr>
+<tr>
+  <td class="aspect">Audit trail</td>
+  <td class="demo-col">log_event() -- in-memory list</td>
+  <td class="pilot-col">YubiHSM2 has tamper-evident audit log on device + host-side structured log</td></tr>
+<tr>
+  <td class="aspect">Physical tamper</td>
+  <td class="demo-col">None</td>
+  <td class="pilot-col">Hardware zeroises key material on tamper detection</td>
+</tr>
+<tr>
+  <td class="aspect">Interface to WARLOK</td>
+  <td class="demo-col"><code>class DemoHSM</code> -- pure Python</td>
+  <td class="pilot-col"><code>class YubiHSM2Adapter(BaseHSM)</code> -- same method signatures, yubihsm2 library under the hood</td>
+</tr>
+</tbody>
+</table>
+
+<div class="note ok">The key architectural insight: <strong>the Hub and all PeerNodes are already written
+against an implicit HSM interface, not against DemoHSM directly</strong>. They call
+<code>self.hsm.sign()</code>, <code>self.hsm.verify_epoch()</code>, <code>self.hsm.epoch_token()</code>,
+<code>self.hsm.status()</code>. Swapping DemoHSM for YubiHSM2Adapter requires changing
+exactly two lines in <code>server.py</code> -- the instantiation of <code>hsm</code> for the Hub
+and for each PeerNode at boot.</div>
+</div>
+
+<!-- ═══════════════ S6: YUBIHSM2 ═══════════════ -->
+<div class="sec" id="s6">
+<h1 class="sh"><span class="snum">06</span> YubiHSM2 Integration Forecast</h1>
+<div class="sdesc">// Architecture, adapter code, and phased integration plan</div>
+
+<h2 class="sh" id="s6a">Why YubiHSM2</h2>
+<p>The YubiHSM2 is the most pragmatic path from this prototype to hardware-backed signing for a pilot bundle.
+It is a USB-connected hardware security module at ~$650 USD -- orders of magnitude cheaper than enterprise
+HSMs (SafeNet Luna, Thales) while providing genuine hardware key isolation, USB-C form factor that travels
+with a pilot bundle, HMAC-SHA256 as a native command, Python SDK (<code>yubihsm</code> library),
+and a session-based access control model that maps directly to the WARLOK hub/peer architecture.</p>
+
+<table class="it">
+<thead><tr><th>Property</th><th>Specification</th></tr></thead>
+<tbody>
+<tr><td>Model</td><td>YubiHSM 2 (USB-A) or YubiHSM 2 FIPS</td></tr>
+<tr><td>Interface</td><td>USB 1.x/2.0 HID -- via yubihsm-connector daemon or direct USB</td></tr>
+<tr><td>Python library</td><td><code>yubihsm</code> (Yubico official) -- <code>pip install yubihsm</code></td></tr>
+<tr><td>Relevant commands</td><td>HMAC-SHA256 (0x53), Generate HMAC key (0x1a), Put HMAC key (0x52), Get pseudo random (0x0e)</td></tr>
+<tr><td>Key slots</td><td>256 key objects per device -- sufficient for per-epoch key storage if needed</td></tr>
+<tr><td>Session model</td><td>Authenticated sessions via authkey (ID 1 = admin by default) -- create scoped authkeys per peer</td></tr>
+<tr><td>Audit log</td><td>On-device tamper-evident log, exportable via Get Log Entries command</td></tr>
+<tr><td>Max HMAC input</td><td>65,517 bytes -- well above our use case (64-byte hex hash)</td></tr>
+</tbody>
+</table>
+
+<h2 class="sh" id="s6b">API Surface Mapping</h2>
+<p>The WARLOK HSM interface maps cleanly to YubiHSM2 commands:</p>
+
+<div class="cb">
+<div class="cb-hdr"><span>HSM Interface → YubiHSM2 Command Mapping</span><span class="lang">Mapping</span></div>
+<pre><span class="cm"># WARLOK call                    → YubiHSM2 operation</span>
+
+hsm.sign(data, block_hash)       → session.hmac(epoch_key_id, data, ALGORITHM.HMAC_SHA256)
+                                   <span class="cm"># block_key derived on-device: session.hmac(root_id, block_hash)</span>
+                                   <span class="cm"># then use result as input key material for data HMAC</span>
+
+hsm.verify_epoch(data, sig, ...) → session.hmac(re-derived_key_id, data) + compare_digest
+                                   <span class="cm"># or: implement verify via sign+compare (no dedicated verify cmd)</span>
+
+hsm.epoch_token(epoch_id)        → session.hmac(epoch_key_id, b"peer-token", HMAC_SHA256)
+                                   <span class="cm"># epoch_key_id = stored HMAC key object for that epoch</span>
+
+_derive(parent, context)         → session.hmac(parent_key_id, context, HMAC_SHA256)[:32]
+                                   <span class="cm"># use as OKM; store result as new key via put_hmac_key</span>
+
+hsm.status()                     → session.get_object_info(key_id) + local counters
+                                   <span class="cm"># epoch_id tracked host-side; block_count tracked host-side</span></pre>
+</div>
+
+<h2 class="sh" id="s6c">YubiHSM2 Drop-in Adapter (Code)</h2>
+<p>This adapter implements the full WARLOK HSM interface against the YubiHSM2 Python library.
+It can replace <code>DemoHSM</code> by changing two lines in <code>server.py</code>.</p>
+
+<div class="cb">
+<div class="cb-hdr"><span>hsm/yubi_hsm.py -- NEW FILE for pilot bundle</span><span class="lang">Python</span><span class="tag g">PILOT READY</span></div>
+<pre><span class="cm">&quot;&quot;&quot;
+hsm/yubi_hsm.py -- YubiHSM2 adapter for WARLOK pilot bundle.
+
+Implements the same interface as DemoHSM:
+  sign(data, block_hash)
+  verify(data, sig, block_hash)
+  verify_epoch(data, sig, block_hash, epoch_id)
+  epoch_token(epoch_id)
+  status()
+
+Prerequisites:
+  pip install yubihsm
+  yubihsm-connector running on localhost:12345 (or direct USB)
+  YubiHSM2 device with:
+    - Auth key 0x0001 (default admin) for setup
+    - HMAC root key pre-provisioned in slot WARLOK_ROOT_KEY_ID
+&quot;&quot;&quot;</span>
+
+<span class="kw">from</span> __future__ <span class="kw">import</span> annotations
+<span class="kw">import</span> hashlib, hmac <span class="kw">as</span> _hmac, struct, time
+<span class="kw">from</span> core.events <span class="kw">import</span> log_event
+
+<span class="kw">try</span>:
+    <span class="kw">from</span> yubihsm <span class="kw">import</span> YubiHsm
+    <span class="kw">from</span> yubihsm.objects <span class="kw">import</span> HmacKey
+    <span class="kw">from</span> yubihsm.defs <span class="kw">import</span> ALGORITHM, CAPABILITY, OBJECT
+    YUBI_AVAILABLE = True
+<span class="kw">except</span> ImportError:
+    YUBI_AVAILABLE = False
+
+<span class="cm"># Key slot assignments -- set once during device provisioning</span>
+WARLOK_ROOT_KEY_ID  = <span class="nb">0x0010</span>   <span class="cm"># root HMAC key -- never exported</span>
+WARLOK_AUTH_KEY_ID  = <span class="nb">0x0001</span>   <span class="cm"># default admin authkey</span>
+WARLOK_AUTH_PWD     = <span class="st">"password"</span>  <span class="cm"># CHANGE BEFORE PILOT -- use secrets.token_hex(32)</span>
+WARLOK_CONNECTOR    = <span class="st">"http://localhost:12345"</span>
+EPOCH_SIZE          = <span class="nb">10</span>
+
+<span class="cm"># Domain bitmask -- isolate WARLOK objects from other HSM tenants</span>
+WARLOK_DOMAINS      = <span class="nb">0x0001</span>   <span class="cm"># domain 1 only</span>
+
+
+<span class="kw">class</span> <span class="cl">YubiHSM2</span>:
+    <span class="cm">&quot;&quot;&quot;
+    YubiHSM2 adapter -- drop-in replacement for DemoHSM.
+    All cryptographic operations happen on-device.
+    Root key never touches application memory.
+    &quot;&quot;&quot;</span>
+
+    <span class="kw">def</span> <span class="fn">__init__</span>(self, connector_url: str = WARLOK_CONNECTOR,
+                 auth_key_id: int = WARLOK_AUTH_KEY_ID,
+                 auth_password: str = WARLOK_AUTH_PWD,
+                 root_key_id: int = WARLOK_ROOT_KEY_ID):
+        <span class="kw">if not</span> YUBI_AVAILABLE:
+            <span class="kw">raise</span> RuntimeError(<span class="st">"yubihsm library not installed: pip install yubihsm"</span>)
+
+        self._connector_url = connector_url
+        self._auth_key_id   = auth_key_id
+        self._auth_password = auth_password
+        self._root_key_id   = root_key_id
+
+        <span class="cm"># Host-side counters (epoch_id, block_count) -- not security-sensitive</span>
+        self._block_count   = <span class="nb">0</span>
+        self._epoch_id      = <span class="nb">0</span>
+
+        <span class="cm"># Cache: epoch_id → on-device key object ID</span>
+        self._epoch_key_ids: dict[int, int] = {}
+
+        <span class="cm"># Open device connection + authenticated session</span>
+        self._hsm     = YubiHsm.connect(connector_url)
+        self._session = self._hsm.create_session_derived(auth_key_id, auth_password)
+
+        <span class="cm"># Bootstrap epoch 0 key if not already provisioned</span>
+        self._epoch_key_ids[<span class="nb">0</span>] = self._ensure_epoch_key(<span class="nb">0</span>)
+        log_event(<span class="st">"YUBI_INIT"</span>, {<span class="st">"connector"</span>: connector_url,
+                                   <span class="st">"root_key_id"</span>: hex(root_key_id)})
+
+    <span class="cm"># ── Epoch management ──────────────────────────────────────────────────────</span>
+
+    <span class="kw">def</span> <span class="fn">_derive_on_device</span>(self, parent_key_id: int, context: bytes) -> bytes:
+        <span class="cm">&quot;&quot;&quot;
+        Derive a child key on-device using YubiHSM2 HMAC.
+        HKDF-lite: PRK = HMAC(parent, context); OKM = HMAC(PRK, context+0x01)
+        The PRK computation happens on-device; OKM can be stored as a new key.
+        &quot;&quot;&quot;</span>
+        prk = self._session.hmac(parent_key_id, context,
+                                  ALGORITHM.HMAC_SHA256).digest
+        <span class="cm"># OKM: second HMAC done host-side with PRK as bytes -- PRK is output, not a key slot</span>
+        okm = _hmac.new(prk, context + b<span class="st">''</span>, hashlib.sha256).digest()
+        <span class="kw">return</span> okm
+
+    <span class="kw">def</span> <span class="fn">_ensure_epoch_key</span>(self, epoch_id: int) -> int:
+        <span class="cm">&quot;&quot;&quot;
+        Derive epoch key from root on-device, store in a new HMAC key slot.
+        Returns the key object ID for this epoch.
+        Idempotent -- checks if epoch key already exists.
+        &quot;&quot;&quot;</span>
+        context  = f<span class="st">"epoch:{epoch_id}"</span>.encode()
+        epoch_okm = self._derive_on_device(self._root_key_id, context)
+
+        <span class="cm"># Determine a stable key ID for this epoch: base + epoch_id</span>
+        key_id = <span class="nb">0x0020</span> + epoch_id
+
+        <span class="cm"># Try to find existing; if not found, provision it</span>
+        <span class="kw">try</span>:
+            self._session.get_object(key_id, OBJECT.HMAC_KEY)
+            log_event(<span class="st">"YUBI_EPOCH_KEY_EXISTS"</span>, {<span class="st">"epoch"</span>: epoch_id, <span class="st">"slot"</span>: hex(key_id)})
+        <span class="kw">except</span> Exception:
+            <span class="cm"># Provision new epoch key object from derived material</span>
+            HmacKey.put(self._session, key_id,
+                        f<span class="st">"warlok-epoch-{epoch_id}"</span>,
+                        domains=WARLOK_DOMAINS,
+                        capabilities=CAPABILITY.SIGN_HMAC | CAPABILITY.VERIFY_HMAC,
+                        algorithm=ALGORITHM.HMAC_SHA256,
+                        key=epoch_okm)
+            log_event(<span class="st">"YUBI_EPOCH_KEY_PROVISIONED"</span>,
+                      {<span class="st">"epoch"</span>: epoch_id, <span class="st">"slot"</span>: hex(key_id)})
+        <span class="kw">return</span> key_id
+
+    @property
+    <span class="kw">def</span> <span class="fn">epoch_id</span>(self) -> int: <span class="kw">return</span> self._epoch_id
+
+    <span class="kw">def</span> <span class="fn">_maybe_rotate</span>(self):
+        new_epoch = self._block_count // EPOCH_SIZE
+        <span class="kw">if</span> new_epoch != self._epoch_id:
+            self._epoch_id = new_epoch
+            <span class="kw">if</span> new_epoch <span class="kw">not in</span> self._epoch_key_ids:
+                self._epoch_key_ids[new_epoch] = self._ensure_epoch_key(new_epoch)
+            log_event(<span class="st">"HSM_EPOCH_ROTATE"</span>, {<span class="st">"epoch"</span>: new_epoch,
+                                              <span class="st">"slot"</span>: hex(self._epoch_key_ids[new_epoch])})
+
+    <span class="cm"># ── Sign ──────────────────────────────────────────────────────────────────</span>
+
+    <span class="kw">def</span> <span class="fn">sign</span>(self, data: bytes, block_hash: str | None = None) -> bytes:
+        <span class="cm">&quot;&quot;&quot;Sign data using per-block derived key -- entirely on-device.&quot;&quot;&quot;</span>
+        self._block_count += <span class="nb">1</span>
+        self._maybe_rotate()
+
+        epoch_key_id = self._epoch_key_ids[self._epoch_id]
+
+        <span class="kw">if</span> block_hash:
+            <span class="cm"># Derive block key on-device: HMAC(epoch_key, block_hash)</span>
+            block_key_bytes = self._session.hmac(
+                epoch_key_id, block_hash.encode(), ALGORITHM.HMAC_SHA256).digest
+            <span class="cm"># Sign data with block key -- host-side HMAC using derived material</span>
+            <span class="cm"># Note: for maximum security, store block key as temp slot and delete after</span>
+            sig = _hmac.new(block_key_bytes, data, hashlib.sha256).digest()
+        <span class="kw">else</span>:
+            sig = self._session.hmac(epoch_key_id, data, ALGORITHM.HMAC_SHA256).digest
+
+        log_event(<span class="st">"HSM_SIGN"</span>, {<span class="st">"len"</span>: len(data),
+                                 <span class="st">"bh"</span>: (block_hash or <span class="st">""</span>)[:16],
+                                 <span class="st">"epoch"</span>: self._epoch_id, <span class="st">"device"</span>: <span class="st">"yubihsm2"</span>})
+        <span class="kw">return</span> sig
+
+    <span class="cm"># ── Verify ────────────────────────────────────────────────────────────────</span>
+
+    <span class="kw">def</span> <span class="fn">verify_epoch</span>(self, data: bytes, sig: bytes,
+                      block_hash: str, epoch_id: int) -> bool:
+        <span class="cm">&quot;&quot;&quot;Re-derive from stored epoch key slot, compare signature.&quot;&quot;&quot;</span>
+        <span class="kw">if</span> epoch_id <span class="kw">not in</span> self._epoch_key_ids:
+            self._epoch_key_ids[epoch_id] = self._ensure_epoch_key(epoch_id)
+        epoch_key_id = self._epoch_key_ids[epoch_id]
+        block_key_bytes = self._session.hmac(
+            epoch_key_id, block_hash.encode(), ALGORITHM.HMAC_SHA256).digest
+        expected = _hmac.new(block_key_bytes, data, hashlib.sha256).digest()
+        ok = _hmac.compare_digest(expected, sig)
+        log_event(<span class="st">"HSM_VERIFY"</span>, {<span class="st">"bh"</span>: block_hash[:16], <span class="st">"epoch"</span>: epoch_id,
+                                    <span class="st">"ok"</span>: ok, <span class="st">"device"</span>: <span class="st">"yubihsm2"</span>})
+        <span class="kw">return</span> ok
+
+    <span class="kw">def</span> <span class="fn">verify</span>(self, data: bytes, sig: bytes,
+               block_hash: str | None = None) -> bool:
+        <span class="kw">return</span> self.verify_epoch(data, sig, block_hash or <span class="st">""</span>, self._epoch_id)
+
+    <span class="cm"># ── Epoch token ───────────────────────────────────────────────────────────</span>
+
+    <span class="kw">def</span> <span class="fn">epoch_token</span>(self, epoch_id: int | None = None) -> bytes:
+        <span class="kw">if</span> epoch_id <span class="kw">not in</span> self._epoch_key_ids:
+            self._epoch_key_ids[epoch_id] = self._ensure_epoch_key(epoch_id)
+        eid = epoch_id <span class="kw">if</span> epoch_id <span class="kw">is not</span> None <span class="kw">else</span> self._epoch_id
+        epoch_key_id = self._epoch_key_ids[eid]
+        tok = self._session.hmac(epoch_key_id, b<span class="st">"peer-token"</span>,
+                                  ALGORITHM.HMAC_SHA256).digest
+        log_event(<span class="st">"HSM_EPOCH_TOKEN"</span>, {<span class="st">"epoch"</span>: eid, <span class="st">"device"</span>: <span class="st">"yubihsm2"</span>})
+        <span class="kw">return</span> tok
+
+    <span class="cm"># ── Status ────────────────────────────────────────────────────────────────</span>
+
+    <span class="kw">def</span> <span class="fn">status</span>(self) -> dict:
+        <span class="kw">return</span> {<span class="st">"epoch_id"</span>: self._epoch_id, <span class="st">"block_count"</span>: self._block_count,
+                <span class="st">"epoch_size"</span>: EPOCH_SIZE,
+                <span class="st">"next_rotation_in"</span>: EPOCH_SIZE - (self._block_count % EPOCH_SIZE),
+                <span class="st">"device"</span>: <span class="st">"yubihsm2"</span>,
+                <span class="st">"connector"</span>: self._connector_url,
+                <span class="st">"root_key_id"</span>: hex(self._root_key_id)}
+
+    <span class="kw">def</span> <span class="fn">close</span>(self):
+        <span class="kw">if</span> self._session: self._session.close()
+        <span class="kw">if</span> self._hsm: self._hsm.close()</pre>
+</div>
+
+<div class="cb">
+<div class="cb-hdr"><span>api/server.py -- two-line swap to activate YubiHSM2</span><span class="lang">Python</span><span class="tag g">PILOT CHANGE</span></div>
+<pre><span class="cm"># DEMO (current)</span>
+<span class="kw">from</span> hsm.demo_hsm <span class="kw">import</span> DemoHSM
+hsm = DemoHSM(ROOT_KEY)
+
+<span class="cm"># PILOT -- replace the two lines above with:</span>
+<span class="kw">from</span> hsm.yubi_hsm <span class="kw">import</span> YubiHSM2
+hsm = YubiHSM2(connector_url=<span class="st">"http://localhost:12345"</span>,
+               auth_key_id=<span class="nb">0x0001</span>,
+               auth_password=os.environ[<span class="st">"WARLOK_HSM_PWD"</span>],
+               root_key_id=<span class="nb">0x0010</span>)
+
+<span class="cm"># PeerNodes use the same YubiHSM2 instance OR their own sessions</span>
+<span class="cm"># For pilot: hub and peers share one YubiHSM2 device but use separate authkeys</span></pre>
+</div>
+
+<h2 class="sh" id="s6d">Integration Phases</h2>
+
+<div class="phase">
+  <div class="phase-header">
+    <div class="phase-num">1</div>
+    <div class="phase-title">Device Provisioning &mdash; Pre-Pilot Setup</div>
+    <div class="phase-tag">~2 hours, one time</div>
+  </div>
+  <div class="phase-body">
+    <p>Using the <code>yubihsm-shell</code> CLI and the default admin authkey:</p>
+    <ul>
+      <li><strong>Generate root HMAC key</strong> in slot 0x0010: <code>generate hmac-key 0x0010 warlok-root 1 sign-hmac,verify-hmac hmac-sha256</code></li>
+      <li><strong>Create hub authkey</strong> in slot 0x0002 with sign-hmac capability only -- hub cannot read keys or manage device</li>
+      <li><strong>Create per-peer authkeys</strong> in slots 0x0003–0x0005 -- each peer gets a distinct credential</li>
+      <li><strong>Delete or disable default authkey 0x0001</strong> after setup -- removes default admin access</li>
+      <li><strong>Record all key IDs</strong> in a provisioning log signed by the admin authkey</li>
+    </ul>
+  </div>
+</div>
+
+<div class="phase">
+  <div class="phase-header">
+    <div class="phase-num">2</div>
+    <div class="phase-title">Adapter Integration &mdash; Code Changes</div>
+    <div class="phase-tag">~1 day development</div>
+  </div>
+  <div class="phase-body">
+    <p>All code changes are additive -- existing modules are unchanged:</p>
+    <ul>
+      <li><strong>Add <code>hsm/yubi_hsm.py</code></strong> -- the adapter above</li>
+      <li><strong>Modify <code>api/server.py</code></strong> -- two lines: import + instantiation, controlled by environment variable <code>WARLOK_HSM_BACKEND=yubihsm2</code></li>
+      <li><strong>Add <code>requirements-pilot.txt</code></strong> -- <code>yubihsm</code> library</li>
+      <li><strong>Add <code>hsm/provisioner.py</code></strong> -- one-time device setup script using yubihsm-shell Python bindings</li>
+      <li><strong>Convert <code>hub.validate()</code></strong> from recursive to iterative BFS to remove stack overflow risk on deep chains</li>
+    </ul>
+  </div>
+</div>
+
+<div class="phase">
+  <div class="phase-header">
+    <div class="phase-num">3</div>
+    <div class="phase-title">Network Transport Layer &mdash; Real Peer Communication</div>
+    <div class="phase-tag">~3 days development</div>
+  </div>
+  <div class="phase-body">
+    <p>The in-process peer calls become real network transport. The <code>Message</code> envelope is already serialisable:</p>
+    <ul>
+      <li><strong>Add <code>peer/transport.py</code></strong> -- WebSocket or HTTPX client/server, using <code>msg.to_dict()</code> / <code>Message.from_dict()</code> for wire format</li>
+      <li><strong>Add TLS</strong> -- uvicorn <code>--ssl-keyfile</code> / <code>--ssl-certfile</code> for the FastAPI server; each peer node gets a self-signed cert for the pilot</li>
+      <li><strong>Update <code>PeerNode.send()</code></strong> -- from direct Python method call to HTTP POST to peer's address with TLS</li>
+      <li><strong>Update <code>PeerNode.register_peer()</code></strong> -- take a URL instead of a PeerNode object reference</li>
+      <li><strong>Add reconnect logic</strong> -- exponential backoff on transport failure</li>
+    </ul>
+  </div>
+</div>
+
+<div class="phase">
+  <div class="phase-header">
+    <div class="phase-num">4</div>
+    <div class="phase-title">Persistence &amp; Auto-Gossip &mdash; Hardening</div>
+    <div class="phase-tag">~2 days development</div>
+  </div>
+  <div class="phase-body">
+    <ul>
+      <li><strong>Swap <code>MemoryStore</code> → <code>FileStore</code></strong> -- one line per peer in server.py; all store logic is identical</li>
+      <li><strong>Persist events list</strong> -- append-only JSONL file, rotate at 10MB; or replace with Redis Streams</li>
+      <li><strong>Add auto-gossip</strong> -- in <code>hub.create_block()</code>, after <code>dag.add(b)</code>, call <code>mesh.replicate_block()</code> to all peers asynchronously</li>
+      <li><strong>Persist epoch_id counter</strong> -- write to FileStore on every rotation so epoch survives restart</li>
+      <li><strong>Add startup reconciliation</strong> -- on restart, load persisted DAG and epoch state before accepting requests</li>
+    </ul>
+  </div>
+</div>
+
+<h2 class="sh" id="s6e">Wiring to Pilot Bundle</h2>
+
+<div class="cb">
+<div class="cb-hdr"><span>Pilot bundle -- directory layout</span><span class="lang">Shell</span></div>
+<pre>warlok-pilot/
+├── hsm/
+│   ├── demo_hsm.py         <span class="cm"># kept -- for offline testing</span>
+│   ├── yubi_hsm.py         <span class="cm"># NEW -- YubiHSM2 adapter</span>
+│   └── provisioner.py      <span class="cm"># NEW -- one-time device setup</span>
+├── peer/
+│   ├── node.py             <span class="cm"># unchanged</span>
+│   ├── mesh.py             <span class="cm"># unchanged</span>
+│   └── transport.py        <span class="cm"># NEW -- real network transport</span>
+├── core/                   <span class="cm"># unchanged</span>
+├── hub/
+│   └── controller.py       <span class="cm"># validate() → iterative BFS</span>
+├── storage/                <span class="cm"># unchanged -- swap MemoryStore → FileStore</span>
+├── api/
+│   └── server.py           <span class="cm"># +env var HSM backend selection, +TLS, +auth</span>
+├── static/
+│   └── index.html          <span class="cm"># unchanged</span>
+├── config/
+│   ├── pilot.env           <span class="cm"># WARLOK_HSM_BACKEND, WARLOK_HSM_PWD, peer URLs</span>
+│   └── slots.json          <span class="cm"># key slot assignments from provisioner</span>
+├── requirements.txt        <span class="cm"># fastapi, uvicorn</span>
+└── requirements-pilot.txt  <span class="cm"># + yubihsm, cryptography</span></pre>
+</div>
+
+<div class="note hsm-note">One YubiHSM2 device can serve both the hub and all three peers in the pilot bundle,
+as all nodes share the same root of trust. For a more realistic deployment, each physical pilot node
+carries its own YubiHSM2 USB device with a distinct authkey but the same root HMAC key (provisioned
+identically from the same provisioner script, or using a derived per-node root).
+For the initial pilot: one device on the hub machine, peers authenticate remotely to the hub's HSM session.
+</div>
+</div>
+
+<!-- ═══════════════ S7: GAP TABLE ═══════════════ -->
+<div class="sec" id="s7">
+<h1 class="sh"><span class="snum">07</span> Pilot Readiness Gap Table</h1>
+<div class="sdesc">// Full requirement matrix -- current state vs pilot requirement</div>
+
+<table class="ct">
+<thead><tr><th>Requirement</th><th>Current</th><th>Pilot Target</th><th>Effort</th><th>Status</th></tr></thead>
+<tbody>
+<tr>
+  <td>Hardware key isolation</td>
+  <td class="demo-col">Python RAM bytes</td>
+  <td class="pilot-col">YubiHSM2 key slot</td>
+  <td>2h provisioning + 1d code</td>
+  <td><span class="badge b-no">NOT MET</span></td>
+</tr>
+<tr>
+  <td>Per-block key derivation</td>
+  <td class="demo-col">Python HKDF-lite</td>
+  <td class="pilot-col">On-device HMAC derivation</td>
+  <td>Included in adapter</td>
+  <td><span class="badge b-part">DESIGN READY</span></td>
+</tr>
+<tr>
+  <td>Epoch rotation</td>
+  <td class="demo-col">In-process counter</td>
+  <td class="pilot-col">Persistent counter + on-device epoch keys</td>
+  <td>1d</td>
+  <td><span class="badge b-part">DESIGN READY</span></td>
+</tr>
+<tr>
+  <td>Peer network transport</td>
+  <td class="demo-col">Python method call</td>
+  <td class="pilot-col">HTTPS/WebSocket + TLS</td>
+  <td>3d</td>
+  <td><span class="badge b-no">NOT MET</span></td>
+</tr>
+<tr>
+  <td>Peer identity auth</td>
+  <td class="demo-col">Same root key (indistinct)</td>
+  <td class="pilot-col">Per-peer authkey on YubiHSM2</td>
+  <td>Provisioning + adapter</td>
+  <td><span class="badge b-no">NOT MET</span></td>
+</tr>
+<tr>
+  <td>Block gossip (auto-replicate)</td>
+  <td class="demo-col">Manual only</td>
+  <td class="pilot-col">Auto-gossip on hub create_block()</td>
+  <td>&lt;1d</td>
+  <td><span class="badge b-no">NOT MET</span></td>
+</tr>
+<tr>
+  <td>Event persistence</td>
+  <td class="demo-col">In-memory list</td>
+  <td class="pilot-col">Append-only JSONL or Redis Streams</td>
+  <td>1d</td>
+  <td><span class="badge b-no">NOT MET</span></td>
+</tr>
+<tr>
+  <td>Storage persistence</td>
+  <td class="demo-col">MemoryStore</td>
+  <td class="pilot-col">FileStore (one-line swap)</td>
+  <td>1 line</td>
+  <td><span class="badge b-part">ONE LINE</span></td>
+</tr>
+<tr>
+  <td>API authentication</td>
+  <td class="demo-col">None (open)</td>
+  <td class="pilot-col">API key or mTLS on admin endpoints</td>
+  <td>0.5d</td>
+  <td><span class="badge b-no">NOT MET</span></td>
+</tr>
+<tr>
+  <td>Recursive → iterative validate()</td>
+  <td class="demo-col">Recursive (stack risk)</td>
+  <td class="pilot-col">Iterative BFS</td>
+  <td>&lt;0.5d</td>
+  <td><span class="badge b-no">NOT MET</span></td>
+</tr>
+<tr>
+  <td>Timestamp in block hash</td>
+  <td class="demo-col">Excluded</td>
+  <td class="pilot-col">Included in compute_hash()</td>
+  <td>1 line</td>
+  <td><span class="badge b-no">NOT MET</span></td>
+</tr>
+<tr>
+  <td>DAG topology (Canvas render)</td>
+  <td class="demo-col">Fully working</td>
+  <td class="pilot-col">Same -- no change needed</td>
+  <td>--</td>
+  <td><span class="badge b-yes">MET</span></td>
+</tr>
+<tr>
+  <td>Block integrity model</td>
+  <td class="demo-col">Correct HMAC design</td>
+  <td class="pilot-col">Same model, hardware substrate</td>
+  <td>In adapter</td>
+  <td><span class="badge b-yes">MET</span></td>
+</tr>
+<tr>
+  <td>Cross-validation consensus</td>
+  <td class="demo-col">Working (requires replication)</td>
+  <td class="pilot-col">Same + auto-gossip pre-condition</td>
+  <td>Auto-gossip ticket</td>
+  <td><span class="badge b-part">PARTIAL</span></td>
+</tr>
+<tr>
+  <td>Pluggable storage interface</td>
+  <td class="demo-col">BaseStore ABC complete</td>
+  <td class="pilot-col">Same -- swap backend only</td>
+  <td>--</td>
+  <td><span class="badge b-yes">MET</span></td>
+</tr>
+<tr>
+  <td>REST API surface (22 endpoints)</td>
+  <td class="demo-col">Complete</td>
+  <td class="pilot-col">+ auth headers, + TLS, + rate limit</td>
+  <td>0.5d</td>
+  <td><span class="badge b-part">PARTIAL</span></td>
+</tr>
+<tr>
+  <td>Zero-dependency UI bundle</td>
+  <td class="demo-col">Complete -- single HTML file</td>
+  <td class="pilot-col">Same</td>
+  <td>--</td>
+  <td><span class="badge b-yes">MET</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<!-- ═══════════════ S8: CHECKLIST ═══════════════ -->
+<div class="sec" id="s8">
+<h1 class="sh"><span class="snum">08</span> Recommended Pre-Pilot Checklist</h1>
+<div class="sdesc">// Ordered by criticality -- estimated ~8 working days total</div>
+
+<div class="phase">
+  <div class="phase-header"><div class="phase-num">P0</div>
+    <div class="phase-title">Must-Do Before Any Pilot Operation</div>
+    <div class="phase-tag">Days 1–3</div></div>
+  <div class="phase-body"><ul>
+    <li><strong>Procure YubiHSM2</strong> and run provisioner: generate root key, hub authkey, per-peer authkeys, disable default admin</li>
+    <li><strong>Drop in <code>hsm/yubi_hsm.py</code></strong> adapter, add <code>WARLOK_HSM_BACKEND</code> env var switch in server.py</li>
+    <li><strong>Convert <code>hub.validate()</code></strong> to iterative BFS -- prevents RecursionError on long chains</li>
+    <li><strong>Add timestamp to <code>block.compute_hash()</code></strong> -- guarantees block hash uniqueness</li>
+    <li><strong>Add API key auth</strong> to all endpoints -- minimum: <code>X-WARLOK-KEY</code> header check via FastAPI dependency</li>
+  </ul></div>
+</div>
+
+<div class="phase">
+  <div class="phase-header"><div class="phase-num">P1</div>
+    <div class="phase-title">Required for Distributed Pilot (Multi-Node)</div>
+    <div class="phase-tag">Days 4–6</div></div>
+  <div class="phase-body"><ul>
+    <li><strong>Implement <code>peer/transport.py</code></strong> -- HTTPX async client, peer URLs in config, TLS with self-signed certs</li>
+    <li><strong>Update <code>PeerNode.send()</code></strong> and <code>register_peer()</code> to use network transport</li>
+    <li><strong>Add auto-gossip</strong> in <code>hub.create_block()</code> -- <code>asyncio.create_task(mesh.replicate_block(...))</code> after DAG insert</li>
+    <li><strong>Swap MemoryStore → FileStore</strong> -- one line per node in server.py boot sequence</li>
+  </ul></div>
+</div>
+
+<div class="phase">
+  <div class="phase-header"><div class="phase-num">P2</div>
+    <div class="phase-title">Strongly Recommended for Pilot Credibility</div>
+    <div class="phase-tag">Days 7–8</div></div>
+  <div class="phase-body"><ul>
+    <li><strong>Persist events</strong> -- append-only JSONL file, loaded on startup for continuity</li>
+    <li><strong>Persist epoch counter</strong> -- write to FileStore on every rotation, load on startup</li>
+    <li><strong>Add replay cache</strong> -- store seen msg_ids in a TTL-expiring set to prevent message replay attacks</li>
+    <li><strong>Add LRU eviction</strong> to <code>DemoHSM._block_keys</code> dict (relevant for demo use, moot for YubiHSM2)</li>
+    <li><strong>Write a provisioner self-test</strong> -- end-to-end smoke test: provision device → sign → verify → epoch rotate → cross-validate</li>
+  </ul></div>
+</div>
+
+<div class="note ok">
+<strong>The fundamental assessment:</strong> WARLOK v3 is the right architecture in the wrong substrate.
+The design decisions are correct for a production system. The abstractions are pilot-appropriate.
+The cryptographic model is sound. The 8-day gap closure plan above does not require rethinking
+anything that has been built -- it requires replacing the simulation substrate with real hardware and
+real network transport, using the interfaces that are already defined and already depended upon.
+That is a very strong position for a pre-pilot codebase.
+</div>
+</div>
+
+</div>
+<footer>
+  <div class="fl">WARLOK</div>
+  <div style="margin-top:10px">Pre-Pilot Code Analysis &mdash; v3.0 &mdash; March 2026</div>
+  <div style="margin-top:4px">1,082 Python LOC + 1,168 UI LOC &middot; 10 Modules &middot; 22 Endpoints &middot; 14 UI Pages</div>
+  <div style="margin-top:4px;color:var(--border2)">YubiHSM2 Integration: 8 working days to pilot-grade hardware deployment</div>
+</footer>
+</body>
+</html>

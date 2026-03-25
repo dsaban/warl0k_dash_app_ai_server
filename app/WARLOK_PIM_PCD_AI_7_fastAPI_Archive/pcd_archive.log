@@ -1,0 +1,129 @@
+2026-03-21T13:55:28 | INFO     | [ARCHIVE_MGR   ] INIT                   hsm_key=0d3e3f22…1eb9c4
+2026-03-21T13:55:47 | INFO     | [EPOCH_ARCHIVE ] ARCHIVE                epoch=0 tier=HOT short=55157ea7…fe08ca
+2026-03-21T13:55:47 | INFO     | [ARCHIVE_MGR   ] EPOCH_ARCHIVED         epoch=0 tier=HOT
+2026-03-21T13:56:26 | INFO     | [ARCHIVE_MGR   ] INIT                   hsm_key=0d3e3f22…1eb9c4
+2026-03-21T13:57:35 | INFO     | [EPOCH_ARCHIVE ] POLICY_UPDATE          max_keys=50 hot=5 warm=20 max_age_days=0.0
+2026-03-21T13:57:35 | INFO     | [DATA_ARCHIVE  ] POLICY_UPDATE          max_records=10000 max_age_days=365.0 max_bytes=0
+2026-03-21T13:57:35 | INFO     | [ARCHIVE_MGR   ] POLICY_UPDATED         max_keys=50 hot=5 warm=20 max_records=10000
+2026-03-21T13:58:11 | INFO     | [EPOCH_ARCHIVE ] ARCHIVE                epoch=0 tier=HOT short=8cdae924…cf589d
+2026-03-21T13:58:11 | INFO     | [ARCHIVE_MGR   ] EPOCH_ARCHIVED         epoch=0 tier=HOT
+2026-03-21T13:58:14 | WARNING  | [EPOCH_ARCHIVE ] RETRIEVE_MISS          epoch=1 — evicted or never archived
+2026-03-21T13:58:14 | WARNING  | [ARCHIVE_MGR   ] EPOCH_MISS             epoch=1 — beyond archive bounds or never archived
+2026-03-21T13:58:20 | WARNING  | [EPOCH_ARCHIVE ] RETRIEVE_MISS          epoch=1 — evicted or never archived
+2026-03-21T13:58:20 | WARNING  | [ARCHIVE_MGR   ] EPOCH_MISS             epoch=1 — beyond archive bounds or never archived
+2026-03-21T14:00:37 | INFO     | [ARCHIVE_MGR   ] INIT                   hsm_key=0d3e3f22…1eb9c4
+2026-03-21T14:01:17 | INFO     | [ARCHIVE_MGR   ] INIT                   hsm_key=0d3e3f22…1eb9c4
+2026-03-21T14:01:23 | INFO     | [ARCHIVE_MGR   ] INIT                   hsm_key=0d3e3f22…1eb9c4
+2026-03-21T16:41:51 | INFO     | [DATA_ARCHIVE  ] ARCHIVE_NODE           node=0fabda32…f2324f reason=MANUAL_ARCHIVE
+2026-03-21T16:41:56 | INFO     | [DATA_ARCHIVE  ] RESTORE_NODE           node=0fabda32…f2324f
+2026-03-21T16:42:41 | INFO     | [ARCHIVE_MGR   ] INIT                   hsm_key=0d3e3f22…1eb9c4
+2026-03-21T16:42:53 | INFO     | [EPOCH_ARCHIVE ] ARCHIVE                epoch=0 tier=HOT short=6ceeb737…aa2dcb
+2026-03-21T16:42:53 | INFO     | [ARCHIVE_MGR   ] EPOCH_ARCHIVED         epoch=0 tier=HOT
+2026-03-21T17:37:33 | INFO     | [ARCHIVE_MGR   ] INIT                   hsm_key=0d3e3f22…1eb9c4
+2026-03-21T17:38:00 | INFO     | [EPOCH_ARCHIVE ] ARCHIVE                epoch=0 tier=HOT short=5a18d801…40963c
+2026-03-21T17:38:00 | INFO     | [ARCHIVE_MGR   ] EPOCH_ARCHIVED         epoch=0 tier=HOT
+2026-03-21T17:39:06 | INFO     | [ARCHIVE_MGR   ] INIT                   hsm_key=0d3e3f22…1eb9c4
+2026-03-21T17:40:09 | INFO     | [ARCHIVE_MGR   ] INIT                   hsm_key=0d3e3f22…1eb9c4
+2026-03-21T17:40:19 | INFO     | [ARCHIVE_MGR   ] INIT                   hsm_key=0d3e3f22…1eb9c4
+2026-03-21T17:40:21 | INFO     | [ARCHIVE_MGR   ] INIT                   hsm_key=0d3e3f22…1eb9c4
+2026-03-21T17:41:08 | INFO     | [EPOCH_ARCHIVE ] ARCHIVE                epoch=0 tier=HOT short=0bd6f5ba…ed927d
+2026-03-21T17:41:08 | INFO     | [ARCHIVE_MGR   ] EPOCH_ARCHIVED         epoch=0 tier=HOT
+2026-03-21T17:41:58 | WARNING  | [EPOCH_ARCHIVE ] RETRIEVE_MISS          epoch=1 — evicted or never archived
+2026-03-21T17:41:58 | WARNING  | [ARCHIVE_MGR   ] EPOCH_MISS             epoch=1 — beyond archive bounds or never archived
+2026-03-21T17:42:28 | INFO     | [ARCHIVE_MGR   ] INIT                   hsm_key=0d3e3f22…1eb9c4
+2026-03-21T17:42:37 | INFO     | [ARCHIVE_MGR   ] INIT                   hsm_key=0d3e3f22…1eb9c4
+2026-03-21T17:42:58 | INFO     | [EPOCH_ARCHIVE ] ARCHIVE                epoch=0 tier=HOT short=8cab43ea…75eba0
+2026-03-21T17:42:58 | INFO     | [ARCHIVE_MGR   ] EPOCH_ARCHIVED         epoch=0 tier=HOT
+2026-03-21T17:43:57 | INFO     | [ARCHIVE_MGR   ] INIT                   hsm_key=0d3e3f22…1eb9c4
+2026-03-21T17:55:05 | INFO     | [EPOCH_ARCHIVE ] ARCHIVE                epoch=0 tier=HOT short=172ac8cc…dc5c4e
+2026-03-21T17:55:05 | INFO     | [ARCHIVE_MGR   ] EPOCH_ARCHIVED         epoch=0 tier=HOT
+2026-03-21T17:56:32 | INFO     | [EPOCH_ARCHIVE ] ARCHIVE                epoch=1 tier=HOT short=efce0a72…1a8d5a
+2026-03-21T17:56:32 | INFO     | [ARCHIVE_MGR   ] EPOCH_ARCHIVED         epoch=1 tier=HOT
+2026-03-21T17:56:40 | INFO     | [EPOCH_ARCHIVE ] RETRIEVE_HOT           epoch=1
+2026-03-21T19:08:49 | INFO     | [EPOCH_ARCHIVE ] ARCHIVE                epoch=2 tier=HOT short=390564f4…e61e6a
+2026-03-21T19:08:49 | INFO     | [ARCHIVE_MGR   ] EPOCH_ARCHIVED         epoch=2 tier=HOT
+2026-03-21T19:08:51 | INFO     | [EPOCH_ARCHIVE ] RETRIEVE_HOT           epoch=2
+2026-03-21T19:10:23 | INFO     | [EPOCH_ARCHIVE ] ARCHIVE                epoch=3 tier=HOT short=508dbc52…1a3ecd
+2026-03-21T19:10:23 | INFO     | [ARCHIVE_MGR   ] EPOCH_ARCHIVED         epoch=3 tier=HOT
+2026-03-21T19:10:25 | INFO     | [EPOCH_ARCHIVE ] RETRIEVE_HOT           epoch=3
+2026-03-21T19:11:18 | INFO     | [DATA_ARCHIVE  ] ARCHIVE_NODE           node=bf29a8df…8ef028 reason=MANUAL_ARCHIVE
+2026-03-21T19:11:46 | INFO     | [DATA_ARCHIVE  ] RESTORE_NODE           node=bf29a8df…8ef028
+2026-03-22T01:08:28 | INFO     | [ARCHIVE_MGR   ] INIT                   hsm_key=0d3e3f22…1eb9c4
+2026-03-22T01:09:32 | WARNING  | [EPOCH_ARCHIVE ] RETRIEVE_MISS          epoch=4 — evicted or never archived
+2026-03-22T01:09:32 | WARNING  | [ARCHIVE_MGR   ] EPOCH_MISS             epoch=4 — beyond archive bounds or never archived
+2026-03-22T01:09:32 | WARNING  | [EPOCH_ARCHIVE ] RETRIEVE_MISS          epoch=4 — evicted or never archived
+2026-03-22T01:09:32 | WARNING  | [ARCHIVE_MGR   ] EPOCH_MISS             epoch=4 — beyond archive bounds or never archived
+2026-03-22T01:10:21 | WARNING  | [EPOCH_ARCHIVE ] RETRIEVE_MISS          epoch=0 — evicted or never archived
+2026-03-22T01:10:21 | WARNING  | [ARCHIVE_MGR   ] EPOCH_MISS             epoch=0 — beyond archive bounds or never archived
+2026-03-22T01:10:52 | WARNING  | [EPOCH_ARCHIVE ] RETRIEVE_MISS          epoch=0 — evicted or never archived
+2026-03-22T01:10:52 | WARNING  | [ARCHIVE_MGR   ] EPOCH_MISS             epoch=0 — beyond archive bounds or never archived
+2026-03-22T01:11:38 | INFO     | [ARCHIVE_MGR   ] INIT                   hsm_key=0d3e3f22…1eb9c4
+2026-03-22T01:11:48 | INFO     | [EPOCH_ARCHIVE ] ARCHIVE                epoch=0 tier=HOT short=842f5a5a…570b6b
+2026-03-22T01:11:48 | INFO     | [ARCHIVE_MGR   ] EPOCH_ARCHIVED         epoch=0 tier=HOT
+2026-03-22T01:12:11 | INFO     | [EPOCH_ARCHIVE ] RETRIEVE_HOT           epoch=0
+2026-03-22T01:12:37 | INFO     | [EPOCH_ARCHIVE ] RETRIEVE_HOT           epoch=0
+2026-03-22T01:13:15 | INFO     | [EPOCH_ARCHIVE ] ARCHIVE                epoch=1 tier=HOT short=dc3233f7…1f943c
+2026-03-22T01:13:15 | INFO     | [ARCHIVE_MGR   ] EPOCH_ARCHIVED         epoch=1 tier=HOT
+2026-03-22T01:13:17 | INFO     | [EPOCH_ARCHIVE ] RETRIEVE_HOT           epoch=1
+2026-03-22T01:13:33 | INFO     | [EPOCH_ARCHIVE ] RETRIEVE_HOT           epoch=0
+2026-03-22T01:13:49 | INFO     | [EPOCH_ARCHIVE ] RETRIEVE_HOT           epoch=1
+2026-03-22T01:13:49 | INFO     | [EPOCH_ARCHIVE ] RETRIEVE_HOT           epoch=1
+2026-03-22T01:13:54 | INFO     | [EPOCH_ARCHIVE ] RETRIEVE_HOT           epoch=1
+2026-03-22T01:13:54 | INFO     | [EPOCH_ARCHIVE ] RETRIEVE_HOT           epoch=1
+2026-03-22T01:14:27 | WARNING  | [EPOCH_ARCHIVE ] RETRIEVE_MISS          epoch=2 — evicted or never archived
+2026-03-22T01:14:27 | WARNING  | [ARCHIVE_MGR   ] EPOCH_MISS             epoch=2 — beyond archive bounds or never archived
+2026-03-22T01:15:19 | INFO     | [EPOCH_ARCHIVE ] RETRIEVE_HOT           epoch=1
+2026-03-22T01:15:19 | INFO     | [EPOCH_ARCHIVE ] RETRIEVE_HOT           epoch=1
+2026-03-22T01:15:34 | WARNING  | [EPOCH_ARCHIVE ] RETRIEVE_MISS          epoch=2 — evicted or never archived
+2026-03-22T01:15:34 | WARNING  | [ARCHIVE_MGR   ] EPOCH_MISS             epoch=2 — beyond archive bounds or never archived
+2026-03-22T01:15:34 | WARNING  | [EPOCH_ARCHIVE ] RETRIEVE_MISS          epoch=2 — evicted or never archived
+2026-03-22T01:15:34 | WARNING  | [ARCHIVE_MGR   ] EPOCH_MISS             epoch=2 — beyond archive bounds or never archived
+2026-03-22T01:15:51 | INFO     | [EPOCH_ARCHIVE ] RETRIEVE_HOT           epoch=1
+2026-03-22T01:15:51 | INFO     | [EPOCH_ARCHIVE ] RETRIEVE_HOT           epoch=1
+2026-03-22T01:16:20 | INFO     | [ARCHIVE_MGR   ] INIT                   hsm_key=0d3e3f22…1eb9c4
+2026-03-22T01:16:28 | INFO     | [EPOCH_ARCHIVE ] ARCHIVE                epoch=0 tier=HOT short=9c381c50…d91b02
+2026-03-22T01:16:28 | INFO     | [ARCHIVE_MGR   ] EPOCH_ARCHIVED         epoch=0 tier=HOT
+2026-03-22T01:17:37 | WARNING  | [EPOCH_ARCHIVE ] RETRIEVE_MISS          epoch=1 — evicted or never archived
+2026-03-22T01:17:37 | WARNING  | [ARCHIVE_MGR   ] EPOCH_MISS             epoch=1 — beyond archive bounds or never archived
+2026-03-22T01:17:37 | WARNING  | [EPOCH_ARCHIVE ] RETRIEVE_MISS          epoch=1 — evicted or never archived
+2026-03-22T01:17:37 | WARNING  | [ARCHIVE_MGR   ] EPOCH_MISS             epoch=1 — beyond archive bounds or never archived
+2026-03-22T08:33:02 | INFO     | [ARCHIVE_MGR   ] INIT                   hsm_key=0d3e3f22…1eb9c4
+2026-03-22T08:33:28 | WARNING  | [EPOCH_ARCHIVE ] RETRIEVE_MISS          epoch=1 — evicted or never archived
+2026-03-22T08:33:28 | WARNING  | [ARCHIVE_MGR   ] EPOCH_MISS             epoch=1 — beyond archive bounds or never archived
+2026-03-22T08:33:28 | WARNING  | [EPOCH_ARCHIVE ] RETRIEVE_MISS          epoch=1 — evicted or never archived
+2026-03-22T08:33:28 | WARNING  | [ARCHIVE_MGR   ] EPOCH_MISS             epoch=1 — beyond archive bounds or never archived
+2026-03-22T08:33:40 | WARNING  | [EPOCH_ARCHIVE ] RETRIEVE_MISS          epoch=2 — evicted or never archived
+2026-03-22T08:33:40 | WARNING  | [ARCHIVE_MGR   ] EPOCH_MISS             epoch=2 — beyond archive bounds or never archived
+2026-03-22T08:33:40 | WARNING  | [EPOCH_ARCHIVE ] RETRIEVE_MISS          epoch=2 — evicted or never archived
+2026-03-22T08:33:40 | WARNING  | [ARCHIVE_MGR   ] EPOCH_MISS             epoch=2 — beyond archive bounds or never archived
+2026-03-22T08:33:47 | INFO     | [ARCHIVE_MGR   ] INIT                   hsm_key=0d3e3f22…1eb9c4
+2026-03-22T08:33:52 | INFO     | [EPOCH_ARCHIVE ] ARCHIVE                epoch=0 tier=HOT short=51ecf6fe…86caf4
+2026-03-22T08:33:52 | INFO     | [ARCHIVE_MGR   ] EPOCH_ARCHIVED         epoch=0 tier=HOT
+2026-03-22T08:33:54 | INFO     | [EPOCH_ARCHIVE ] ARCHIVE                epoch=1 tier=HOT short=ee50e5d5…5105a7
+2026-03-22T08:33:54 | INFO     | [ARCHIVE_MGR   ] EPOCH_ARCHIVED         epoch=1 tier=HOT
+2026-03-22T08:33:56 | INFO     | [EPOCH_ARCHIVE ] RETRIEVE_HOT           epoch=1
+2026-03-22T08:34:22 | WARNING  | [EPOCH_ARCHIVE ] RETRIEVE_MISS          epoch=2 — evicted or never archived
+2026-03-22T08:34:22 | WARNING  | [ARCHIVE_MGR   ] EPOCH_MISS             epoch=2 — beyond archive bounds or never archived
+2026-03-22T08:34:22 | WARNING  | [EPOCH_ARCHIVE ] RETRIEVE_MISS          epoch=2 — evicted or never archived
+2026-03-22T08:34:22 | WARNING  | [ARCHIVE_MGR   ] EPOCH_MISS             epoch=2 — beyond archive bounds or never archived
+2026-03-22T08:34:33 | INFO     | [ARCHIVE_MGR   ] INIT                   hsm_key=0d3e3f22…1eb9c4
+2026-03-22T08:34:46 | INFO     | [EPOCH_ARCHIVE ] ARCHIVE                epoch=0 tier=HOT short=1c41c557…152036
+2026-03-22T08:34:46 | INFO     | [ARCHIVE_MGR   ] EPOCH_ARCHIVED         epoch=0 tier=HOT
+2026-03-22T08:34:57 | INFO     | [EPOCH_ARCHIVE ] ARCHIVE                epoch=1 tier=HOT short=8d01758b…30d41f
+2026-03-22T08:34:57 | INFO     | [ARCHIVE_MGR   ] EPOCH_ARCHIVED         epoch=1 tier=HOT
+2026-03-22T08:35:00 | INFO     | [EPOCH_ARCHIVE ] RETRIEVE_HOT           epoch=1
+2026-03-22T08:35:17 | INFO     | [EPOCH_ARCHIVE ] RETRIEVE_HOT           epoch=1
+2026-03-22T08:35:17 | INFO     | [EPOCH_ARCHIVE ] RETRIEVE_HOT           epoch=1
+2026-03-22T08:39:18 | INFO     | [EPOCH_ARCHIVE ] RETRIEVE_HOT           epoch=0
+2026-03-22T08:39:32 | INFO     | [ARCHIVE_MGR   ] INIT                   hsm_key=0d3e3f22…1eb9c4
+2026-03-22T08:39:48 | INFO     | [EPOCH_ARCHIVE ] ARCHIVE                epoch=0 tier=HOT short=04903185…9d0e75
+2026-03-22T08:39:48 | INFO     | [ARCHIVE_MGR   ] EPOCH_ARCHIVED         epoch=0 tier=HOT
+2026-03-22T08:39:53 | INFO     | [EPOCH_ARCHIVE ] ARCHIVE                epoch=1 tier=HOT short=64c919d0…ad4d97
+2026-03-22T08:39:53 | INFO     | [ARCHIVE_MGR   ] EPOCH_ARCHIVED         epoch=1 tier=HOT
+2026-03-22T08:40:20 | INFO     | [EPOCH_ARCHIVE ] RETRIEVE_HOT           epoch=0
+2026-03-22T08:40:40 | WARNING  | [EPOCH_ARCHIVE ] RETRIEVE_MISS          epoch=2 — evicted or never archived
+2026-03-22T08:40:40 | WARNING  | [ARCHIVE_MGR   ] EPOCH_MISS             epoch=2 — beyond archive bounds or never archived
+2026-03-22T08:40:40 | WARNING  | [EPOCH_ARCHIVE ] RETRIEVE_MISS          epoch=2 — evicted or never archived
+2026-03-22T08:40:40 | WARNING  | [ARCHIVE_MGR   ] EPOCH_MISS             epoch=2 — beyond archive bounds or never archived
+2026-03-22T08:40:52 | INFO     | [EPOCH_ARCHIVE ] RETRIEVE_HOT           epoch=1
+2026-03-22T08:40:52 | INFO     | [EPOCH_ARCHIVE ] RETRIEVE_HOT           epoch=1

@@ -1,0 +1,7 @@
+cryptography
+fastapi
+uvicorn
+streamlit
+requests
+networkx
+matplotlib

@@ -1,0 +1,81 @@
+{
+  "nodes": {
+    "65ea58d572ff42d4d6cb29be": {
+      "node_id": "65ea58d572ff42d4d6cb29be",
+      "label": "sensor-batch-001",
+      "actor": "NODE-ALPHA",
+      "classification": "CONFIDENTIAL",
+      "epoch": 0,
+      "window_pos": 0,
+      "chain_counter": 0,
+      "timestamp": 1774082931.5800633,
+      "nonce": "d9fc169931324b9d",
+      "cipher_payload": "b9c03912ab35d2cf8f5c9256b59d51bb73e7c103930eda7bf7da801e9a665399ab966f4de416bed88b5d9e42bbcc55a862e1c154db49962eab83df4cda665b",
+      "payload_hash": "4dce92e83489e0dcbd0e8bd19d96349191a2d6cf1cfad69615bbc3c2097f5ef5",
+      "cipher_hash": "536299a0036dd665da6b2e2bcf36f3a39be4001bd2170703bfd43925cd0dc2b1",
+      "prev_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+      "env_hash": "6a4e48561af49d7be334cd397932a55e1406210ec8ff90e5ccb84e6cc6ae9900",
+      "temporal_seal": "c01ed6daa6a499bada788bbde17ddd55ff61fe09c0ab39eb7221b8f05dbc4d9e",
+      "chain_seal": "93913ab2116624af89d3f2d70dfd52a6174628e41e2f90edb2ae158609a4ab91",
+      "feature_fp": "4c96593a909548337ae2059c518679fb2778859ab047c1a5fd6809cf5630aa6e",
+      "zk_proof": "64dcf265fcfcd3bf7ac4309c4871d75144b342cd4208b443061170eb42c2d2bb",
+      "ai_score": 0.542715,
+      "ai_tier": "COOL",
+      "ai_features": {
+        "f1": 0.544701,
+        "f2": 0.5,
+        "f3": 0.409624,
+        "f4": 0.0,
+        "f5": 0.0,
+        "f6": 0,
+        "f6n": 0.0
+      },
+      "ai_gates": [],
+      "latency_ms": 0.442,
+      "status": "ACTIVE",
+      "superseded_by": ""
+    },
+    "503746bd18fdef2f8e7089f3": {
+      "node_id": "503746bd18fdef2f8e7089f3",
+      "label": "sensor-batch-001",
+      "actor": "NODE-ALPHA",
+      "classification": "CONFIDENTIAL",
+      "epoch": 0,
+      "window_pos": 1,
+      "chain_counter": 1,
+      "timestamp": 1774082989.8016233,
+      "nonce": "e739ff39ceb37dde",
+      "cipher_payload": "88020c3888f25c6aaeb32cb26f4c4f2d80890105a82085a64eb4463ee279adc39a545a67c7d1307daab220a6611d4b3e918f0152e067c9f312ed196ca279f48f87535a67d4b54a62adb532ba735f42",
+      "payload_hash": "0772482b62c863ece55d042c5904317afe46925165e6b5304c3d66502386f899",
+      "cipher_hash": "0625d441c8d618ba891743d7afb79deb426a9a8f6d8c29b60f469fbe5c90598e",
+      "prev_hash": "6a4e48561af49d7be334cd397932a55e1406210ec8ff90e5ccb84e6cc6ae9900",
+      "env_hash": "2a55ed66893f8715945ad273eb444652b0e4ed8754364d6c86c5ed6ac848913e",
+      "temporal_seal": "8f9d7d2d0f84bad90738089a82bc8d4bc47df1ad1d6b5a2d820ba9c1bbf32154",
+      "chain_seal": "eecc774ed39c7f4133f2dcfe9a9ad5391974e30d60e14a69658c982c857ab9b2",
+      "feature_fp": "274e0974702dced21d896969f7e46fa9779d393409ad951e4781b898b379ed8e",
+      "zk_proof": "fef0b388f6c44a777f78ab01bfcab8a76f44c66f5c64c67d322aa5e4c82e8cf2",
+      "ai_score": 0.542661,
+      "ai_tier": "QUARANTINE",
+      "ai_features": {
+        "f1": 0.549585,
+        "f2": 0.521709,
+        "f3": 0.017147,
+        "f4": 0.25,
+        "f5": 0.05,
+        "f6": 1,
+        "f6n": 0.01
+      },
+      "ai_gates": [
+        "TIMING_ANOMALY(0.017<0.2)"
+      ],
+      "latency_ms": 1.542,
+      "status": "ACTIVE",
+      "superseded_by": ""
+    }
+  },
+  "meta": {
+    "created": 1774082903.2440631,
+    "ops": 3,
+    "last_updated": 1774082989.8021865
+  }
+}

@@ -1,0 +1,57 @@
+# ╔══════════════════════════════════════════════════════════════════════════╗
+# ║  PIM-PCD  ·  NEURAL RATCHET CHAIN  ·  WARLOK UI                        ║
+# ║  Requirements File — pinned for reproducible installation               ║
+# ╚══════════════════════════════════════════════════════════════════════════╝
+#
+# INSTALLATION
+# ─────────────────────────────────────────────────────────────────────────
+#   pip install -r requirements.txt
+#
+# VERIFIED ON
+#   Python  3.10 · 3.11 · 3.12
+#   OS      Linux / macOS / Windows (WSL2 recommended on Windows)
+#
+# RUNTIME NOTES
+#   All cryptographic primitives (SHA-256, HMAC-SHA-256) use Python stdlib
+#   only — hashlib + hmac.  No external crypto library is required or used.
+#   Flask serves the WARLOK UI on http://localhost:5050
+#   NumPy provides the weighted linear inference for the nano-AI model.
+# ─────────────────────────────────────────────────────────────────────────
+
+# ── WEB FRAMEWORK ────────────────────────────────────────────────────────
+flask==3.1.2
+    # REST API + SSE + HTML template rendering
+    # Pulls in: werkzeug, jinja2, click, itsdangerous, markupsafe
+
+# ── FLASK DEPENDENCIES (pinned for reproducibility) ──────────────────────
+werkzeug==3.1.5
+    # WSGI utilities, routing, request/response handling
+jinja2==3.1.6
+    # Template rendering for the embedded HTML UI
+click==8.3.1
+    # Flask CLI — used by `flask run`
+itsdangerous==2.2.0
+    # Cryptographic signing for Flask sessions
+markupsafe==3.0.3
+    # HTML escaping — dependency of Jinja2
+
+# ── NANO-AI MODEL ─────────────────────────────────────────────────────────
+numpy==2.4.2
+    # Weighted linear inference: score = sigmoid(dot(W, F) + b)
+    # F = [entropy, actor_score, timing_align, window_pos, depth, counter]
+    # W = [0.22, 0.28, 0.15, 0.18, 0.12, 0.05]  (public model weights)
+
+# ── STDLIB (no install required — included with Python 3.10+) ─────────────
+#   hashlib     SHA-256 for envelope hash, payload hash, cipher hash
+#   hmac        HMAC-SHA-256 for K(t,n), temporal_seal, chain_seal, ZK proof
+#   json        PCD Envelope serialisation / API request-response
+#   math        sigmoid activation: 1 / (1 + exp(-x))
+#   os          Cryptographically secure random bytes: os.urandom(n)
+#   queue       Thread-safe peer log drain queue
+#   threading   Thread-safe DagStore lock; peer log collection
+#   time        Timing anchor, inter-event Δt, log timestamps
+#   dataclasses PcdEnvelope, AIFeatures, SideConfig dataclass definitions
+#   typing      Type hints throughout (Dict, List, Optional, Tuple)
+#   enum        BlockType enum (DATA / PROOF / FEATURES / ACK)
+#   socket      Reserved for TCP P2P streaming (use_socket=True path)
+#   struct      4-byte length prefix for TCP block framing

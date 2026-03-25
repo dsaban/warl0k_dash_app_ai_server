@@ -1,0 +1,1359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PIM-PCD · Nano-AI Chain Engine</title>
+<style>
+/* ── FONTS ── */
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg0:   #03060f;
+  --bg1:   #070d1a;
+  --bg2:   #0c1528;
+  --bg3:   #111e35;
+  --bg4:   #162441;
+  --panel: #0d1a2e;
+  --border:#1a2e4a;
+  --brite: #1e3a5f;
+
+  --cyn:   #00e5ff;
+  --cyn2:  #00b8d9;
+  --grn:   #00e676;
+  --grn2:  #00c853;
+  --amb:   #ffab00;
+  --amb2:  #ff8f00;
+  --red:   #ff1744;
+  --red2:  #d50000;
+  --prp:   #e040fb;
+  --prp2:  #aa00ff;
+  --wht:   #e8edf5;
+  --gry:   #4a6080;
+  --gry2:  #2a3a55;
+
+  --font-mono: 'Share Tech Mono', monospace;
+  --font-hdr:  'Orbitron', sans-serif;
+  --font-ui:   'Rajdhani', sans-serif;
+}
+
+* { box-sizing:border-box; margin:0; padding:0; }
+
+body {
+  background: var(--bg0);
+  color: var(--wht);
+  font-family: var(--font-ui);
+  font-size: 15px;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── SCANLINES overlay ── */
+body::before {
+  content:'';
+  position:fixed; inset:0; z-index:0; pointer-events:none;
+  background: repeating-linear-gradient(
+    0deg, transparent, transparent 2px,
+    rgba(0,229,255,.015) 2px, rgba(0,229,255,.015) 4px
+  );
+}
+
+/* ── HEADER ── */
+header {
+  background: linear-gradient(135deg, #020810 0%, #071428 50%, #020810 100%);
+  border-bottom: 1px solid var(--cyn);
+  padding: 18px 28px;
+  display: flex; align-items:center; justify-content:space-between;
+  position: sticky; top:0; z-index:100;
+  box-shadow: 0 0 30px rgba(0,229,255,.12);
+}
+.logo {
+  font-family: var(--font-hdr);
+  font-size: 22px; font-weight:900;
+  color: var(--cyn);
+  letter-spacing:.15em;
+  text-shadow: 0 0 18px rgba(0,229,255,.6);
+}
+.logo span { color: var(--prp); }
+.tagline {
+  font-family: var(--font-mono);
+  font-size: 11px; color: var(--gry);
+  letter-spacing:.08em;
+}
+.status-dot {
+  display:flex; align-items:center; gap:8px;
+  font-family:var(--font-mono); font-size:11px; color:var(--gry);
+}
+.dot {
+  width:8px; height:8px; border-radius:50%;
+  background:var(--grn);
+  box-shadow:0 0 6px var(--grn);
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+@keyframes pulse-dot {
+  0%,100%{opacity:1} 50%{opacity:.4}
+}
+
+/* ── LAYOUT ── */
+.app { display:grid; grid-template-columns:320px 1fr; gap:0; min-height:calc(100vh - 57px); position:relative; z-index:1; }
+
+/* ── SIDEBAR ── */
+.sidebar {
+  background: var(--bg1);
+  border-right: 1px solid var(--border);
+  padding: 20px 16px;
+  display: flex; flex-direction:column; gap:20px;
+  overflow-y: auto;
+}
+
+.sidebar-section h3 {
+  font-family: var(--font-mono);
+  font-size: 11px; color: var(--gry);
+  letter-spacing:.12em; text-transform:uppercase;
+  margin-bottom:10px;
+  padding-bottom:6px;
+  border-bottom:1px solid var(--border);
+}
+
+/* Labels + inputs */
+label {
+  display:block; margin-bottom:4px;
+  font-size:12px; color:var(--gry);
+  font-family:var(--font-mono);
+  letter-spacing:.05em;
+}
+input[type=text], textarea, select {
+  width:100%;
+  background:var(--bg3);
+  border:1px solid var(--border);
+  color:var(--wht);
+  font-family:var(--font-mono);
+  font-size:12px;
+  padding:8px 10px;
+  border-radius:4px;
+  outline:none;
+  transition:border-color .2s;
+}
+input[type=text]:focus, textarea:focus, select:focus {
+  border-color: var(--cyn2);
+  box-shadow: 0 0 8px rgba(0,229,255,.15);
+}
+textarea { resize:vertical; min-height:80px; }
+select option { background:var(--bg3); }
+
+.input-row { margin-bottom:12px; }
+
+/* ── BUTTONS ── */
+.btn {
+  display:block; width:100%;
+  padding:10px 14px;
+  border:none; border-radius:4px;
+  font-family:var(--font-hdr);
+  font-size:12px; font-weight:700;
+  letter-spacing:.1em; text-transform:uppercase;
+  cursor:pointer;
+  transition:all .2s;
+  margin-bottom:8px;
+  position:relative; overflow:hidden;
+}
+.btn::after {
+  content:'';
+  position:absolute; inset:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.06),transparent);
+  transform:translateX(-100%);
+  transition:transform .4s;
+}
+.btn:hover::after { transform:translateX(100%); }
+
+.btn-seal   { background:linear-gradient(135deg,#003d4d,#006685); color:var(--cyn); border:1px solid var(--cyn2); }
+.btn-verify { background:linear-gradient(135deg,#003d1a,#006830); color:var(--grn); border:1px solid var(--grn2); }
+.btn-tamper { background:linear-gradient(135deg,#4d0000,#880000); color:var(--red); border:1px solid var(--red2); }
+.btn-chain  { background:linear-gradient(135deg,#1a003d,#380085); color:var(--prp); border:1px solid var(--prp2); }
+.btn-reset  { background:linear-gradient(135deg,#1a1a1a,#2e2e2e); color:var(--gry); border:1px solid var(--gry2); }
+
+.btn:hover { transform:translateY(-1px); box-shadow:0 4px 16px rgba(0,0,0,.4); }
+.btn:active { transform:translateY(0); }
+.btn:disabled { opacity:.4; cursor:not-allowed; transform:none; }
+
+/* ── AI SCORE WIDGET ── */
+.ai-widget {
+  background:var(--bg3);
+  border:1px solid var(--border);
+  border-radius:6px;
+  padding:14px;
+}
+.ai-widget-title {
+  font-family:var(--font-hdr);
+  font-size:10px; color:var(--cyn);
+  letter-spacing:.12em; margin-bottom:12px;
+}
+.feature-bar {
+  display:flex; align-items:center; gap:8px;
+  margin-bottom:7px;
+}
+.feature-label {
+  width:60px; font-family:var(--font-mono);
+  font-size:10px; color:var(--gry);
+  flex-shrink:0;
+}
+.bar-track {
+  flex:1; height:5px; background:var(--bg2);
+  border-radius:3px; overflow:hidden;
+}
+.bar-fill {
+  height:100%; border-radius:3px;
+  transition:width .5s cubic-bezier(.4,0,.2,1);
+  background: linear-gradient(90deg,var(--cyn2),var(--cyn));
+}
+.bar-fill.warn { background:linear-gradient(90deg,var(--amb2),var(--amb)); }
+.bar-fill.bad  { background:linear-gradient(90deg,var(--red2),var(--red)); }
+.feature-val {
+  width:44px; text-align:right;
+  font-family:var(--font-mono); font-size:10px; color:var(--wht);
+}
+.score-big {
+  text-align:center; margin-top:12px; padding-top:10px;
+  border-top:1px solid var(--border);
+}
+.score-num {
+  font-family:var(--font-hdr); font-size:32px; font-weight:900;
+  transition:color .3s;
+}
+.score-tier {
+  font-family:var(--font-mono); font-size:11px;
+  letter-spacing:.1em; margin-top:2px;
+}
+.tier-HOT        { color:var(--grn);  }
+.tier-WARM       { color:var(--cyn);  }
+.tier-COOL       { color:var(--amb);  }
+.tier-QUARANTINE { color:var(--red);  }
+
+/* ── MAIN CONTENT ── */
+.main {
+  background: var(--bg0);
+  padding: 20px 24px;
+  overflow-y: auto;
+  display:flex; flex-direction:column; gap:20px;
+}
+
+/* ── STEP TRACE PANEL ── */
+.trace-panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius:6px;
+  overflow:hidden;
+}
+.trace-header {
+  background:var(--bg3);
+  padding:10px 16px;
+  display:flex; align-items:center; justify-content:space-between;
+  border-bottom:1px solid var(--border);
+}
+.trace-header-title {
+  font-family:var(--font-hdr);
+  font-size:11px; color:var(--cyn);
+  letter-spacing:.12em;
+}
+.trace-body {
+  padding:0;
+  font-family:var(--font-mono);
+  font-size:12px;
+  max-height:460px;
+  overflow-y:auto;
+}
+.trace-body::-webkit-scrollbar { width:5px; }
+.trace-body::-webkit-scrollbar-track { background:var(--bg2); }
+.trace-body::-webkit-scrollbar-thumb { background:var(--brite); border-radius:3px; }
+
+.step-entry {
+  padding:10px 16px;
+  border-bottom:1px solid rgba(26,46,74,.5);
+  animation:fade-in .25s ease;
+}
+@keyframes fade-in { from{opacity:0;transform:translateY(4px)} to{opacity:1;transform:none} }
+
+.step-num {
+  display:inline-block;
+  background:var(--bg4); border:1px solid var(--brite);
+  padding:1px 7px; border-radius:3px;
+  color:var(--cyn); font-size:10px;
+  margin-right:8px;
+}
+.step-title { color:var(--wht); font-weight:bold; }
+.step-detail { color:var(--gry); font-size:11px; margin-top:5px; padding-left:48px; line-height:1.7; }
+.kv-row { display:flex; gap:0; margin-top:3px; padding-left:48px; }
+.kv-key  { width:180px; flex-shrink:0; color:var(--gry); font-size:11px; }
+.kv-val  { color:var(--cyn); font-size:11px; word-break:break-all; }
+.kv-val.red  { color:var(--red); }
+.kv-val.grn  { color:var(--grn); }
+.kv-val.amb  { color:var(--amb); }
+.kv-val.gry  { color:var(--gry); }
+.kv-val.prp  { color:var(--prp); }
+
+.result-ok  { background:rgba(0,200,83,.07);  border-left:3px solid var(--grn); padding:6px 12px; margin:0 0 0 -1px; color:var(--grn); font-size:11px; }
+.result-err { background:rgba(255,23,68,.07);  border-left:3px solid var(--red); padding:6px 12px; margin:0 0 0 -1px; color:var(--red); font-size:11px; }
+.result-warn{ background:rgba(255,171,0,.07);  border-left:3px solid var(--amb); padding:6px 12px; margin:0 0 0 -1px; color:var(--amb); font-size:11px; }
+.result-info{ background:rgba(0,229,255,.05);  border-left:3px solid var(--cyn); padding:6px 12px; margin:0 0 0 -1px; color:var(--cyn); font-size:11px; }
+
+/* ── DAG DISPLAY ── */
+.dag-panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius:6px; overflow:hidden;
+}
+.dag-header {
+  background:var(--bg3); padding:10px 16px;
+  border-bottom:1px solid var(--border);
+  font-family:var(--font-hdr); font-size:11px; color:var(--prp);
+  letter-spacing:.12em;
+}
+.dag-nodes { padding:14px 16px; display:flex; flex-direction:column; gap:4px; }
+.dag-node {
+  display:grid;
+  grid-template-columns:80px 200px 80px 80px 80px 1fr 100px;
+  gap:8px; align-items:center;
+  padding:8px 10px;
+  background:var(--bg2);
+  border:1px solid var(--border);
+  border-radius:4px;
+  font-family:var(--font-mono); font-size:11px;
+  animation:fade-in .3s ease;
+  cursor:pointer;
+  transition:border-color .2s;
+}
+.dag-node:hover { border-color:var(--cyn2); }
+.dag-node.selected { border-color:var(--cyn); background:var(--bg3); }
+.dag-node.tampered { border-color:var(--red); background:rgba(255,23,68,.06); }
+
+.node-tier  { font-family:var(--font-hdr); font-size:10px; letter-spacing:.08em; font-weight:700; }
+.node-label { color:var(--wht); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.node-epoch { color:var(--gry); font-size:10px; }
+.node-score { font-family:var(--font-hdr); font-size:12px; }
+.node-hash  { color:var(--gry); font-size:10px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.node-arrow { color:var(--gry2); font-size:10px; text-align:center; }
+
+.dag-empty { padding:24px; text-align:center; color:var(--gry); font-family:var(--font-mono); font-size:12px; }
+
+/* ── CHAIN VERIFY RESULT ── */
+.chain-row {
+  display:grid;
+  grid-template-columns:24px 200px 60px repeat(4,60px);
+  gap:6px; align-items:center;
+  padding:6px 10px;
+  border-radius:3px;
+  font-family:var(--font-mono); font-size:11px;
+  margin-bottom:3px;
+  animation:fade-in .2s ease;
+}
+.chain-ok  { background:rgba(0,200,83,.06);  }
+.chain-bad { background:rgba(255,23,68,.08); }
+.check-icon { font-size:13px; }
+
+/* ── EPOCH STATUS ── */
+.epoch-widget {
+  background:var(--bg3); border:1px solid var(--border);
+  border-radius:6px; padding:12px;
+}
+.epoch-title {
+  font-family:var(--font-hdr); font-size:10px;
+  color:var(--prp); letter-spacing:.12em; margin-bottom:10px;
+}
+.epoch-row {
+  display:flex; justify-content:space-between;
+  font-family:var(--font-mono); font-size:11px;
+  margin-bottom:6px;
+}
+.epoch-key { color:var(--gry); }
+.epoch-val { color:var(--wht); }
+.epoch-secret-val {
+  color:var(--amb); font-size:10px;
+  overflow:hidden; text-overflow:ellipsis;
+  white-space:nowrap; max-width:130px;
+}
+
+/* ── WINDOW SLOTS ── */
+.window-slots { display:flex; gap:5px; margin-top:8px; }
+.slot {
+  flex:1; height:18px; border-radius:3px;
+  background:var(--bg2); border:1px solid var(--border);
+  transition:all .3s;
+  display:flex; align-items:center; justify-content:center;
+  font-family:var(--font-mono); font-size:9px; color:var(--gry);
+}
+.slot.used { background:rgba(0,229,255,.15); border-color:var(--cyn2); color:var(--cyn); }
+.slot.current { background:rgba(0,229,255,.3); border-color:var(--cyn); color:var(--cyn); box-shadow:0 0 6px rgba(0,229,255,.3); }
+
+/* ── SECTION HEADERS ── */
+.section-hdr {
+  font-family:var(--font-hdr); font-size:13px;
+  color:var(--cyn); letter-spacing:.1em;
+  margin-bottom:12px;
+  padding-bottom:8px;
+  border-bottom:1px solid var(--border);
+}
+
+/* ── TAB BAR ── */
+.tabs {
+  display:flex; gap:2px;
+  background:var(--bg2); border-radius:5px; padding:3px;
+  margin-bottom:16px;
+}
+.tab {
+  flex:1; padding:7px 10px;
+  background:none; border:none;
+  font-family:var(--font-hdr); font-size:11px;
+  letter-spacing:.06em; color:var(--gry);
+  cursor:pointer; border-radius:3px;
+  transition:all .2s;
+}
+.tab.active { background:var(--bg4); color:var(--cyn); box-shadow:0 0 8px rgba(0,229,255,.12); }
+.tab:hover:not(.active) { color:var(--wht); }
+
+.tab-panel { display:none; }
+.tab-panel.active { display:block; }
+
+/* ── SCROLLBAR global ── */
+::-webkit-scrollbar { width:5px; height:5px; }
+::-webkit-scrollbar-track { background:var(--bg2); }
+::-webkit-scrollbar-thumb { background:var(--brite); border-radius:3px; }
+
+/* ── TOOLTIP ── */
+.tooltip {
+  position:relative; display:inline-block;
+  border-bottom:1px dotted var(--gry);
+  cursor:help;
+}
+.tooltip .tip {
+  display:none;
+  position:absolute; bottom:120%; left:50%; transform:translateX(-50%);
+  background:var(--bg4); border:1px solid var(--border);
+  padding:6px 10px; border-radius:4px;
+  font-family:var(--font-mono); font-size:10px;
+  color:var(--wht); white-space:nowrap;
+  z-index:999;
+}
+.tooltip:hover .tip { display:block; }
+
+/* ── ANIMATIONS ── */
+@keyframes glow-pulse {
+  0%,100%{ text-shadow:0 0 10px rgba(0,229,255,.4) }
+  50%{ text-shadow:0 0 20px rgba(0,229,255,.8) }
+}
+.glow { animation:glow-pulse 2.5s ease-in-out infinite; }
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .app { grid-template-columns:1fr; }
+  .sidebar { border-right:none; border-bottom:1px solid var(--border); }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="logo">WARL<span>0</span>K <span style="color:var(--wht);font-size:.6em;font-weight:400">·</span> <span style="color:var(--prp)">PIM</span>-PCD</div>
+    <div class="tagline">NANO-AI CHAIN ENGINE · PROOF-OF-CHAINED-DATA</div>
+  </div>
+  <div class="status-dot"><div class="dot"></div> ENGINE READY</div>
+</header>
+
+<div class="app">
+
+<!-- ══════════════ SIDEBAR ══════════════ -->
+<aside class="sidebar">
+
+  <div class="sidebar-section">
+    <h3>Hub Authority</h3>
+    <div class="input-row">
+      <label>Master Secret</label>
+      <input type="text" id="masterSecret" value="PCD-MASTER-2026" placeholder="Hub master secret">
+    </div>
+    <div class="input-row">
+      <label>Window Size (W)</label>
+      <select id="windowSize">
+        <option value="3">3 objects/epoch</option>
+        <option value="4" selected>4 objects/epoch</option>
+        <option value="6">6 objects/epoch</option>
+        <option value="8">8 objects/epoch</option>
+      </select>
+    </div>
+    <button class="btn btn-chain" onclick="initHub()">⬡ Provision Hub</button>
+  </div>
+
+  <div class="sidebar-section">
+    <h3>Insert Data Object</h3>
+    <div class="input-row">
+      <label>Label</label>
+      <input type="text" id="objLabel" value="sensor-batch-001" placeholder="Object label">
+    </div>
+    <div class="input-row">
+      <label>Payload (JSON / text)</label>
+      <textarea id="objPayload">{"temp":36.8,"pressure":1013,"unit":"SN-77","status":"nominal"}</textarea>
+    </div>
+    <div class="input-row">
+      <label>Classification</label>
+      <select id="objClass">
+        <option>UNCLASSIFIED</option>
+        <option selected>CONFIDENTIAL</option>
+        <option>SECRET</option>
+        <option>TOP_SECRET</option>
+      </select>
+    </div>
+    <button class="btn btn-seal" id="btnSeal" onclick="sealObject()">⊛ Seal &amp; Insert</button>
+    <button class="btn btn-reset" onclick="loadPreset()">↺ Load Sample Payload</button>
+  </div>
+
+  <div class="sidebar-section">
+    <h3>Operations</h3>
+    <button class="btn btn-verify" id="btnVerify" onclick="verifySelected()">▶ Verify Selected Node</button>
+    <button class="btn btn-chain"  id="btnChain"  onclick="verifyChain()">⛓ Verify Full Chain</button>
+    <button class="btn btn-tamper" id="btnTamper" onclick="tamperSelected()">⚡ Simulate Tamper Attack</button>
+    <button class="btn btn-reset"  onclick="fullReset()">✕ Full Reset</button>
+  </div>
+
+  <!-- Nano-AI live scores -->
+  <div class="ai-widget">
+    <div class="ai-widget-title">NANO-AI · LIVE FEATURE SCORES</div>
+    <div class="feature-bar"><span class="feature-label">entropy</span><div class="bar-track"><div class="bar-fill" id="bar-f1" style="width:0%"></div></div><span class="feature-val" id="val-f1">—</span></div>
+    <div class="feature-bar"><span class="feature-label">actor_rep</span><div class="bar-track"><div class="bar-fill" id="bar-f2" style="width:0%"></div></div><span class="feature-val" id="val-f2">—</span></div>
+    <div class="feature-bar"><span class="feature-label">timing</span><div class="bar-track"><div class="bar-fill" id="bar-f3" style="width:0%"></div></div><span class="feature-val" id="val-f3">—</span></div>
+    <div class="feature-bar"><span class="feature-label">win_pos</span><div class="bar-track"><div class="bar-fill" id="bar-f4" style="width:0%"></div></div><span class="feature-val" id="val-f4">—</span></div>
+    <div class="feature-bar"><span class="feature-label">depth</span><div class="bar-track"><div class="bar-fill" id="bar-f5" style="width:0%"></div></div><span class="feature-val" id="val-f5">—</span></div>
+    <div class="score-big">
+      <div class="score-num tier-WARM" id="scoreNum">—</div>
+      <div class="score-tier" id="scoreTier" style="color:var(--gry)">INSERT OBJECT</div>
+    </div>
+  </div>
+
+  <!-- Epoch widget -->
+  <div class="epoch-widget">
+    <div class="epoch-title">EPOCH RATCHET STATE</div>
+    <div class="epoch-row"><span class="epoch-key">current epoch</span><span class="epoch-val" id="epochNum">0</span></div>
+    <div class="epoch-row"><span class="epoch-key">epoch_secret</span><span class="epoch-secret-val" id="epochSec">not provisioned</span></div>
+    <div class="epoch-row"><span class="epoch-key">chain_counter</span><span class="epoch-val" id="chainCtr">0</span></div>
+    <div class="epoch-row"><span class="epoch-key">actor_rep</span><span class="epoch-val" id="actorRep">0.500</span></div>
+    <div class="window-slots" id="windowSlots"></div>
+  </div>
+
+</aside>
+
+<!-- ══════════════ MAIN ══════════════ -->
+<main class="main">
+
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('trace',this)">STEP TRACE</button>
+    <button class="tab" onclick="switchTab('dag',this)">DAG CHAIN</button>
+    <button class="tab" onclick="switchTab('verify',this)">VERIFY</button>
+    <button class="tab" onclick="switchTab('about',this)">ABOUT</button>
+  </div>
+
+  <!-- TRACE TAB -->
+  <div class="tab-panel active" id="tab-trace">
+    <div class="trace-panel">
+      <div class="trace-header">
+        <span class="trace-header-title">NANO-AI PIPELINE · STEP-BY-STEP TRACE</span>
+        <span style="font-family:var(--font-mono);font-size:10px;color:var(--gry)" id="traceStatus">awaiting operation</span>
+      </div>
+      <div class="trace-body" id="traceBody">
+        <div style="padding:28px;text-align:center;color:var(--gry);font-family:var(--font-mono);font-size:12px">
+          ► Provision the Hub, then insert a data object to trace the nano-AI pipeline
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAG TAB -->
+  <div class="tab-panel" id="tab-dag">
+    <div class="dag-panel">
+      <div class="dag-header">DIRECTED ACYCLIC GRAPH · PROOF CHAIN · CLICK NODE TO SELECT</div>
+      <div style="display:grid;grid-template-columns:80px 200px 80px 80px 80px 1fr 100px;gap:8px;padding:6px 16px;border-bottom:1px solid var(--border)">
+        <span style="font-family:var(--font-mono);font-size:10px;color:var(--gry)">TIER</span>
+        <span style="font-family:var(--font-mono);font-size:10px;color:var(--gry)">LABEL</span>
+        <span style="font-family:var(--font-mono);font-size:10px;color:var(--gry)">E/W</span>
+        <span style="font-family:var(--font-mono);font-size:10px;color:var(--gry)">SCORE</span>
+        <span style="font-family:var(--font-mono);font-size:10px;color:var(--gry)">CTR</span>
+        <span style="font-family:var(--font-mono);font-size:10px;color:var(--gry)">HASH (env)</span>
+        <span style="font-family:var(--font-mono);font-size:10px;color:var(--gry)">STATUS</span>
+      </div>
+      <div class="dag-nodes" id="dagNodes">
+        <div class="dag-empty">No objects sealed yet — insert data to build the chain</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VERIFY TAB -->
+  <div class="tab-panel" id="tab-verify">
+    <div class="section-hdr">VERIFICATION RESULTS</div>
+    <div id="verifyResults" style="font-family:var(--font-mono);font-size:12px;color:var(--gry);padding:20px 0">
+      Run a verification operation to see results here
+    </div>
+  </div>
+
+  <!-- ABOUT TAB -->
+  <div class="tab-panel" id="tab-about">
+    <div style="max-width:700px">
+      <div class="section-hdr">THE NANO-AI · WHY IT IS THE INNOVATION</div>
+      <div style="font-family:var(--font-ui);font-size:14px;line-height:1.8;color:var(--wht)">
+        <p style="margin-bottom:14px">DAGs are established technology. Hash chains are established technology. ZK proofs are established technology.</p>
+        <p style="margin-bottom:14px"><strong style="color:var(--cyn)">The nano-AI is the innovation.</strong></p>
+        <div style="background:var(--bg3);border:1px solid var(--cyn);border-left:4px solid var(--cyn);padding:16px;border-radius:4px;margin:14px 0;font-family:var(--font-mono);font-size:13px;color:var(--cyn)">
+          K(t,n) = HMAC( epoch_secret,  SHA-256( feature_vector ) )<br>
+          <span style="color:var(--gry)">   hardware secret    +    observable context   =   ephemeral key</span>
+        </div>
+        <p style="margin-bottom:10px">It uses observable properties of the <em>data itself</em> to derive the encryption key — then immediately destroys the key. Both peers run the same 7-parameter model over the same public features and arrive at the same K(t,n) <strong>without transmitting it</strong>.</p>
+
+        <div class="section-hdr" style="margin-top:20px">8 UNIQUE CONTRIBUTIONS</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px">
+          <div style="background:var(--bg3);border:1px solid var(--border);padding:12px;border-radius:4px">
+            <div style="color:var(--cyn);font-family:var(--font-hdr);font-size:11px;margin-bottom:6px">KEY FACTORY</div>
+            <div style="font-size:13px;color:var(--gry)">K(t,n) is an AI output, not a random value. The key encodes WHO, WHEN, WHERE, and WHAT.</div>
+          </div>
+          <div style="background:var(--bg3);border:1px solid var(--border);padding:12px;border-radius:4px">
+            <div style="color:var(--grn);font-family:var(--font-hdr);font-size:11px;margin-bottom:6px">CONVERGENT</div>
+            <div style="font-size:13px;color:var(--gry)">Both peers independently derive the same K(t,n). The key was never on any wire.</div>
+          </div>
+          <div style="background:var(--bg3);border:1px solid var(--border);padding:12px;border-radius:4px">
+            <div style="color:var(--amb);font-family:var(--font-hdr);font-size:11px;margin-bottom:6px">EPHEMERAL</div>
+            <div style="font-size:13px;color:var(--gry)">K revoked immediately after use. &lt;3ms lifetime. Exists in no memory after that.</div>
+          </div>
+          <div style="background:var(--bg3);border:1px solid var(--border);padding:12px;border-radius:4px">
+            <div style="color:var(--prp);font-family:var(--font-hdr);font-size:11px;margin-bottom:6px">INSTITUTIONAL MEMORY</div>
+            <div style="font-size:13px;color:var(--gry)">actor_reputation accumulates across the entire chain lifetime.</div>
+          </div>
+          <div style="background:var(--bg3);border:1px solid var(--border);padding:12px;border-radius:4px">
+            <div style="color:var(--red);font-family:var(--font-hdr);font-size:11px;margin-bottom:6px">PARALLEL GATES</div>
+            <div style="font-size:13px;color:var(--gry)">Anomaly checks run in parallel. A gate fire quarantines regardless of score.</div>
+          </div>
+          <div style="background:var(--bg3);border:1px solid var(--border);padding:12px;border-radius:4px">
+            <div style="color:var(--cyn);font-family:var(--font-hdr);font-size:11px;margin-bottom:6px">&lt;1ms OVERHEAD</div>
+            <div style="font-size:13px;color:var(--gry)">7 parameters, 12 multiplications, 1 sigmoid, 2 HMACs. Runs on any hardware.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════
+//  PCD NANO-AI ENGINE — Full JavaScript Port
+//  All crypto via SubtleCrypto (Web Crypto API)
+// ═══════════════════════════════════════════════════════
+
+// ── CRYPTO HELPERS ──────────────────────────────────────
+async function sha256hex(str) {
+  const buf = new TextEncoder().encode(str);
+  const hash = await crypto.subtle.digest('SHA-256', buf);
+  return Array.from(new Uint8Array(hash)).map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+
+async function hmac256hex(keyStr, msgStr) {
+  const keyBuf = new TextEncoder().encode(keyStr);
+  const msgBuf = new TextEncoder().encode(msgStr);
+  const key = await crypto.subtle.importKey('raw', keyBuf, {name:'HMAC',hash:'SHA-256'}, false, ['sign']);
+  const sig  = await crypto.subtle.sign('HMAC', key, msgBuf);
+  return Array.from(new Uint8Array(sig)).map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+
+function rng(n=8) {
+  return Array.from(crypto.getRandomValues(new Uint8Array(n)))
+         .map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+
+// XOR stream cipher (demo; production = AES-256-GCM)
+async function xorEncrypt(plaintext, keyHex) {
+  const ks_raw = await sha256hex(keyHex + 'stream');
+  const ks = ks_raw.repeat(4);  // expand keystream
+  const pt  = new TextEncoder().encode(plaintext);
+  const ksb = new Uint8Array(ks.match(/../g).map(h=>parseInt(h,16)));
+  const ct  = pt.map((b,i) => b ^ ksb[i % ksb.length]);
+  return Array.from(ct).map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+
+async function xorDecrypt(cipherHex, keyHex) {
+  const ks_raw = await sha256hex(keyHex + 'stream');
+  const ks  = ks_raw.repeat(4);
+  const ct  = cipherHex.match(/../g).map(h=>parseInt(h,16));
+  const ksb = new Uint8Array(ks.match(/../g).map(h=>parseInt(h,16)));
+  const pt  = new Uint8Array(ct.map((b,i) => b ^ ksb[i % ksb.length]));
+  return new TextDecoder().decode(pt);
+}
+
+function sh(h) { return h ? `${h.slice(0,10)}…${h.slice(-8)}` : '—'; }
+
+// ── NANO-AI MODEL ────────────────────────────────────────
+const W = [0.22, 0.28, 0.15, 0.18, 0.12, 0.05];
+const B = -0.15;
+const TIERS = [[0.85,'HOT'],[0.60,'WARM'],[0.30,'COOL'],[0.00,'QUARANTINE']];
+
+function sigmoid(z) { return 1.0 / (1.0 + Math.exp(-z)); }
+
+function shannonEntropy(str) {
+  const bytes = new TextEncoder().encode(str);
+  const freq  = new Array(256).fill(0);
+  for (const b of bytes) freq[b]++;
+  const n = bytes.length;
+  let H = 0;
+  for (const c of freq) if (c > 0) { const p = c/n; H -= p * Math.log2(p); }
+  return Math.min(H / 8.0, 1.0);
+}
+
+function buildFeatures(payload, actorRep, winPos, winSize, depth, counter, lastTs) {
+  const dt = Math.max(0, (Date.now()/1000) - lastTs);
+  const f3 = Math.min(1.0, 1.0 / (dt + 0.1));
+  return {
+    f1: +shannonEntropy(payload).toFixed(6),
+    f2: +actorRep.toFixed(6),
+    f3: +f3.toFixed(6),
+    f4: +(winPos / Math.max(winSize, 1)).toFixed(6),
+    f5: +Math.min(depth / 20.0, 1.0).toFixed(6),
+    f6: counter,
+    f6n: +Math.min(counter / 100.0, 1.0).toFixed(6),
+  };
+}
+
+function featureCanonical(F) {
+  return `${F.f1.toFixed(6)}|${F.f2.toFixed(6)}|${F.f3.toFixed(6)}|${F.f6}|${F.f4.toFixed(6)}|${F.f5.toFixed(6)}`;
+}
+
+async function featureFingerprint(F) {
+  return sha256hex(featureCanonical(F));
+}
+
+function aiInfer(F) {
+  const fv = [F.f1, F.f2, F.f3, F.f4, F.f5, F.f6n];
+  const z  = fv.reduce((s,x,i) => s + W[i]*x, 0) + B;
+  const score = +sigmoid(z).toFixed(6);
+  const tier  = TIERS.find(([t]) => score >= t)[1];
+  return { score, tier, z: +z.toFixed(6) };
+}
+
+function anomalyGates(F) {
+  const flags = [];
+  if (F.f1 < 0.30) flags.push(`LOW_ENTROPY f1=${F.f1.toFixed(3)} < 0.30`);
+  if (F.f2 < 0.40) flags.push(`ACTOR_DEGRADED f2=${F.f2.toFixed(3)} < 0.40`);
+  if (F.f3 < 0.20) flags.push(`TIMING_ANOMALY f3=${F.f3.toFixed(3)} < 0.20`);
+  if (F.f6 === 0 && F.f5 > 0.10) flags.push(`STRUCTURAL_VIOLATION counter=0 at depth=${F.f5}`);
+  return flags;
+}
+
+// ── STATE ───────────────────────────────────────────────
+let state = {
+  provisioned: false,
+  masterSecret: '',
+  windowSize: 4,
+  anchor: 0,
+  // Sealer chain
+  sealerSecrets: {},
+  sealerEpoch: 0,
+  sealerWin: 0,
+  sealerCtr: 0,
+  sealerLastTs: 0,
+  actorRep: 0.50,
+  // Verifier chain (separate instance)
+  verifierSecrets: {},
+  verifierEpoch: 0,
+  // DAG
+  dag: [],
+  selectedNodeId: null,
+  tamperedNodes: new Set(),
+};
+
+// ── EPOCH CHAIN ──────────────────────────────────────────
+async function deriveEpoch0(master, W, anchor) {
+  return hmac256hex(master, `epoch|0|${W}|${Math.floor(anchor)}`);
+}
+
+async function getEpochSecret(secrets, epoch, anchor, masterForRatchet) {
+  // Ratchet forward from highest available epoch
+  if (secrets[epoch] !== undefined) return secrets[epoch];
+  const avail = Object.keys(secrets).map(Number).sort((a,b)=>a-b);
+  if (!avail.length) throw new Error('No epoch secrets available');
+  let s = secrets[avail[avail.length-1]];
+  let e = avail[avail.length-1];
+  while (e < epoch) {
+    e++;
+    s = await hmac256hex(s, `epoch|${e}|pim-pcd-chain`);
+    secrets[e] = s;
+  }
+  return secrets[epoch];
+}
+
+async function rotateSealerEpoch() {
+  const old = state.sealerEpoch;
+  const cur = state.sealerSecrets[old];
+  const next = await hmac256hex(cur, `epoch|${old+1}|pim-pcd-chain`);
+  state.sealerEpoch = old + 1;
+  state.sealerSecrets[state.sealerEpoch] = next;
+  delete state.sealerSecrets[old];   // FORWARD SECRECY
+  return { old, newEpoch: state.sealerEpoch, newSec: next };
+}
+
+// ── ACTIONS ─────────────────────────────────────────────
+async function initHub() {
+  const master = document.getElementById('masterSecret').value.trim();
+  const W      = +document.getElementById('windowSize').value;
+  if (!master) { alert('Enter a master secret'); return; }
+
+  state.masterSecret = master;
+  state.windowSize   = W;
+  state.anchor       = Date.now() / 1000;
+
+  const ep0 = await deriveEpoch0(master, W, state.anchor);
+  // Both sealer and verifier get same epoch_0 secret
+  state.sealerSecrets   = { 0: ep0 };
+  state.verifierSecrets = { 0: ep0 };
+  state.sealerEpoch     = 0;
+  state.verifierEpoch   = 0;
+  state.sealerWin       = 0;
+  state.sealerCtr       = 0;
+  state.sealerLastTs    = state.anchor;
+  state.actorRep        = 0.50;
+  state.dag             = [];
+  state.selectedNodeId  = null;
+  state.tamperedNodes   = new Set();
+  state.provisioned     = true;
+
+  const traceLines = [];
+  traceLines.push({ type:'hdr', text:'HUB AUTHORITY PROVISIONING' });
+  traceLines.push({ type:'info', text:`master_secret: "${master}" — seeds epoch chain, then discarded` });
+  traceLines.push({ type:'kv',   key:'epoch_0_secret', val:sh(ep0), cls:'amb' });
+  traceLines.push({ type:'kv',   key:'window_size',    val:`W = ${W}` });
+  traceLines.push({ type:'kv',   key:'model weights',  val:`[${W_str()}]  bias=${B}`, cls:'gry' });
+  traceLines.push({ type:'kv',   key:'both peers',     val:'provisioned with same epoch_0_secret' });
+  traceLines.push({ type:'ok',   text:'Hub SILENT — not in data path after provisioning' });
+
+  renderTrace(traceLines, 'PROVISIONED');
+  updateEpochWidget();
+  updateDagTab();
+}
+
+function W_str() { return W.join(', '); }
+
+async function sealObject() {
+  if (!state.provisioned) { alert('Provision the Hub first'); return; }
+
+  const label  = document.getElementById('objLabel').value.trim() || 'object-1';
+  const payload= document.getElementById('objPayload').value.trim();
+  const cls    = document.getElementById('objClass').value;
+  if (!payload) { alert('Enter a payload'); return; }
+
+  const t0 = performance.now();
+  const trace = [];
+  trace.push({ type:'hdr', text:`SEALING: "${label}"` });
+
+  // ─ Step 1: Features ───────────────────────────────────
+  trace.push({ type:'step', n:1, title:'BUILD FEATURE VECTOR F(t,n)',
+    detail:'Compute six observable properties — ALL PUBLIC.\nSecurity = epoch_secret, not feature values.' });
+
+  const F = buildFeatures(
+    payload, state.actorRep, state.sealerWin, state.windowSize,
+    state.dag.length, state.sealerCtr, state.sealerLastTs
+  );
+  trace.push({ type:'kv', key:'f1 entropy',     val:`${F.f1.toFixed(6)}   H(payload)/8` });
+  trace.push({ type:'kv', key:'f2 actor_rep',   val:`${F.f2.toFixed(6)}   rep[NODE-ALPHA]` });
+  trace.push({ type:'kv', key:'f3 timing',      val:`${F.f3.toFixed(6)}   1/(Δt+0.1)` });
+  trace.push({ type:'kv', key:'f4 window_pos',  val:`${F.f4.toFixed(6)}   slot ${state.sealerWin}/${state.windowSize}` });
+  trace.push({ type:'kv', key:'f5 chain_depth', val:`${F.f5.toFixed(6)}   depth ${state.dag.length}/20` });
+  trace.push({ type:'kv', key:'f6 counter',     val:`${F.f6}   (global monotonic)` });
+
+  // ─ Step 2: Anomaly gates ──────────────────────────────
+  trace.push({ type:'step', n:2, title:'ANOMALY GATES (parallel)',
+    detail:'Hard threshold checks. Gate fire → QUARANTINE regardless of score.' });
+  const flags = anomalyGates(F);
+  if (flags.length) {
+    flags.forEach(fl => trace.push({ type:'warn', text:fl }));
+  } else {
+    trace.push({ type:'ok', text:'All anomaly gates clear' });
+  }
+
+  // ─ Step 3: AI Inference + KEY FACTORY ─────────────────
+  trace.push({ type:'step', n:3, title:'NANO-AI INFERENCE — THE KEY FACTORY',
+    detail:'z = dot(W,F)+b  →  score = sigmoid(z)\nfp = SHA-256(canonical(F))\nK(t,n) = HMAC(epoch_secret, fp|counter|window_pos)\nK(t,n) exists in RAM from this point. Revoked in Step 11.' });
+
+  const { score, tier, z } = aiInfer(F);
+  const ep_sec = state.sealerSecrets[state.sealerEpoch];
+  const fp     = await featureFingerprint(F);
+  const ktn    = await hmac256hex(ep_sec, `${fp}|${F.f6}|${F.f4.toFixed(6)}`);
+
+  trace.push({ type:'kv', key:'z (linear combo)', val:`${z.toFixed(6)}` });
+  trace.push({ type:'kv', key:'score',            val:`${score.toFixed(6)}` });
+  trace.push({ type:'kv', key:'tier',             val:tier, cls: tierCls(tier) });
+  trace.push({ type:'kv', key:'fp',               val:sh(fp)+'  SHA-256(canonical_F)' });
+  trace.push({ type:'kv', key:'epoch_secret',     val:sh(ep_sec)+'  [hardware, never stored]', cls:'gry' });
+  trace.push({ type:'kv', key:'K(t,n)',           val:sh(ktn)+'  [EPHEMERAL — RAM only, <3ms]', cls:'red' });
+
+  // ─ Step 4: Encrypt ────────────────────────────────────
+  trace.push({ type:'step', n:4, title:'ENCRYPT PAYLOAD WITH K(t,n)',
+    detail:'cipher = AES-256-GCM(plaintext, K(t,n))\n(XOR-stream in demo; AES-256-GCM in production)' });
+
+  const cipher      = await xorEncrypt(payload, ktn);
+  const payload_hsh = await sha256hex(payload);
+  const cipher_hsh  = await sha256hex(cipher);
+  trace.push({ type:'kv', key:'plaintext',      val:payload.slice(0,60)+(payload.length>60?'…':'') });
+  trace.push({ type:'kv', key:'cipher_payload', val:sh(cipher)+'  [encrypted]' });
+  trace.push({ type:'kv', key:'payload_hash',   val:sh(payload_hsh)+'  SHA-256(plain)' });
+  trace.push({ type:'kv', key:'cipher_hash',    val:sh(cipher_hsh)+'  SHA-256(cipher)' });
+
+  // ─ Step 5: Chain linkage ──────────────────────────────
+  trace.push({ type:'step', n:5, title:'CHAIN LINKAGE — prev_hash',
+    detail:'Store SHA-256 of parent node.\nModifying parent → changed hash → prev_hash mismatch → chain break.' });
+
+  const parent    = state.dag.length > 0 ? state.dag[state.dag.length-1] : null;
+  const prev_hash = parent ? parent.env_hash : '0'.repeat(64);
+  trace.push({ type:'kv', key:'parent',    val:parent ? sh(parent.node_id) : 'GENESIS' });
+  trace.push({ type:'kv', key:'prev_hash', val:sh(prev_hash) });
+
+  // ─ Step 6: Seals ──────────────────────────────────────
+  trace.push({ type:'step', n:6, title:'COMPUTE SEALS WITH epoch_secret',
+    detail:'temporal_seal = HMAC(epoch_secret, cipher_hash|ts|nonce)\nchain_seal    = HMAC(epoch_secret, prev_hash|fp|counter)\nCannot be forged without epoch_secret. Tampering is IRREFUTABLE.' });
+
+  const nonce = rng(8);
+  const ts    = Date.now() / 1000;
+  const tseal = await hmac256hex(ep_sec, `${cipher_hsh}|${ts}|${nonce}`);
+  const cseal = await hmac256hex(ep_sec, `${prev_hash}|${fp}|${state.sealerCtr}`);
+  trace.push({ type:'kv', key:'temporal_seal', val:sh(tseal)+'  HMAC(ep_sec, cipher_h|ts|nonce)' });
+  trace.push({ type:'kv', key:'chain_seal',    val:sh(cseal)+'  HMAC(ep_sec, prev_h|fp|ctr)' });
+
+  // ─ Step 7: ZK Proof ───────────────────────────────────
+  trace.push({ type:'step', n:7, title:'COMPUTE ZK PROOF — proof that K was held',
+    detail:'zk_proof = HMAC(K(t,n), "zk|actor|node_id")\nProves K was held WITHOUT revealing K. HMAC is one-way.' });
+
+  const node_id = (await sha256hex(`${label}${ts}${nonce}`)).slice(0,16);
+  const zk      = await hmac256hex(ktn, `zk|NODE-ALPHA|${node_id}`);
+  trace.push({ type:'kv', key:'node_id',  val:node_id });
+  trace.push({ type:'kv', key:'zk_proof', val:sh(zk)+'  HMAC(K, "zk|actor|nid")' });
+  trace.push({ type:'kv', key:'K visible', val:'NO — used here, REVOKED in Step 11', cls:'red' });
+
+  // ─ Step 8: Envelope hash ──────────────────────────────
+  trace.push({ type:'step', n:8, title:'COMPUTE ENVELOPE HASH',
+    detail:'env_hash = SHA-256(cipher_hash|prev_hash|temporal_seal|chain_seal)\nNext node stores this as its prev_hash.' });
+
+  const env_hash = await sha256hex(`${cipher_hsh}|${prev_hash}|${tseal}|${cseal}`);
+  trace.push({ type:'kv', key:'env_hash', val:sh(env_hash) });
+
+  // ─ Step 9: Assemble + store ───────────────────────────
+  trace.push({ type:'step', n:9, title:'ASSEMBLE ENVELOPE → WRITE TO DAG',
+    detail:'K(t,n), epoch_secret, plaintext: ABSENT by design.\nStorage layer holds only cipher_payload + public seals.' });
+
+  const env = {
+    node_id, label, actor:'NODE-ALPHA',
+    classification:cls,
+    cipher_payload:cipher, payload_hash:payload_hsh, cipher_hash:cipher_hsh,
+    prev_hash, env_hash,
+    temporal_seal:tseal, chain_seal:cseal,
+    feature_fp:fp, zk_proof:zk,
+    ai_score:score, tier,
+    ai_features:{ ...F },
+    epoch:state.sealerEpoch,
+    window_pos:state.sealerWin,
+    chain_counter:state.sealerCtr,
+    timestamp:ts, nonce,
+    latency_ms: +(performance.now()-t0).toFixed(2),
+    tampered:false,
+  };
+  state.dag.push(env);
+  state.selectedNodeId = node_id;
+
+  trace.push({ type:'kv', key:'K(t,n) in Env',       val:'ABSENT', cls:'red' });
+  trace.push({ type:'kv', key:'epoch_secret in Env',  val:'ABSENT', cls:'red' });
+  trace.push({ type:'kv', key:'plaintext in Env',     val:'ABSENT', cls:'red' });
+
+  // ─ Step 10: REVOKE K ──────────────────────────────────
+  trace.push({ type:'step', n:10, title:'REVOKE K(t,n) — THE KEY IS DESTROYED',
+    detail:'K(t,n) discarded from memory.\nData encrypted with a key that no longer exists.\nRecovery: re-run nano-AI with stored features + hardware secret.' });
+
+  // K is a local variable — goes out of scope here
+  const oldRep = state.actorRep;
+  state.actorRep = Math.min(1.0, state.actorRep + 0.04 * score);
+  trace.push({ type:'kv', key:'rep update',
+    val:`rep[NODE-ALPHA]: ${oldRep.toFixed(4)} → ${state.actorRep.toFixed(4)}` });
+
+  // Advance state
+  state.sealerWin++;
+  state.sealerCtr++;
+  state.sealerLastTs = ts;
+
+  // Epoch rotation
+  let rotated = null;
+  if (state.sealerWin >= state.windowSize) {
+    rotated = await rotateSealerEpoch();
+    state.sealerWin = 0;
+    // Also advance verifier chain so it stays in sync
+    state.verifierSecrets[rotated.newEpoch] = rotated.newSec;
+    delete state.verifierSecrets[rotated.old];
+    trace.push({ type:'warn',
+      text:`EPOCH RATCHET: ${rotated.old} → ${rotated.newEpoch} | epoch_${rotated.old}_secret DELETED (forward secrecy)` });
+  }
+
+  const tc = tierCls(tier);
+  trace.push({
+    type:'result-sealed',
+    label, score, tier, latency:env.latency_ms, hash:sh(env_hash)
+  });
+
+  renderTrace(trace, `SEALED · ${tier} · ${env.latency_ms}ms`);
+  updateAiWidget(F, score, tier);
+  updateEpochWidget();
+  updateDagTab();
+}
+
+async function verifySelected() {
+  if (!state.dag.length) { alert('No objects in chain'); return; }
+  const env = state.selectedNodeId
+    ? state.dag.find(e=>e.node_id===state.selectedNodeId)
+    : state.dag[state.dag.length-1];
+  if (!env) { alert('Select a node'); return; }
+
+  const trace = [];
+  trace.push({ type:'hdr', text:`VERIFYING: "${env.label}"  [E:${env.epoch} W:${env.window_pos}]` });
+  trace.push({ type:'info', text:'NODE-BETA runs same nano-AI over stored public features → K(t,n) never transmitted' });
+
+  let success = true;
+  let plaintext = null;
+
+  // V1: Fingerprint
+  trace.push({ type:'step', n:1, title:'RECONSTRUCT fp from stored ai_features',
+    detail:'fp_local = SHA-256(canonical(stored_features))\nASSERT: fp_local == envelope.feature_fp' });
+  const F_local = env.ai_features;
+  const fp_local = await featureFingerprint(F_local);
+  const fp_match = fp_local === env.feature_fp;
+  trace.push({ type:'kv', key:'fp_local',  val:sh(fp_local) });
+  trace.push({ type:'kv', key:'stored fp', val:sh(env.feature_fp) });
+  if (fp_match) trace.push({ type:'ok', text:'Fingerprint MATCH — ai_features intact' });
+  else { trace.push({ type:'err', text:'Fingerprint MISMATCH — ai_features TAMPERED' }); success=false; }
+
+  if (!success) { renderVerify(trace); return; }
+
+  // V2: epoch_secret
+  trace.push({ type:'step', n:2, title:'RETRIEVE epoch_secret FROM HARDWARE',
+    detail:'From HSM/TEE — NOT from storage.\nIf deleted by forward secrecy: HARD FAIL.' });
+  let ep_sec;
+  try {
+    ep_sec = await getEpochSecret(state.verifierSecrets, env.epoch, state.anchor, '');
+  } catch(e) {
+    trace.push({ type:'err', text:`epoch_secret for epoch ${env.epoch} not available (forward secrecy)` });
+    renderVerify(trace); return;
+  }
+  trace.push({ type:'kv', key:'epoch',       val:String(env.epoch) });
+  trace.push({ type:'kv', key:'epoch_secret', val:sh(ep_sec)+'  [from hardware]', cls:'gry' });
+
+  // V3: Regenerate K
+  trace.push({ type:'step', n:3, title:'REGENERATE K(t,n) — CONVERGENT INDEPENDENT COMPUTATION',
+    detail:'K_local = HMAC(epoch_secret, fp_local|counter|window_pos)\nKey was NEVER TRANSMITTED. Both sides converge independently.' });
+  const k_local = await hmac256hex(ep_sec, `${fp_local}|${F_local.f6}|${F_local.f4.toFixed(6)}`);
+  trace.push({ type:'kv', key:'K_local', val:sh(k_local)+'  [regenerated — never received]', cls:'grn' });
+  trace.push({ type:'ok', text:'K(t,n) regenerated via convergent computation' });
+
+  // V4: ZK proof
+  trace.push({ type:'step', n:4, title:'VERIFY ZK PROOF',
+    detail:'expected_zk = HMAC(K_local, "zk|actor|node_id")\nASSERT: expected_zk == envelope.zk_proof' });
+  const exp_zk = await hmac256hex(k_local, `zk|${env.actor}|${env.node_id}`);
+  const zk_ok  = exp_zk === env.zk_proof;
+  trace.push({ type:'kv', key:'expected_zk', val:sh(exp_zk) });
+  trace.push({ type:'kv', key:'stored zk',   val:sh(env.zk_proof) });
+  if (zk_ok) trace.push({ type:'ok',  text:'ZK proof VALID — K was held; actor intact' });
+  else       { trace.push({ type:'err', text:'ZK proof INVALID — K mismatch or actor tampered' }); success=false; }
+
+  if (!success) { renderVerify(trace); return; }
+
+  // V5: Decrypt
+  trace.push({ type:'step', n:5, title:'DECRYPT + VERIFY payload_hash' });
+  try {
+    plaintext = await xorDecrypt(env.cipher_payload, k_local);
+    const dec_hash = await sha256hex(plaintext);
+    const hash_ok  = dec_hash === env.payload_hash;
+    if (hash_ok) {
+      trace.push({ type:'ok', text:'Decryption VALID — payload_hash confirmed' });
+      trace.push({ type:'kv', key:'plaintext', val:plaintext.slice(0,80)+(plaintext.length>80?'…':''), cls:'grn' });
+    } else {
+      trace.push({ type:'err', text:'payload_hash MISMATCH — cipher_payload tampered' });
+      success = false;
+    }
+  } catch(e) {
+    trace.push({ type:'err', text:`Decryption failed: ${e.message}` });
+    success = false;
+  }
+
+  // V6: Master chain seals
+  trace.push({ type:'step', n:6, title:'MASTER SECRET CHAIN VERIFICATION',
+    detail:'Verify temporal_seal and chain_seal against epoch_secret.\nProves sealed by authorised party holding epoch_secret(t) — rooted in Hub master_secret.' });
+  const exp_tseal = await hmac256hex(ep_sec, `${env.cipher_hash}|${env.timestamp}|${env.nonce}`);
+  const exp_cseal = await hmac256hex(ep_sec, `${env.prev_hash}|${env.feature_fp}|${env.chain_counter}`);
+  const ts_ok = exp_tseal === env.temporal_seal;
+  const cs_ok = exp_cseal === env.chain_seal;
+  trace.push({ type:'kv', key:'temporal_seal', val: ts_ok ? '✓ VALID' : '✗ INVALID', cls: ts_ok?'grn':'red' });
+  trace.push({ type:'kv', key:'chain_seal',    val: cs_ok ? '✓ VALID' : '✗ INVALID', cls: cs_ok?'grn':'red' });
+  if (ts_ok && cs_ok) trace.push({ type:'ok', text:'MASTER SECRET CHAIN CONFIRMED — sealed by authorised party' });
+  else { trace.push({ type:'err', text:'SEAL FAILURE — cannot prove authorised sealing' }); success = false; }
+
+  // V7: Revoke K_local
+  trace.push({ type:'step', n:7, title:'REVOKE K_local (second revocation event)',
+    detail:'Verification complete. K_local discarded.\nK(t,n) destroyed by both sealer and verifier. Exists nowhere.' });
+
+  if (success)
+    trace.push({ type:'result-verified', label:env.label, score:env.ai_score, tier:env.tier });
+  else
+    trace.push({ type:'result-rejected', label:env.label });
+
+  renderVerify(trace);
+  switchToTab('verify');
+}
+
+async function verifyChain() {
+  if (!state.dag.length) { alert('No objects in chain'); return; }
+  const trace = [];
+  trace.push({ type:'hdr', text:'FULL CHAIN INTEGRITY — four checks per node' });
+
+  let all_ok = true;
+  for (let i=0; i<state.dag.length; i++) {
+    const n      = state.dag[i];
+    const parent = i>0 ? state.dag[i-1] : null;
+
+    const c1 = (await sha256hex(n.cipher_payload)) === n.cipher_hash;
+    const c2 = n.prev_hash === (parent ? parent.env_hash : '0'.repeat(64));
+    const c3 = (await featureFingerprint(n.ai_features)) === n.feature_fp;
+    let c4 = false;
+    try {
+      const ep = await getEpochSecret(state.verifierSecrets, n.epoch, state.anchor, '');
+      const exp_ts = await hmac256hex(ep, `${n.cipher_hash}|${n.timestamp}|${n.nonce}`);
+      c4 = exp_ts === n.temporal_seal;
+    } catch(e) { c4 = false; }
+
+    const node_ok = c1 && c2 && c3 && c4;
+    if (!node_ok) all_ok = false;
+    const fails = [['cipher_hash',c1],['prev_hash',c2],['feature_fp',c3],['temporal_seal',c4]]
+                  .filter(([,b])=>!b).map(([k])=>k);
+
+    trace.push({
+      type:'chain-row', index:i, label:n.label,
+      epoch:n.epoch, win:n.window_pos,
+      ok:node_ok, fails,
+      c1,c2,c3,c4
+    });
+  }
+  trace.push({ type:all_ok?'ok':'err',
+    text: all_ok ? 'CHAIN FULLY INTACT — all nodes pass all four checks'
+                 : 'CHAIN INTEGRITY VIOLATION DETECTED' });
+
+  renderVerify(trace);
+  switchToTab('verify');
+}
+
+async function tamperSelected() {
+  if (!state.dag.length) { alert('No objects to tamper'); return; }
+  const env = state.selectedNodeId
+    ? state.dag.find(e=>e.node_id===state.selectedNodeId)
+    : state.dag[state.dag.length-1];
+  if (!env) return;
+
+  const trace = [];
+  trace.push({ type:'hdr', text:`TAMPER ATTACK: "${env.label}"` });
+  trace.push({ type:'warn', text:'Attacker corrupts cipher_payload (data poisoning simulation)' });
+  trace.push({ type:'info', text:'temporal_seal needs epoch_secret to recompute → attacker does not have it' });
+  trace.push({ type:'err',  text:'epoch_secret is in hardware → tamper is PERMANENT AND IRREPERABLE' });
+
+  // Corrupt last 8 bytes of cipher_payload
+  const orig = env.cipher_payload;
+  env.cipher_payload = orig.slice(0,-8) + rng(4);
+  env.tampered = true;
+  state.tamperedNodes.add(env.node_id);
+
+  trace.push({ type:'kv', key:'original suffix',  val:orig.slice(-16), cls:'gry' });
+  trace.push({ type:'kv', key:'corrupted suffix',  val:env.cipher_payload.slice(-16), cls:'red' });
+  trace.push({ type:'warn', text:`Node "${env.label}" marked as TAMPERED in DAG` });
+  trace.push({ type:'info', text:'Run "Verify Full Chain" to see self-announcing chain break' });
+
+  renderTrace(trace, 'TAMPER INJECTED');
+  updateDagTab();
+}
+
+function fullReset() {
+  state = {
+    provisioned:false, masterSecret:'', windowSize:4, anchor:0,
+    sealerSecrets:{}, sealerEpoch:0, sealerWin:0, sealerCtr:0, sealerLastTs:0,
+    actorRep:0.50,
+    verifierSecrets:{}, verifierEpoch:0,
+    dag:[], selectedNodeId:null, tamperedNodes:new Set(),
+  };
+  renderTrace([{type:'info',text:'System reset — provision Hub to begin'}], 'READY');
+  updateAiWidget(null,null,null);
+  updateEpochWidget();
+  updateDagTab();
+  document.getElementById('verifyResults').innerHTML = '<div style="color:var(--gry);font-family:var(--font-mono);font-size:12px">Run a verification operation to see results here</div>';
+}
+
+// ── PRESETS ─────────────────────────────────────────────
+const PRESETS = [
+  ['sensor-batch-001',   '{"temp":36.8,"pressure":1013,"unit":"SN-77","status":"nominal"}',      'CONFIDENTIAL'],
+  ['patient-record-002', '{"patient_id":"PT-9821","bp":"118/76","glucose":94,"flagged":false}',   'TOP_SECRET'],
+  ['tx-ledger-7731',     '{"from":"ACCT-441","to":"ACCT-882","amount":12500.00,"currency":"USD"}','CONFIDENTIAL'],
+  ['ml-training-17',     '{"epoch":17,"loss":0.0421,"acc":0.9834,"model":"resnet-50-v2"}',        'UNCLASSIFIED'],
+  ['sat-telemetry-042',  '{"sat":"SAT-9","alt_km":412,"lat":31.2,"lon":34.8,"status":"NOMINAL"}', 'SECRET'],
+];
+let presetIdx = 0;
+function loadPreset() {
+  const p = PRESETS[presetIdx % PRESETS.length];
+  document.getElementById('objLabel').value   = p[0];
+  document.getElementById('objPayload').value = p[1];
+  document.getElementById('objClass').value   = p[2];
+  presetIdx++;
+}
+
+// ── RENDERING ────────────────────────────────────────────
+function tierCls(tier) {
+  return {HOT:'grn',WARM:'cyn',COOL:'amb',QUARANTINE:'red'}[tier]||'wht';
+}
+function tierColor(tier) {
+  return {HOT:'var(--grn)',WARM:'var(--cyn)',COOL:'var(--amb)',QUARANTINE:'var(--red)'}[tier]||'var(--wht)';
+}
+
+function buildTraceHTML(trace) {
+  return trace.map(t => {
+    if (t.type==='hdr') return `<div class="step-entry" style="background:var(--bg4);border-left:3px solid var(--cyn)"><span style="font-family:var(--font-hdr);font-size:12px;color:var(--cyn);letter-spacing:.1em">${t.text}</span></div>`;
+    if (t.type==='step') return `<div class="step-entry"><span class="step-num">STEP ${String(t.n).padStart(2,'0')}</span><span class="step-title">${t.title}</span>${t.detail?`<div class="step-detail">${t.detail.replace(/\n/g,'<br>')}</div>`:''}</div>`;
+    if (t.type==='kv')   return `<div class="kv-row"><span class="kv-key">${t.key}</span><span class="kv-val ${t.cls||''}">${t.val}</span></div>`;
+    if (t.type==='ok')   return `<div class="result-ok">✓  ${t.text}</div>`;
+    if (t.type==='err')  return `<div class="result-err">✗  ${t.text}</div>`;
+    if (t.type==='warn') return `<div class="result-warn">⚠  ${t.text}</div>`;
+    if (t.type==='info') return `<div class="result-info">▸  ${t.text}</div>`;
+    if (t.type==='chain-row') {
+      const col = t.ok?'var(--grn)':'var(--red)';
+      const icon= t.ok?'✓':'✗';
+      return `<div class="chain-row ${t.ok?'chain-ok':'chain-bad'}">
+        <span style="color:${col};font-size:13px">${icon}</span>
+        <span style="color:var(--wht)">${t.label}</span>
+        <span style="color:var(--gry)">E:${t.epoch}/W:${t.win}</span>
+        <span style="color:${t.c1?'var(--grn)':'var(--red)'}">${t.c1?'✓':'✗'} cipher</span>
+        <span style="color:${t.c2?'var(--grn)':'var(--red)'}">${t.c2?'✓':'✗'} prev</span>
+        <span style="color:${t.c3?'var(--grn)':'var(--red)'}">${t.c3?'✓':'✗'} fp</span>
+        <span style="color:${t.c4?'var(--grn)':'var(--red)'}">${t.c4?'✓':'✗'} tseal</span>
+      </div>`;
+    }
+    if (t.type==='result-sealed') return `<div class="step-entry" style="background:rgba(0,200,83,.08);border-left:3px solid var(--grn)"><span style="font-family:var(--font-hdr);color:var(--grn)">◈ SEALED</span>  <span style="color:var(--wht)">${t.label}</span>  score=<span style="color:${tierColor(t.tier)}">${t.score.toFixed(4)}</span>  tier=<span style="color:${tierColor(t.tier)}">${t.tier}</span>  hash=${t.hash}  <span style="color:var(--gry)">${t.latency}ms</span></div>`;
+    if (t.type==='result-verified') return `<div class="step-entry" style="background:rgba(0,200,83,.08);border-left:3px solid var(--grn)"><span style="font-family:var(--font-hdr);color:var(--grn)">◈ VERIFIED</span>  <span style="color:var(--wht)">${t.label}</span>  score=${t.score.toFixed(4)}  tier=${t.tier}  ALL 7 GATES PASSED</div>`;
+    if (t.type==='result-rejected') return `<div class="step-entry" style="background:rgba(255,23,68,.08);border-left:3px solid var(--red)"><span style="font-family:var(--font-hdr);color:var(--red)">✗ REJECTED</span>  <span style="color:var(--wht)">${t.label}</span>  VERIFICATION FAILED</div>`;
+    return '';
+  }).join('');
+}
+
+function renderTrace(trace, status='') {
+  document.getElementById('traceBody').innerHTML   = buildTraceHTML(trace);
+  document.getElementById('traceStatus').textContent = status;
+  document.getElementById('traceBody').scrollTop = 99999;
+  switchToTab('trace');
+}
+
+function renderVerify(trace) {
+  document.getElementById('verifyResults').innerHTML = buildTraceHTML(trace);
+}
+
+function updateAiWidget(F, score, tier) {
+  const setBar = (id, val) => {
+    const pct = val ? (val*100).toFixed(1) : 0;
+    const cls = val < 0.30 ? 'bad' : val < 0.50 ? 'warn' : '';
+    document.getElementById(`bar-${id}`).style.width = pct+'%';
+    document.getElementById(`bar-${id}`).className = `bar-fill ${cls}`;
+    document.getElementById(`val-${id}`).textContent = val ? val.toFixed(3) : '—';
+  };
+  if (F) {
+    setBar('f1',F.f1); setBar('f2',F.f2); setBar('f3',F.f3);
+    setBar('f4',F.f4); setBar('f5',F.f5);
+  } else {
+    ['f1','f2','f3','f4','f5'].forEach(id=>{
+      document.getElementById(`bar-${id}`).style.width='0%';
+      document.getElementById(`val-${id}`).textContent='—';
+    });
+  }
+  const sn = document.getElementById('scoreNum');
+  const st = document.getElementById('scoreTier');
+  if (score !== null && score !== undefined) {
+    sn.textContent = score.toFixed(3);
+    sn.className   = `score-num tier-${tier}`;
+    st.textContent = tier;
+    st.style.color = tierColor(tier);
+  } else {
+    sn.textContent = '—'; sn.className='score-num';
+    st.textContent = 'INSERT OBJECT'; st.style.color='var(--gry)';
+  }
+}
+
+function updateEpochWidget() {
+  document.getElementById('epochNum').textContent  = state.sealerEpoch;
+  const ep = state.sealerSecrets[state.sealerEpoch];
+  document.getElementById('epochSec').textContent = ep ? sh(ep) : 'not provisioned';
+  document.getElementById('chainCtr').textContent  = state.sealerCtr;
+  document.getElementById('actorRep').textContent  = state.actorRep.toFixed(4);
+
+  const slots = document.getElementById('windowSlots');
+  slots.innerHTML = '';
+  for (let i=0; i<state.windowSize; i++) {
+    const div = document.createElement('div');
+    div.className = `slot ${i<state.sealerWin?'used':''} ${i===state.sealerWin&&state.provisioned?'current':''}`;
+    div.textContent = i;
+    slots.appendChild(div);
+  }
+}
+
+function updateDagTab() {
+  const el = document.getElementById('dagNodes');
+  if (!state.dag.length) {
+    el.innerHTML = '<div class="dag-empty">No objects sealed yet — insert data to build the chain</div>';
+    return;
+  }
+  el.innerHTML = state.dag.map((n,i) => {
+    const isSel     = n.node_id === state.selectedNodeId;
+    const isTampered= n.tampered;
+    const tc        = tierColor(n.tier);
+    const statusStr = isTampered ? `<span style="color:var(--red)">TAMPERED</span>`
+                                 : `<span style="color:var(--grn)">INTACT</span>`;
+    const arrow     = i>0 ? '↑' : '◈';
+    return `<div class="dag-node ${isSel?'selected':''} ${isTampered?'tampered':''}"
+              onclick="selectNode('${n.node_id}')">
+      <span class="node-tier" style="color:${tc}">${n.tier}</span>
+      <span class="node-label">${n.label}</span>
+      <span class="node-epoch">E:${n.epoch}/W:${n.window_pos}</span>
+      <span class="node-score" style="color:${tc}">${n.ai_score.toFixed(3)}</span>
+      <span class="node-epoch">#${n.chain_counter}</span>
+      <span class="node-hash">${sh(n.env_hash)}</span>
+      <span>${statusStr}</span>
+    </div>
+    ${i<state.dag.length-1?`<div style="text-align:center;color:var(--gry2);font-size:11px;padding:0 0 0 80px;font-family:var(--font-mono)">  ↓ prev_hash = ${sh(n.env_hash)}</div>`:''}`;
+  }).join('');
+}
+
+function selectNode(id) {
+  state.selectedNodeId = id;
+  updateDagTab();
+}
+
+// ── TABS ────────────────────────────────────────────────
+function switchTab(name, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
+  document.getElementById(`tab-${name}`).classList.add('active');
+  if (btn) btn.classList.add('active');
+  else {
+    const tabs = {'trace':0,'dag':1,'verify':2,'about':3};
+    document.querySelectorAll('.tab')[tabs[name]]?.classList.add('active');
+  }
+}
+function switchToTab(name) {
+  switchTab(name);
+}
+
+// ── INIT ────────────────────────────────────────────────
+updateEpochWidget();
+updateDagTab();
+
+// Auto-provision on load
+window.addEventListener('load', async () => {
+  await initHub();
+  loadPreset();
+});
+</script>
+</body>
+</html>

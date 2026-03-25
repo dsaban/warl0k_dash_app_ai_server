@@ -1,0 +1,47 @@
+{
+  "nodes": {
+    "307116102b582d43fd84ceec": {
+      "node_id": "307116102b582d43fd84ceec",
+      "label": "patient-record-002",
+      "actor": "NODE-ALPHA",
+      "classification": "TOP_SECRET",
+      "epoch": 0,
+      "window_pos": 2,
+      "chain_counter": 2,
+      "timestamp": 1774168832.947239,
+      "nonce": "bb2b124e05ee86e7",
+      "cipher_payload": "13055310cf6b147e0d61121207d85e33ca0c83cf75e41779abc51dd3231679d250081447992e5377154b181956875e59a71596d521b95432eec209d32352298f1b420f53cc6303745b04593f66b75150bc5c",
+      "payload_hash": "857453d5ccbdbf3700da8698f6c4ace780c724d46d818354cc2d7d8d6b17946b",
+      "cipher_hash": "86dd7b364b5b4177a89509e9aaaeb1af9e4ea410259a879c2737296d93c58eb7",
+      "prev_hash": "93d8c6858c6f597e1f7c19bf4719f9625b06ef42ae84a4348904508312f347f1",
+      "env_hash": "0fb9f5a64021fd6db363266063ee0ef5f4390b90b11a2d32148a98aa08cbe762",
+      "temporal_seal": "f46c94b20d77b6db75e382cf85adf5488b57672830f8c3c8dbe9987d29a99c8b",
+      "chain_seal": "6758191bba325d4d8d19cc1988f5fee42c2c204c694214a298255d1302883d05",
+      "feature_fp": "9008ef07dc9d5ca62b50100e450507275f6bc38c1177337613835aaa784e5be7",
+      "zk_proof": "841f6145b72850ced03aca5f71fd47ab808c0daaee6aea4ba7f92f2c533a9180",
+      "ai_score": 0.581965,
+      "ai_tier": "COOL",
+      "ai_features": {
+        "f1": 0.589467,
+        "f2": 0.543748,
+        "f3": 0.639409,
+        "f4": 0.5,
+        "f5": 0.1,
+        "f6": 2,
+        "f6n": 0.02
+      },
+      "ai_gates": [],
+      "latency_ms": 0.857,
+      "status": "ACTIVE",
+      "superseded_by": "",
+      "archived_at": 1774169174.2977326,
+      "archive_reason": "MANUAL_ARCHIVE"
+    }
+  },
+  "meta": {
+    "created": 1774169174.2977254,
+    "ops": 1,
+    "total_archived": 1,
+    "last_updated": 1774169174.2977505
+  }
+}

@@ -1,0 +1,1611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>WARLOK — Site Installation & Test Implementation Report</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500&family=IBM+Plex+Sans:wght@300;400;500;600&family=Orbitron:wght@600;800&display=swap');
+
+:root {
+  --ink:    #0d1117;
+  --ink1:   #161b24;
+  --ink2:   #1c2333;
+  --border: #253047;
+  --border2:#2e3d5a;
+  --text:   #cdd9f0;
+  --text-d: #6a80a0;
+  --text-b: #e8f0ff;
+  --cyan:   #00d9ff;
+  --cyan-d: #0099cc;
+  --green:  #00e87a;
+  --green-d:#006633;
+  --red:    #ff4060;
+  --amber:  #ffb700;
+  --purple: #8855ff;
+  --teal:   #00bfa5;
+  --mono:   'IBM Plex Mono', monospace;
+  --sans:   'IBM Plex Sans', sans-serif;
+  --disp:   'Orbitron', monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--ink);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+/* ─── GRID BG ─── */
+body::after {
+  content: '';
+  position: fixed; inset: 0; z-index: 0;
+  background-image:
+    linear-gradient(rgba(0,217,255,.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,217,255,.018) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none;
+}
+
+/* ─── COVER ─── */
+.cover {
+  position: relative; z-index: 1;
+  border-bottom: 2px solid var(--border2);
+  padding: 64px 64px 48px;
+  background: linear-gradient(160deg, #0d1520 0%, var(--ink) 60%);
+}
+
+.cover-eyebrow {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: var(--cyan);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  display: flex; align-items: center; gap: 10px;
+}
+
+.cover-eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 32px; height: 1px;
+  background: var(--cyan);
+}
+
+.cover-logo {
+  font-family: var(--disp);
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 800;
+  letter-spacing: 6px;
+  color: var(--text-b);
+  margin-bottom: 4px;
+}
+
+.cover-subtitle {
+  font-family: var(--sans);
+  font-size: clamp(14px, 2vw, 20px);
+  font-weight: 300;
+  color: var(--text-d);
+  letter-spacing: 1px;
+  margin-bottom: 40px;
+}
+
+.cover-meta {
+  display: flex; gap: 48px; flex-wrap: wrap;
+  border-top: 1px solid var(--border);
+  padding-top: 24px;
+}
+
+.cm { font-family: var(--mono); font-size: 11px; }
+.cm .label { color: var(--text-d); letter-spacing: 1px; margin-bottom: 3px; }
+.cm .val { color: var(--text-b); font-size: 13px; }
+
+/* ─── LAYOUT ─── */
+.body-wrap {
+  position: relative; z-index: 1;
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  min-height: calc(100vh - 200px);
+}
+
+/* ─── SIDEBAR NAV ─── */
+.sidebar {
+  position: sticky; top: 0; height: 100vh;
+  overflow-y: auto;
+  background: var(--ink1);
+  border-right: 1px solid var(--border);
+  padding: 32px 0;
+}
+
+.nav-group-label {
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 3px;
+  color: var(--text-d);
+  text-transform: uppercase;
+  padding: 12px 20px 4px;
+  margin-top: 16px;
+}
+
+.nav-group-label:first-child { margin-top: 0; }
+
+.nav-link {
+  display: block;
+  padding: 7px 20px;
+  font-size: 12px;
+  color: var(--text-d);
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  transition: all .12s;
+  line-height: 1.4;
+}
+
+.nav-link:hover {
+  background: var(--ink2);
+  color: var(--text);
+  border-left-color: var(--border2);
+}
+
+.nav-link.h1 { font-weight: 500; color: var(--text); }
+.nav-link.h1:hover { border-left-color: var(--cyan); color: var(--cyan); }
+
+/* ─── MAIN ─── */
+.main { padding: 48px 56px 80px; max-width: 860px; }
+
+/* ─── SECTIONS ─── */
+.section { margin-bottom: 64px; }
+
+h1.sec-title {
+  font-family: var(--disp);
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  color: var(--cyan);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+  display: flex; align-items: center; gap: 12px;
+}
+
+.sec-num {
+  font-size: 10px;
+  background: var(--cyan);
+  color: var(--ink);
+  padding: 2px 7px;
+  border-radius: 2px;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+.sec-desc {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-d);
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+h2 {
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: .5px;
+  color: var(--text-b);
+  margin: 28px 0 10px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid var(--border);
+}
+
+h3 {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--amber);
+  text-transform: uppercase;
+  margin: 20px 0 8px;
+}
+
+p { margin: 10px 0; color: var(--text); font-size: 14px; }
+
+code {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  color: var(--cyan);
+  background: var(--ink2);
+  padding: 1px 5px;
+  border-radius: 2px;
+  border: 1px solid var(--border);
+}
+
+strong { color: var(--text-b); font-weight: 500; }
+em { color: var(--text-d); font-style: italic; }
+
+/* ─── TOPOLOGY DIAGRAM ─── */
+.topo {
+  background: var(--ink1);
+  border: 1px solid var(--border2);
+  border-radius: 4px;
+  padding: 32px;
+  margin: 24px 0;
+  font-family: var(--mono);
+  font-size: 11px;
+  overflow-x: auto;
+}
+
+.topo-row {
+  display: flex; align-items: center;
+  gap: 0; margin: 4px 0;
+}
+
+.topo-node {
+  display: inline-flex; flex-direction: column; align-items: center;
+  min-width: 110px;
+}
+
+.topo-box {
+  border: 1px solid; border-radius: 3px;
+  padding: 6px 12px;
+  text-align: center;
+  font-size: 10px; letter-spacing: 1px;
+  position: relative;
+}
+
+.topo-box.hub {
+  border-color: var(--cyan);
+  color: var(--cyan);
+  background: rgba(0,217,255,.06);
+  min-width: 120px;
+}
+
+.topo-box.peer {
+  border-color: var(--purple);
+  color: var(--purple);
+  background: rgba(136,85,255,.06);
+}
+
+.topo-box.store {
+  border-color: var(--teal);
+  color: var(--teal);
+  background: rgba(0,191,165,.06);
+}
+
+.topo-box.hsm-hw {
+  border-color: var(--amber);
+  color: var(--amber);
+  background: rgba(255,183,0,.06);
+  border-style: dashed;
+}
+
+.topo-box.fw {
+  border-color: var(--red);
+  color: var(--red);
+  background: rgba(255,64,96,.06);
+  min-width: 80px;
+}
+
+.topo-box.client {
+  border-color: var(--text-d);
+  color: var(--text-d);
+  background: rgba(106,128,160,.06);
+}
+
+.topo-box .sub {
+  font-size: 8px;
+  color: var(--text-d);
+  margin-top: 2px;
+  letter-spacing: 0;
+  display: block;
+}
+
+.topo-line {
+  display: flex; flex-direction: column; align-items: center;
+  flex-shrink: 0; padding: 0 4px;
+}
+
+.topo-h-line {
+  width: 28px; height: 1px;
+  background: var(--border2);
+  position: relative;
+  flex-shrink: 0;
+  align-self: center;
+}
+
+.topo-h-line.sec-line {
+  background: var(--border);
+  border-top: 1px dashed var(--border2);
+  height: 0;
+}
+
+.topo-label {
+  font-size: 8px; color: var(--text-d);
+  letter-spacing: 1px; margin-top: 4px;
+  text-align: center; white-space: nowrap;
+}
+
+.topo-v {
+  width: 1px; background: var(--border2);
+  margin: 0 auto;
+}
+
+.topo-section-label {
+  font-size: 8px; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--text-d); margin-bottom: 8px; margin-top: 20px;
+}
+
+.topo-section-label:first-child { margin-top: 0; }
+
+.legend {
+  display: flex; gap: 20px; flex-wrap: wrap;
+  margin-top: 20px; padding-top: 16px;
+  border-top: 1px solid var(--border);
+  font-size: 10px; color: var(--text-d);
+}
+
+.leg-item { display: flex; align-items: center; gap: 6px; }
+.leg-dot { width: 8px; height: 8px; border-radius: 1px; }
+
+/* ─── CODE BLOCKS ─── */
+.cb {
+  background: var(--ink1);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--cyan-d);
+  border-radius: 4px;
+  margin: 16px 0;
+  overflow: hidden;
+}
+
+.cb-head {
+  background: var(--ink2);
+  padding: 6px 14px;
+  display: flex; justify-content: space-between; align-items: center;
+  border-bottom: 1px solid var(--border);
+  font-family: var(--mono); font-size: 10px; color: var(--text-d);
+  letter-spacing: 1px;
+}
+
+.cb-head .lang { color: var(--cyan-d); }
+.cb-head .tag {
+  font-size: 8px; padding: 1px 6px; border-radius: 2px;
+  font-weight: 500; letter-spacing: 1px;
+}
+.tag-warn { background: rgba(255,183,0,.15); color: var(--amber); border: 1px solid rgba(255,183,0,.3); }
+.tag-ok   { background: rgba(0,232,122,.1);  color: var(--green); border: 1px solid rgba(0,232,122,.25); }
+.tag-crit { background: rgba(255,64,96,.15); color: var(--red);   border: 1px solid rgba(255,64,96,.3); }
+
+pre {
+  padding: 16px 18px;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  line-height: 1.75;
+  color: var(--text);
+  overflow-x: auto;
+  white-space: pre;
+}
+
+.cm  { color: var(--text-d); font-style: italic; }
+.kw  { color: var(--purple); }
+.fn  { color: var(--cyan); }
+.st  { color: var(--green); }
+.nb  { color: var(--amber); }
+.hl  { background: rgba(255,183,0,.07); display: block; margin: 0 -18px; padding: 0 16px; }
+
+/* ─── CALLOUTS ─── */
+.callout {
+  border-radius: 3px;
+  padding: 13px 16px 13px 42px;
+  margin: 16px 0;
+  font-size: 13px;
+  line-height: 1.7;
+  border: 1px solid;
+  position: relative;
+}
+
+.callout::before {
+  position: absolute; left: 14px; top: 13px; font-size: 14px;
+}
+
+.c-info  { border-color: rgba(0,217,255,.25); background: rgba(0,217,255,.04); }
+.c-info::before  { content: 'ℹ'; color: var(--cyan); }
+.c-warn  { border-color: rgba(255,183,0,.25); background: rgba(255,183,0,.04); }
+.c-warn::before  { content: '⚠'; color: var(--amber); }
+.c-ok    { border-color: rgba(0,232,122,.25); background: rgba(0,232,122,.04); }
+.c-ok::before    { content: '✓'; color: var(--green); }
+.c-crit  { border-color: rgba(255,64,96,.25); background: rgba(255,64,96,.04); }
+.c-crit::before  { content: '⚡'; color: var(--red); }
+.c-sec   { border-color: rgba(255,183,0,.3); background: rgba(255,183,0,.05); border-left: 3px solid var(--amber); }
+.c-sec::before   { content: '🔑'; font-style: normal; left: 12px; }
+
+/* ─── STEP TABLES ─── */
+.steps {
+  display: flex; flex-direction: column;
+  border: 1px solid var(--border); border-radius: 4px; overflow: hidden;
+  margin: 16px 0;
+}
+
+.step {
+  display: grid; grid-template-columns: 52px 1fr;
+  border-bottom: 1px solid var(--border);
+  background: var(--ink1);
+}
+
+.step:last-child { border-bottom: none; }
+
+.step-n {
+  background: var(--ink2);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--disp); font-size: 14px; color: var(--cyan);
+  font-weight: 600; border-right: 1px solid var(--border);
+}
+
+.step-n.warn { color: var(--amber); }
+.step-n.crit { color: var(--red); }
+.step-n.ok   { color: var(--green); }
+
+.step-body { padding: 12px 16px; font-size: 13px; }
+.step-body strong { color: var(--text-b); display: block; margin-bottom: 2px; }
+.step-body .detail { font-size: 12px; color: var(--text-d); font-family: var(--mono); margin-top: 4px; }
+
+/* ─── TABLES ─── */
+.dt {
+  width: 100%; border-collapse: collapse; font-size: 12px; margin: 16px 0;
+}
+
+.dt th {
+  background: var(--ink2); padding: 8px 12px; text-align: left;
+  font-family: var(--mono); font-size: 9px; letter-spacing: 2px;
+  color: var(--text-d); border: 1px solid var(--border);
+  text-transform: uppercase;
+}
+
+.dt td {
+  padding: 8px 12px; border: 1px solid var(--border);
+  vertical-align: top; background: var(--ink1);
+}
+
+.dt .port { font-family: var(--mono); color: var(--amber); }
+.dt .svc  { color: var(--cyan); font-family: var(--mono); }
+.dt .dir  { font-family: var(--mono); font-size: 10px; }
+
+/* ─── BADGE ─── */
+.badge {
+  display: inline-block; padding: 1px 7px; border-radius: 2px;
+  font-family: var(--mono); font-size: 9px; letter-spacing: 1px;
+  text-transform: uppercase; border: 1px solid;
+}
+.b-green  { color: var(--green); background: rgba(0,232,122,.08); border-color: rgba(0,232,122,.3); }
+.b-red    { color: var(--red);   background: rgba(255,64,96,.08);  border-color: rgba(255,64,96,.3); }
+.b-amber  { color: var(--amber); background: rgba(255,183,0,.08);  border-color: rgba(255,183,0,.3); }
+.b-cyan   { color: var(--cyan);  background: rgba(0,217,255,.08);  border-color: rgba(0,217,255,.3); }
+.b-purple { color: var(--purple);background: rgba(136,85,255,.08); border-color: rgba(136,85,255,.3); }
+
+/* ─── CHOKE POINT ─── */
+.choke {
+  background: var(--ink2);
+  border: 1px solid var(--border2);
+  border-left: 3px solid var(--red);
+  border-radius: 4px;
+  padding: 14px 16px;
+  margin: 12px 0;
+  font-size: 13px;
+}
+
+.choke-label {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 2px;
+  color: var(--red); text-transform: uppercase; margin-bottom: 5px;
+}
+
+.choke-title { color: var(--text-b); font-weight: 500; margin-bottom: 4px; }
+.choke-desc  { color: var(--text-d); font-size: 12px; line-height: 1.6; }
+.choke-test  { font-family: var(--mono); font-size: 11px; color: var(--amber);
+               margin-top: 6px; border-top: 1px solid var(--border); padding-top: 6px; }
+
+/* ─── APPROVAL CHAIN ─── */
+.chain {
+  display: flex; flex-direction: column; gap: 0;
+  border: 1px solid var(--border); border-radius: 4px; overflow: hidden;
+  margin: 16px 0;
+}
+
+.chain-step {
+  display: grid; grid-template-columns: 36px 1fr auto;
+  align-items: center; gap: 12px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  background: var(--ink1); font-size: 13px;
+  position: relative;
+}
+
+.chain-step:last-child { border-bottom: none; }
+
+.chain-step::after {
+  content: '';
+  position: absolute; left: 18px; bottom: -10px;
+  width: 1px; height: 10px; background: var(--border2); z-index: 1;
+}
+
+.chain-step:last-child::after { display: none; }
+
+.chain-num {
+  width: 28px; height: 28px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--disp); font-size: 11px; font-weight: 600;
+  background: var(--ink2); border: 1px solid var(--border2);
+  color: var(--cyan); flex-shrink: 0;
+}
+
+.chain-body strong { color: var(--text-b); display: block; font-size: 13px; }
+.chain-body span   { color: var(--text-d); font-size: 12px; }
+
+.chain-badge { flex-shrink: 0; }
+
+/* ─── SCROLLBAR ─── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: var(--ink1); }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+
+/* ─── FOOTER ─── */
+footer {
+  position: relative; z-index: 1;
+  border-top: 1px solid var(--border);
+  padding: 28px 64px;
+  display: flex; justify-content: space-between; align-items: center;
+  font-family: var(--mono); font-size: 10px; color: var(--text-d);
+  background: var(--ink1);
+}
+
+footer .fl { font-family: var(--disp); color: var(--cyan); letter-spacing: 3px; }
+
+@media (max-width: 800px) {
+  .body-wrap { grid-template-columns: 1fr; }
+  .sidebar   { display: none; }
+  .main      { padding: 32px 24px; }
+  .cover     { padding: 40px 24px 32px; }
+  footer     { padding: 20px 24px; flex-direction: column; gap: 8px; }
+}
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-eyebrow">Controlled Document</div>
+  <div class="cover-logo">WARLOK</div>
+  <div class="cover-subtitle">Site Installation &amp; Test Implementation Report</div>
+  <div class="cover-meta">
+    <div class="cm"><div class="label">Document Type</div><div class="val">Deployment Field Guide</div></div>
+    <div class="cm"><div class="label">Scope</div><div class="val">Client-Site Pilot Bundle</div></div>
+    <div class="cm"><div class="label">System Version</div><div class="val">v3.0 + YubiHSM2</div></div>
+    <div class="cm"><div class="label">Classification</div><div class="val">Restricted — Pilot Personnel Only</div></div>
+    <div class="cm"><div class="label">Revision</div><div class="val">March 2026 — Pre-Pilot</div></div>
+  </div>
+</div>
+
+<!-- BODY -->
+<div class="body-wrap">
+
+<!-- SIDEBAR -->
+<nav class="sidebar">
+  <div class="nav-group-label">Overview</div>
+  <a class="nav-link h1" href="#s1">01 — Deployment Topology</a>
+  <a class="nav-link" href="#s1a">Network zones</a>
+  <a class="nav-link" href="#s1b">Node roles &amp; placement</a>
+  <a class="nav-link" href="#s1c">Port &amp; firewall map</a>
+
+  <div class="nav-group-label">Installation</div>
+  <a class="nav-link h1" href="#s2">02 — Hub Node Setup</a>
+  <a class="nav-link" href="#s2a">OS &amp; environment</a>
+  <a class="nav-link" href="#s2b">YubiHSM2 provisioning</a>
+  <a class="nav-link" href="#s2c">Service configuration</a>
+
+  <a class="nav-link h1" href="#s3">03 — Peer Node Setup</a>
+  <a class="nav-link" href="#s3a">Per-peer deployment</a>
+  <a class="nav-link" href="#s3b">Transport &amp; TLS</a>
+  <a class="nav-link" href="#s3c">Storage targeting</a>
+
+  <div class="nav-group-label">Choke Points</div>
+  <a class="nav-link h1" href="#s4">04 — Communication Lines</a>
+  <a class="nav-link" href="#s4a">Line A: Execution path</a>
+  <a class="nav-link" href="#s4b">Line B: Data transit path</a>
+  <a class="nav-link" href="#s4c">Choke point inventory</a>
+
+  <div class="nav-group-label">Validation</div>
+  <a class="nav-link h1" href="#s5">05 — Test Protocol</a>
+  <a class="nav-link" href="#s5a">Phase 1: HSM &amp; signing</a>
+  <a class="nav-link" href="#s5b">Phase 2: Execution line</a>
+  <a class="nav-link" href="#s5c">Phase 3: Data transit</a>
+  <a class="nav-link" href="#s5d">Phase 4: Attack &amp; detect</a>
+
+  <div class="nav-group-label">Governance</div>
+  <a class="nav-link h1" href="#s6">06 — Chain Approval</a>
+  <a class="nav-link h1" href="#s7">07 — Acceptance Criteria</a>
+  <a class="nav-link h1" href="#s8">08 — Operations Runbook</a>
+</nav>
+
+<!-- MAIN CONTENT -->
+<main class="main">
+
+<!-- ═══════════════════════════════════════ -->
+<!-- S1: TOPOLOGY -->
+<!-- ═══════════════════════════════════════ -->
+<div class="section" id="s1">
+<h1 class="sec-title"><span class="sec-num">01</span> Deployment Topology</h1>
+<div class="sec-desc">// Physical and logical placement of all WARLOK components on client site</div>
+
+<h2 id="s1a">Network Zones</h2>
+<p>WARLOK is deployed across three isolated network zones. The hub occupies the secure operations zone.
+Peers sit in the execution zone — the segment closest to the work being performed.
+The client console (browser-based UI) is in the staff zone, separated by a firewall that permits only
+HTTPS to the hub and read-only API calls.</p>
+
+<div class="topo">
+  <div class="topo-section-label">// Staff Zone — Browser Access Only</div>
+  <div class="topo-row">
+    <div class="topo-node">
+      <div class="topo-box client">OPERATOR CONSOLE<span class="sub">Browser → :8000/ui</span></div>
+    </div>
+    <div class="topo-h-line"></div>
+    <div class="topo-node" style="min-width:80px;text-align:center">
+      <div class="topo-box fw">FIREWALL<span class="sub">HTTPS only</span></div>
+    </div>
+    <div class="topo-h-line"></div>
+    <div class="topo-node">
+      <div class="topo-box fw">FIREWALL<span class="sub">Peer ports</span></div>
+    </div>
+  </div>
+
+  <div style="margin:12px 0 0 55px;display:flex;gap:0;align-items:flex-start">
+    <div style="width:1px;height:32px;background:var(--border2);margin:0 auto;width:55px;height:24px;border-right:1px solid var(--border2)"></div>
+    <div style="width:1px;height:32px;background:var(--border2);margin-left:168px;border-right:1px solid var(--border2);height:24px"></div>
+  </div>
+
+  <div class="topo-section-label" style="margin-top:8px">// Secure Operations Zone — Hub &amp; HSM</div>
+  <div class="topo-row" style="gap:12px;flex-wrap:wrap">
+    <div class="topo-node">
+      <div class="topo-box hub">WARLOK HUB<span class="sub">:8000 — FastAPI</span></div>
+      <div class="topo-label">hub-node</div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;align-self:center">
+      <div style="width:40px;height:1px;background:var(--amber)"></div>
+      <div style="font-size:8px;color:var(--amber);letter-spacing:1px;margin-top:2px">USB</div>
+    </div>
+    <div class="topo-node">
+      <div class="topo-box hsm-hw">YubiHSM2<span class="sub">USB · Key slots</span></div>
+      <div class="topo-label">hardware</div>
+    </div>
+    <div style="width:40px;height:1px;background:var(--border2);align-self:center;margin-top:-14px"></div>
+    <div class="topo-node">
+      <div class="topo-box store">HUB STORE<span class="sub">FileStore</span></div>
+      <div class="topo-label">/data/warlok/hub</div>
+    </div>
+  </div>
+
+  <div style="margin:0 0 0 55px;height:24px;border-right:1px solid var(--border2);width:1px"></div>
+
+  <div class="topo-section-label">// Execution Zone — Peer Nodes</div>
+  <div class="topo-row" style="gap:16px;flex-wrap:wrap">
+    <div class="topo-node">
+      <div class="topo-box peer">PEER-ALPHA<span class="sub">:8001</span></div>
+      <div class="topo-label">exec-node-1</div>
+    </div>
+    <div style="height:1px;width:24px;background:var(--border2);align-self:center;margin-top:-14px"></div>
+    <div class="topo-node">
+      <div class="topo-box peer">PEER-BETA<span class="sub">:8002</span></div>
+      <div class="topo-label">exec-node-2</div>
+    </div>
+    <div style="height:1px;width:24px;background:var(--border2);align-self:center;margin-top:-14px"></div>
+    <div class="topo-node">
+      <div class="topo-box peer">PEER-GAMMA<span class="sub">:8003</span></div>
+      <div class="topo-label">exec-node-3</div>
+    </div>
+  </div>
+
+  <div class="topo-row" style="gap:16px;flex-wrap:wrap;margin-top:8px">
+    <div class="topo-node">
+      <div class="topo-box store">STORE-A<span class="sub">/data/warlok/alpha</span></div>
+    </div>
+    <div style="width:40px"></div>
+    <div class="topo-node">
+      <div class="topo-box store">STORE-B<span class="sub">/data/warlok/beta</span></div>
+    </div>
+    <div style="width:40px"></div>
+    <div class="topo-node">
+      <div class="topo-box store">STORE-C<span class="sub">/data/warlok/gamma</span></div>
+    </div>
+  </div>
+
+  <div class="legend">
+    <div class="leg-item"><div class="leg-dot" style="background:var(--cyan);border:1px solid var(--cyan)"></div>Hub process</div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--purple);border:1px solid var(--purple)"></div>Peer process</div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--amber);border:1px dashed var(--amber)"></div>Hardware device</div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--teal);border:1px solid var(--teal)"></div>Storage target</div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--red);border:1px solid var(--red)"></div>Firewall boundary</div>
+  </div>
+</div>
+
+<h2 id="s1b">Node Roles &amp; Physical Placement</h2>
+<table class="dt">
+<thead><tr><th>Node</th><th>Role</th><th>Physical Location</th><th>Min Spec</th></tr></thead>
+<tbody>
+<tr>
+  <td class="svc">hub-node</td>
+  <td>Hub + YubiHSM2 host + UI server + storage coordinator</td>
+  <td>Secure ops rack, locked cabinet, physical access log</td>
+  <td>4-core, 8GB RAM, 50GB SSD, Ubuntu 22.04 LTS</td>
+</tr>
+<tr>
+  <td class="svc">exec-node-1..3</td>
+  <td>Peer execution agents — receive tasks, sign blocks, hold local storage</td>
+  <td>Execution rack or adjacent server room — same site, different physical segment</td>
+  <td>2-core, 4GB RAM, 20GB SSD per peer</td>
+</tr>
+<tr>
+  <td class="svc">Operator workstation</td>
+  <td>Browser-based console only — no WARLOK process installed</td>
+  <td>Staff office / operations desk</td>
+  <td>Any modern browser with HTTPS support</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="s1c">Port &amp; Firewall Map</h2>
+<table class="dt">
+<thead><tr><th>Source</th><th>Destination</th><th>Port</th><th>Protocol</th><th>Purpose</th><th>Rule</th></tr></thead>
+<tbody>
+<tr>
+  <td>Operator workstation</td><td class="svc">hub-node</td>
+  <td class="port">8000</td><td>HTTPS/TLS</td>
+  <td>UI access + API calls (read-only endpoints)</td>
+  <td><span class="badge b-green">ALLOW</span></td>
+</tr>
+<tr>
+  <td class="svc">hub-node</td><td class="svc">exec-node-1..3</td>
+  <td class="port">8001–8003</td><td>HTTPS/TLS</td>
+  <td>Task dispatch, block replication, telemetry, validate requests</td>
+  <td><span class="badge b-green">ALLOW</span></td>
+</tr>
+<tr>
+  <td class="svc">exec-node-1..3</td><td class="svc">hub-node</td>
+  <td class="port">8000</td><td>HTTPS/TLS</td>
+  <td>ACK responses, cross-validation callbacks</td>
+  <td><span class="badge b-green">ALLOW</span></td>
+</tr>
+<tr>
+  <td class="svc">exec-node-1..3</td><td class="svc">exec-node-1..3</td>
+  <td class="port">8001–8003</td><td>HTTPS/TLS</td>
+  <td>Peer-to-peer cross-validation (full mesh)</td>
+  <td><span class="badge b-green">ALLOW</span></td>
+</tr>
+<tr>
+  <td>Any</td><td class="svc">hub-node</td>
+  <td class="port">22</td><td>SSH</td>
+  <td>Admin access — restricted to jump host</td>
+  <td><span class="badge b-amber">JUMP ONLY</span></td>
+</tr>
+<tr>
+  <td>Operator workstation</td><td class="svc">hub-node</td>
+  <td class="port">8000</td><td>HTTPS</td>
+  <td>Admin endpoints (/reset, /peers/task) — require API key header</td>
+  <td><span class="badge b-amber">API KEY</span></td>
+</tr>
+<tr>
+  <td>Any</td><td>Any</td>
+  <td class="port">*</td><td>Any</td>
+  <td>All other traffic</td>
+  <td><span class="badge b-red">DENY</span></td>
+</tr>
+</tbody>
+</table>
+
+<div class="callout c-crit">
+The YubiHSM2 connector daemon (<code>yubihsm-connector</code>) listens on
+<code>localhost:12345</code> on hub-node. This port must <strong>never</strong> be exposed
+beyond 127.0.0.1. Any firewall rule that reaches this port from the network
+constitutes a critical security misconfiguration — the entire key hierarchy becomes remotely accessible.
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- S2: HUB NODE SETUP -->
+<!-- ═══════════════════════════════════════ -->
+<div class="section" id="s2">
+<h1 class="sec-title"><span class="sec-num">02</span> Hub Node Setup</h1>
+<div class="sec-desc">// Installation sequence for hub-node — the root-of-trust anchor</div>
+
+<h2 id="s2a">OS &amp; Environment</h2>
+
+<div class="cb">
+<div class="cb-head"><span>hub-node — initial environment</span><span class="lang">Shell</span></div>
+<pre><span class="cm"># 1. OS hardening baseline</span>
+apt update &amp;&amp; apt upgrade -y
+apt install -y python3.11 python3.11-venv ufw fail2ban
+
+<span class="cm"># 2. Firewall — open only required ports</span>
+ufw default deny incoming
+ufw allow from &lt;EXEC_ZONE_CIDR&gt; to any port 8000 proto tcp
+ufw allow from &lt;STAFF_ZONE_CIDR&gt; to any port 8000 proto tcp
+ufw allow from &lt;JUMP_HOST_IP&gt; to any port 22 proto tcp
+ufw enable
+
+<span class="cm"># 3. Application user — no shell, no sudo</span>
+useradd -r -s /bin/false -d /opt/warlok warlok
+mkdir -p /opt/warlok /data/warlok/hub /data/warlok/certs
+chown -R warlok:warlok /opt/warlok /data/warlok
+
+<span class="cm"># 4. Python environment</span>
+python3.11 -m venv /opt/warlok/venv
+source /opt/warlok/venv/bin/activate
+pip install fastapi "uvicorn[standard]" yubihsm cryptography
+
+<span class="cm"># 5. Deploy codebase</span>
+cp -r warlok/ /opt/warlok/app/</pre>
+</div>
+
+<h2 id="s2b">YubiHSM2 Provisioning</h2>
+
+<div class="callout c-sec">
+Provisioning is a <strong>one-time operation</strong> performed offline, before connecting hub-node to
+the network. The provisioner engineer must sign the provisioning log. The default authkey password
+is changed immediately. The provisioning session is not repeatable — if the device is reset,
+all signed blocks from prior epochs become unverifiable without the backup epoch key record.
+</div>
+
+<div class="steps">
+  <div class="step">
+    <div class="step-n">1</div>
+    <div class="step-body">
+      <strong>Install YubiHSM2 connector daemon</strong>
+      <div class="detail">apt install yubihsm-connector &amp;&amp; systemctl enable --now yubihsm-connector</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-n">2</div>
+    <div class="step-body">
+      <strong>Generate root HMAC key in slot 0x0010</strong>
+      <div class="detail">yubihsm-shell: generate hmac-key 0 0x0010 warlok-root 1 sign-hmac,verify-hmac hmac-sha256</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-n">3</div>
+    <div class="step-body">
+      <strong>Create hub authkey (slot 0x0002) — sign-hmac only</strong>
+      <div class="detail">put authkey 0 0x0002 warlok-hub 1 sign-hmac &lt;generated-password-32chars&gt;</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-n">4</div>
+    <div class="step-body">
+      <strong>Create per-peer authkeys (slots 0x0003–0x0005) — verify-hmac only</strong>
+      <div class="detail">put authkey 0 0x0003 peer-alpha 1 verify-hmac &lt;peer-alpha-password&gt;</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-n warn">⚠</div>
+    <div class="step-body">
+      <strong>Change default admin authkey password immediately</strong>
+      <div class="detail">change-authentication-key 0x0001 &lt;new-admin-password-64chars&gt; — store offline only</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-n">6</div>
+    <div class="step-body">
+      <strong>Record provisioning log — sign with admin authkey</strong>
+      <div class="detail">Export: get-object-info for all provisioned keys; sign log file; store in offline vault</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-n ok">✓</div>
+    <div class="step-body">
+      <strong>Verify provisioning — run smoke test</strong>
+      <div class="detail">python3 hsm/provisioner.py --verify — confirms sign/verify round-trip on device</div>
+    </div>
+  </div>
+</div>
+
+<h2 id="s2c">Hub Service Configuration</h2>
+
+<div class="cb">
+<div class="cb-head"><span>/opt/warlok/config/pilot.env</span><span class="lang">Env</span><span class="tag tag-warn">SECRETS — NOT IN GIT</span></div>
+<pre><span class="cm"># HSM backend selection</span>
+WARLOK_HSM_BACKEND=yubihsm2
+WARLOK_HSM_CONNECTOR=http://127.0.0.1:12345
+WARLOK_HSM_AUTH_KEY_ID=0x0002
+WARLOK_HSM_AUTH_PWD=&lt;hub-authkey-password&gt;
+WARLOK_HSM_ROOT_KEY_ID=0x0010
+
+<span class="cm"># API authentication</span>
+WARLOK_API_KEY=&lt;random-64-char-hex&gt;
+
+<span class="cm"># Peer endpoints (populated after peer nodes are deployed)</span>
+WARLOK_PEER_ALPHA=https://exec-node-1:8001
+WARLOK_PEER_BETA=https://exec-node-2:8002
+WARLOK_PEER_GAMMA=https://exec-node-3:8003
+
+<span class="cm"># Storage</span>
+WARLOK_STORE_BACKEND=file
+WARLOK_STORE_ROOT=/data/warlok/hub
+
+<span class="cm"># TLS</span>
+WARLOK_TLS_CERT=/data/warlok/certs/hub.crt
+WARLOK_TLS_KEY=/data/warlok/certs/hub.key</pre>
+</div>
+
+<div class="cb">
+<div class="cb-head"><span>/etc/systemd/system/warlok-hub.service</span><span class="lang">Systemd</span></div>
+<pre>[Unit]
+Description=WARLOK Hub Node
+After=network.target yubihsm-connector.service
+Requires=yubihsm-connector.service
+
+[Service]
+User=warlok
+Group=warlok
+WorkingDirectory=/opt/warlok/app
+EnvironmentFile=/opt/warlok/config/pilot.env
+ExecStart=/opt/warlok/venv/bin/uvicorn api.server:app \
+  --host 0.0.0.0 --port 8000 \
+  --ssl-keyfile $WARLOK_TLS_KEY \
+  --ssl-certfile $WARLOK_TLS_CERT \
+  --workers 1
+Restart=on-failure
+RestartSec=5s
+<span class="hl">NoNewPrivileges=yes
+ProtectSystem=strict
+ReadWritePaths=/data/warlok/hub
+PrivateTmp=yes</span>
+
+[Install]
+WantedBy=multi-user.target</pre>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- S3: PEER NODE SETUP -->
+<!-- ═══════════════════════════════════════ -->
+<div class="section" id="s3">
+<h1 class="sec-title"><span class="sec-num">03</span> Peer Node Setup</h1>
+<div class="sec-desc">// Deployment of exec-node-1, exec-node-2, exec-node-3</div>
+
+<p>Each peer node runs an independent WARLOK peer process. The installation is identical
+across all three; only the peer ID, port, and authkey password differ. Peers do not need
+a YubiHSM2 device — they authenticate to the hub's device using their designated
+authkey over the existing yubihsm-connector session on hub-node.</p>
+
+<div class="callout c-info">
+In the pilot configuration, peer HSM operations are <strong>proxied through the hub's connector</strong>.
+This means exec-node-1..3 send their sign/verify operations to hub-node:12345 via the authenticated session.
+For a hardened multi-site deployment, each peer would carry its own YubiHSM2 USB device.
+The adapter code supports both modes via the <code>WARLOK_HSM_CONNECTOR</code> env var.
+</div>
+
+<h2 id="s3a">Per-Peer Deployment</h2>
+
+<div class="cb">
+<div class="cb-head"><span>exec-node-1 — peer-alpha (repeat for beta/gamma with different values)</span><span class="lang">Shell</span></div>
+<pre><span class="cm"># Same OS hardening + venv as hub-node, then:</span>
+
+<span class="cm"># Peer-specific env file</span>
+cat &gt; /opt/warlok/config/peer.env &lt;&lt; EOF
+WARLOK_PEER_ID=peer-alpha
+WARLOK_PEER_PORT=8001
+WARLOK_HUB_URL=https://hub-node:8000
+WARLOK_HSM_CONNECTOR=https://hub-node:12345   <span class="cm"># proxied</span>
+WARLOK_HSM_AUTH_KEY_ID=0x0003                 <span class="cm"># peer-alpha slot</span>
+WARLOK_HSM_AUTH_PWD=&lt;peer-alpha-password&gt;
+WARLOK_STORE_BACKEND=file
+WARLOK_STORE_ROOT=/data/warlok/alpha
+WARLOK_TLS_CERT=/data/warlok/certs/peer-alpha.crt
+WARLOK_TLS_KEY=/data/warlok/certs/peer-alpha.key
+WARLOK_API_KEY=&lt;same-api-key-as-hub&gt;
+EOF</pre>
+</div>
+
+<h2 id="s3b">Transport &amp; TLS</h2>
+<p>Self-signed certificates are generated for the pilot. Each node gets a cert with its
+hostname as the Common Name. All nodes pin each other's certificates — no public CA is involved,
+eliminating the dependency on external PKI during a controlled site pilot.</p>
+
+<div class="cb">
+<div class="cb-head"><span>TLS certificate generation — run on each node</span><span class="lang">Shell</span></div>
+<pre><span class="cm"># Generate cert + key for hub-node</span>
+openssl req -x509 -newkey rsa:4096 -keyout hub.key -out hub.crt \
+  -days 365 -nodes -subj "/CN=hub-node" \
+  -addext "subjectAltName=IP:&lt;HUB_IP&gt;,DNS:hub-node"
+
+<span class="cm"># Distribute hub.crt to all peer nodes as trusted CA</span>
+<span class="cm"># Distribute peer-*.crt to hub-node for mTLS verification</span>
+
+<span class="cm"># Verify cert fingerprint is logged in provisioning record</span>
+openssl x509 -in hub.crt -noout -fingerprint -sha256</pre>
+</div>
+
+<h2 id="s3c">Storage Targeting</h2>
+<p>Each peer writes execution results, replicated blocks, and telemetry to its own isolated
+filesystem path under <code>/data/warlok/&lt;peer-id&gt;/</code>. The FileStore backend
+uses SHA-256-derived filenames, making directory enumeration uninformative without the key index.
+Separate filesystem mount points per peer are recommended to bound any runaway write.</p>
+
+<div class="callout c-warn">
+File ownership must be <code>warlok:warlok</code> with mode <code>750</code> on all store directories.
+The systemd service runs as the <code>warlok</code> user with <code>ProtectSystem=strict</code>
+and only the store path whitelisted via <code>ReadWritePaths</code>. Any attempt by the peer
+process to write outside its designated store directory will be blocked at the kernel level.
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- S4: COMMUNICATION LINES & CHOKE POINTS -->
+<!-- ═══════════════════════════════════════ -->
+<div class="section" id="s4">
+<h1 class="sec-title"><span class="sec-num">04</span> Communication Lines &amp; Choke Points</h1>
+<div class="sec-desc">// Two distinct lines of communication — each with defined choke points and test triggers</div>
+
+<p>WARLOK has two functionally separate communication lines. <strong>Line A</strong> is the execution
+path: a signed command travels from hub to a peer, executes, produces a block, and the block hash
+returns with a storage receipt. <strong>Line B</strong> is the data transit path: raw bytes
+(telemetry, sensor data, results) move from a source peer to a designated storage peer,
+are checksummed, and a receipt is issued. Both lines are audited by the event log.
+Both lines terminate at the filesystem. Both are blocked at separate firewall chokepoints.</p>
+
+<h2 id="s4a">Line A — Execution Command Path</h2>
+
+<div class="steps">
+  <div class="step">
+    <div class="step-n">1</div>
+    <div class="step-body">
+      <strong>Hub: task constructed &amp; HMAC-signed (transport layer)</strong>
+      <div class="detail">Message envelope created: msg_id=UUID[:12], sender_id="hub", HMAC(root_key, canonical_json)</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-n">2</div>
+    <div class="step-body">
+      <strong>CHOKE POINT A-1 — Hub firewall egress to peer port</strong>
+      <div class="detail">Hub → exec-node-X:800N via HTTPS/TLS. If this port is blocked, task never arrives.</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-n">3</div>
+    <div class="step-body">
+      <strong>Peer: TLS handshake + message received</strong>
+      <div class="detail">mTLS: peer verifies hub cert fingerprint. Hub verifies peer cert fingerprint. Any cert mismatch → connection dropped.</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-n">4</div>
+    <div class="step-body">
+      <strong>Peer: transport HMAC verified</strong>
+      <div class="detail">PeerNode._verify_msg() — HMAC(sender.root_key, msg.canonical()) vs msg.signature. AUTH_FAIL if mismatch.</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-n">5</div>
+    <div class="step-body">
+      <strong>Peer: task_runner executed</strong>
+      <div class="detail">Result bytes produced. On exception: result = error message bytes, exec_status = ERROR.</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-n">6</div>
+    <div class="step-body">
+      <strong>CHOKE POINT A-2 — Peer HSM session (YubiHSM2 via connector)</strong>
+      <div class="detail">Peer requests block signing from YubiHSM2. HKDF epoch→block key derived on-device. If connector unreachable or authkey invalid → signing fails, block not created.</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-n">7</div>
+    <div class="step-body">
+      <strong>Peer: block created + signed + inserted into peer DAG</strong>
+      <div class="detail">Block hash = SHA-256(parents + payload + meta + timestamp). Signature = HMAC(block_key, hash_bytes). epoch stamped on meta._epoch.</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-n">8</div>
+    <div class="step-body">
+      <strong>CHOKE POINT A-3 — Peer store write (filesystem)</strong>
+      <div class="detail">FileStore.put("task:&lt;msg_id&gt;", result_bytes). SHA-256 checksum computed. Written to /data/warlok/&lt;peer&gt;/&lt;hash&gt;.json. If filesystem full or permission denied → STORE_PUT fails, receipt not issued.</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-n ok">✓</div>
+    <div class="step-body">
+      <strong>ACK returned to hub: block_hash + store_key + checksum</strong>
+      <div class="detail">Signed ACK message traverses CHOKE A-1 in reverse. Hub receives execution proof.</div>
+    </div>
+  </div>
+</div>
+
+<h2 id="s4b">Line B — Data Transit Path</h2>
+
+<div class="steps">
+  <div class="step">
+    <div class="step-n">1</div>
+    <div class="step-body">
+      <strong>Source peer: TELEMETRY message assembled</strong>
+      <div class="detail">data encoded as hex bytes. key = "sensor:&lt;id&gt;". Message HMAC-signed by sender.</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-n">2</div>
+    <div class="step-body">
+      <strong>CHOKE POINT B-1 — Source → target peer firewall</strong>
+      <div class="detail">Direct peer-to-peer HTTPS or hub-mediated POST /peers/telemetry. Firewall must permit peer port in both directions.</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-n">3</div>
+    <div class="step-body">
+      <strong>Target peer: message received, transport HMAC verified</strong>
+      <div class="detail">Same AUTH check as Line A. Sender must be a registered peer (correct root key).</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-n">4</div>
+    <div class="step-body">
+      <strong>CHOKE POINT B-2 — Target store write (filesystem)</strong>
+      <div class="detail">FileStore.put(key, data_bytes). SHA-256 checksum assigned. Written to /data/warlok/&lt;target&gt;/. Filesystem quota, permissions, and disk space are all failure modes here.</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-n">5</div>
+    <div class="step-body">
+      <strong>StorageReceipt issued: key + checksum + backend + peer_id + timestamp</strong>
+      <div class="detail">Receipt propagates back through CHOKE B-1 to the original sender as ACK payload.</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-n">6</div>
+    <div class="step-body">
+      <strong>CHOKE POINT B-3 — Receipt integrity verification</strong>
+      <div class="detail">Sender stores receipt. At any future point: GET /storage/&lt;peer&gt;/get/&lt;key&gt; → StorageRecord.verify() re-hashes value vs stored checksum. STORE_CORRUPT event if mismatch.</div>
+    </div>
+  </div>
+</div>
+
+<h2 id="s4c">Choke Point Inventory</h2>
+
+<div class="choke">
+  <div class="choke-label">Choke Point A-1</div>
+  <div class="choke-title">Hub → Peer Network Boundary</div>
+  <div class="choke-desc">Firewall rule between secure ops zone and execution zone. Controls whether tasks can be dispatched at all. Bidirectional — also gates ACK responses.</div>
+  <div class="choke-test">TEST: Block port 8001 → dispatch task → confirm timeout + PEER_SEND_ERR event. Unblock → retest → confirm task executes.</div>
+</div>
+
+<div class="choke">
+  <div class="choke-label">Choke Point A-2</div>
+  <div class="choke-title">YubiHSM2 Connector Availability</div>
+  <div class="choke-desc">Peer HSM operations route through the connector at localhost:12345 on hub-node. If yubihsm-connector is stopped, every signing operation fails — no block can be created by any peer.</div>
+  <div class="choke-test">TEST: systemctl stop yubihsm-connector → dispatch task → confirm "HSM unavailable" error in event log. Restart → confirm recovery.</div>
+</div>
+
+<div class="choke">
+  <div class="choke-label">Choke Point A-3 / B-2</div>
+  <div class="choke-title">Peer Filesystem Write Path</div>
+  <div class="choke-desc">Each peer's FileStore writes to /data/warlok/&lt;peer&gt;/. Filesystem full, incorrect ownership, or SELinux/AppArmor denial will produce STORE_PUT failure. The operation fails cleanly — no partial writes — but the block is still created in the peer DAG without a storage receipt.</div>
+  <div class="choke-test">TEST: chmod 000 /data/warlok/beta → dispatch task to peer-beta → confirm STORE_PUT fails in events, block_hash still returned. Restore permissions → confirm next task stores correctly.</div>
+</div>
+
+<div class="choke">
+  <div class="choke-label">Choke Point B-1</div>
+  <div class="choke-title">Peer-to-Peer Direct Channel</div>
+  <div class="choke-desc">Cross-validation and telemetry between peers traverses the exec zone internal network. A misconfigured firewall that blocks intra-peer traffic will cause 0% consensus on all cross-validate calls.</div>
+  <div class="choke-test">TEST: iptables -I INPUT -s exec-node-2 -j DROP on exec-node-1 → cross-validate → peer-alpha reports INVALID for peer-beta blocks. Remove rule → retest consensus.</div>
+</div>
+
+<div class="choke">
+  <div class="choke-label">Choke Point B-3</div>
+  <div class="choke-title">Storage Integrity Verification on Read</div>
+  <div class="choke-desc">Every GET from FileStore re-hashes the value and compares to the stored checksum. Manual file modification after storage will trigger STORE_CORRUPT. This is the final data-integrity gate before any downstream consumer.</div>
+  <div class="choke-test">TEST: After telemetry stored, manually edit the .json file value field → GET /storage/peer-beta/get/&lt;key&gt; → confirm STORE_CORRUPT event, 404 response.</div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- S5: TEST PROTOCOL -->
+<!-- ═══════════════════════════════════════ -->
+<div class="section" id="s5">
+<h1 class="sec-title"><span class="sec-num">05</span> Test Protocol</h1>
+<div class="sec-desc">// Ordered test phases — must pass sequentially. Each phase gates the next.</div>
+
+<h2 id="s5a">Phase 1 — HSM &amp; Block Signing</h2>
+<p>Verify the YubiHSM2 is correctly provisioned and the WARLOK signing pipeline is end-to-end functional before any peer communication is tested.</p>
+
+<div class="cb">
+<div class="cb-head"><span>Phase 1 test sequence — run on hub-node</span><span class="lang">Shell</span></div>
+<pre><span class="cm"># P1.1 — HSM device visible and responsive</span>
+curl -s https://hub-node:8000/hsm/status \
+  -H "X-WARLOK-KEY: $API_KEY" | python3 -m json.tool
+<span class="cm"># Expected: epoch_id=0, device=yubihsm2, root_key_id=0x10</span>
+
+<span class="cm"># P1.2 — Create a single block, verify it signs correctly</span>
+curl -s -X POST https://hub-node:8000/create_block \
+  -H "X-WARLOK-KEY: $API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"payload":"pilot-test-block-1","parents":[]}' | python3 -m json.tool
+<span class="cm"># Expected: hash=64char hex, status=ACTIVE, epoch=0</span>
+BLOCK1_HASH=&lt;hash from above&gt;
+
+<span class="cm"># P1.3 — Validate the block (verify_epoch on YubiHSM2)</span>
+curl -s -X POST https://hub-node:8000/validate \
+  -H "X-WARLOK-KEY: $API_KEY" \
+  -d "{\"hash\":\"$BLOCK1_HASH\"}" | python3 -m json.tool
+<span class="cm"># Expected: valid=true, msg=VALID</span>
+
+<span class="cm"># P1.4 — Verify HSM events in log</span>
+curl -s https://hub-node:8000/events -H "X-WARLOK-KEY: $API_KEY" | \
+  python3 -c "import json,sys; evs=json.load(sys.stdin)['events'];
+[print(e['type'],e['data'].get('device','')) for e in evs if 'HSM' in e['type']]"
+<span class="cm"># Expected: HSM_SIGN device=yubihsm2, HSM_VERIFY device=yubihsm2</span></pre>
+</div>
+
+<p><strong>Phase 1 pass criterion:</strong> <code>valid=true</code> returned from hardware-backed verify. HSM events show <code>"device":"yubihsm2"</code>. No <code>HSM_VERIFY</code> with <code>ok=false</code>.</p>
+
+<h2 id="s5b">Phase 2 — Execution Line (Line A) End-to-End</h2>
+
+<div class="cb">
+<div class="cb-head"><span>Phase 2 — dispatch, execute, sign, store, validate</span><span class="lang">Shell</span></div>
+<pre><span class="cm"># P2.1 — Peer mesh is online</span>
+curl -s https://hub-node:8000/peers -H "X-WARLOK-KEY: $API_KEY" | \
+  python3 -c "import json,sys; d=json.load(sys.stdin);
+[print(p, d['peer_status'][p]['dag_blocks'],'blocks') for p in d['peers']]"
+<span class="cm"># Expected: peer-alpha 0 blocks, peer-beta 0 blocks, peer-gamma 0 blocks</span>
+
+<span class="cm"># P2.2 — Dispatch task: alpha sends compute task to beta</span>
+RESULT=$(curl -s -X POST https://hub-node:8000/peers/task \
+  -H "X-WARLOK-KEY: $API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"from":"peer-alpha","to":"peer-beta",
+       "task":{"type":"compute","data":"pilot-payload-001"},
+       "parents":[]}')
+echo $RESULT | python3 -m json.tool
+TASK_BLOCK=$(echo $RESULT | python3 -c "import json,sys; print(json.load(sys.stdin)['block_hash'])")
+TASK_KEY=$(echo $RESULT | python3 -c "import json,sys; print(json.load(sys.stdin)['store_key'])")
+TASK_CKSUM=$(echo $RESULT | python3 -c "import json,sys;
+  print(json.load(sys.stdin)['store_receipt']['checksum'])")
+<span class="cm"># Expected: status=OK, exec_status=OK, block_hash=64chars, store_key=task:*</span>
+
+<span class="cm"># P2.3 — Verify task block exists in peer-beta's DAG</span>
+curl -s https://hub-node:8000/peers/peer-beta \
+  -H "X-WARLOK-KEY: $API_KEY" | \
+  python3 -c "import json,sys; d=json.load(sys.stdin); print('DAG blocks:', d['dag_blocks'])"
+<span class="cm"># Expected: DAG blocks: 1</span>
+
+<span class="cm"># P2.4 — Retrieve result from peer-beta's store, verify checksum</span>
+curl -s "https://hub-node:8000/storage/peer-beta/get/$TASK_KEY" \
+  -H "X-WARLOK-KEY: $API_KEY" | \
+  python3 -c "import json,sys; d=json.load(sys.stdin);
+print('Checksum match:', d['checksum'] == '$TASK_CKSUM')"
+<span class="cm"># Expected: Checksum match: True</span>
+
+<span class="cm"># P2.5 — Confirm block is on peer-beta's filesystem</span>
+ls -la /data/warlok/beta/*.json | wc -l
+<span class="cm"># Expected: &gt;= 1 file present</span></pre>
+</div>
+
+<p><strong>Phase 2 pass criterion:</strong> Block exists in peer-beta's DAG. Storage receipt checksum matches retrieved record checksum. File present on filesystem. No <code>PEER_AUTH_FAIL</code> events.</p>
+
+<h2 id="s5c">Phase 3 — Data Transit (Line B) End-to-End</h2>
+
+<div class="cb">
+<div class="cb-head"><span>Phase 3 — telemetry route, store, integrity verify, cross-validate</span><span class="lang">Shell</span></div>
+<pre><span class="cm"># P3.1 — Send telemetry from alpha to gamma</span>
+TEL=$(curl -s -X POST https://hub-node:8000/peers/telemetry \
+  -H "X-WARLOK-KEY: $API_KEY" \
+  -d '{"from":"peer-alpha","to":"peer-gamma",
+       "key":"sensor:pilot-001",
+       "data":"pilot telemetry reading 42.7C at 14:00"}')
+echo $TEL | python3 -m json.tool
+TEL_CKSUM=$(echo $TEL | python3 -c "import json,sys;
+  print(json.load(sys.stdin)['receipt']['checksum'])")
+<span class="cm"># Expected: stored=true, receipt.peer_id=peer-gamma, receipt.backend=file</span>
+
+<span class="cm"># P3.2 — Retrieve and verify integrity from peer-gamma</span>
+curl -s "https://hub-node:8000/storage/peer-gamma/get/sensor:pilot-001" \
+  -H "X-WARLOK-KEY: $API_KEY" | \
+  python3 -c "import json,sys; d=json.load(sys.stdin);
+print('Integrity OK:', d['checksum']=='$TEL_CKSUM');
+print('Value (hex):', d['value'][:40])"
+<span class="cm"># Expected: Integrity OK: True</span>
+
+<span class="cm"># P3.3 — Replicate a hub block to all peers, then cross-validate</span>
+curl -s -X POST https://hub-node:8000/peers/replicate \
+  -H "X-WARLOK-KEY: $API_KEY" \
+  -d "{\"source\":\"peer-alpha\",\"hash\":\"$TASK_BLOCK\"}"
+<span class="cm"># Wait 1 second</span>
+sleep 1
+
+curl -s -X POST https://hub-node:8000/peers/cross_validate \
+  -H "X-WARLOK-KEY: $API_KEY" \
+  -d "{\"requestor\":\"peer-alpha\",\"hash\":\"$TASK_BLOCK\"}" | \
+  python3 -c "import json,sys; d=json.load(sys.stdin);
+print('Consensus:', d['consensus_pct'],'%');
+print('Valid peers:', d['valid_count'],'/', d['total_peers'])"
+<span class="cm"># Expected: Consensus: 100.0 %, Valid peers: 2 / 2</span></pre>
+</div>
+
+<p><strong>Phase 3 pass criterion:</strong> Telemetry receipt checksum matches on retrieval. Replicated block achieves 100% consensus. Epoch tokens match across all peers.</p>
+
+<h2 id="s5d">Phase 4 — Attack Detection &amp; Recovery</h2>
+
+<div class="cb">
+<div class="cb-head"><span>Phase 4 — tamper detection, cross-validate confirms compromise</span><span class="lang">Shell</span></div>
+<pre><span class="cm"># P4.1 — Tamper a replicated block via attack API</span>
+curl -s -X POST https://hub-node:8000/attack/tamper \
+  -H "X-WARLOK-KEY: $API_KEY" \
+  -d "{\"hash\":\"$TASK_BLOCK\"}"
+<span class="cm"># Expected: status=tampered</span>
+
+<span class="cm"># P4.2 — Hub validate should now fail</span>
+curl -s -X POST https://hub-node:8000/validate \
+  -H "X-WARLOK-KEY: $API_KEY" \
+  -d "{\"hash\":\"$TASK_BLOCK\"}" | \
+  python3 -c "import json,sys; d=json.load(sys.stdin);
+print('Valid:', d['valid']); print('Reason:', d['msg'])"
+<span class="cm"># Expected: Valid: False, Reason: Bad signature</span>
+
+<span class="cm"># P4.3 — Cross-validate confirms 0% consensus — all peers reject</span>
+curl -s -X POST https://hub-node:8000/peers/cross_validate \
+  -H "X-WARLOK-KEY: $API_KEY" \
+  -d "{\"requestor\":\"peer-alpha\",\"hash\":\"$TASK_BLOCK\"}" | \
+  python3 -c "import json,sys; d=json.load(sys.stdin);
+print('Consensus after tamper:', d['consensus_pct'],'%')"
+<span class="cm"># Expected: Consensus after tamper: 0.0 %</span>
+
+<span class="cm"># P4.4 — ATTACK event visible in log</span>
+curl -s https://hub-node:8000/events -H "X-WARLOK-KEY: $API_KEY" | \
+  python3 -c "import json,sys;
+evs=json.load(sys.stdin)['events'];
+attacks=[e for e in evs if e['type']=='ATTACK'];
+print(f'{len(attacks)} ATTACK events recorded')"
+<span class="cm"># Expected: 1 ATTACK events recorded</span>
+
+<span class="cm"># P4.5 — Manually corrupt stored file, verify STORE_CORRUPT detected</span>
+<span class="cm"># Edit /data/warlok/beta/&lt;hash&gt;.json — change one char in "value" field</span>
+curl -s "https://hub-node:8000/storage/peer-beta/get/$TASK_KEY" \
+  -H "X-WARLOK-KEY: $API_KEY"
+<span class="cm"># Expected: 404 Not Found (record fails verify(), returns None)</span>
+<span class="cm"># Verify STORE_CORRUPT event in /events log</span></pre>
+</div>
+
+<p><strong>Phase 4 pass criterion:</strong> Hub validate returns <code>Bad signature</code>. Cross-validate returns 0%. ATTACK event in log. Corrupted file returns 404 with STORE_CORRUPT event.</p>
+
+<div class="callout c-ok">
+All four phases must pass sequentially. Phase failures are not partial passes — if Phase 2 fails (no block created), Phase 3 and 4 cannot be meaningfully executed. Document the exact failure step, log output, and event sequence for each failure before attempting remediation.
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- S6: CHAIN APPROVAL -->
+<!-- ═══════════════════════════════════════ -->
+<div class="section" id="s6">
+<h1 class="sec-title"><span class="sec-num">06</span> Chain Approval</h1>
+<div class="sec-desc">// Required sign-offs before and after each installation milestone</div>
+
+<p>WARLOK operates on a chain-of-custody model at the operational level, mirroring its cryptographic
+model. No milestone proceeds without the documented approval of the preceding stage.
+Approvals are recorded in the site installation log, signed by each approver.</p>
+
+<div class="chain">
+  <div class="chain-step">
+    <div class="chain-num">1</div>
+    <div class="chain-body">
+      <strong>Site Security Assessment</strong>
+      <span>Physical access to hub-node rack confirmed. Network zones confirmed isolated. USB ports on non-hub machines disabled. YubiHSM2 serial number recorded.</span>
+    </div>
+    <div class="chain-badge"><span class="badge b-amber">Site Lead</span></div>
+  </div>
+  <div class="chain-step">
+    <div class="chain-num">2</div>
+    <div class="chain-body">
+      <strong>YubiHSM2 Provisioning Approval</strong>
+      <span>Provisioning log signed. All key slot assignments recorded. Default authkey changed. Provisioner engineer confirms no copy of root key material was made in application memory during setup.</span>
+    </div>
+    <div class="chain-badge"><span class="badge b-red">Security Officer</span></div>
+  </div>
+  <div class="chain-step">
+    <div class="chain-num">3</div>
+    <div class="chain-body">
+      <strong>Network Configuration Approval</strong>
+      <span>Firewall rules reviewed. Port 12345 confirmed localhost-only. TLS certificates fingerprints logged. No default credentials remaining on any node.</span>
+    </div>
+    <div class="chain-badge"><span class="badge b-amber">Network Lead</span></div>
+  </div>
+  <div class="chain-step">
+    <div class="chain-num">4</div>
+    <div class="chain-body">
+      <strong>Phase 1 Test Sign-Off — HSM &amp; Signing</strong>
+      <span>P1.1–P1.4 all passed. HSM events confirm device=yubihsm2. Validation returns VALID on hardware-backed block. Results witnessed by two personnel.</span>
+    </div>
+    <div class="chain-badge"><span class="badge b-cyan">Tech Lead</span></div>
+  </div>
+  <div class="chain-step">
+    <div class="chain-num">5</div>
+    <div class="chain-body">
+      <strong>Phase 2+3 Test Sign-Off — Full Communication Lines</strong>
+      <span>Line A (execution) and Line B (data transit) both passed. Filesystem writes confirmed. Checksums verified. 100% consensus achieved on replicated block.</span>
+    </div>
+    <div class="chain-badge"><span class="badge b-cyan">Tech Lead</span></div>
+  </div>
+  <div class="chain-step">
+    <div class="chain-num">6</div>
+    <div class="chain-body">
+      <strong>Phase 4 Test Sign-Off — Attack Detection</strong>
+      <span>Tamper and signature break both detected. STORE_CORRUPT triggered on manual file edit. ATTACK events recorded. 0% consensus confirmed on compromised block.</span>
+    </div>
+    <div class="chain-badge"><span class="badge b-purple">Client Witness</span></div>
+  </div>
+  <div class="chain-step">
+    <div class="chain-num" style="color:var(--green)">✓</div>
+    <div class="chain-body">
+      <strong>Pilot Operational Approval</strong>
+      <span>All six preceding chain steps signed. Site installation log complete. System handed to pilot operations team. No further installation changes permitted without repeating steps 3–6.</span>
+    </div>
+    <div class="chain-badge"><span class="badge b-green">All Signatories</span></div>
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- S7: ACCEPTANCE CRITERIA -->
+<!-- ═══════════════════════════════════════ -->
+<div class="section" id="s7">
+<h1 class="sec-title"><span class="sec-num">07</span> Acceptance Criteria</h1>
+<div class="sec-desc">// Hard pass/fail definitions — not negotiable thresholds</div>
+
+<table class="dt">
+<thead><tr><th>ID</th><th>Criterion</th><th>Test Reference</th><th>Pass Definition</th></tr></thead>
+<tbody>
+<tr>
+  <td style="font-family:var(--mono);color:var(--cyan)">AC-01</td>
+  <td>Hardware signing active</td>
+  <td>P1.1–P1.3</td>
+  <td>HSM events contain <code>"device":"yubihsm2"</code>. Root key not present in any env var or log output.</td>
+</tr>
+<tr>
+  <td style="font-family:var(--mono);color:var(--cyan)">AC-02</td>
+  <td>Block validation succeeds</td>
+  <td>P1.3</td>
+  <td><code>valid=true, msg=VALID</code> returned from hardware-backed verify_epoch().</td>
+</tr>
+<tr>
+  <td style="font-family:var(--mono);color:var(--cyan)">AC-03</td>
+  <td>Task execution produces signed block</td>
+  <td>P2.2–P2.3</td>
+  <td>block_hash present in ACK, block exists in peer's DAG, epoch stamp on block meta.</td>
+</tr>
+<tr>
+  <td style="font-family:var(--mono);color:var(--cyan)">AC-04</td>
+  <td>Execution result reaches filesystem</td>
+  <td>P2.4–P2.5</td>
+  <td>File present at /data/warlok/&lt;peer&gt;/. Checksum from receipt matches GET retrieval.</td>
+</tr>
+<tr>
+  <td style="font-family:var(--mono);color:var(--cyan)">AC-05</td>
+  <td>Telemetry reaches designated store</td>
+  <td>P3.1–P3.2</td>
+  <td>receipt.peer_id matches target. receipt.checksum matches on retrieval. backend=file.</td>
+</tr>
+<tr>
+  <td style="font-family:var(--mono);color:var(--cyan)">AC-06</td>
+  <td>Cross-validation reaches 100%</td>
+  <td>P3.3</td>
+  <td>consensus_pct=100.0 after block is replicated to all peers.</td>
+</tr>
+<tr>
+  <td style="font-family:var(--mono);color:var(--cyan)">AC-07</td>
+  <td>Tamper detection is immediate</td>
+  <td>P4.1–P4.2</td>
+  <td>validate() returns <code>Bad signature</code> on tampered block within one validation call.</td>
+</tr>
+<tr>
+  <td style="font-family:var(--mono);color:var(--cyan)">AC-08</td>
+  <td>Network tamper drops consensus to 0%</td>
+  <td>P4.3</td>
+  <td>cross_validate() returns consensus_pct=0.0 on tampered block — no peer votes valid.</td>
+</tr>
+<tr>
+  <td style="font-family:var(--mono);color:var(--cyan)">AC-09</td>
+  <td>File corruption detected on read</td>
+  <td>P4.5</td>
+  <td>Manually modified store file returns 404 + STORE_CORRUPT event. Not silently served.</td>
+</tr>
+<tr>
+  <td style="font-family:var(--mono);color:var(--cyan)">AC-10</td>
+  <td>Choke point failure is clean</td>
+  <td>Chokepoint tests</td>
+  <td>Every blocked choke point produces a logged error event, not a silent timeout or crash.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- S8: OPERATIONS RUNBOOK -->
+<!-- ═══════════════════════════════════════ -->
+<div class="section" id="s8">
+<h1 class="sec-title"><span class="sec-num">08</span> Operations Runbook</h1>
+<div class="sec-desc">// Day-to-day procedures for pilot operations personnel</div>
+
+<h2>Daily Startup Sequence</h2>
+
+<div class="steps">
+  <div class="step">
+    <div class="step-n">1</div>
+    <div class="step-body"><strong>Verify YubiHSM2 is seated and connector is running</strong>
+      <div class="detail">systemctl status yubihsm-connector — must show active (running)</div></div>
+  </div>
+  <div class="step">
+    <div class="step-n">2</div>
+    <div class="step-body"><strong>Start hub service</strong>
+      <div class="detail">systemctl start warlok-hub — check: curl https://hub-node:8000/health → status=ok, device=yubihsm2</div></div>
+  </div>
+  <div class="step">
+    <div class="step-n">3</div>
+    <div class="step-body"><strong>Start peer services on each exec-node</strong>
+      <div class="detail">systemctl start warlok-peer — repeat on exec-node-1, 2, 3</div></div>
+  </div>
+  <div class="step">
+    <div class="step-n">4</div>
+    <div class="step-body"><strong>Confirm mesh via UI — Peer Mesh page</strong>
+      <div class="detail">All 3 peers show ONLINE, DAG blocks=0 (or N if resuming), epoch=current</div></div>
+  </div>
+</div>
+
+<h2>If a Peer Stops Responding</h2>
+<p>Check <code>systemctl status warlok-peer</code> on the affected node.
+Check firewall rules have not changed. Check <code>journalctl -u warlok-peer -n 50</code>
+for PEER_AUTH_FAIL or HSM errors. If HSM connector is unreachable, restart
+<code>yubihsm-connector</code> on hub-node first, then restart the peer.</p>
+
+<h2>Epoch Rotation Event</h2>
+<p>The HSM/Epochs page will show the epoch counter incrementing after every 10 blocks signed.
+This is expected. No operator action required. The new epoch key is automatically provisioned
+on the YubiHSM2 device. Existing blocks retain their epoch stamp and remain verifiable via
+<code>verify_epoch()</code> using their stored epoch ID.</p>
+
+<h2>If Cross-Validate Returns 0%</h2>
+<p>First check whether the target block has been replicated to all peers
+(Storage Monitor → peer record counts). If the block is in hub DAG only,
+call <code>POST /peers/replicate</code> with the block hash, then re-run cross-validate.
+If replication succeeds but consensus is still 0%, run <code>POST /validate</code> directly
+on the block hash — a <code>Bad signature</code> response indicates the block was tampered.
+Document the incident, preserve the event log, and escalate.</p>
+
+<h2>Preserving the Event Log Before Reset</h2>
+<div class="cb">
+<div class="cb-head"><span>Export event log before any reset</span><span class="lang">Shell</span></div>
+<pre><span class="cm"># Export current event log to timestamped file</span>
+DATE=$(date +%Y%m%d-%H%M%S)
+curl -s https://hub-node:8000/events \
+  -H "X-WARLOK-KEY: $API_KEY" \
+  &gt; /data/warlok/logs/events-$DATE.json
+
+<span class="cm"># Confirm count matches before reset</span>
+echo "Events saved: $(python3 -c "import json; d=json.load(open('/data/warlok/logs/events-$DATE.json')); print(d['count'])")"
+
+<span class="cm"># Only then reset — if required by test protocol</span>
+curl -s -X POST https://hub-node:8000/reset -H "X-WARLOK-KEY: $API_KEY"</pre>
+</div>
+
+<div class="callout c-crit">
+The <code>/reset</code> endpoint clears all in-memory state — blocks, events, peers. It does <em>not</em>
+clear the FileStore (files on disk remain). It does <em>not</em> clear the YubiHSM2 — key slots and
+epoch keys are preserved. A reset is a process restart, not a device wipe. However, any blocks
+created before the reset will not be in the new hub's DAG, so cross-validation will return 0%
+until blocks are recreated. Export the event log first.
+</div>
+</div>
+
+</main>
+</div>
+
+<footer>
+  <div class="fl">WARLOK</div>
+  <div>Site Installation &amp; Test Implementation Report &mdash; Pilot Bundle v3.0 &mdash; March 2026</div>
+  <div>Restricted — Pilot Personnel Only</div>
+</footer>
+
+</body>
+</html>

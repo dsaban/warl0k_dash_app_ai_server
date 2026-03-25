@@ -1,0 +1,569 @@
+2026-03-21T13:53:58 | INFO     | [SYSTEM      ] STARTUP              PCD system starting on http://localhost:7700
+2026-03-21T13:53:58 | INFO     | [SYSTEM      ] PATHS                data=/home/danny/PycharmProjects/llm_graph_search_2024/warl0k_cloud_demo_app_multi_client_server_dash/app/WARLOK_PIM_PCD_AI_7_fastAPI_Archive/pcd_data.json audit=/home/danny/PycharmProjects/llm_graph_search_2024/warl0k_cloud_demo_app_multi_client_server_dash/app/WARLOK_PIM_PCD_AI_7_fastAPI_Archive/pcd_audit.log
+2026-03-21T13:54:57 | INFO     | [SYSTEM      ] STARTUP              PCD system starting on http://localhost:7707
+2026-03-21T13:54:57 | INFO     | [SYSTEM      ] PATHS                data=/home/danny/PycharmProjects/llm_graph_search_2024/warl0k_cloud_demo_app_multi_client_server_dash/app/WARLOK_PIM_PCD_AI_7_fastAPI_Archive/pcd_data.json audit=/home/danny/PycharmProjects/llm_graph_search_2024/warl0k_cloud_demo_app_multi_client_server_dash/app/WARLOK_PIM_PCD_AI_7_fastAPI_Archive/pcd_audit.log
+2026-03-21T13:55:28 | INFO     | [EPOCH_CHAIN ] INIT                 ep0=55157ea7…fe08ca W=4
+2026-03-21T13:55:28 | INFO     | [HUB         ] LOG                  Hub provisioned | W=4 | peers=NODE-ALPHA,NODE-BETA
+2026-03-21T13:55:28 | INFO     | [HUB         ] LOG                  ep0_hash=d4315b43…1b8c12 | Hub now SILENT
+2026-03-21T13:55:28 | INFO     | [HUB         ] PROVISION            peer_a=NODE-ALPHA peer_b=NODE-BETA W=4 ep0=d4315b43…1b8c12
+2026-03-21T13:55:28 | INFO     | [NODE-ALPHA  ] LOG                  epoch_0 received | hash=d4315b43…1b8c12
+2026-03-21T13:55:28 | INFO     | [NODE-BETA   ] LOG                  epoch_0 received | hash=d4315b43…1b8c12
+2026-03-21T13:55:28 | INFO     | [HUB         ] LOG                  Epoch sync: SYNC_OK
+2026-03-21T13:55:28 | INFO     | [HUB         ] EPOCH_SYNC           SYNC_OK
+2026-03-21T13:55:28 | INFO     | [SYSTEM      ] PROVISION            W=4 peers=NODE-ALPHA,NODE-BETA sync=True
+2026-03-21T13:55:42 | WARNING  | [NODE-ALPHA  ] LOG                  QUARANTINE gates fired: TIMING_ANOMALY(0.070<0.2)
+2026-03-21T13:55:42 | WARNING  | [NODE-ALPHA  ] QUARANTINE           label=sensor-batch-001 gates=['TIMING_ANOMALY(0.070<0.2)']
+2026-03-21T13:55:42 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=619cb999…fcb86e tier=QUARANTINE score=0.5301
+2026-03-21T13:55:42 | INFO     | [NODE-ALPHA  ] LOG                  SEALED sensor-batch-001 | score=0.5301 tier=QUARANTINE ep=0 w=0 ctr=0 lat=0.494ms
+2026-03-21T13:55:44 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=c3824a86…b6c719 tier=COOL score=0.5636
+2026-03-21T13:55:44 | INFO     | [NODE-ALPHA  ] LOG                  SEALED sensor-batch-001 | score=0.5636 tier=COOL ep=0 w=1 ctr=1 lat=0.527ms
+2026-03-21T13:55:45 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=72491fd3…d3dcea tier=COOL score=0.5863
+2026-03-21T13:55:45 | INFO     | [NODE-ALPHA  ] LOG                  SEALED patient-record-002 | score=0.5863 tier=COOL ep=0 w=2 ctr=2 lat=1.701ms
+2026-03-21T13:55:47 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=bf539128…31a9a6 tier=COOL score=0.5957
+2026-03-21T13:55:47 | INFO     | [EPOCH_CHAIN ] ROTATE               epoch 0→1 archived_to=HOT new=4e7b3bac…a424f4 fwd_secrecy=applied
+2026-03-21T13:55:47 | INFO     | [NODE-ALPHA  ] LOG                  Epoch rotated → 1 | fwd_secrecy applied
+2026-03-21T13:55:47 | INFO     | [NODE-ALPHA  ] LOG                  SEALED tx-ledger-7731 | score=0.5957 tier=COOL ep=0 w=3 ctr=3 lat=0.512ms
+2026-03-21T13:56:01 | INFO     | [NODE-BETA   ] LOG                  READ tx-ledger-7731 | fp_ok=✓ zk_ok=✓ hash_ok=✓ tier=COOL
+2026-03-21T13:56:01 | INFO     | [NODE-BETA   ] READ                 node=bf539128…31a9a6 label=tx-ledger-7731
+2026-03-21T13:56:12 | INFO     | [NODE-ALPHA  ] LOG                  VERIFY: 4 nodes (0 from archive), chain_ok=True
+2026-03-21T13:56:26 | INFO     | [EPOCH_CHAIN ] INIT                 ep0=8cdae924…cf589d W=4
+2026-03-21T13:56:26 | INFO     | [HUB         ] LOG                  Hub provisioned | W=4 | peers=NODE-ALPHA,NODE-BETA
+2026-03-21T13:56:26 | INFO     | [HUB         ] LOG                  ep0_hash=d1dddad8…67bf55 | Hub now SILENT
+2026-03-21T13:56:26 | INFO     | [HUB         ] PROVISION            peer_a=NODE-ALPHA peer_b=NODE-BETA W=4 ep0=d1dddad8…67bf55
+2026-03-21T13:56:26 | INFO     | [NODE-ALPHA  ] LOG                  epoch_0 received | hash=d1dddad8…67bf55
+2026-03-21T13:56:26 | INFO     | [NODE-BETA   ] LOG                  epoch_0 received | hash=d1dddad8…67bf55
+2026-03-21T13:56:26 | INFO     | [HUB         ] LOG                  Epoch sync: SYNC_OK
+2026-03-21T13:56:26 | INFO     | [HUB         ] EPOCH_SYNC           SYNC_OK
+2026-03-21T13:56:26 | INFO     | [SYSTEM      ] PROVISION            W=4 peers=NODE-ALPHA,NODE-BETA sync=True
+2026-03-21T13:57:35 | INFO     | [ADMIN       ] ARCHIVE_POLICY_UPDATE max_keys=50 hot=5 warm=20 max_records=10000
+2026-03-21T13:58:01 | WARNING  | [NODE-ALPHA  ] LOG                  QUARANTINE gates fired: TIMING_ANOMALY(0.011<0.2), STRUCTURAL_VIOLATION(counter=0,depth>0)
+2026-03-21T13:58:01 | WARNING  | [NODE-ALPHA  ] QUARANTINE           label=tx-ledger-7731 gates=['TIMING_ANOMALY(0.011<0.2)', 'STRUCTURAL_VIOLATION(counter=0,depth>0)']
+2026-03-21T13:58:01 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=5de2e031…8bc9a4 tier=QUARANTINE score=0.5353
+2026-03-21T13:58:01 | INFO     | [NODE-ALPHA  ] LOG                  SEALED tx-ledger-7731 | score=0.5353 tier=QUARANTINE ep=0 w=0 ctr=0 lat=1.174ms
+2026-03-21T13:58:05 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=1568fc4b…e83566 tier=COOL score=0.5563
+2026-03-21T13:58:05 | INFO     | [NODE-ALPHA  ] LOG                  SEALED sat-telemetry-042 | score=0.5563 tier=COOL ep=0 w=1 ctr=1 lat=1.171ms
+2026-03-21T13:58:10 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=63cff479…25361c tier=COOL score=0.5701
+2026-03-21T13:58:10 | INFO     | [NODE-ALPHA  ] LOG                  SEALED ml-batch-epoch17 | score=0.5701 tier=COOL ep=0 w=2 ctr=2 lat=1.699ms
+2026-03-21T13:58:11 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=b8d345e2…db9e59 tier=WARM score=0.6092
+2026-03-21T13:58:11 | INFO     | [EPOCH_CHAIN ] ROTATE               epoch 0→1 archived_to=HOT new=db1bfb46…ea552c fwd_secrecy=applied
+2026-03-21T13:58:11 | INFO     | [NODE-ALPHA  ] LOG                  Epoch rotated → 1 | fwd_secrecy applied
+2026-03-21T13:58:11 | INFO     | [NODE-ALPHA  ] LOG                  SEALED audit-log-443 | score=0.6092 tier=WARM ep=0 w=3 ctr=3 lat=0.549ms
+2026-03-21T13:58:12 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=f5583a28…3e2d56 tier=COOL score=0.5747
+2026-03-21T13:58:12 | INFO     | [NODE-ALPHA  ] LOG                  SEALED sensor-batch-001 | score=0.5747 tier=COOL ep=1 w=0 ctr=4 lat=0.669ms
+2026-03-21T13:58:13 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=0fabda32…f2324f tier=COOL score=0.5929
+2026-03-21T13:58:13 | INFO     | [NODE-ALPHA  ] LOG                  SEALED patient-record-002 | score=0.5929 tier=COOL ep=1 w=1 ctr=5 lat=0.679ms
+2026-03-21T14:00:37 | INFO     | [EPOCH_CHAIN ] INIT                 ep0=fc7d505e…20c929 W=4
+2026-03-21T14:00:37 | INFO     | [HUB         ] LOG                  Hub provisioned | W=4 | peers=NODE-ALPHA,NODE-BETA
+2026-03-21T14:00:37 | INFO     | [HUB         ] LOG                  ep0_hash=8f38e908…fe9951 | Hub now SILENT
+2026-03-21T14:00:37 | INFO     | [HUB         ] PROVISION            peer_a=NODE-ALPHA peer_b=NODE-BETA W=4 ep0=8f38e908…fe9951
+2026-03-21T14:00:37 | INFO     | [NODE-ALPHA  ] LOG                  epoch_0 received | hash=8f38e908…fe9951
+2026-03-21T14:00:37 | INFO     | [NODE-BETA   ] LOG                  epoch_0 received | hash=8f38e908…fe9951
+2026-03-21T14:00:37 | INFO     | [HUB         ] LOG                  Epoch sync: SYNC_OK
+2026-03-21T14:00:37 | INFO     | [HUB         ] EPOCH_SYNC           SYNC_OK
+2026-03-21T14:00:37 | INFO     | [SYSTEM      ] PROVISION            W=4 peers=NODE-ALPHA,NODE-BETA sync=True
+2026-03-21T14:00:42 | WARNING  | [NODE-ALPHA  ] LOG                  QUARANTINE gates fired: STRUCTURAL_VIOLATION(counter=0,depth>0)
+2026-03-21T14:00:42 | WARNING  | [NODE-ALPHA  ] QUARANTINE           label=patient-record-002 gates=['STRUCTURAL_VIOLATION(counter=0,depth>0)']
+2026-03-21T14:00:42 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=b30a93a2…141050 tier=QUARANTINE score=0.5525
+2026-03-21T14:00:42 | INFO     | [NODE-ALPHA  ] LOG                  SEALED patient-record-002 | score=0.5525 tier=QUARANTINE ep=0 w=0 ctr=0 lat=0.863ms
+2026-03-21T14:00:45 | INFO     | [NODE-BETA   ] LOG                  READ patient-record-002 | fp_ok=✓ zk_ok=✓ hash_ok=✓ tier=QUARANTINE
+2026-03-21T14:00:45 | INFO     | [NODE-BETA   ] READ                 node=b30a93a2…141050 label=patient-record-002
+2026-03-21T14:00:50 | ERROR    | [NODE-ALPHA  ] LOG                  VERIFY: 11 nodes (0 from archive), chain_ok=False
+2026-03-21T14:01:17 | INFO     | [EPOCH_CHAIN ] INIT                 ep0=0865d522…3fd865 W=4
+2026-03-21T14:01:17 | INFO     | [HUB         ] LOG                  Hub provisioned | W=4 | peers=NODE-ALPHA,NODE-BETA
+2026-03-21T14:01:17 | INFO     | [HUB         ] LOG                  ep0_hash=082c22ec…5191cb | Hub now SILENT
+2026-03-21T14:01:17 | INFO     | [HUB         ] PROVISION            peer_a=NODE-ALPHA peer_b=NODE-BETA W=4 ep0=082c22ec…5191cb
+2026-03-21T14:01:17 | INFO     | [NODE-ALPHA  ] LOG                  epoch_0 received | hash=082c22ec…5191cb
+2026-03-21T14:01:17 | INFO     | [NODE-BETA   ] LOG                  epoch_0 received | hash=082c22ec…5191cb
+2026-03-21T14:01:17 | INFO     | [HUB         ] LOG                  Epoch sync: SYNC_OK
+2026-03-21T14:01:17 | INFO     | [HUB         ] EPOCH_SYNC           SYNC_OK
+2026-03-21T14:01:17 | INFO     | [SYSTEM      ] PROVISION            W=4 peers=NODE-ALPHA,NODE-BETA sync=True
+2026-03-21T14:01:23 | INFO     | [EPOCH_CHAIN ] INIT                 ep0=6ab3c6c1…e64cb7 W=4
+2026-03-21T14:01:23 | INFO     | [HUB         ] LOG                  Hub provisioned | W=4 | peers=NODE-ALPHA,NODE-BETA
+2026-03-21T14:01:23 | INFO     | [HUB         ] LOG                  ep0_hash=7c948033…e77e20 | Hub now SILENT
+2026-03-21T14:01:23 | INFO     | [HUB         ] PROVISION            peer_a=NODE-ALPHA peer_b=NODE-BETA W=4 ep0=7c948033…e77e20
+2026-03-21T14:01:23 | INFO     | [NODE-ALPHA  ] LOG                  epoch_0 received | hash=7c948033…e77e20
+2026-03-21T14:01:23 | INFO     | [NODE-BETA   ] LOG                  epoch_0 received | hash=7c948033…e77e20
+2026-03-21T14:01:23 | INFO     | [HUB         ] LOG                  Epoch sync: SYNC_OK
+2026-03-21T14:01:23 | INFO     | [HUB         ] EPOCH_SYNC           SYNC_OK
+2026-03-21T14:01:23 | INFO     | [SYSTEM      ] PROVISION            W=4 peers=NODE-ALPHA,NODE-BETA sync=True
+2026-03-21T14:01:28 | WARNING  | [NODE-ALPHA  ] LOG                  QUARANTINE gates fired: TIMING_ANOMALY(0.175<0.2), STRUCTURAL_VIOLATION(counter=0,depth>0)
+2026-03-21T14:01:28 | WARNING  | [NODE-ALPHA  ] QUARANTINE           label=patient-record-002 gates=['TIMING_ANOMALY(0.175<0.2)', 'STRUCTURAL_VIOLATION(counter=0,depth>0)']
+2026-03-21T14:01:28 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=3dc286c3…224699 tier=QUARANTINE score=0.5528
+2026-03-21T14:01:28 | INFO     | [NODE-ALPHA  ] LOG                  SEALED patient-record-002 | score=0.5528 tier=QUARANTINE ep=0 w=0 ctr=0 lat=1.185ms
+2026-03-21T14:01:30 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=f93ff7a8…5ad62f tier=COOL score=0.5790
+2026-03-21T14:01:30 | INFO     | [NODE-ALPHA  ] LOG                  SEALED tx-ledger-7731 | score=0.5790 tier=COOL ep=0 w=1 ctr=1 lat=0.734ms
+2026-03-21T14:01:31 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=ba954969…6bef14 tier=COOL score=0.5986
+2026-03-21T14:01:31 | INFO     | [NODE-ALPHA  ] LOG                  SEALED sat-telemetry-042 | score=0.5986 tier=COOL ep=0 w=2 ctr=2 lat=0.825ms
+2026-03-21T14:01:34 | INFO     | [NODE-BETA   ] LOG                  READ sat-telemetry-042 | fp_ok=✓ zk_ok=✓ hash_ok=✓ tier=COOL
+2026-03-21T14:01:34 | INFO     | [NODE-BETA   ] READ                 node=ba954969…6bef14 label=sat-telemetry-042
+2026-03-21T14:01:37 | ERROR    | [NODE-ALPHA  ] LOG                  VERIFY: 14 nodes (0 from archive), chain_ok=False
+2026-03-21T14:02:45 | WARNING  | [ADMIN       ] EPOCH_MANUAL_EVICT   epoch=0
+2026-03-21T14:03:01 | INFO     | [ADMIN       ] ARCHIVE_ENFORCE      manual trigger
+2026-03-21T16:39:58 | INFO     | [ADMIN       ] ARCHIVE_ENFORCE      manual trigger
+2026-03-21T16:41:33 | ERROR    | [NODE-ALPHA  ] LOG                  VERIFY: 14 nodes (0 from archive), chain_ok=False
+2026-03-21T16:41:51 | INFO     | [ADMIN       ] MANUAL_ARCHIVE_NODE  node=0fabda32…f2324f reason=MANUAL_ARCHIVE
+2026-03-21T16:41:56 | INFO     | [ADMIN       ] RESTORE_NODE         node=0fabda32…f2324f
+2026-03-21T16:42:41 | INFO     | [EPOCH_CHAIN ] INIT                 ep0=6ceeb737…aa2dcb W=4
+2026-03-21T16:42:41 | INFO     | [HUB         ] LOG                  Hub provisioned | W=4 | peers=NODE-ALPHA,NODE-BETA
+2026-03-21T16:42:41 | INFO     | [HUB         ] LOG                  ep0_hash=e2d64803…8186ec | Hub now SILENT
+2026-03-21T16:42:41 | INFO     | [HUB         ] PROVISION            peer_a=NODE-ALPHA peer_b=NODE-BETA W=4 ep0=e2d64803…8186ec
+2026-03-21T16:42:41 | INFO     | [NODE-ALPHA  ] LOG                  epoch_0 received | hash=e2d64803…8186ec
+2026-03-21T16:42:41 | INFO     | [NODE-BETA   ] LOG                  epoch_0 received | hash=e2d64803…8186ec
+2026-03-21T16:42:41 | INFO     | [HUB         ] LOG                  Epoch sync: SYNC_OK
+2026-03-21T16:42:41 | INFO     | [HUB         ] EPOCH_SYNC           SYNC_OK
+2026-03-21T16:42:41 | INFO     | [SYSTEM      ] PROVISION            W=4 peers=NODE-ALPHA,NODE-BETA sync=True
+2026-03-21T16:42:49 | WARNING  | [NODE-ALPHA  ] LOG                  QUARANTINE gates fired: TIMING_ANOMALY(0.123<0.2), STRUCTURAL_VIOLATION(counter=0,depth>0)
+2026-03-21T16:42:49 | WARNING  | [NODE-ALPHA  ] QUARANTINE           label=sat-telemetry-042 gates=['TIMING_ANOMALY(0.123<0.2)', 'STRUCTURAL_VIOLATION(counter=0,depth>0)']
+2026-03-21T16:42:49 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=3cfc851a…095756 tier=QUARANTINE score=0.5535
+2026-03-21T16:42:49 | INFO     | [NODE-ALPHA  ] LOG                  SEALED sat-telemetry-042 | score=0.5535 tier=QUARANTINE ep=0 w=0 ctr=0 lat=8.332ms
+2026-03-21T16:42:51 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=5f9d2823…ce7128 tier=COOL score=0.5822
+2026-03-21T16:42:51 | INFO     | [NODE-ALPHA  ] LOG                  SEALED ml-batch-epoch17 | score=0.5822 tier=COOL ep=0 w=1 ctr=1 lat=0.792ms
+2026-03-21T16:42:52 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=b7619593…4a02b4 tier=WARM score=0.6103
+2026-03-21T16:42:52 | INFO     | [NODE-ALPHA  ] LOG                  SEALED audit-log-443 | score=0.6103 tier=WARM ep=0 w=2 ctr=2 lat=1.368ms
+2026-03-21T16:42:53 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=080ca723…a623fb tier=WARM score=0.6238
+2026-03-21T16:42:53 | INFO     | [EPOCH_CHAIN ] ROTATE               epoch 0→1 archived_to=HOT new=410b8f82…41e7e3 fwd_secrecy=applied
+2026-03-21T16:42:53 | INFO     | [NODE-ALPHA  ] LOG                  Epoch rotated → 1 | fwd_secrecy applied
+2026-03-21T16:42:53 | INFO     | [NODE-ALPHA  ] LOG                  SEALED sensor-batch-001 | score=0.6238 tier=WARM ep=0 w=3 ctr=3 lat=4.758ms
+2026-03-21T16:42:55 | INFO     | [NODE-BETA   ] LOG                  READ sensor-batch-001 | fp_ok=✓ zk_ok=✓ hash_ok=✓ tier=WARM
+2026-03-21T16:42:55 | INFO     | [NODE-BETA   ] READ                 node=080ca723…a623fb label=sensor-batch-001
+2026-03-21T16:43:17 | WARNING  | [SYSTEM      ] RESET                Full system reset
+2026-03-21T16:59:22 | WARNING  | [SYSTEM      ] RESET                Full system reset
+2026-03-21T17:37:33 | INFO     | [EPOCH_CHAIN ] INIT                 ep0=5a18d801…40963c W=4
+2026-03-21T17:37:33 | INFO     | [HUB         ] LOG                  Hub provisioned | W=4 | peers=NODE-ALPHA,NODE-BETA
+2026-03-21T17:37:33 | INFO     | [HUB         ] LOG                  ep0_hash=36379127…4fd74f | Hub now SILENT
+2026-03-21T17:37:33 | INFO     | [HUB         ] PROVISION            peer_a=NODE-ALPHA peer_b=NODE-BETA W=4 ep0=36379127…4fd74f
+2026-03-21T17:37:33 | INFO     | [NODE-ALPHA  ] LOG                  epoch_0 received | hash=36379127…4fd74f
+2026-03-21T17:37:33 | INFO     | [NODE-BETA   ] LOG                  epoch_0 received | hash=36379127…4fd74f
+2026-03-21T17:37:33 | INFO     | [HUB         ] LOG                  Epoch sync: SYNC_OK
+2026-03-21T17:37:33 | INFO     | [HUB         ] EPOCH_SYNC           SYNC_OK
+2026-03-21T17:37:33 | INFO     | [SYSTEM      ] PROVISION            W=4 peers=NODE-ALPHA,NODE-BETA sync=True
+2026-03-21T17:37:37 | INFO     | [NODE-ALPHA  ] LOG                  VERIFY: 0 nodes (0 from archive), chain_ok=True
+2026-03-21T17:37:53 | WARNING  | [NODE-ALPHA  ] LOG                  QUARANTINE gates fired: TIMING_ANOMALY(0.049<0.2)
+2026-03-21T17:37:53 | WARNING  | [NODE-ALPHA  ] QUARANTINE           label=sensor-batch-001 gates=['TIMING_ANOMALY(0.049<0.2)']
+2026-03-21T17:37:53 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=68bde73d…8fbdd4 tier=QUARANTINE score=0.5293
+2026-03-21T17:37:53 | INFO     | [NODE-ALPHA  ] LOG                  SEALED sensor-batch-001 | score=0.5293 tier=QUARANTINE ep=0 w=0 ctr=0 lat=0.663ms
+2026-03-21T17:37:56 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=221045ce…b3f068 tier=COOL score=0.5576
+2026-03-21T17:37:56 | INFO     | [NODE-ALPHA  ] LOG                  SEALED patient-record-002 | score=0.5576 tier=COOL ep=0 w=1 ctr=1 lat=1.383ms
+2026-03-21T17:37:58 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=6305ce61…584a38 tier=COOL score=0.5798
+2026-03-21T17:37:58 | INFO     | [NODE-ALPHA  ] LOG                  SEALED tx-ledger-7731 | score=0.5798 tier=COOL ep=0 w=2 ctr=2 lat=0.602ms
+2026-03-21T17:38:00 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=37d3c58e…543b71 tier=COOL score=0.5885
+2026-03-21T17:38:00 | INFO     | [EPOCH_CHAIN ] ROTATE               epoch 0→1 archived_to=HOT new=2a3932b5…872ef8 fwd_secrecy=applied
+2026-03-21T17:38:00 | INFO     | [NODE-ALPHA  ] LOG                  Epoch rotated → 1 | fwd_secrecy applied
+2026-03-21T17:38:00 | INFO     | [NODE-ALPHA  ] LOG                  SEALED sat-telemetry-042 | score=0.5885 tier=COOL ep=0 w=3 ctr=3 lat=0.663ms
+2026-03-21T17:38:10 | INFO     | [NODE-ALPHA  ] LOG                  VERIFY: 4 nodes (0 from archive), chain_ok=True
+2026-03-21T17:38:38 | INFO     | [NODE-BETA   ] LOG                  READ sat-telemetry-042 | fp_ok=✓ zk_ok=✓ hash_ok=✓ tier=COOL
+2026-03-21T17:38:38 | INFO     | [NODE-BETA   ] READ                 node=37d3c58e…543b71 label=sat-telemetry-042
+2026-03-21T17:39:06 | INFO     | [EPOCH_CHAIN ] INIT                 ep0=c6b3415e…5ed67b W=4
+2026-03-21T17:39:06 | INFO     | [HUB         ] LOG                  Hub provisioned | W=4 | peers=NODE-ALPHA,NODE-BETA
+2026-03-21T17:39:06 | INFO     | [HUB         ] LOG                  ep0_hash=f928082b…de9b44 | Hub now SILENT
+2026-03-21T17:39:06 | INFO     | [HUB         ] PROVISION            peer_a=NODE-ALPHA peer_b=NODE-BETA W=4 ep0=f928082b…de9b44
+2026-03-21T17:39:06 | INFO     | [NODE-ALPHA  ] LOG                  epoch_0 received | hash=f928082b…de9b44
+2026-03-21T17:39:06 | INFO     | [NODE-BETA   ] LOG                  epoch_0 received | hash=f928082b…de9b44
+2026-03-21T17:39:06 | INFO     | [HUB         ] LOG                  Epoch sync: SYNC_OK
+2026-03-21T17:39:06 | INFO     | [HUB         ] EPOCH_SYNC           SYNC_OK
+2026-03-21T17:39:06 | INFO     | [SYSTEM      ] PROVISION            W=4 peers=NODE-ALPHA,NODE-BETA sync=True
+2026-03-21T17:39:13 | WARNING  | [NODE-ALPHA  ] LOG                  QUARANTINE gates fired: TIMING_ANOMALY(0.140<0.2), STRUCTURAL_VIOLATION(counter=0,depth>0)
+2026-03-21T17:39:13 | WARNING  | [NODE-ALPHA  ] QUARANTINE           label=sat-telemetry-042 gates=['TIMING_ANOMALY(0.140<0.2)', 'STRUCTURAL_VIOLATION(counter=0,depth>0)']
+2026-03-21T17:39:13 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=57508320…dfa02e tier=QUARANTINE score=0.5392
+2026-03-21T17:39:13 | INFO     | [NODE-ALPHA  ] LOG                  SEALED sat-telemetry-042 | score=0.5392 tier=QUARANTINE ep=0 w=0 ctr=0 lat=1.166ms
+2026-03-21T17:39:17 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=1611b85d…bdcaa5 tier=COOL score=0.5575
+2026-03-21T17:39:17 | INFO     | [NODE-ALPHA  ] LOG                  SEALED ml-batch-epoch17 | score=0.5575 tier=COOL ep=0 w=1 ctr=1 lat=0.716ms
+2026-03-21T17:39:19 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=06286182…b4a3d2 tier=COOL score=0.5888
+2026-03-21T17:39:19 | INFO     | [NODE-ALPHA  ] LOG                  SEALED audit-log-443 | score=0.5888 tier=COOL ep=0 w=2 ctr=2 lat=1.815ms
+2026-03-21T17:39:26 | ERROR    | [NODE-ALPHA  ] LOG                  VERIFY: 7 nodes (0 from archive), chain_ok=False
+2026-03-21T17:40:03 | INFO     | [NODE-BETA   ] LOG                  READ audit-log-443 | fp_ok=✓ zk_ok=✓ hash_ok=✓ tier=COOL
+2026-03-21T17:40:03 | INFO     | [NODE-BETA   ] READ                 node=06286182…b4a3d2 label=audit-log-443
+2026-03-21T17:40:05 | ERROR    | [NODE-ALPHA  ] LOG                  VERIFY: 7 nodes (0 from archive), chain_ok=False
+2026-03-21T17:40:09 | INFO     | [EPOCH_CHAIN ] INIT                 ep0=52098959…255ce0 W=4
+2026-03-21T17:40:09 | INFO     | [HUB         ] LOG                  Hub provisioned | W=4 | peers=NODE-ALPHA,NODE-BETA
+2026-03-21T17:40:09 | INFO     | [HUB         ] LOG                  ep0_hash=e21f1028…0c1ceb | Hub now SILENT
+2026-03-21T17:40:09 | INFO     | [HUB         ] PROVISION            peer_a=NODE-ALPHA peer_b=NODE-BETA W=4 ep0=e21f1028…0c1ceb
+2026-03-21T17:40:09 | INFO     | [NODE-ALPHA  ] LOG                  epoch_0 received | hash=e21f1028…0c1ceb
+2026-03-21T17:40:09 | INFO     | [NODE-BETA   ] LOG                  epoch_0 received | hash=e21f1028…0c1ceb
+2026-03-21T17:40:09 | INFO     | [HUB         ] LOG                  Epoch sync: SYNC_OK
+2026-03-21T17:40:09 | INFO     | [HUB         ] EPOCH_SYNC           SYNC_OK
+2026-03-21T17:40:09 | INFO     | [SYSTEM      ] PROVISION            W=4 peers=NODE-ALPHA,NODE-BETA sync=True
+2026-03-21T17:40:18 | WARNING  | [SYSTEM      ] RESET                Full system reset
+2026-03-21T17:40:19 | INFO     | [EPOCH_CHAIN ] INIT                 ep0=5d89e6da…e6e692 W=4
+2026-03-21T17:40:19 | INFO     | [HUB         ] LOG                  Hub provisioned | W=4 | peers=NODE-ALPHA,NODE-BETA
+2026-03-21T17:40:19 | INFO     | [HUB         ] LOG                  ep0_hash=3a3559cb…29a556 | Hub now SILENT
+2026-03-21T17:40:19 | INFO     | [HUB         ] PROVISION            peer_a=NODE-ALPHA peer_b=NODE-BETA W=4 ep0=3a3559cb…29a556
+2026-03-21T17:40:19 | INFO     | [NODE-ALPHA  ] LOG                  epoch_0 received | hash=3a3559cb…29a556
+2026-03-21T17:40:19 | INFO     | [NODE-BETA   ] LOG                  epoch_0 received | hash=3a3559cb…29a556
+2026-03-21T17:40:19 | INFO     | [HUB         ] LOG                  Epoch sync: SYNC_OK
+2026-03-21T17:40:19 | INFO     | [HUB         ] EPOCH_SYNC           SYNC_OK
+2026-03-21T17:40:19 | INFO     | [SYSTEM      ] PROVISION            W=4 peers=NODE-ALPHA,NODE-BETA sync=True
+2026-03-21T17:40:21 | INFO     | [EPOCH_CHAIN ] INIT                 ep0=0bd6f5ba…ed927d W=4
+2026-03-21T17:40:21 | INFO     | [HUB         ] LOG                  Hub provisioned | W=4 | peers=NODE-ALPHA,NODE-BETA
+2026-03-21T17:40:21 | INFO     | [HUB         ] LOG                  ep0_hash=077f2320…b9d5ab | Hub now SILENT
+2026-03-21T17:40:21 | INFO     | [HUB         ] PROVISION            peer_a=NODE-ALPHA peer_b=NODE-BETA W=4 ep0=077f2320…b9d5ab
+2026-03-21T17:40:21 | INFO     | [NODE-ALPHA  ] LOG                  epoch_0 received | hash=077f2320…b9d5ab
+2026-03-21T17:40:21 | INFO     | [NODE-BETA   ] LOG                  epoch_0 received | hash=077f2320…b9d5ab
+2026-03-21T17:40:21 | INFO     | [HUB         ] LOG                  Epoch sync: SYNC_OK
+2026-03-21T17:40:21 | INFO     | [HUB         ] EPOCH_SYNC           SYNC_OK
+2026-03-21T17:40:21 | INFO     | [SYSTEM      ] PROVISION            W=4 peers=NODE-ALPHA,NODE-BETA sync=True
+2026-03-21T17:40:26 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=d5ed2fb0…534667 tier=COOL score=0.5370
+2026-03-21T17:40:26 | INFO     | [NODE-ALPHA  ] LOG                  SEALED audit-log-443 | score=0.5370 tier=COOL ep=0 w=0 ctr=0 lat=0.325ms
+2026-03-21T17:40:27 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=34f2e97b…c08805 tier=COOL score=0.5610
+2026-03-21T17:40:27 | INFO     | [NODE-ALPHA  ] LOG                  SEALED sensor-batch-001 | score=0.5610 tier=COOL ep=0 w=1 ctr=1 lat=0.497ms
+2026-03-21T17:40:29 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=37b47625…2a6811 tier=COOL score=0.5863
+2026-03-21T17:40:29 | INFO     | [NODE-ALPHA  ] LOG                  SEALED patient-record-002 | score=0.5863 tier=COOL ep=0 w=2 ctr=2 lat=1.415ms
+2026-03-21T17:40:31 | INFO     | [NODE-BETA   ] LOG                  READ patient-record-002 | fp_ok=✓ zk_ok=✓ hash_ok=✓ tier=COOL
+2026-03-21T17:40:31 | INFO     | [NODE-BETA   ] READ                 node=37b47625…2a6811 label=patient-record-002
+2026-03-21T17:40:34 | INFO     | [NODE-ALPHA  ] LOG                  VERIFY: 3 nodes (0 from archive), chain_ok=True
+2026-03-21T17:41:08 | WARNING  | [NODE-ALPHA  ] LOG                  QUARANTINE gates fired: TIMING_ANOMALY(0.025<0.2)
+2026-03-21T17:41:08 | WARNING  | [NODE-ALPHA  ] QUARANTINE           label=tx-ledger-7731 gates=['TIMING_ANOMALY(0.025<0.2)']
+2026-03-21T17:41:08 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=0d3a5ec9…638ed2 tier=QUARANTINE score=0.5727
+2026-03-21T17:41:08 | INFO     | [EPOCH_CHAIN ] ROTATE               epoch 0→1 archived_to=HOT new=73d013e6…e9c4fa fwd_secrecy=applied
+2026-03-21T17:41:08 | INFO     | [NODE-ALPHA  ] LOG                  Epoch rotated → 1 | fwd_secrecy applied
+2026-03-21T17:41:08 | INFO     | [NODE-ALPHA  ] LOG                  SEALED tx-ledger-7731 | score=0.5727 tier=QUARANTINE ep=0 w=3 ctr=3 lat=0.682ms
+2026-03-21T17:41:11 | INFO     | [NODE-ALPHA  ] LOG                  VERIFY: 4 nodes (0 from archive), chain_ok=True
+2026-03-21T17:41:23 | INFO     | [NODE-BETA   ] LOG                  READ tx-ledger-7731 | fp_ok=✓ zk_ok=✓ hash_ok=✓ tier=QUARANTINE
+2026-03-21T17:41:23 | INFO     | [NODE-BETA   ] READ                 node=0d3a5ec9…638ed2 label=tx-ledger-7731
+2026-03-21T17:41:25 | INFO     | [NODE-ALPHA  ] LOG                  VERIFY: 4 nodes (0 from archive), chain_ok=True
+2026-03-21T17:41:47 | WARNING  | [NODE-ALPHA  ] LOG                  QUARANTINE gates fired: TIMING_ANOMALY(0.026<0.2)
+2026-03-21T17:41:47 | WARNING  | [NODE-ALPHA  ] QUARANTINE           label=tx-ledger-7731 gates=['TIMING_ANOMALY(0.026<0.2)']
+2026-03-21T17:41:47 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=78136929…d9407a tier=QUARANTINE score=0.5426
+2026-03-21T17:41:47 | INFO     | [NODE-ALPHA  ] LOG                  SEALED tx-ledger-7731 | score=0.5426 tier=QUARANTINE ep=1 w=0 ctr=4 lat=0.875ms
+2026-03-21T17:41:49 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=c44f43e1…76c6e3 tier=COOL score=0.5707
+2026-03-21T17:41:49 | INFO     | [NODE-ALPHA  ] LOG                  SEALED sat-telemetry-042 | score=0.5707 tier=COOL ep=1 w=1 ctr=5 lat=1.453ms
+2026-03-21T17:41:52 | INFO     | [NODE-ALPHA  ] LOG                  VERIFY: 6 nodes (0 from archive), chain_ok=True
+2026-03-21T17:42:28 | INFO     | [EPOCH_CHAIN ] INIT                 ep0=29e74348…81ac02 W=4
+2026-03-21T17:42:28 | INFO     | [HUB         ] LOG                  Hub provisioned | W=4 | peers=NODE-ALPHA,NODE-BETA
+2026-03-21T17:42:28 | INFO     | [HUB         ] LOG                  ep0_hash=0dbdf971…04319d | Hub now SILENT
+2026-03-21T17:42:28 | INFO     | [HUB         ] PROVISION            peer_a=NODE-ALPHA peer_b=NODE-BETA W=4 ep0=0dbdf971…04319d
+2026-03-21T17:42:28 | INFO     | [NODE-ALPHA  ] LOG                  epoch_0 received | hash=0dbdf971…04319d
+2026-03-21T17:42:28 | INFO     | [NODE-BETA   ] LOG                  epoch_0 received | hash=0dbdf971…04319d
+2026-03-21T17:42:28 | INFO     | [HUB         ] LOG                  Epoch sync: SYNC_OK
+2026-03-21T17:42:28 | INFO     | [HUB         ] EPOCH_SYNC           SYNC_OK
+2026-03-21T17:42:28 | INFO     | [SYSTEM      ] PROVISION            W=4 peers=NODE-ALPHA,NODE-BETA sync=True
+2026-03-21T17:42:37 | INFO     | [EPOCH_CHAIN ] INIT                 ep0=8cab43ea…75eba0 W=4
+2026-03-21T17:42:37 | INFO     | [HUB         ] LOG                  Hub provisioned | W=4 | peers=NODE-ALPHA,NODE-BETA
+2026-03-21T17:42:37 | INFO     | [HUB         ] LOG                  ep0_hash=1356e364…319f8e | Hub now SILENT
+2026-03-21T17:42:37 | INFO     | [HUB         ] PROVISION            peer_a=NODE-ALPHA peer_b=NODE-BETA W=4 ep0=1356e364…319f8e
+2026-03-21T17:42:37 | INFO     | [NODE-ALPHA  ] LOG                  epoch_0 received | hash=1356e364…319f8e
+2026-03-21T17:42:37 | INFO     | [NODE-BETA   ] LOG                  epoch_0 received | hash=1356e364…319f8e
+2026-03-21T17:42:37 | INFO     | [HUB         ] LOG                  Epoch sync: SYNC_OK
+2026-03-21T17:42:37 | INFO     | [HUB         ] EPOCH_SYNC           SYNC_OK
+2026-03-21T17:42:37 | INFO     | [SYSTEM      ] PROVISION            W=4 peers=NODE-ALPHA,NODE-BETA sync=True
+2026-03-21T17:42:48 | ERROR    | [NODE-ALPHA  ] LOG                  VERIFY: 6 nodes (0 from archive), chain_ok=False
+2026-03-21T17:42:53 | WARNING  | [NODE-ALPHA  ] LOG                  QUARANTINE gates fired: TIMING_ANOMALY(0.061<0.2), STRUCTURAL_VIOLATION(counter=0,depth>0)
+2026-03-21T17:42:53 | WARNING  | [NODE-ALPHA  ] QUARANTINE           label=sensor-batch-001 gates=['TIMING_ANOMALY(0.061<0.2)', 'STRUCTURAL_VIOLATION(counter=0,depth>0)']
+2026-03-21T17:42:53 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=904508cb…163ff4 tier=QUARANTINE score=0.5387
+2026-03-21T17:42:53 | INFO     | [NODE-ALPHA  ] LOG                  SEALED sensor-batch-001 | score=0.5387 tier=QUARANTINE ep=0 w=0 ctr=0 lat=1.95ms
+2026-03-21T17:42:55 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=c5fc998b…7e8451 tier=COOL score=0.5772
+2026-03-21T17:42:55 | INFO     | [NODE-ALPHA  ] LOG                  SEALED ml-batch-epoch17 | score=0.5772 tier=COOL ep=0 w=1 ctr=1 lat=0.762ms
+2026-03-21T17:42:56 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=d79b974b…7cc19c tier=COOL score=0.5919
+2026-03-21T17:42:56 | INFO     | [NODE-ALPHA  ] LOG                  SEALED audit-log-443 | score=0.5919 tier=COOL ep=0 w=2 ctr=2 lat=2.529ms
+2026-03-21T17:42:58 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=8ec43aa1…1c3a73 tier=WARM score=0.6021
+2026-03-21T17:42:58 | INFO     | [EPOCH_CHAIN ] ROTATE               epoch 0→1 archived_to=HOT new=08915b44…081cce fwd_secrecy=applied
+2026-03-21T17:42:58 | INFO     | [NODE-ALPHA  ] LOG                  Epoch rotated → 1 | fwd_secrecy applied
+2026-03-21T17:42:58 | INFO     | [NODE-ALPHA  ] LOG                  SEALED sensor-batch-001 | score=0.6021 tier=WARM ep=0 w=3 ctr=3 lat=0.614ms
+2026-03-21T17:42:59 | INFO     | [NODE-BETA   ] LOG                  READ sensor-batch-001 | fp_ok=✓ zk_ok=✓ hash_ok=✓ tier=WARM
+2026-03-21T17:42:59 | INFO     | [NODE-BETA   ] READ                 node=8ec43aa1…1c3a73 label=sensor-batch-001
+2026-03-21T17:43:01 | ERROR    | [NODE-ALPHA  ] LOG                  VERIFY: 10 nodes (0 from archive), chain_ok=False
+2026-03-21T17:43:47 | WARNING  | [SYSTEM      ] RESET                Full system reset
+2026-03-21T17:43:57 | INFO     | [EPOCH_CHAIN ] INIT                 ep0=172ac8cc…dc5c4e W=4
+2026-03-21T17:43:57 | INFO     | [HUB         ] LOG                  Hub provisioned | W=4 | peers=NODE-ALPHA,NODE-BETA
+2026-03-21T17:43:57 | INFO     | [HUB         ] LOG                  ep0_hash=879eedf7…6fa42f | Hub now SILENT
+2026-03-21T17:43:57 | INFO     | [HUB         ] PROVISION            peer_a=NODE-ALPHA peer_b=NODE-BETA W=4 ep0=879eedf7…6fa42f
+2026-03-21T17:43:57 | INFO     | [NODE-ALPHA  ] LOG                  epoch_0 received | hash=879eedf7…6fa42f
+2026-03-21T17:43:57 | INFO     | [NODE-BETA   ] LOG                  epoch_0 received | hash=879eedf7…6fa42f
+2026-03-21T17:43:57 | INFO     | [HUB         ] LOG                  Epoch sync: SYNC_OK
+2026-03-21T17:43:57 | INFO     | [HUB         ] EPOCH_SYNC           SYNC_OK
+2026-03-21T17:43:57 | INFO     | [SYSTEM      ] PROVISION            W=4 peers=NODE-ALPHA,NODE-BETA sync=True
+2026-03-21T17:54:34 | INFO     | [NODE-ALPHA  ] LOG                  VERIFY: 0 nodes (0 from archive), chain_ok=True
+2026-03-21T17:54:48 | WARNING  | [NODE-ALPHA  ] LOG                  QUARANTINE gates fired: TIMING_ANOMALY(0.002<0.2)
+2026-03-21T17:54:48 | WARNING  | [NODE-ALPHA  ] QUARANTINE           label=sensor-batch-001 gates=['TIMING_ANOMALY(0.002<0.2)']
+2026-03-21T17:54:48 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=bf29a8df…8ef028 tier=QUARANTINE score=0.5275
+2026-03-21T17:54:48 | INFO     | [NODE-ALPHA  ] LOG                  SEALED sensor-batch-001 | score=0.5275 tier=QUARANTINE ep=0 w=0 ctr=0 lat=1.909ms
+2026-03-21T17:54:55 | WARNING  | [NODE-ALPHA  ] LOG                  QUARANTINE gates fired: TIMING_ANOMALY(0.155<0.2)
+2026-03-21T17:54:55 | WARNING  | [NODE-ALPHA  ] QUARANTINE           label=patient-record-002 gates=['TIMING_ANOMALY(0.155<0.2)']
+2026-03-21T17:54:55 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=9ac91817…57d49a tier=QUARANTINE score=0.5499
+2026-03-21T17:54:55 | INFO     | [NODE-ALPHA  ] LOG                  SEALED patient-record-002 | score=0.5499 tier=QUARANTINE ep=0 w=1 ctr=1 lat=0.637ms
+2026-03-21T17:54:57 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=d08ca136…12505d tier=COOL score=0.5761
+2026-03-21T17:54:57 | INFO     | [NODE-ALPHA  ] LOG                  SEALED tx-ledger-7731 | score=0.5761 tier=COOL ep=0 w=2 ctr=2 lat=0.408ms
+2026-03-21T17:55:05 | WARNING  | [NODE-ALPHA  ] LOG                  QUARANTINE gates fired: TIMING_ANOMALY(0.122<0.2)
+2026-03-21T17:55:05 | WARNING  | [NODE-ALPHA  ] QUARANTINE           label=sat-telemetry-042 gates=['TIMING_ANOMALY(0.122<0.2)']
+2026-03-21T17:55:05 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=77bbd53c…7f72eb tier=QUARANTINE score=0.5753
+2026-03-21T17:55:05 | INFO     | [EPOCH_CHAIN ] ROTATE               epoch 0→1 archived_to=HOT new=efce0a72…1a8d5a fwd_secrecy=applied
+2026-03-21T17:55:05 | INFO     | [NODE-ALPHA  ] LOG                  Epoch rotated → 1 | fwd_secrecy applied
+2026-03-21T17:55:05 | INFO     | [NODE-ALPHA  ] LOG                  SEALED sat-telemetry-042 | score=0.5753 tier=QUARANTINE ep=0 w=3 ctr=3 lat=0.851ms
+2026-03-21T17:55:07 | INFO     | [NODE-ALPHA  ] LOG                  VERIFY: 4 nodes (0 from archive), chain_ok=True
+2026-03-21T17:55:12 | INFO     | [NODE-BETA   ] LOG                  READ sat-telemetry-042 | fp_ok=✓ zk_ok=✓ hash_ok=✓ tier=QUARANTINE
+2026-03-21T17:55:12 | INFO     | [NODE-BETA   ] READ                 node=77bbd53c…7f72eb label=sat-telemetry-042
+2026-03-21T17:55:23 | INFO     | [NODE-ALPHA  ] LOG                  VERIFY: 4 nodes (0 from archive), chain_ok=True
+2026-03-21T17:56:07 | WARNING  | [NODE-ALPHA  ] LOG                  QUARANTINE gates fired: TIMING_ANOMALY(0.016<0.2)
+2026-03-21T17:56:07 | WARNING  | [NODE-ALPHA  ] QUARANTINE           label=sat-telemetry-042 gates=['TIMING_ANOMALY(0.016<0.2)']
+2026-03-21T17:56:07 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=e7a15c23…f758c8 tier=QUARANTINE score=0.5413
+2026-03-21T17:56:07 | INFO     | [NODE-ALPHA  ] LOG                  SEALED sat-telemetry-042 | score=0.5413 tier=QUARANTINE ep=1 w=0 ctr=4 lat=0.7ms
+2026-03-21T17:56:15 | WARNING  | [NODE-ALPHA  ] LOG                  QUARANTINE gates fired: TIMING_ANOMALY(0.121<0.2)
+2026-03-21T17:56:15 | WARNING  | [NODE-ALPHA  ] QUARANTINE           label=ml-batch-epoch17 gates=['TIMING_ANOMALY(0.121<0.2)']
+2026-03-21T17:56:15 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=9de03043…a35ffb tier=QUARANTINE score=0.5591
+2026-03-21T17:56:15 | INFO     | [NODE-ALPHA  ] LOG                  SEALED ml-batch-epoch17 | score=0.5591 tier=QUARANTINE ep=1 w=1 ctr=5 lat=1.371ms
+2026-03-21T17:56:22 | WARNING  | [NODE-ALPHA  ] LOG                  QUARANTINE gates fired: TIMING_ANOMALY(0.131<0.2)
+2026-03-21T17:56:22 | WARNING  | [NODE-ALPHA  ] QUARANTINE           label=audit-log-443 gates=['TIMING_ANOMALY(0.131<0.2)']
+2026-03-21T17:56:22 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=e376f987…a60710 tier=QUARANTINE score=0.5747
+2026-03-21T17:56:22 | INFO     | [NODE-ALPHA  ] LOG                  SEALED audit-log-443 | score=0.5747 tier=QUARANTINE ep=1 w=2 ctr=6 lat=8.173ms
+2026-03-21T17:56:32 | WARNING  | [NODE-ALPHA  ] LOG                  QUARANTINE gates fired: TIMING_ANOMALY(0.108<0.2)
+2026-03-21T17:56:32 | WARNING  | [NODE-ALPHA  ] QUARANTINE           label=sensor-batch-001 gates=['TIMING_ANOMALY(0.108<0.2)']
+2026-03-21T17:56:32 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=9de4d859…a2849b tier=QUARANTINE score=0.5869
+2026-03-21T17:56:32 | INFO     | [EPOCH_CHAIN ] ROTATE               epoch 1→2 archived_to=HOT new=390564f4…e61e6a fwd_secrecy=applied
+2026-03-21T17:56:32 | INFO     | [NODE-ALPHA  ] LOG                  Epoch rotated → 2 | fwd_secrecy applied
+2026-03-21T17:56:32 | INFO     | [NODE-ALPHA  ] LOG                  SEALED sensor-batch-001 | score=0.5869 tier=QUARANTINE ep=1 w=3 ctr=7 lat=0.803ms
+2026-03-21T17:56:34 | INFO     | [NODE-ALPHA  ] LOG                  VERIFY: 8 nodes (0 from archive), chain_ok=True
+2026-03-21T17:56:40 | INFO     | [NODE-BETA   ] LOG                  READ sensor-batch-001 | fp_ok=✓ zk_ok=✓ hash_ok=✓ tier=QUARANTINE
+2026-03-21T17:56:40 | INFO     | [NODE-BETA   ] READ                 node=9de4d859…a2849b label=sensor-batch-001
+2026-03-21T19:08:45 | WARNING  | [NODE-ALPHA  ] LOG                  QUARANTINE gates fired: TIMING_ANOMALY(0.000<0.2)
+2026-03-21T19:08:45 | WARNING  | [NODE-ALPHA  ] QUARANTINE           label=sensor-batch-001 gates=['TIMING_ANOMALY(0.000<0.2)']
+2026-03-21T19:08:45 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=115316aa…a1dd38 tier=QUARANTINE score=0.5531
+2026-03-21T19:08:45 | INFO     | [NODE-ALPHA  ] LOG                  SEALED sensor-batch-001 | score=0.5531 tier=QUARANTINE ep=2 w=0 ctr=8 lat=1.321ms
+2026-03-21T19:08:47 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=9138adf9…b65a05 tier=COOL score=0.5882
+2026-03-21T19:08:47 | INFO     | [NODE-ALPHA  ] LOG                  SEALED patient-record-002 | score=0.5882 tier=COOL ep=2 w=1 ctr=9 lat=1.054ms
+2026-03-21T19:08:48 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=78823327…eeb3d5 tier=WARM score=0.6127
+2026-03-21T19:08:48 | INFO     | [NODE-ALPHA  ] LOG                  SEALED tx-ledger-7731 | score=0.6127 tier=WARM ep=2 w=2 ctr=10 lat=0.641ms
+2026-03-21T19:08:49 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=152ce62d…b3c916 tier=WARM score=0.6251
+2026-03-21T19:08:49 | INFO     | [EPOCH_CHAIN ] ROTATE               epoch 2→3 archived_to=HOT new=508dbc52…1a3ecd fwd_secrecy=applied
+2026-03-21T19:08:49 | INFO     | [NODE-ALPHA  ] LOG                  Epoch rotated → 3 | fwd_secrecy applied
+2026-03-21T19:08:49 | INFO     | [NODE-ALPHA  ] LOG                  SEALED sat-telemetry-042 | score=0.6251 tier=WARM ep=2 w=3 ctr=11 lat=1.78ms
+2026-03-21T19:08:51 | INFO     | [NODE-BETA   ] LOG                  READ sat-telemetry-042 | fp_ok=✓ zk_ok=✓ hash_ok=✓ tier=WARM
+2026-03-21T19:08:51 | INFO     | [NODE-BETA   ] READ                 node=152ce62d…b3c916 label=sat-telemetry-042
+2026-03-21T19:08:53 | INFO     | [NODE-ALPHA  ] LOG                  VERIFY: 12 nodes (0 from archive), chain_ok=True
+2026-03-21T19:10:16 | WARNING  | [NODE-ALPHA  ] LOG                  QUARANTINE gates fired: TIMING_ANOMALY(0.012<0.2)
+2026-03-21T19:10:16 | WARNING  | [NODE-ALPHA  ] QUARANTINE           label=ml-batch-epoch17 gates=['TIMING_ANOMALY(0.012<0.2)']
+2026-03-21T19:10:16 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=54a14bb0…3590fa tier=QUARANTINE score=0.5664
+2026-03-21T19:10:16 | INFO     | [NODE-ALPHA  ] LOG                  SEALED ml-batch-epoch17 | score=0.5664 tier=QUARANTINE ep=3 w=0 ctr=12 lat=1.794ms
+2026-03-21T19:10:17 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=c4c3fc0e…ccc242 tier=WARM score=0.6028
+2026-03-21T19:10:17 | INFO     | [NODE-ALPHA  ] LOG                  SEALED audit-log-443 | score=0.6028 tier=WARM ep=3 w=1 ctr=13 lat=0.777ms
+2026-03-21T19:10:19 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=821112f7…c2e92c tier=WARM score=0.6191
+2026-03-21T19:10:19 | INFO     | [NODE-ALPHA  ] LOG                  SEALED sensor-batch-001 | score=0.6191 tier=WARM ep=3 w=2 ctr=14 lat=1.042ms
+2026-03-21T19:10:23 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=b01d0a0a…f9687e tier=WARM score=0.6181
+2026-03-21T19:10:23 | INFO     | [EPOCH_CHAIN ] ROTATE               epoch 3→4 archived_to=HOT new=d1887e74…673384 fwd_secrecy=applied
+2026-03-21T19:10:23 | INFO     | [NODE-ALPHA  ] LOG                  Epoch rotated → 4 | fwd_secrecy applied
+2026-03-21T19:10:23 | INFO     | [NODE-ALPHA  ] LOG                  SEALED patient-record-002 | score=0.6181 tier=WARM ep=3 w=3 ctr=15 lat=0.788ms
+2026-03-21T19:10:25 | INFO     | [NODE-BETA   ] LOG                  READ patient-record-002 | fp_ok=✓ zk_ok=✓ hash_ok=✓ tier=WARM
+2026-03-21T19:10:25 | INFO     | [NODE-BETA   ] READ                 node=b01d0a0a…f9687e label=patient-record-002
+2026-03-21T19:11:18 | INFO     | [ADMIN       ] MANUAL_ARCHIVE_NODE  node=bf29a8df…8ef028 reason=MANUAL_ARCHIVE
+2026-03-21T19:11:46 | INFO     | [ADMIN       ] RESTORE_NODE         node=bf29a8df…8ef028
+2026-03-21T19:13:20 | INFO     | [NODE-ALPHA  ] LOG                  VERIFY: 16 nodes (0 from archive), chain_ok=True
+2026-03-21T19:29:50 | WARNING  | [NODE-ALPHA  ] LOG                  QUARANTINE gates fired: TIMING_ANOMALY(0.001<0.2)
+2026-03-21T19:29:50 | WARNING  | [NODE-ALPHA  ] QUARANTINE           label=sensor-batch-001:v16 gates=['TIMING_ANOMALY(0.001<0.2)']
+2026-03-21T19:29:50 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=f0f4318b…7b1aa9 tier=QUARANTINE score=0.5743
+2026-03-21T19:29:50 | INFO     | [NODE-ALPHA  ] LOG                  SEALED sensor-batch-001:v16 | score=0.5743 tier=QUARANTINE ep=4 w=0 ctr=16 lat=4.386ms
+2026-03-21T19:29:50 | WARNING  | [SYSTEM      ] STORE_UPDATE         node=bf29a8df…8ef028 status=SUPERSEDED superseded_by=f0f4318b88c3c4e23e7b1aa9
+2026-03-21T19:29:50 | INFO     | [SYSTEM      ] STORE_PUT            node=c2e05b1f…1f8408 tier=WARM score=0.6066
+2026-03-21T19:29:50 | INFO     | [NODE-ALPHA  ] LOG                  SEALED _AUDIT_SUPERSEDE | score=0.6066 tier=WARM ep=4 w=1 ctr=17 lat=4.205ms
+2026-03-21T19:29:50 | INFO     | [NODE-ALPHA  ] LOG                  SUPERSEDE sensor-batch-001 → f0f4318b88c3 reason=GDPR-ART17
+2026-03-21T19:30:17 | INFO     | [NODE-ALPHA  ] LOG                  VERIFY: 18 nodes (0 from archive), chain_ok=True
+2026-03-22T01:08:11 | INFO     | [SYSTEM      ] STARTUP              PCD system starting on http://localhost:7708
+2026-03-22T01:08:11 | INFO     | [SYSTEM      ] PATHS                data=/home/danny/PycharmProjects/llm_graph_search_2024/warl0k_cloud_demo_app_multi_client_server_dash/app/WARLOK_PIM_PCD_AI_7_fastAPI_Archive/pcd_data.json audit=/home/danny/PycharmProjects/llm_graph_search_2024/warl0k_cloud_demo_app_multi_client_server_dash/app/WARLOK_PIM_PCD_AI_7_fastAPI_Archive/pcd_audit.log
+2026-03-22T01:08:28 | INFO     | [EPOCH_CHAIN ] INIT                 ep0=6970b606…385ffb W=4
+2026-03-22T01:08:28 | INFO     | [HUB         ] LOG                  Hub provisioned | W=4 | peers=NODE-ALPHA,NODE-BETA
+2026-03-22T01:08:28 | INFO     | [HUB         ] LOG                  ep0_hash=7969caac…f75d74 | Hub now SILENT
+2026-03-22T01:08:28 | INFO     | [HUB         ] PROVISION            peer_a=NODE-ALPHA peer_b=NODE-BETA W=4 ep0=7969caac…f75d74
+2026-03-22T01:08:28 | INFO     | [NODE-ALPHA  ] LOG                  epoch_0 received | hash=7969caac…f75d74
+2026-03-22T01:08:28 | INFO     | [NODE-BETA   ] LOG                  epoch_0 received | hash=7969caac…f75d74
+2026-03-22T01:08:28 | INFO     | [HUB         ] LOG                  Epoch sync: SYNC_OK
+2026-03-22T01:08:28 | INFO     | [HUB         ] EPOCH_SYNC           SYNC_OK
+2026-03-22T01:08:28 | INFO     | [SYSTEM      ] PROVISION            W=4 peers=NODE-ALPHA,NODE-BETA sync=True
+2026-03-22T01:09:46 | ERROR    | [NODE-ALPHA  ] LOG                  VERIFY: 18 nodes (0 from archive), chain_ok=False
+2026-03-22T01:11:34 | WARNING  | [SYSTEM      ] RESET                Full system reset
+2026-03-22T01:11:38 | INFO     | [EPOCH_CHAIN ] INIT                 ep0=842f5a5a…570b6b W=4
+2026-03-22T01:11:38 | INFO     | [HUB         ] LOG                  Hub provisioned | W=4 | peers=NODE-ALPHA,NODE-BETA
+2026-03-22T01:11:38 | INFO     | [HUB         ] LOG                  ep0_hash=db3e555e…22e1b6 | Hub now SILENT
+2026-03-22T01:11:38 | INFO     | [HUB         ] PROVISION            peer_a=NODE-ALPHA peer_b=NODE-BETA W=4 ep0=db3e555e…22e1b6
+2026-03-22T01:11:38 | INFO     | [NODE-ALPHA  ] LOG                  epoch_0 received | hash=db3e555e…22e1b6
+2026-03-22T01:11:38 | INFO     | [NODE-BETA   ] LOG                  epoch_0 received | hash=db3e555e…22e1b6
+2026-03-22T01:11:38 | INFO     | [HUB         ] LOG                  Epoch sync: SYNC_OK
+2026-03-22T01:11:38 | INFO     | [HUB         ] EPOCH_SYNC           SYNC_OK
+2026-03-22T01:11:38 | INFO     | [SYSTEM      ] PROVISION            W=4 peers=NODE-ALPHA,NODE-BETA sync=True
+2026-03-22T01:11:44 | WARNING  | [NODE-ALPHA  ] LOG                  QUARANTINE gates fired: TIMING_ANOMALY(0.166<0.2)
+2026-03-22T01:11:44 | WARNING  | [NODE-ALPHA  ] QUARANTINE           label=sensor-batch-001 gates=['TIMING_ANOMALY(0.166<0.2)']
+2026-03-22T01:11:44 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=af25412f…6c0b19 tier=QUARANTINE score=0.5337
+2026-03-22T01:11:44 | INFO     | [NODE-ALPHA  ] LOG                  SEALED sensor-batch-001 | score=0.5337 tier=QUARANTINE ep=0 w=0 ctr=0 lat=1.041ms
+2026-03-22T01:11:45 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=07b243ae…54f325 tier=COOL score=0.5643
+2026-03-22T01:11:45 | INFO     | [NODE-ALPHA  ] LOG                  SEALED sensor-batch-001 | score=0.5643 tier=COOL ep=0 w=1 ctr=1 lat=0.642ms
+2026-03-22T01:11:47 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=c0d89004…4c8012 tier=COOL score=0.5823
+2026-03-22T01:11:47 | INFO     | [NODE-ALPHA  ] LOG                  SEALED patient-record-002 | score=0.5823 tier=COOL ep=0 w=2 ctr=2 lat=0.442ms
+2026-03-22T01:11:48 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=e199c8c0…a51bc5 tier=COOL score=0.5949
+2026-03-22T01:11:48 | INFO     | [EPOCH_CHAIN ] ROTATE               epoch 0→1 archived_to=HOT new=dc3233f7…1f943c fwd_secrecy=applied
+2026-03-22T01:11:48 | INFO     | [NODE-ALPHA  ] LOG                  Epoch rotated → 1 | fwd_secrecy applied
+2026-03-22T01:11:48 | INFO     | [NODE-ALPHA  ] LOG                  SEALED tx-ledger-7731 | score=0.5949 tier=COOL ep=0 w=3 ctr=3 lat=0.821ms
+2026-03-22T01:11:50 | INFO     | [NODE-BETA   ] LOG                  READ tx-ledger-7731 | fp_ok=✓ zk_ok=✓ hash_ok=✓ tier=COOL
+2026-03-22T01:11:50 | INFO     | [NODE-BETA   ] READ                 node=e199c8c0…a51bc5 label=tx-ledger-7731
+2026-03-22T01:11:56 | INFO     | [NODE-ALPHA  ] LOG                  VERIFY: 4 nodes (0 from archive), chain_ok=True
+2026-03-22T01:12:11 | INFO     | [NODE-BETA   ] LOG                  READ tx-ledger-7731 | fp_ok=✓ zk_ok=✓ hash_ok=✓ tier=COOL
+2026-03-22T01:12:11 | INFO     | [NODE-BETA   ] READ                 node=e199c8c0…a51bc5 label=tx-ledger-7731
+2026-03-22T01:12:37 | INFO     | [NODE-BETA   ] LOG                  READ sensor-batch-001 | fp_ok=✓ zk_ok=✓ hash_ok=✓ tier=QUARANTINE
+2026-03-22T01:12:37 | INFO     | [NODE-BETA   ] READ                 node=af25412f…6c0b19 label=sensor-batch-001
+2026-03-22T01:13:11 | WARNING  | [NODE-ALPHA  ] LOG                  QUARANTINE gates fired: TIMING_ANOMALY(0.012<0.2)
+2026-03-22T01:13:11 | WARNING  | [NODE-ALPHA  ] QUARANTINE           label=tx-ledger-7731 gates=['TIMING_ANOMALY(0.012<0.2)']
+2026-03-22T01:13:11 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=c53af599…cd1744 tier=QUARANTINE score=0.5422
+2026-03-22T01:13:11 | INFO     | [NODE-ALPHA  ] LOG                  SEALED tx-ledger-7731 | score=0.5422 tier=QUARANTINE ep=1 w=0 ctr=4 lat=1.057ms
+2026-03-22T01:13:12 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=60c2c73b…e56028 tier=COOL score=0.5785
+2026-03-22T01:13:12 | INFO     | [NODE-ALPHA  ] LOG                  SEALED sat-telemetry-042 | score=0.5785 tier=COOL ep=1 w=1 ctr=5 lat=0.784ms
+2026-03-22T01:13:13 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=e53cbdbd…85842f tier=COOL score=0.5927
+2026-03-22T01:13:13 | INFO     | [NODE-ALPHA  ] LOG                  SEALED ml-batch-epoch17 | score=0.5927 tier=COOL ep=1 w=2 ctr=6 lat=0.943ms
+2026-03-22T01:13:15 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=9b8f9c9f…5cb852 tier=WARM score=0.6084
+2026-03-22T01:13:15 | INFO     | [EPOCH_CHAIN ] ROTATE               epoch 1→2 archived_to=HOT new=7b440103…9af907 fwd_secrecy=applied
+2026-03-22T01:13:15 | INFO     | [NODE-ALPHA  ] LOG                  Epoch rotated → 2 | fwd_secrecy applied
+2026-03-22T01:13:15 | INFO     | [NODE-ALPHA  ] LOG                  SEALED audit-log-443 | score=0.6084 tier=WARM ep=1 w=3 ctr=7 lat=1.062ms
+2026-03-22T01:13:17 | INFO     | [NODE-BETA   ] LOG                  READ audit-log-443 | fp_ok=✓ zk_ok=✓ hash_ok=✓ tier=WARM
+2026-03-22T01:13:17 | INFO     | [NODE-BETA   ] READ                 node=9b8f9c9f…5cb852 label=audit-log-443
+2026-03-22T01:13:22 | INFO     | [NODE-ALPHA  ] LOG                  VERIFY: 8 nodes (0 from archive), chain_ok=True
+2026-03-22T01:13:33 | INFO     | [NODE-BETA   ] LOG                  READ sensor-batch-001 | fp_ok=✓ zk_ok=✓ hash_ok=✓ tier=QUARANTINE
+2026-03-22T01:13:33 | INFO     | [NODE-BETA   ] READ                 node=af25412f…6c0b19 label=sensor-batch-001
+2026-03-22T01:13:49 | INFO     | [NODE-BETA   ] LOG                  READ audit-log-443 | fp_ok=✓ zk_ok=✓ hash_ok=✓ tier=WARM
+2026-03-22T01:13:49 | INFO     | [NODE-BETA   ] READ                 node=9b8f9c9f…5cb852 label=audit-log-443
+2026-03-22T01:13:54 | INFO     | [NODE-BETA   ] LOG                  READ audit-log-443 | fp_ok=✓ zk_ok=✓ hash_ok=✓ tier=WARM
+2026-03-22T01:13:54 | INFO     | [NODE-BETA   ] READ                 node=9b8f9c9f…5cb852 label=audit-log-443
+2026-03-22T01:14:17 | WARNING  | [NODE-ALPHA  ] LOG                  QUARANTINE gates fired: TIMING_ANOMALY(0.016<0.2)
+2026-03-22T01:14:17 | WARNING  | [NODE-ALPHA  ] QUARANTINE           label=audit-log-443 gates=['TIMING_ANOMALY(0.016<0.2)']
+2026-03-22T01:14:17 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=2371e898…c70726 tier=QUARANTINE score=0.5551
+2026-03-22T01:14:17 | INFO     | [NODE-ALPHA  ] LOG                  SEALED audit-log-443 | score=0.5551 tier=QUARANTINE ep=2 w=0 ctr=8 lat=0.968ms
+2026-03-22T01:14:19 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=72bb3fcb…0c077e tier=COOL score=0.5841
+2026-03-22T01:14:19 | INFO     | [NODE-ALPHA  ] LOG                  SEALED sensor-batch-001 | score=0.5841 tier=COOL ep=2 w=1 ctr=9 lat=1.313ms
+2026-03-22T01:14:54 | INFO     | [NODE-ALPHA  ] LOG                  VERIFY: 10 nodes (0 from archive), chain_ok=True
+2026-03-22T01:15:19 | INFO     | [NODE-BETA   ] LOG                  READ audit-log-443 | fp_ok=✓ zk_ok=✓ hash_ok=✓ tier=WARM
+2026-03-22T01:15:19 | INFO     | [NODE-BETA   ] READ                 node=9b8f9c9f…5cb852 label=audit-log-443
+2026-03-22T01:15:51 | INFO     | [NODE-BETA   ] LOG                  READ sat-telemetry-042 | fp_ok=✓ zk_ok=✓ hash_ok=✓ tier=COOL
+2026-03-22T01:15:51 | INFO     | [NODE-BETA   ] READ                 node=60c2c73b…e56028 label=sat-telemetry-042
+2026-03-22T01:16:20 | INFO     | [EPOCH_CHAIN ] INIT                 ep0=9c381c50…d91b02 W=2
+2026-03-22T01:16:20 | INFO     | [HUB         ] LOG                  Hub provisioned | W=2 | peers=NODE-ALPHA,NODE-BETA
+2026-03-22T01:16:20 | INFO     | [HUB         ] LOG                  ep0_hash=1a498265…2a8a3c | Hub now SILENT
+2026-03-22T01:16:20 | INFO     | [HUB         ] PROVISION            peer_a=NODE-ALPHA peer_b=NODE-BETA W=2 ep0=1a498265…2a8a3c
+2026-03-22T01:16:20 | INFO     | [NODE-ALPHA  ] LOG                  epoch_0 received | hash=1a498265…2a8a3c
+2026-03-22T01:16:20 | INFO     | [NODE-BETA   ] LOG                  epoch_0 received | hash=1a498265…2a8a3c
+2026-03-22T01:16:20 | INFO     | [HUB         ] LOG                  Epoch sync: SYNC_OK
+2026-03-22T01:16:20 | INFO     | [HUB         ] EPOCH_SYNC           SYNC_OK
+2026-03-22T01:16:20 | INFO     | [SYSTEM      ] PROVISION            W=2 peers=NODE-ALPHA,NODE-BETA sync=True
+2026-03-22T01:16:26 | WARNING  | [NODE-ALPHA  ] LOG                  QUARANTINE gates fired: TIMING_ANOMALY(0.160<0.2), STRUCTURAL_VIOLATION(counter=0,depth>0)
+2026-03-22T01:16:26 | WARNING  | [NODE-ALPHA  ] QUARANTINE           label=sensor-batch-001 gates=['TIMING_ANOMALY(0.160<0.2)', 'STRUCTURAL_VIOLATION(counter=0,depth>0)']
+2026-03-22T01:16:26 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=af86ff34…f245a8 tier=QUARANTINE score=0.5486
+2026-03-22T01:16:26 | INFO     | [NODE-ALPHA  ] LOG                  SEALED sensor-batch-001 | score=0.5486 tier=QUARANTINE ep=0 w=0 ctr=0 lat=0.898ms
+2026-03-22T01:16:28 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=a7db7e5c…ae7a98 tier=COOL score=0.5891
+2026-03-22T01:16:28 | INFO     | [EPOCH_CHAIN ] ROTATE               epoch 0→1 archived_to=HOT new=092e052d…61666b fwd_secrecy=applied
+2026-03-22T01:16:28 | INFO     | [NODE-ALPHA  ] LOG                  Epoch rotated → 1 | fwd_secrecy applied
+2026-03-22T01:16:28 | INFO     | [NODE-ALPHA  ] LOG                  SEALED patient-record-002 | score=0.5891 tier=COOL ep=0 w=1 ctr=1 lat=0.759ms
+2026-03-22T01:16:29 | INFO     | [NODE-BETA   ] LOG                  READ patient-record-002 | fp_ok=✓ zk_ok=✓ hash_ok=✓ tier=COOL
+2026-03-22T01:16:29 | INFO     | [NODE-BETA   ] READ                 node=a7db7e5c…ae7a98 label=patient-record-002
+2026-03-22T01:16:33 | ERROR    | [NODE-ALPHA  ] LOG                  VERIFY: 12 nodes (0 from archive), chain_ok=False
+2026-03-22T02:12:23 | INFO     | [SYSTEM      ] STARTUP              PCD system starting on http://localhost:7708
+2026-03-22T02:12:23 | INFO     | [SYSTEM      ] PATHS                data=/home/danny/PycharmProjects/llm_graph_search_2024/warl0k_cloud_demo_app_multi_client_server_dash/app/WARLOK_PIM_PCD_AI_7_fastAPI_Archive/pcd_data.json audit=/home/danny/PycharmProjects/llm_graph_search_2024/warl0k_cloud_demo_app_multi_client_server_dash/app/WARLOK_PIM_PCD_AI_7_fastAPI_Archive/pcd_audit.log
+2026-03-22T08:33:02 | INFO     | [EPOCH_CHAIN ] INIT                 ep0=3c89a443…040bad W=2
+2026-03-22T08:33:02 | INFO     | [HUB         ] LOG                  Hub provisioned | W=2 | peers=NODE-ALPHA,NODE-BETA
+2026-03-22T08:33:02 | INFO     | [HUB         ] LOG                  ep0_hash=6fcb1a61…a3c050 | Hub now SILENT
+2026-03-22T08:33:02 | INFO     | [HUB         ] PROVISION            peer_a=NODE-ALPHA peer_b=NODE-BETA W=2 ep0=6fcb1a61…a3c050
+2026-03-22T08:33:02 | INFO     | [NODE-ALPHA  ] LOG                  epoch_0 received | hash=6fcb1a61…a3c050
+2026-03-22T08:33:02 | INFO     | [NODE-BETA   ] LOG                  epoch_0 received | hash=6fcb1a61…a3c050
+2026-03-22T08:33:02 | INFO     | [HUB         ] LOG                  Epoch sync: SYNC_OK
+2026-03-22T08:33:02 | INFO     | [HUB         ] EPOCH_SYNC           SYNC_OK
+2026-03-22T08:33:02 | INFO     | [SYSTEM      ] PROVISION            W=2 peers=NODE-ALPHA,NODE-BETA sync=True
+2026-03-22T08:33:18 | ERROR    | [NODE-ALPHA  ] LOG                  VERIFY: 12 nodes (0 from archive), chain_ok=False
+2026-03-22T08:33:47 | INFO     | [EPOCH_CHAIN ] INIT                 ep0=51ecf6fe…86caf4 W=2
+2026-03-22T08:33:47 | INFO     | [HUB         ] LOG                  Hub provisioned | W=2 | peers=NODE-ALPHA,NODE-BETA
+2026-03-22T08:33:47 | INFO     | [HUB         ] LOG                  ep0_hash=daf2d71c…273195 | Hub now SILENT
+2026-03-22T08:33:47 | INFO     | [HUB         ] PROVISION            peer_a=NODE-ALPHA peer_b=NODE-BETA W=2 ep0=daf2d71c…273195
+2026-03-22T08:33:47 | INFO     | [NODE-ALPHA  ] LOG                  epoch_0 received | hash=daf2d71c…273195
+2026-03-22T08:33:47 | INFO     | [NODE-BETA   ] LOG                  epoch_0 received | hash=daf2d71c…273195
+2026-03-22T08:33:47 | INFO     | [HUB         ] LOG                  Epoch sync: SYNC_OK
+2026-03-22T08:33:47 | INFO     | [HUB         ] EPOCH_SYNC           SYNC_OK
+2026-03-22T08:33:47 | INFO     | [SYSTEM      ] PROVISION            W=2 peers=NODE-ALPHA,NODE-BETA sync=True
+2026-03-22T08:33:50 | WARNING  | [NODE-ALPHA  ] LOG                  QUARANTINE gates fired: STRUCTURAL_VIOLATION(counter=0,depth>0)
+2026-03-22T08:33:50 | WARNING  | [NODE-ALPHA  ] QUARANTINE           label=patient-record-002 gates=['STRUCTURAL_VIOLATION(counter=0,depth>0)']
+2026-03-22T08:33:50 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=5ebffb5b…84cad3 tier=QUARANTINE score=0.5600
+2026-03-22T08:33:50 | INFO     | [NODE-ALPHA  ] LOG                  SEALED patient-record-002 | score=0.5600 tier=QUARANTINE ep=0 w=0 ctr=0 lat=1.104ms
+2026-03-22T08:33:52 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=a08b0f78…340462 tier=COOL score=0.5948
+2026-03-22T08:33:52 | INFO     | [EPOCH_CHAIN ] ROTATE               epoch 0→1 archived_to=HOT new=ee50e5d5…5105a7 fwd_secrecy=applied
+2026-03-22T08:33:52 | INFO     | [NODE-ALPHA  ] LOG                  Epoch rotated → 1 | fwd_secrecy applied
+2026-03-22T08:33:52 | INFO     | [NODE-ALPHA  ] LOG                  SEALED sensor-batch-001 | score=0.5948 tier=COOL ep=0 w=1 ctr=1 lat=3.524ms
+2026-03-22T08:33:53 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=92ca25ac…8d8790 tier=COOL score=0.5810
+2026-03-22T08:33:53 | INFO     | [NODE-ALPHA  ] LOG                  SEALED patient-record-002 | score=0.5810 tier=COOL ep=1 w=0 ctr=2 lat=2.938ms
+2026-03-22T08:33:54 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=c4f06049…b0930d tier=WARM score=0.6008
+2026-03-22T08:33:54 | INFO     | [EPOCH_CHAIN ] ROTATE               epoch 1→2 archived_to=HOT new=6248a9b0…9dcb6b fwd_secrecy=applied
+2026-03-22T08:33:54 | INFO     | [NODE-ALPHA  ] LOG                  Epoch rotated → 2 | fwd_secrecy applied
+2026-03-22T08:33:54 | INFO     | [NODE-ALPHA  ] LOG                  SEALED tx-ledger-7731 | score=0.6008 tier=WARM ep=1 w=1 ctr=3 lat=0.932ms
+2026-03-22T08:33:56 | INFO     | [NODE-BETA   ] LOG                  READ tx-ledger-7731 | fp_ok=✓ zk_ok=✓ hash_ok=✓ tier=WARM
+2026-03-22T08:33:56 | INFO     | [NODE-BETA   ] READ                 node=c4f06049…b0930d label=tx-ledger-7731
+2026-03-22T08:34:04 | ERROR    | [NODE-ALPHA  ] LOG                  VERIFY: 16 nodes (0 from archive), chain_ok=False
+2026-03-22T08:34:27 | WARNING  | [SYSTEM      ] RESET                Full system reset
+2026-03-22T08:34:33 | INFO     | [EPOCH_CHAIN ] INIT                 ep0=1c41c557…152036 W=4
+2026-03-22T08:34:33 | INFO     | [HUB         ] LOG                  Hub provisioned | W=4 | peers=NODE-ALPHA,NODE-BETA
+2026-03-22T08:34:33 | INFO     | [HUB         ] LOG                  ep0_hash=f0dc32de…7fe61c | Hub now SILENT
+2026-03-22T08:34:33 | INFO     | [HUB         ] PROVISION            peer_a=NODE-ALPHA peer_b=NODE-BETA W=4 ep0=f0dc32de…7fe61c
+2026-03-22T08:34:33 | INFO     | [NODE-ALPHA  ] LOG                  epoch_0 received | hash=f0dc32de…7fe61c
+2026-03-22T08:34:33 | INFO     | [NODE-BETA   ] LOG                  epoch_0 received | hash=f0dc32de…7fe61c
+2026-03-22T08:34:33 | INFO     | [HUB         ] LOG                  Epoch sync: SYNC_OK
+2026-03-22T08:34:33 | INFO     | [HUB         ] EPOCH_SYNC           SYNC_OK
+2026-03-22T08:34:33 | INFO     | [SYSTEM      ] PROVISION            W=4 peers=NODE-ALPHA,NODE-BETA sync=True
+2026-03-22T08:34:35 | INFO     | [NODE-ALPHA  ] LOG                  VERIFY: 0 nodes (0 from archive), chain_ok=True
+2026-03-22T08:34:42 | WARNING  | [NODE-ALPHA  ] LOG                  QUARANTINE gates fired: TIMING_ANOMALY(0.122<0.2)
+2026-03-22T08:34:42 | WARNING  | [NODE-ALPHA  ] QUARANTINE           label=sensor-batch-001 gates=['TIMING_ANOMALY(0.122<0.2)']
+2026-03-22T08:34:42 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=5a2cf5d3…4baf97 tier=QUARANTINE score=0.5320
+2026-03-22T08:34:42 | INFO     | [NODE-ALPHA  ] LOG                  SEALED sensor-batch-001 | score=0.5320 tier=QUARANTINE ep=0 w=0 ctr=0 lat=1.584ms
+2026-03-22T08:34:43 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=e6677114…7eab81 tier=COOL score=0.5659
+2026-03-22T08:34:43 | INFO     | [NODE-ALPHA  ] LOG                  SEALED sat-telemetry-042 | score=0.5659 tier=COOL ep=0 w=1 ctr=1 lat=1.606ms
+2026-03-22T08:34:45 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=71f238df…7b1e34 tier=COOL score=0.5803
+2026-03-22T08:34:45 | INFO     | [NODE-ALPHA  ] LOG                  SEALED ml-batch-epoch17 | score=0.5803 tier=COOL ep=0 w=2 ctr=2 lat=0.688ms
+2026-03-22T08:34:46 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=fb44bba2…f44f81 tier=COOL score=0.5937
+2026-03-22T08:34:46 | INFO     | [EPOCH_CHAIN ] ROTATE               epoch 0→1 archived_to=HOT new=8d01758b…30d41f fwd_secrecy=applied
+2026-03-22T08:34:46 | INFO     | [NODE-ALPHA  ] LOG                  Epoch rotated → 1 | fwd_secrecy applied
+2026-03-22T08:34:46 | INFO     | [NODE-ALPHA  ] LOG                  SEALED audit-log-443 | score=0.5937 tier=COOL ep=0 w=3 ctr=3 lat=0.724ms
+2026-03-22T08:34:50 | INFO     | [NODE-ALPHA  ] LOG                  VERIFY: 4 nodes (0 from archive), chain_ok=True
+2026-03-22T08:34:52 | WARNING  | [NODE-ALPHA  ] LOG                  QUARANTINE gates fired: TIMING_ANOMALY(0.158<0.2)
+2026-03-22T08:34:52 | WARNING  | [NODE-ALPHA  ] QUARANTINE           label=sensor-batch-001 gates=['TIMING_ANOMALY(0.158<0.2)']
+2026-03-22T08:34:52 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=376e7d30…9f9b7a tier=QUARANTINE score=0.5464
+2026-03-22T08:34:52 | INFO     | [NODE-ALPHA  ] LOG                  SEALED sensor-batch-001 | score=0.5464 tier=QUARANTINE ep=1 w=0 ctr=4 lat=2.274ms
+2026-03-22T08:34:54 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=e6e4133a…b7af88 tier=COOL score=0.5814
+2026-03-22T08:34:54 | INFO     | [NODE-ALPHA  ] LOG                  SEALED patient-record-002 | score=0.5814 tier=COOL ep=1 w=1 ctr=5 lat=1.117ms
+2026-03-22T08:34:55 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=b5b48b8d…0e3a59 tier=COOL score=0.5928
+2026-03-22T08:34:55 | INFO     | [NODE-ALPHA  ] LOG                  SEALED tx-ledger-7731 | score=0.5928 tier=COOL ep=1 w=2 ctr=6 lat=2.492ms
+2026-03-22T08:34:57 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=5b84f32d…65696f tier=WARM score=0.6085
+2026-03-22T08:34:57 | INFO     | [EPOCH_CHAIN ] ROTATE               epoch 1→2 archived_to=HOT new=c87b2479…afd493 fwd_secrecy=applied
+2026-03-22T08:34:57 | INFO     | [NODE-ALPHA  ] LOG                  Epoch rotated → 2 | fwd_secrecy applied
+2026-03-22T08:34:57 | INFO     | [NODE-ALPHA  ] LOG                  SEALED sat-telemetry-042 | score=0.6085 tier=WARM ep=1 w=3 ctr=7 lat=2.743ms
+2026-03-22T08:35:00 | INFO     | [NODE-BETA   ] LOG                  READ sat-telemetry-042 | fp_ok=✓ zk_ok=✓ hash_ok=✓ tier=WARM
+2026-03-22T08:35:00 | INFO     | [NODE-BETA   ] READ                 node=5b84f32d…65696f label=sat-telemetry-042
+2026-03-22T08:35:07 | INFO     | [NODE-ALPHA  ] LOG                  VERIFY: 8 nodes (0 from archive), chain_ok=True
+2026-03-22T08:35:17 | INFO     | [NODE-BETA   ] LOG                  READ sensor-batch-001 | fp_ok=✓ zk_ok=✓ hash_ok=✓ tier=QUARANTINE
+2026-03-22T08:35:17 | INFO     | [NODE-BETA   ] READ                 node=376e7d30…9f9b7a label=sensor-batch-001
+2026-03-22T08:35:28 | INFO     | [NODE-ALPHA  ] LOG                  VERIFY: 8 nodes (0 from archive), chain_ok=True
+2026-03-22T08:39:18 | INFO     | [NODE-BETA   ] LOG                  READ sensor-batch-001 | fp_ok=✓ zk_ok=✓ hash_ok=✓ tier=QUARANTINE
+2026-03-22T08:39:18 | INFO     | [NODE-BETA   ] READ                 node=5a2cf5d3…4baf97 label=sensor-batch-001
+2026-03-22T08:39:32 | INFO     | [EPOCH_CHAIN ] INIT                 ep0=04903185…9d0e75 W=4
+2026-03-22T08:39:32 | INFO     | [HUB         ] LOG                  Hub provisioned | W=4 | peers=NODE-ALPHA,NODE-BETA
+2026-03-22T08:39:32 | INFO     | [HUB         ] LOG                  ep0_hash=59c24b1f…e27718 | Hub now SILENT
+2026-03-22T08:39:32 | INFO     | [HUB         ] PROVISION            peer_a=NODE-ALPHA peer_b=NODE-BETA W=4 ep0=59c24b1f…e27718
+2026-03-22T08:39:32 | INFO     | [NODE-ALPHA  ] LOG                  epoch_0 received | hash=59c24b1f…e27718
+2026-03-22T08:39:32 | INFO     | [NODE-BETA   ] LOG                  epoch_0 received | hash=59c24b1f…e27718
+2026-03-22T08:39:32 | INFO     | [HUB         ] LOG                  Epoch sync: SYNC_OK
+2026-03-22T08:39:32 | INFO     | [HUB         ] EPOCH_SYNC           SYNC_OK
+2026-03-22T08:39:32 | INFO     | [SYSTEM      ] PROVISION            W=4 peers=NODE-ALPHA,NODE-BETA sync=True
+2026-03-22T08:39:44 | WARNING  | [NODE-ALPHA  ] LOG                  QUARANTINE gates fired: TIMING_ANOMALY(0.085<0.2), STRUCTURAL_VIOLATION(counter=0,depth>0)
+2026-03-22T08:39:44 | WARNING  | [NODE-ALPHA  ] QUARANTINE           label=sat-telemetry-042 gates=['TIMING_ANOMALY(0.085<0.2)', 'STRUCTURAL_VIOLATION(counter=0,depth>0)']
+2026-03-22T08:39:44 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=50647361…c77024 tier=QUARANTINE score=0.5432
+2026-03-22T08:39:44 | INFO     | [NODE-ALPHA  ] LOG                  SEALED sat-telemetry-042 | score=0.5432 tier=QUARANTINE ep=0 w=0 ctr=0 lat=2.034ms
+2026-03-22T08:39:45 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=70563985…271c07 tier=COOL score=0.5792
+2026-03-22T08:39:45 | INFO     | [NODE-ALPHA  ] LOG                  SEALED ml-batch-epoch17 | score=0.5792 tier=COOL ep=0 w=1 ctr=1 lat=0.975ms
+2026-03-22T08:39:47 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=71a9d0d8…153b5d tier=COOL score=0.5979
+2026-03-22T08:39:47 | INFO     | [NODE-ALPHA  ] LOG                  SEALED audit-log-443 | score=0.5979 tier=COOL ep=0 w=2 ctr=2 lat=0.995ms
+2026-03-22T08:39:48 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=3b7f148d…3897cc tier=WARM score=0.6092
+2026-03-22T08:39:48 | INFO     | [EPOCH_CHAIN ] ROTATE               epoch 0→1 archived_to=HOT new=64c919d0…ad4d97 fwd_secrecy=applied
+2026-03-22T08:39:48 | INFO     | [NODE-ALPHA  ] LOG                  Epoch rotated → 1 | fwd_secrecy applied
+2026-03-22T08:39:48 | INFO     | [NODE-ALPHA  ] LOG                  SEALED sensor-batch-001 | score=0.6092 tier=WARM ep=0 w=3 ctr=3 lat=1.084ms
+2026-03-22T08:39:49 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=ae9e3145…8f9cf6 tier=COOL score=0.5770
+2026-03-22T08:39:49 | INFO     | [NODE-ALPHA  ] LOG                  SEALED patient-record-002 | score=0.5770 tier=COOL ep=1 w=0 ctr=4 lat=0.852ms
+2026-03-22T08:39:51 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=ba87bf40…7abcf0 tier=COOL score=0.5935
+2026-03-22T08:39:51 | INFO     | [NODE-ALPHA  ] LOG                  SEALED tx-ledger-7731 | score=0.5935 tier=COOL ep=1 w=1 ctr=5 lat=3.127ms
+2026-03-22T08:39:52 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=d0a1b726…caf173 tier=WARM score=0.6085
+2026-03-22T08:39:52 | INFO     | [NODE-ALPHA  ] LOG                  SEALED sat-telemetry-042 | score=0.6085 tier=WARM ep=1 w=2 ctr=6 lat=4.194ms
+2026-03-22T08:39:53 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=f86052ab…a3cc91 tier=WARM score=0.6211
+2026-03-22T08:39:53 | INFO     | [EPOCH_CHAIN ] ROTATE               epoch 1→2 archived_to=HOT new=056cf324…c5cd3f fwd_secrecy=applied
+2026-03-22T08:39:53 | INFO     | [NODE-ALPHA  ] LOG                  Epoch rotated → 2 | fwd_secrecy applied
+2026-03-22T08:39:53 | INFO     | [NODE-ALPHA  ] LOG                  SEALED ml-batch-epoch17 | score=0.6211 tier=WARM ep=1 w=3 ctr=7 lat=3.11ms
+2026-03-22T08:39:55 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=02220802…8f058a tier=COOL score=0.5912
+2026-03-22T08:39:55 | INFO     | [NODE-ALPHA  ] LOG                  SEALED audit-log-443 | score=0.5912 tier=COOL ep=2 w=0 ctr=8 lat=4.398ms
+2026-03-22T08:39:56 | INFO     | [NODE-ALPHA  ] STORE_PUT            node=d8405aaa…a748b4 tier=WARM score=0.6046
+2026-03-22T08:39:56 | INFO     | [NODE-ALPHA  ] LOG                  SEALED sensor-batch-001 | score=0.6046 tier=WARM ep=2 w=1 ctr=9 lat=0.951ms
+2026-03-22T08:40:03 | ERROR    | [NODE-ALPHA  ] LOG                  VERIFY: 18 nodes (0 from archive), chain_ok=False
+2026-03-22T09:04:59 | WARNING  | [SYSTEM      ] RESET                Full system reset

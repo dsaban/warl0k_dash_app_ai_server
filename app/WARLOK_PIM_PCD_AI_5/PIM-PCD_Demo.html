@@ -1,0 +1,1463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PIM-PCD · Proof Chain of Data</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:        #050810;
+    --bg2:       #080d1a;
+    --bg3:       #0c1225;
+    --panel:     #0a1020;
+    --border:    #1a2a4a;
+    --border2:   #243558;
+    --cyan:      #00f5e4;
+    --cyan2:     #00bfb3;
+    --blue:      #0080ff;
+    --blue2:     #0055cc;
+    --green:     #00e676;
+    --green2:    #00c853;
+    --amber:     #ffab00;
+    --red:       #ff3d57;
+    --purple:    #bb86fc;
+    --text:      #c8d8f0;
+    --text2:     #7a99cc;
+    --text3:     #3a5580;
+    --glow-c:    0 0 8px #00f5e440, 0 0 20px #00f5e420;
+    --glow-b:    0 0 8px #0080ff40, 0 0 20px #0080ff20;
+    --glow-g:    0 0 8px #00e67640, 0 0 20px #00e67620;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 15px;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Animated grid background */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      linear-gradient(rgba(0,245,228,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,245,228,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Scan line overlay */
+  body::after {
+    content: '';
+    position: fixed; inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,0,0,0.08) 2px,
+      rgba(0,0,0,0.08) 4px
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  #app { position: relative; z-index: 1; max-width: 1400px; margin: 0 auto; padding: 0 24px 40px; }
+
+  /* ── HEADER ── */
+  header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 0 16px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 28px;
+  }
+  .logo-block { display: flex; align-items: baseline; gap: 12px; }
+  .logo {
+    font-family: 'Orbitron', monospace;
+    font-weight: 900; font-size: 26px;
+    color: var(--cyan);
+    text-shadow: var(--glow-c);
+    letter-spacing: 2px;
+  }
+  .logo-sub {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px; color: var(--text2);
+    letter-spacing: 3px; text-transform: uppercase;
+  }
+  .header-status {
+    display: flex; gap: 20px; align-items: center;
+  }
+  .status-pill {
+    display: flex; align-items: center; gap: 6px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px; color: var(--text2);
+    background: var(--bg3); border: 1px solid var(--border);
+    border-radius: 2px; padding: 5px 10px;
+  }
+  .status-pill .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 6px var(--green);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+
+  /* ── SECTION LABELS ── */
+  .section-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px; letter-spacing: 4px;
+    color: var(--cyan2); text-transform: uppercase;
+    margin-bottom: 10px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .section-label::after {
+    content: ''; flex: 1; height: 1px;
+    background: linear-gradient(90deg, var(--border2), transparent);
+  }
+
+  /* ── LAYOUT GRID ── */
+  .main-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+  .full-width { grid-column: 1 / -1; }
+
+  /* ── PANELS ── */
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+  }
+  .panel::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--cyan2), transparent);
+    opacity: .5;
+  }
+  .panel-head {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 16px;
+    background: var(--bg3);
+    border-bottom: 1px solid var(--border);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px; letter-spacing: 2px; color: var(--cyan);
+  }
+  .panel-head .icon { font-size: 14px; }
+  .panel-body { padding: 16px; }
+
+  /* ── INPUTS ── */
+  label {
+    display: block;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px; letter-spacing: 2px; color: var(--text2);
+    margin-bottom: 5px; text-transform: uppercase;
+  }
+  input[type=text], textarea, select {
+    width: 100%; background: var(--bg2);
+    border: 1px solid var(--border2);
+    border-radius: 2px; color: var(--text);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 13px; padding: 9px 12px;
+    outline: none; transition: border-color .2s, box-shadow .2s;
+  }
+  input[type=text]:focus, textarea:focus {
+    border-color: var(--cyan2);
+    box-shadow: 0 0 0 1px var(--cyan2)30;
+  }
+  textarea { height: 80px; resize: vertical; }
+  select { cursor: pointer; }
+  .form-row { margin-bottom: 14px; }
+  .form-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+
+  /* ── BUTTONS ── */
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: 'Orbitron', monospace;
+    font-size: 11px; font-weight: 700; letter-spacing: 2px;
+    padding: 10px 20px; border: none; cursor: pointer;
+    border-radius: 2px; transition: all .15s;
+    text-transform: uppercase; white-space: nowrap;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--cyan2), var(--blue));
+    color: var(--bg); box-shadow: var(--glow-c);
+  }
+  .btn-primary:hover { filter: brightness(1.2); transform: translateY(-1px); }
+  .btn-success {
+    background: linear-gradient(135deg, var(--green2), #00897b);
+    color: var(--bg); box-shadow: var(--glow-g);
+  }
+  .btn-success:hover { filter: brightness(1.15); transform: translateY(-1px); }
+  .btn-amber {
+    background: linear-gradient(135deg, var(--amber), #e65100);
+    color: var(--bg);
+  }
+  .btn-amber:hover { filter: brightness(1.15); }
+  .btn-ghost {
+    background: transparent; color: var(--text2);
+    border: 1px solid var(--border2);
+  }
+  .btn-ghost:hover { border-color: var(--cyan2); color: var(--cyan); }
+  .btn:disabled { opacity: .4; cursor: not-allowed; transform: none !important; }
+  .btn-row { display: flex; gap: 10px; flex-wrap: wrap; }
+
+  /* ── MONO / CODE ── */
+  .mono {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 12px;
+  }
+  .hash { color: var(--cyan); font-size: 11px; word-break: break-all; }
+  .hash-short { color: var(--cyan); font-size: 12px; }
+
+  /* ── TERMINAL LOG ── */
+  .terminal {
+    background: #020509;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    height: 180px; overflow-y: auto;
+    padding: 10px 12px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11.5px; line-height: 1.7;
+  }
+  .log-line { display: flex; gap: 8px; }
+  .log-ts { color: var(--text3); min-width: 56px; flex-shrink: 0; }
+  .log-ok  { color: var(--green); }
+  .log-info{ color: var(--cyan2); }
+  .log-warn{ color: var(--amber); }
+  .log-err { color: var(--red); }
+  .log-sys { color: var(--purple); }
+
+  /* ── DAG CANVAS ── */
+  #dag-canvas {
+    width: 100%; height: 320px;
+    background: #020509;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    display: block;
+  }
+
+  /* ── CHAIN INSPECTOR ── */
+  .chain-list { max-height: 320px; overflow-y: auto; }
+  .chain-node {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer; transition: background .1s;
+    border-radius: 2px; padding: 10px 8px;
+  }
+  .chain-node:hover { background: var(--bg3); }
+  .chain-node.genesis .node-badge { background: var(--amber); color: var(--bg); }
+  .chain-node.data    .node-badge { background: var(--blue); color: #fff; }
+  .chain-node.verify  .node-badge { background: var(--green2); color: var(--bg); }
+  .chain-node.xfer    .node-badge { background: var(--purple); color: var(--bg); }
+  .chain-node.tampered .node-badge { background: var(--red); color: #fff; }
+  .node-badge {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px; letter-spacing: 1px;
+    padding: 3px 6px; border-radius: 2px;
+    white-space: nowrap; flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .node-meta { flex: 1; min-width: 0; }
+  .node-title { font-weight: 600; font-size: 13px; color: var(--text); margin-bottom: 2px; }
+  .node-hash  { font-family: 'Share Tech Mono', monospace; font-size: 10px; color: var(--cyan); }
+  .node-detail { font-size: 11px; color: var(--text2); margin-top: 3px; }
+  .node-score {
+    font-family: 'Share Tech Mono', monospace; font-size: 12px;
+    text-align: right; flex-shrink: 0;
+  }
+
+  /* ── METRICS ROW ── */
+  .metrics-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px; margin-bottom: 20px;
+  }
+  .metric-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 4px; padding: 14px 16px;
+    position: relative; overflow: hidden;
+  }
+  .metric-card::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+  }
+  .metric-card.cyan::after  { background: var(--cyan); }
+  .metric-card.green::after { background: var(--green); }
+  .metric-card.blue::after  { background: var(--blue); }
+  .metric-card.amber::after { background: var(--amber); }
+  .metric-card.purple::after{ background: var(--purple); }
+  .metric-label { font-family: 'Share Tech Mono', monospace; font-size: 9px; letter-spacing: 2px; color: var(--text3); text-transform: uppercase; margin-bottom: 6px; }
+  .metric-val   { font-family: 'Orbitron', monospace; font-size: 22px; font-weight: 700; }
+  .metric-card.cyan  .metric-val { color: var(--cyan); }
+  .metric-card.green .metric-val { color: var(--green); }
+  .metric-card.blue  .metric-val { color: var(--blue); }
+  .metric-card.amber .metric-val { color: var(--amber); }
+  .metric-card.purple .metric-val { color: var(--purple); }
+  .metric-sub { font-size: 11px; color: var(--text3); margin-top: 3px; }
+
+  /* ── P2P TRANSFER ── */
+  .p2p-track {
+    display: flex; align-items: center; gap: 0;
+    margin: 16px 0; position: relative;
+  }
+  .p2p-node {
+    flex-shrink: 0; width: 80px; text-align: center;
+  }
+  .p2p-node-circle {
+    width: 48px; height: 48px; border-radius: 50%;
+    margin: 0 auto 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Orbitron', monospace; font-size: 11px;
+    border: 2px solid;
+  }
+  .p2p-node-circle.src  { border-color: var(--cyan);  background: rgba(0,245,228,.1); color: var(--cyan); }
+  .p2p-node-circle.dst  { border-color: var(--green); background: rgba(0,230,118,.1); color: var(--green); }
+  .p2p-node-label { font-size: 10px; color: var(--text2); font-family: 'Share Tech Mono', monospace; }
+  .p2p-pipe {
+    flex: 1; height: 2px; position: relative;
+    background: var(--border2); overflow: visible;
+  }
+  .p2p-pipe .packets { position: absolute; top: -6px; left: 0; width: 100%; height: 14px; overflow: hidden; }
+  .packet {
+    position: absolute; top: 0; height: 14px; width: 28px;
+    background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+    border-radius: 2px; opacity: 0;
+    transition: none;
+  }
+  .block-stream {
+    background: var(--bg2); border: 1px solid var(--border2);
+    border-radius: 2px; padding: 12px;
+    max-height: 200px; overflow-y: auto;
+    font-family: 'Share Tech Mono', monospace; font-size: 11px;
+  }
+  .block-item {
+    display: grid;
+    grid-template-columns: 40px 90px 1fr auto;
+    gap: 8px; padding: 6px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: center;
+  }
+  .block-item:last-child { border-bottom: none; }
+  .block-seq { color: var(--text3); }
+  .block-type-tag {
+    font-size: 9px; padding: 2px 6px; border-radius: 2px;
+    text-align: center; font-weight: 700; letter-spacing: 1px;
+  }
+  .block-type-tag.data   { background: rgba(0,128,255,.2); color: var(--blue); border: 1px solid var(--blue2); }
+  .block-type-tag.proof  { background: rgba(0,245,228,.2); color: var(--cyan); border: 1px solid var(--cyan2); }
+  .block-type-tag.ack    { background: rgba(0,230,118,.2); color: var(--green); border: 1px solid var(--green2); }
+  .block-type-tag.verify { background: rgba(187,134,252,.2); color: var(--purple); border: 1px solid var(--purple); }
+  .block-content { color: var(--text2); font-size: 10px; }
+  .block-status { font-size: 10px; }
+  .block-status.ok { color: var(--green); }
+  .block-status.pending { color: var(--amber); }
+
+  /* ── PROOF DETAIL MODAL ── */
+  .proof-detail {
+    background: var(--bg2); border: 1px solid var(--border2);
+    border-radius: 4px; padding: 14px; margin-top: 10px;
+    font-family: 'Share Tech Mono', monospace; font-size: 11px;
+    display: none;
+  }
+  .proof-detail.active { display: block; }
+  .proof-kv { display: grid; grid-template-columns: 120px 1fr; gap: 4px 12px; }
+  .proof-k { color: var(--text3); }
+  .proof-v { color: var(--text); word-break: break-all; }
+
+  /* ── AI HARDENING STATUS ── */
+  .ai-bars { display: flex; flex-direction: column; gap: 8px; }
+  .ai-bar-row { display: flex; align-items: center; gap: 10px; }
+  .ai-bar-label { font-family: 'Share Tech Mono', monospace; font-size: 10px; color: var(--text2); width: 130px; flex-shrink: 0; }
+  .ai-bar-track { flex: 1; height: 6px; background: var(--bg3); border-radius: 3px; overflow: hidden; }
+  .ai-bar-fill { height: 100%; border-radius: 3px; transition: width .8s ease; }
+  .ai-bar-val { font-family: 'Share Tech Mono', monospace; font-size: 10px; width: 36px; text-align: right; flex-shrink: 0; }
+
+  /* ── INTEGRITY BADGE ── */
+  .integrity-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px 14px; border-radius: 2px;
+    font-family: 'Orbitron', monospace; font-size: 12px; font-weight: 700;
+    letter-spacing: 1px;
+  }
+  .integrity-badge.valid { background: rgba(0,230,118,.15); border: 1px solid var(--green2); color: var(--green); }
+  .integrity-badge.invalid { background: rgba(255,61,87,.15); border: 1px solid var(--red); color: var(--red); }
+  .integrity-badge.checking { background: rgba(255,171,0,.15); border: 1px solid var(--amber); color: var(--amber); }
+
+  /* ── SCROLLBARS ── */
+  ::-webkit-scrollbar { width: 4px; height: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg2); }
+  ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--cyan2); }
+
+  /* ── TABS ── */
+  .tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+  .tab {
+    font-family: 'Share Tech Mono', monospace; font-size: 11px;
+    letter-spacing: 1px; padding: 8px 16px; cursor: pointer;
+    color: var(--text2); border-bottom: 2px solid transparent;
+    transition: all .15s; text-transform: uppercase;
+  }
+  .tab:hover { color: var(--cyan); }
+  .tab.active { color: var(--cyan); border-bottom-color: var(--cyan); }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  /* ── VERIFY RESULT ── */
+  .verify-result {
+    margin-top: 14px; padding: 14px;
+    background: var(--bg2); border-radius: 2px; border: 1px solid var(--border2);
+    font-family: 'Share Tech Mono', monospace; font-size: 12px; line-height: 2;
+    display: none;
+  }
+  .verify-result.active { display: block; }
+
+  /* Animations */
+  @keyframes fadeIn { from{opacity:0;transform:translateY(4px)} to{opacity:1;transform:none} }
+  @keyframes slideIn { from{opacity:0;transform:translateX(-8px)} to{opacity:1;transform:none} }
+  @keyframes glow { 0%,100%{box-shadow:0 0 4px var(--cyan)30} 50%{box-shadow:0 0 16px var(--cyan)60} }
+  .animate-in { animation: fadeIn .3s ease both; }
+
+  .node-conn-line { color: var(--text3); font-family: 'Share Tech Mono', monospace; font-size: 10px; padding-left: 8px; margin: 2px 0; }
+
+  .alert-strip {
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px 14px; border-radius: 2px; margin-bottom: 12px;
+    font-family: 'Share Tech Mono', monospace; font-size: 11px;
+  }
+  .alert-strip.danger { background: rgba(255,61,87,.1); border: 1px solid var(--red); color: var(--red); }
+  .alert-strip.success { background: rgba(0,230,118,.1); border: 1px solid var(--green2); color: var(--green); }
+  .alert-strip.info { background: rgba(0,128,255,.1); border: 1px solid var(--blue2); color: var(--blue); }
+</style>
+</head>
+<body>
+<div id="app">
+
+  <header>
+    <div class="logo-block">
+      <span class="logo">PIM-PCD</span>
+      <span class="logo-sub">Proof Chain of Data · v1.0 · Demo</span>
+    </div>
+    <div class="header-status">
+      <div class="status-pill"><span class="dot"></span>CHAIN ACTIVE</div>
+      <div class="status-pill" id="nodeCount">NODES: 0</div>
+      <div class="status-pill" id="chainIntegrity">INTEGRITY: INIT</div>
+    </div>
+  </header>
+
+  <!-- METRICS -->
+  <div class="metrics-row">
+    <div class="metric-card cyan">
+      <div class="metric-label">Chain Nodes</div>
+      <div class="metric-val" id="m-nodes">0</div>
+      <div class="metric-sub">DAG entries</div>
+    </div>
+    <div class="metric-card green">
+      <div class="metric-label">Integrity</div>
+      <div class="metric-val" id="m-integrity">—</div>
+      <div class="metric-sub">chain valid</div>
+    </div>
+    <div class="metric-card blue">
+      <div class="metric-label">Avg Latency</div>
+      <div class="metric-val" id="m-latency">—</div>
+      <div class="metric-sub">retrieval ms</div>
+    </div>
+    <div class="metric-card amber">
+      <div class="metric-label">AI Trust</div>
+      <div class="metric-val" id="m-trust">—</div>
+      <div class="metric-sub">nano-AI score</div>
+    </div>
+    <div class="metric-card purple">
+      <div class="metric-label">Blocks Sent</div>
+      <div class="metric-val" id="m-blocks">0</div>
+      <div class="metric-sub">P2P transfers</div>
+    </div>
+  </div>
+
+  <!-- MAIN GRID -->
+  <div class="main-grid">
+
+    <!-- LEFT: INSERT + RETRIEVE -->
+    <div style="display:flex;flex-direction:column;gap:20px;">
+
+      <!-- INSERT PANEL -->
+      <div class="panel animate-in">
+        <div class="panel-head"><span class="icon">⬡</span> DATA INSERTION — ANCHOR & PROOF CONSTRUCTION</div>
+        <div class="panel-body">
+          <div class="tabs">
+            <div class="tab active" onclick="switchTab('insert','tab-insert',this)">Insert Data</div>
+            <div class="tab" onclick="switchTab('insert','tab-retrieve',this)">Retrieve</div>
+            <div class="tab" onclick="switchTab('insert','tab-verify',this)">Verify</div>
+          </div>
+
+          <!-- INSERT TAB -->
+          <div id="tab-insert" class="tab-content active">
+            <div class="form-row2">
+              <div>
+                <label>Data Label</label>
+                <input type="text" id="dataLabel" placeholder="e.g. patient-record-001" value="sensor-reading-042">
+              </div>
+              <div>
+                <label>Classification</label>
+                <select id="dataClass">
+                  <option value="TOP_SECRET">TOP_SECRET</option>
+                  <option value="SECRET">SECRET</option>
+                  <option value="CONFIDENTIAL" selected>CONFIDENTIAL</option>
+                  <option value="UNCLASSIFIED">UNCLASSIFIED</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <label>Data Payload</label>
+              <textarea id="dataPayload" placeholder="Enter your data payload...">{"temp": 98.6, "pressure": 1013.25, "timestamp": "2026-03-17T09:00:00Z", "sensor_id": "SN-4421"}</textarea>
+            </div>
+            <div class="form-row2">
+              <div>
+                <label>Source Actor ID</label>
+                <input type="text" id="actorId" placeholder="actor@domain" value="node-alpha-7">
+              </div>
+              <div>
+                <label>Entropy Seed</label>
+                <input type="text" id="entropySeed" placeholder="auto-generated" id="entropySeed">
+              </div>
+            </div>
+            <div class="btn-row">
+              <button class="btn btn-primary" onclick="insertData()">⬡ ANCHOR &amp; CHAIN</button>
+              <button class="btn btn-ghost" onclick="loadSampleData()">↺ LOAD SAMPLE</button>
+            </div>
+          </div>
+
+          <!-- RETRIEVE TAB -->
+          <div id="tab-retrieve" class="tab-content">
+            <div class="form-row">
+              <label>Object ID (from chain)</label>
+              <input type="text" id="retrieveId" placeholder="Enter object_id to retrieve...">
+            </div>
+            <div class="form-row">
+              <label>Actor Requesting Access</label>
+              <input type="text" id="retrieveActor" value="inspector-zeta" placeholder="actor id">
+            </div>
+            <div class="btn-row">
+              <button class="btn btn-success" onclick="retrieveData()">▶ FAST RETRIEVE</button>
+              <button class="btn btn-ghost" onclick="retrieveLatest()">▶ RETRIEVE LATEST</button>
+            </div>
+            <div id="retrieve-result" class="verify-result"></div>
+          </div>
+
+          <!-- VERIFY TAB -->
+          <div id="tab-verify" class="tab-content">
+            <div class="form-row">
+              <label>Object ID to Verify</label>
+              <input type="text" id="verifyId" placeholder="Enter object_id...">
+            </div>
+            <div class="btn-row">
+              <button class="btn btn-amber" onclick="verifyChain()">◈ FULL CHAIN VERIFY</button>
+              <button class="btn btn-ghost" onclick="simulateTamper()">⚠ SIMULATE TAMPER</button>
+            </div>
+            <div id="verify-result" class="verify-result"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI HARDENING PANEL -->
+      <div class="panel animate-in">
+        <div class="panel-head"><span class="icon">◈</span> NANO-AI HARDENING ENGINE</div>
+        <div class="panel-body">
+          <div id="ai-alert"></div>
+          <div class="ai-bars" id="ai-bars">
+            <div class="ai-bar-row">
+              <div class="ai-bar-label">Entropy Density</div>
+              <div class="ai-bar-track"><div class="ai-bar-fill" id="bar-entropy" style="width:0%;background:var(--cyan)"></div></div>
+              <div class="ai-bar-val" id="val-entropy" style="color:var(--cyan)">—</div>
+            </div>
+            <div class="ai-bar-row">
+              <div class="ai-bar-label">Injection Resist.</div>
+              <div class="ai-bar-track"><div class="ai-bar-fill" id="bar-inject" style="width:0%;background:var(--green)"></div></div>
+              <div class="ai-bar-val" id="val-inject" style="color:var(--green)">—</div>
+            </div>
+            <div class="ai-bar-row">
+              <div class="ai-bar-label">Spoof Detection</div>
+              <div class="ai-bar-track"><div class="ai-bar-fill" id="bar-spoof" style="width:0%;background:var(--blue)"></div></div>
+              <div class="ai-bar-val" id="val-spoof" style="color:var(--blue)">—</div>
+            </div>
+            <div class="ai-bar-row">
+              <div class="ai-bar-label">Chain Integrity</div>
+              <div class="ai-bar-track"><div class="ai-bar-fill" id="bar-chain" style="width:0%;background:var(--amber)"></div></div>
+              <div class="ai-bar-val" id="val-chain" style="color:var(--amber)">—</div>
+            </div>
+            <div class="ai-bar-row">
+              <div class="ai-bar-label">Trust Weight</div>
+              <div class="ai-bar-track"><div class="ai-bar-fill" id="bar-trust" style="width:0%;background:var(--purple)"></div></div>
+              <div class="ai-bar-val" id="val-trust" style="color:var(--purple)">—</div>
+            </div>
+          </div>
+          <div style="margin-top:12px;display:flex;gap:10px;align-items:center;">
+            <div id="integrity-badge" class="integrity-badge checking">◈ AWAITING DATA</div>
+            <span style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--text3)" id="ai-last-event">—</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT: DAG VISUALIZER + CHAIN INSPECTOR -->
+    <div style="display:flex;flex-direction:column;gap:20px;">
+
+      <!-- DAG -->
+      <div class="panel animate-in">
+        <div class="panel-head"><span class="icon">◉</span> DAG PROOF CHAIN VISUALIZER</div>
+        <div class="panel-body" style="padding:0">
+          <canvas id="dag-canvas"></canvas>
+        </div>
+      </div>
+
+      <!-- CHAIN INSPECTOR -->
+      <div class="panel animate-in">
+        <div class="panel-head"><span class="icon">≡</span> CHAIN NODE INSPECTOR</div>
+        <div class="panel-body" style="padding:8px 12px">
+          <div class="chain-list" id="chain-list">
+            <div style="color:var(--text3);font-family:'Share Tech Mono',monospace;font-size:11px;padding:20px;text-align:center;">
+              ◉ Chain empty — insert a data element to anchor the genesis node
+            </div>
+          </div>
+          <div id="node-detail-box" class="proof-detail"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- BOTTOM: P2P BLOCK STREAM -->
+    <div class="panel full-width animate-in">
+      <div class="panel-head"><span class="icon">⇆</span> P2P BLOCK CHAIN STREAM — SAMPLED POINT-TO-POINT TRANSFER</div>
+      <div class="panel-body">
+        <div class="p2p-track">
+          <div class="p2p-node">
+            <div class="p2p-node-circle src">SRC</div>
+            <div class="p2p-node-label" id="p2p-src">NODE-A</div>
+          </div>
+          <div class="p2p-pipe" id="p2p-pipe">
+            <div class="packets" id="packets-container"></div>
+          </div>
+          <div class="p2p-node">
+            <div class="p2p-node-circle dst">DST</div>
+            <div class="p2p-node-label" id="p2p-dst">NODE-B</div>
+          </div>
+        </div>
+        <div class="btn-row" style="margin-bottom:14px;">
+          <button class="btn btn-primary" onclick="initiateP2PTransfer()">⇆ STREAM CHAIN BLOCKS</button>
+          <button class="btn btn-ghost" onclick="clearStream()">✕ CLEAR</button>
+          <input type="text" id="p2p-src-input" style="width:120px" placeholder="Source node" value="NODE-ALPHA">
+          <input type="text" id="p2p-dst-input" style="width:120px" placeholder="Dest node" value="NODE-BETA">
+        </div>
+        <div class="block-stream" id="block-stream">
+          <div style="color:var(--text3);font-family:'Share Tech Mono',monospace;font-size:11px;padding:10px;text-align:center;">
+            ⇆ No blocks transmitted — initiate transfer to stream proof chain blocks
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TERMINAL LOG -->
+    <div class="panel full-width animate-in">
+      <div class="panel-head"><span class="icon">▶</span> SYSTEM LOG</div>
+      <div class="panel-body" style="padding:0">
+        <div class="terminal" id="terminal"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// ════════════════════════════════════════════════════════════════
+//  PIM-PCD ENGINE — Proof Chain of Data
+//  DAG + Crypto + Nano-AI + P2P Block Stream
+// ════════════════════════════════════════════════════════════════
+
+// ── Crypto primitives (pure JS, no external deps) ──────────────
+
+function hexArr(arr) {
+  return Array.from(arr).map(b => b.toString(16).padStart(2,'0')).join('');
+}
+
+async function sha256(str) {
+  const buf = await crypto.subtle.digest('SHA-256',
+    new TextEncoder().encode(str));
+  return hexArr(new Uint8Array(buf));
+}
+
+async function hmac256(key, msg) {
+  const k = await crypto.subtle.importKey('raw',
+    new TextEncoder().encode(key),
+    { name:'HMAC', hash:'SHA-256' }, false, ['sign']);
+  const sig = await crypto.subtle.sign('HMAC', k, new TextEncoder().encode(msg));
+  return hexArr(new Uint8Array(sig));
+}
+
+function randomBytes(n) {
+  const a = new Uint8Array(n);
+  crypto.getRandomValues(a);
+  return hexArr(a);
+}
+
+function shortHash(h) { return h.slice(0,8)+'…'+h.slice(-6); }
+function ts() { return Date.now(); }
+function tsStr() {
+  const d = new Date();
+  return d.toISOString().replace('T',' ').slice(0,23);
+}
+function nowMs() { return performance.now(); }
+
+// ── Nano-AI Trust Scorer ───────────────────────────────────────
+// Lightweight deterministic model: weighted feature vector → trust score
+// Features: entropy density, actor reputation, temporal gap, chain depth, payload size
+
+const actorReputation = {};
+
+function scoreEntropy(payload) {
+  // Measure Shannon entropy of payload bytes
+  const bytes = new TextEncoder().encode(payload);
+  const freq = new Array(256).fill(0);
+  for (const b of bytes) freq[b]++;
+  let H = 0;
+  const n = bytes.length || 1;
+  for (const f of freq) {
+    if (f > 0) {
+      const p = f / n;
+      H -= p * Math.log2(p);
+    }
+  }
+  return Math.min(H / 8, 1); // normalized 0-1
+}
+
+function nanoAIScore(payload, actorId, chainDepth, prevTimestamp) {
+  const entropyScore  = scoreEntropy(payload);
+  const actorScore    = Math.min(1, (actorReputation[actorId] || 0.5) + 0.05);
+  const timeGap       = prevTimestamp ? Math.min(1, 1000 / (Date.now() - prevTimestamp + 1)) : 0.8;
+  const depthScore    = Math.min(1, 0.6 + chainDepth * 0.04);
+  const payloadScore  = Math.min(1, Math.max(0.4, 1 - Math.abs(payload.length - 100) / 1000));
+
+  // Weighted sum — mimics nano-AI inference
+  const weights = [0.25, 0.30, 0.15, 0.20, 0.10];
+  const feats   = [entropyScore, actorScore, timeGap, depthScore, payloadScore];
+  const score   = feats.reduce((s, f, i) => s + f * weights[i], 0);
+
+  // Update actor reputation
+  actorReputation[actorId] = score;
+
+  return {
+    score: parseFloat(score.toFixed(4)),
+    features: {
+      entropy:  parseFloat(entropyScore.toFixed(4)),
+      actor:    parseFloat(actorScore.toFixed(4)),
+      temporal: parseFloat(timeGap.toFixed(4)),
+      depth:    parseFloat(depthScore.toFixed(4)),
+      payload:  parseFloat(payloadScore.toFixed(4)),
+    }
+  };
+}
+
+// ── DAG Store ─────────────────────────────────────────────────
+// adjacency list + node map
+
+const dag = {
+  nodes: {},       // id → node
+  edges: [],       // { from, to }
+  roots: [],       // genesis node ids
+  latest: null,    // most recent node id
+
+  addNode(node) {
+    this.nodes[node.id] = node;
+    if (node.type === 'GENESIS') this.roots.push(node.id);
+    this.latest = node.id;
+  },
+  addEdge(from, to) {
+    this.edges.push({ from, to });
+  },
+  getNode(id) { return this.nodes[id]; },
+  getAllNodes() { return Object.values(this.nodes); },
+  getChildren(id) {
+    return this.edges.filter(e => e.from === id).map(e => this.nodes[e.to]);
+  },
+  getParents(id) {
+    return this.edges.filter(e => e.to === id).map(e => this.nodes[e.from]);
+  },
+  // Full chain from genesis to node
+  traceChain(id) {
+    const path = [];
+    let cur = id;
+    while (cur) {
+      const node = this.nodes[cur];
+      if (!node) break;
+      path.unshift(node);
+      const parents = this.edges.filter(e => e.to === cur);
+      cur = parents.length ? parents[0].from : null;
+    }
+    return path;
+  }
+};
+
+// ── PCD Envelope ──────────────────────────────────────────────
+
+async function buildEnvelope(payload, label, classification, actorId, entropySeed, parentId) {
+  const t0 = nowMs();
+
+  const parentNode = parentId ? dag.getNode(parentId) : null;
+  const chainDepth = parentNode ? (parentNode.chainDepth + 1) : 0;
+  const prevHash   = parentNode ? parentNode.hash : '0'.repeat(64);
+  const prevTs     = parentNode ? parentNode.timestamp : null;
+
+  // Temporal seal: hash(payload + prevHash + timestamp + entropyNonce)
+  const nonce     = randomBytes(16);
+  const seed      = entropySeed || randomBytes(8);
+  const tsNow     = Date.now();
+  const rawStr    = `${label}|${payload}|${prevHash}|${tsNow}|${nonce}|${seed}`;
+
+  const payloadHash    = await sha256(payload);
+  const envelopeHash   = await sha256(rawStr);
+  const temporalSeal   = await hmac256(seed, `${envelopeHash}${tsNow}`);
+  const zkProof        = await hmac256(envelopeHash, actorId); // ZK access proof stub
+
+  // Nano-AI score
+  const ai = nanoAIScore(payload, actorId, chainDepth, prevTs);
+
+  const objectId = await sha256(`${label}${tsNow}${randomBytes(4)}`);
+
+  const node = {
+    id:           objectId.slice(0,16),
+    objectId:     objectId,
+    type:         parentId ? 'DATA' : 'GENESIS',
+    label,
+    classification,
+    actorId,
+    payload,
+    payloadHash,
+    prevHash,
+    hash:         envelopeHash,
+    temporalSeal,
+    zkProof,
+    nonce,
+    entropyNonce: seed,
+    chainDepth,
+    timestamp:    tsNow,
+    isoTime:      new Date(tsNow).toISOString(),
+    aiScore:      ai.score,
+    aiFeatures:   ai.features,
+    retrievalPriority: ai.score > 0.85 ? 'HOT' : ai.score > 0.60 ? 'WARM' : ai.score > 0.30 ? 'COOL' : 'QUARANTINE',
+    tampered:     false,
+    latencyMs:    parseFloat((nowMs() - t0).toFixed(2)),
+  };
+
+  return node;
+}
+
+// ── INSERT FLOW ───────────────────────────────────────────────
+
+let insertCount = 0;
+let totalBlocks = 0;
+
+async function insertData() {
+  const label    = document.getElementById('dataLabel').value.trim() || 'data-element';
+  const payload  = document.getElementById('dataPayload').value.trim();
+  const cls      = document.getElementById('dataClass').value;
+  const actor    = document.getElementById('actorId').value.trim() || 'anon';
+  const seed     = document.getElementById('entropySeed').value.trim();
+
+  if (!payload) { log('warn', 'Payload is empty — aborting insert'); return; }
+
+  log('info', `Anchoring: "${label}" [${cls}] by ${actor}`);
+  log('sys',  'Constructing proof envelope...');
+
+  // Link to latest node if exists
+  const parentId = dag.latest;
+  const node = await buildEnvelope(payload, label, cls, actor, seed, parentId);
+
+  dag.addNode(node);
+  if (parentId) dag.addEdge(parentId, node.id);
+
+  insertCount++;
+  log('ok',  `Node anchored: ${shortHash(node.objectId)}`);
+  log('ok',  `Hash: ${shortHash(node.hash)}`);
+  log('ok',  `Temporal seal: ${shortHash(node.temporalSeal)}`);
+  log('ok',  `AI trust score: ${node.aiScore} → Tier: ${node.retrievalPriority}`);
+  log('ok',  `Chain depth: ${node.chainDepth} | Latency: ${node.latencyMs}ms`);
+
+  document.getElementById('entropySeed').value = '';
+  updateMetrics(node);
+  updateChainList();
+  drawDAG();
+  updateAIBars(node);
+  document.getElementById('verifyId').value = node.objectId;
+  document.getElementById('retrieveId').value = node.objectId;
+}
+
+// ── RETRIEVE FLOW ─────────────────────────────────────────────
+
+async function retrieveData() {
+  const id    = document.getElementById('retrieveId').value.trim();
+  const actor = document.getElementById('retrieveActor').value.trim() || 'anon';
+  performRetrieval(id, actor);
+}
+
+async function retrieveLatest() {
+  if (!dag.latest) { log('warn','No nodes in chain yet'); return; }
+  performRetrieval(dag.latest, document.getElementById('retrieveActor').value.trim() || 'inspector');
+}
+
+async function performRetrieval(id, actor) {
+  if (!id) { log('warn','No object ID provided for retrieval'); return; }
+
+  const t0 = nowMs();
+  log('info', `Retrieval request: ${shortHash(id)} by ${actor}`);
+
+  // Find by objectId or node.id prefix
+  let node = dag.getNode(id) ||
+    Object.values(dag.nodes).find(n => n.objectId === id || n.id === id || n.objectId.startsWith(id));
+
+  if (!node) { log('err', `Object not found: ${id}`); return; }
+
+  // ZK access proof verification
+  const expectedZK = await hmac256(node.hash, node.actorId);
+  const zkValid    = expectedZK === node.zkProof;
+  const latency    = parseFloat((nowMs() - t0).toFixed(2));
+
+  // Append retrieval event to chain
+  const readNode = await buildEnvelope(
+    JSON.stringify({ event:'READ', objectId: node.objectId, reader: actor }),
+    `${node.label}:READ`,
+    node.classification,
+    actor,
+    '',
+    node.id
+  );
+  readNode.type = 'READ';
+  dag.addNode(readNode);
+  dag.addEdge(node.id, readNode.id);
+
+  const div = document.getElementById('retrieve-result');
+  div.style.display = 'block';
+  div.className = 'verify-result active';
+  div.innerHTML = `
+    <span style="color:var(--green)">▶ RETRIEVAL SUCCESSFUL [${latency}ms — ${node.retrievalPriority} TIER]</span><br>
+    <span style="color:var(--text3)">object_id   :</span> <span style="color:var(--cyan)">${node.objectId}</span><br>
+    <span style="color:var(--text3)">label       :</span> <span style="color:var(--text)">${node.label}</span><br>
+    <span style="color:var(--text3)">class       :</span> <span style="color:var(--amber)">${node.classification}</span><br>
+    <span style="color:var(--text3)">actor       :</span> <span style="color:var(--text)">${node.actorId}</span><br>
+    <span style="color:var(--text3)">ai_score    :</span> <span style="color:var(--purple)">${node.aiScore}</span><br>
+    <span style="color:var(--text3)">zk_valid    :</span> <span style="color:${zkValid?'var(--green)':'var(--red)'}">${zkValid}</span><br>
+    <span style="color:var(--text3)">hash        :</span> <span style="color:var(--cyan);font-size:10px">${node.hash}</span><br>
+    <span style="color:var(--text3)">temporal_seal:</span> <span style="color:var(--cyan);font-size:10px">${node.temporalSeal}</span><br>
+    <span style="color:var(--text3)">payload     :</span><br>
+    <span style="color:var(--text);word-break:break-all;display:block;margin-top:4px;padding:6px;background:var(--bg);border-radius:2px">${node.payload}</span>
+  `;
+
+  log('ok', `Retrieved: ${node.label} in ${latency}ms [${node.retrievalPriority}]`);
+  log('ok', `ZK proof: ${zkValid ? 'VALID' : 'INVALID'}`);
+  updateMetrics(node, latency);
+  updateChainList();
+  drawDAG();
+}
+
+// ── VERIFY CHAIN ──────────────────────────────────────────────
+
+async function verifyChain() {
+  const id = document.getElementById('verifyId').value.trim();
+  if (!id) { log('warn','No ID for verification'); return; }
+
+  let node = dag.getNode(id) ||
+    Object.values(dag.nodes).find(n => n.objectId === id || n.id === id);
+
+  if (!node) { log('err','Node not found for verification'); return; }
+
+  log('info', `Full chain verification: ${shortHash(node.objectId)}`);
+  const chain = dag.traceChain(node.id);
+  let valid = true;
+  const results = [];
+
+  for (let i = 0; i < chain.length; i++) {
+    const cur = chain[i];
+
+    // Recompute payload hash
+    const expectedPayloadHash = await sha256(cur.payload);
+    const payloadOK = expectedPayloadHash === cur.payloadHash;
+
+    // Verify prev_hash linkage
+    let prevHashOK = true;
+    if (i > 0) {
+      prevHashOK = cur.prevHash === chain[i-1].hash;
+    }
+
+    // Check tamper flag
+    const tamperOK = !cur.tampered;
+
+    const nodeValid = payloadOK && prevHashOK && tamperOK;
+    if (!nodeValid) valid = false;
+
+    results.push({ node: cur, payloadOK, prevHashOK, tamperOK, nodeValid });
+    log(nodeValid ? 'ok' : 'err',
+      `Node[${i}] ${shortHash(cur.objectId)}: payload=${payloadOK?'✓':'✗'} prevHash=${prevHashOK?'✓':'✗'} tamper=${tamperOK?'✓':'✗'}`);
+  }
+
+  const div = document.getElementById('verify-result');
+  div.style.display = 'block';
+  div.className = 'verify-result active';
+
+  let html = `<span style="color:${valid?'var(--green)':'var(--red)'}">${valid?'◈ CHAIN VERIFIED — ALL NODES INTACT':'⚠ CHAIN INTEGRITY VIOLATION DETECTED'}</span><br><br>`;
+  results.forEach((r,i) => {
+    const c = r.nodeValid ? 'var(--green)' : 'var(--red)';
+    html += `<span style="color:var(--text3)">Node[${i}] </span><span style="color:${c}">${r.node.label} | ${shortHash(r.node.hash)} | ${r.nodeValid?'VALID':'INVALID'}</span><br>`;
+  });
+  div.innerHTML = html;
+
+  document.getElementById('chainIntegrity').textContent = `INTEGRITY: ${valid?'100%':'BROKEN'}`;
+  document.getElementById('m-integrity').textContent = valid ? '✓' : '✗';
+  document.getElementById('m-integrity').style.color = valid ? 'var(--green)' : 'var(--red)';
+}
+
+// ── TAMPER SIMULATION ─────────────────────────────────────────
+
+async function simulateTamper() {
+  if (!dag.latest) { log('warn','No chain to tamper'); return; }
+  const nodes = Object.values(dag.nodes).filter(n => n.type === 'DATA' || n.type === 'GENESIS');
+  if (!nodes.length) return;
+  const target = nodes[Math.floor(Math.random() * nodes.length)];
+  target.payload  = target.payload + ' [TAMPERED]';
+  target.tampered = true;
+  log('err', `TAMPER INJECTED at node: ${shortHash(target.objectId)}`);
+  log('err', `Payload altered — chain hash linkage now BROKEN`);
+  document.getElementById('ai-alert').innerHTML =
+    `<div class="alert-strip danger">⚠ ANOMALY DETECTED — Nano-AI flagged chain break at node ${shortHash(target.objectId)}</div>`;
+  updateAIBars(null, true);
+  updateChainList();
+  drawDAG();
+  document.getElementById('verifyId').value = target.objectId;
+}
+
+// ── P2P BLOCK STREAM ─────────────────────────────────────────
+
+let blockSeq = 0;
+let p2pActive = false;
+
+async function initiateP2PTransfer() {
+  const nodes = dag.getAllNodes();
+  if (!nodes.length) { log('warn','No chain nodes to stream — insert data first'); return; }
+  if (p2pActive) return;
+
+  const src = document.getElementById('p2p-src-input').value || 'NODE-A';
+  const dst = document.getElementById('p2p-dst-input').value || 'NODE-B';
+  document.getElementById('p2p-src').textContent = src;
+  document.getElementById('p2p-dst').textContent = dst;
+
+  p2pActive = true;
+  log('info', `P2P stream initiated: ${src} → ${dst}`);
+  log('info', `Chunking ${nodes.length} chain node(s) into sampled block stream`);
+
+  const streamDiv = document.getElementById('block-stream');
+  streamDiv.innerHTML = '';
+
+  for (let i = 0; i < nodes.length; i++) {
+    const node = nodes[i];
+    await sleep(180);
+
+    // Each node → 3 block types: DATA block, PROOF block, ACK
+    const blocks = [
+      { type:'data',   content: `OBJ:${shortHash(node.objectId)} CLASS:${node.classification} DEPTH:${node.chainDepth}` },
+      { type:'proof',  content: `HASH:${shortHash(node.hash)} SEAL:${shortHash(node.temporalSeal)} AI:${node.aiScore}` },
+      { type:'verify', content: `ZK:${shortHash(node.zkProof)} PREV:${shortHash(node.prevHash)}` },
+    ];
+
+    for (const block of blocks) {
+      await sleep(90);
+      blockSeq++;
+      totalBlocks++;
+      animatePacket();
+      addBlockRow(blockSeq, block.type, block.content);
+    }
+
+    // ACK
+    await sleep(60);
+    blockSeq++;
+    totalBlocks++;
+    addBlockRow(blockSeq, 'ack', `ACK:${shortHash(node.objectId)} ✓`);
+    log('ok', `Block stream: node ${i+1}/${nodes.length} transmitted [${node.label}]`);
+  }
+
+  document.getElementById('m-blocks').textContent = totalBlocks;
+  p2pActive = false;
+  log('ok', `P2P transfer complete. ${blockSeq} blocks streamed.`);
+}
+
+function addBlockRow(seq, type, content) {
+  const div = document.getElementById('block-stream');
+  const row = document.createElement('div');
+  row.className = 'block-item animate-in';
+  const statusColor = type === 'ack' ? 'ok' : 'pending';
+  const statusText  = type === 'ack' ? '✓ ACK' : '⊛ SENT';
+  row.innerHTML = `
+    <span class="block-seq mono">#${String(seq).padStart(4,'0')}</span>
+    <span class="block-type-tag ${type === 'verify' ? 'verify' : type}">${type.toUpperCase()}</span>
+    <span class="block-content">${content}</span>
+    <span class="block-status ${type==='ack'?'ok':'pending'}">${statusText}</span>
+  `;
+  div.appendChild(row);
+  div.scrollTop = div.scrollHeight;
+}
+
+function animatePacket() {
+  const container = document.getElementById('packets-container');
+  const pipeWidth  = document.getElementById('p2p-pipe').offsetWidth;
+  const pkt = document.createElement('div');
+  pkt.className = 'packet';
+  pkt.style.left = '0px';
+  container.appendChild(pkt);
+  const start = performance.now();
+  const dur = 400;
+  function frame(now) {
+    const t = Math.min((now - start) / dur, 1);
+    pkt.style.left = (t * (pipeWidth - 28)) + 'px';
+    pkt.style.opacity = t < 0.1 ? t*10 : t > 0.8 ? (1-t)*5 : 1;
+    if (t < 1) requestAnimationFrame(frame);
+    else pkt.remove();
+  }
+  requestAnimationFrame(frame);
+}
+
+function clearStream() {
+  document.getElementById('block-stream').innerHTML =
+    `<div style="color:var(--text3);font-family:'Share Tech Mono',monospace;font-size:11px;padding:10px;text-align:center;">⇆ Stream cleared</div>`;
+  blockSeq = 0;
+}
+
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+// ── CHAIN LIST ────────────────────────────────────────────────
+
+function updateChainList() {
+  const div = document.getElementById('chain-list');
+  const nodes = dag.getAllNodes().reverse();
+  if (!nodes.length) return;
+
+  div.innerHTML = '';
+  nodes.forEach(node => {
+    const typeMap = { GENESIS:'genesis', DATA:'data', READ:'verify', VERIFY:'verify' };
+    const cls = node.tampered ? 'tampered' : (typeMap[node.type] || 'data');
+    const scoreColor = node.aiScore > 0.8 ? 'var(--green)' :
+                       node.aiScore > 0.6 ? 'var(--cyan)' :
+                       node.aiScore > 0.4 ? 'var(--amber)' : 'var(--red)';
+
+    const el = document.createElement('div');
+    el.className = `chain-node ${cls} animate-in`;
+    el.innerHTML = `
+      <span class="node-badge">${node.tampered ? 'TAMPERED' : node.type}</span>
+      <div class="node-meta">
+        <div class="node-title">${node.label}</div>
+        <div class="node-hash">${shortHash(node.objectId)}</div>
+        <div class="node-detail">${node.actorId} · ${new Date(node.timestamp).toLocaleTimeString()} · depth:${node.chainDepth}</div>
+      </div>
+      <div class="node-score" style="color:${scoreColor}">${node.aiScore ? node.aiScore.toFixed(3) : '—'}</div>
+    `;
+    el.onclick = () => showNodeDetail(node);
+    div.appendChild(el);
+  });
+}
+
+function showNodeDetail(node) {
+  const box = document.getElementById('node-detail-box');
+  box.className = 'proof-detail active';
+  box.innerHTML = `
+    <div style="color:var(--cyan);font-family:'Share Tech Mono',monospace;font-size:10px;margin-bottom:8px;letter-spacing:2px;">◈ NODE DETAIL: ${node.label}</div>
+    <div class="proof-kv">
+      <span class="proof-k">object_id</span>    <span class="proof-v" style="color:var(--cyan);font-size:10px">${node.objectId}</span>
+      <span class="proof-k">type</span>         <span class="proof-v">${node.type}</span>
+      <span class="proof-k">class</span>        <span class="proof-v" style="color:var(--amber)">${node.classification}</span>
+      <span class="proof-k">actor</span>        <span class="proof-v">${node.actorId}</span>
+      <span class="proof-k">chain_depth</span>  <span class="proof-v">${node.chainDepth}</span>
+      <span class="proof-k">hash</span>         <span class="proof-v" style="color:var(--cyan);font-size:10px">${node.hash}</span>
+      <span class="proof-k">prev_hash</span>    <span class="proof-v" style="color:var(--text2);font-size:10px">${node.prevHash}</span>
+      <span class="proof-k">temporal_seal</span><span class="proof-v" style="color:var(--cyan);font-size:10px">${node.temporalSeal}</span>
+      <span class="proof-k">zk_proof</span>     <span class="proof-v" style="color:var(--purple);font-size:10px">${node.zkProof}</span>
+      <span class="proof-k">ai_score</span>     <span class="proof-v" style="color:var(--green)">${node.aiScore}</span>
+      <span class="proof-k">ai_entropy</span>   <span class="proof-v">${node.aiFeatures?.entropy}</span>
+      <span class="proof-k">tier</span>         <span class="proof-v">${node.retrievalPriority}</span>
+      <span class="proof-k">latency_ms</span>   <span class="proof-v">${node.latencyMs}ms</span>
+      <span class="proof-k">timestamp</span>    <span class="proof-v">${node.isoTime}</span>
+      <span class="proof-k">tampered</span>     <span class="proof-v" style="color:${node.tampered?'var(--red)':'var(--green)'}">${node.tampered}</span>
+    </div>
+  `;
+}
+
+// ── DAG CANVAS ────────────────────────────────────────────────
+
+function drawDAG() {
+  const canvas = document.getElementById('dag-canvas');
+  const ctx    = canvas.getContext('2d');
+  const W = canvas.offsetWidth;
+  const H = 320;
+  canvas.width  = W;
+  canvas.height = H;
+
+  ctx.clearRect(0, 0, W, H);
+  ctx.fillStyle = '#020509';
+  ctx.fillRect(0, 0, W, H);
+
+  const nodes = dag.getAllNodes();
+  if (!nodes.length) {
+    ctx.fillStyle = '#3a5580';
+    ctx.font = '12px "Share Tech Mono"';
+    ctx.textAlign = 'center';
+    ctx.fillText('◉ DAG empty — insert data to visualize proof chain', W/2, H/2);
+    return;
+  }
+
+  // Layout: group by chainDepth
+  const byDepth = {};
+  nodes.forEach(n => {
+    if (!byDepth[n.chainDepth]) byDepth[n.chainDepth] = [];
+    byDepth[n.chainDepth].push(n);
+  });
+  const depths = Object.keys(byDepth).map(Number).sort((a,b)=>a-b);
+  const maxDepth = depths.length;
+  const nodePos = {};
+
+  depths.forEach((d, di) => {
+    const group = byDepth[d];
+    group.forEach((n, gi) => {
+      const x = (di / Math.max(maxDepth - 1, 1)) * (W - 80) + 40;
+      const y = (gi / Math.max(group.length - 1, 1)) * (H - 80) + 40;
+      nodePos[n.id] = { x: group.length === 1 ? x : x, y: group.length === 1 ? H/2 : y };
+    });
+  });
+
+  // Draw edges
+  dag.edges.forEach(e => {
+    const from = nodePos[e.from];
+    const to   = nodePos[e.to];
+    if (!from || !to) return;
+    ctx.save();
+    ctx.strokeStyle = '#243558';
+    ctx.lineWidth = 1.5;
+    ctx.setLineDash([4, 4]);
+    ctx.beginPath();
+    ctx.moveTo(from.x, from.y);
+    const mx = (from.x + to.x) / 2;
+    ctx.bezierCurveTo(mx, from.y, mx, to.y, to.x, to.y);
+    ctx.stroke();
+    ctx.restore();
+
+    // Arrow
+    ctx.save();
+    ctx.strokeStyle = '#00bfb3';
+    ctx.lineWidth = 1;
+    ctx.setLineDash([]);
+    const ang = Math.atan2(to.y - from.y, to.x - from.x);
+    ctx.translate(to.x, to.y);
+    ctx.rotate(ang);
+    ctx.beginPath();
+    ctx.moveTo(-10, -4); ctx.lineTo(0, 0); ctx.lineTo(-10, 4);
+    ctx.stroke();
+    ctx.restore();
+  });
+
+  // Draw nodes
+  nodes.forEach(n => {
+    const pos = nodePos[n.id];
+    if (!pos) return;
+
+    const color = n.tampered ? '#ff3d57' :
+                  n.type === 'GENESIS' ? '#ffab00' :
+                  n.type === 'READ'    ? '#bb86fc' :
+                  n.aiScore > 0.8     ? '#00e676' :
+                  n.aiScore > 0.6     ? '#00f5e4' : '#0080ff';
+
+    const r = n.type === 'GENESIS' ? 14 : 10;
+
+    // Glow
+    ctx.save();
+    ctx.shadowColor = color;
+    ctx.shadowBlur  = 12;
+    ctx.beginPath();
+    ctx.arc(pos.x, pos.y, r, 0, Math.PI * 2);
+    ctx.fillStyle = color + '30';
+    ctx.fill();
+    ctx.restore();
+
+    // Circle
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(pos.x, pos.y, r, 0, Math.PI * 2);
+    ctx.strokeStyle = color;
+    ctx.lineWidth   = 2;
+    ctx.fillStyle   = '#020509';
+    ctx.fill();
+    ctx.stroke();
+    ctx.restore();
+
+    // Label
+    ctx.save();
+    ctx.fillStyle = color;
+    ctx.font      = '9px "Share Tech Mono"';
+    ctx.textAlign = 'center';
+    const label = n.label.length > 14 ? n.label.slice(0,12)+'…' : n.label;
+    ctx.fillText(label, pos.x, pos.y + r + 14);
+    ctx.fillStyle = '#3a5580';
+    ctx.fillText(shortHash(n.hash).slice(0,10), pos.x, pos.y + r + 24);
+    ctx.restore();
+  });
+
+  // Legend
+  const legend = [
+    { c:'#ffab00', l:'GENESIS' }, { c:'#00e676', l:'HIGH TRUST' },
+    { c:'#00f5e4', l:'STANDARD' }, { c:'#bb86fc', l:'READ EVENT' }, { c:'#ff3d57', l:'TAMPERED' }
+  ];
+  legend.forEach((item, i) => {
+    ctx.beginPath();
+    ctx.arc(14 + i * 100, H - 16, 4, 0, Math.PI * 2);
+    ctx.fillStyle = item.c;
+    ctx.fill();
+    ctx.fillStyle = '#7a99cc';
+    ctx.font = '9px "Share Tech Mono"';
+    ctx.textAlign = 'left';
+    ctx.fillText(item.l, 22 + i * 100, H - 13);
+  });
+}
+
+// ── AI BARS ───────────────────────────────────────────────────
+
+function updateAIBars(node, tampered = false) {
+  if (tampered) {
+    setBar('entropy', 0.12, 'var(--red)');
+    setBar('inject',  0.08, 'var(--red)');
+    setBar('spoof',   0.15, 'var(--red)');
+    setBar('chain',   0.05, 'var(--red)');
+    setBar('trust',   0.10, 'var(--red)');
+    document.getElementById('integrity-badge').className = 'integrity-badge invalid';
+    document.getElementById('integrity-badge').textContent = '⚠ CHAIN COMPROMISED';
+    document.getElementById('ai-last-event').textContent = 'TAMPER DETECTED — chain break';
+    document.getElementById('m-trust').textContent = '0.08';
+    document.getElementById('m-trust').style.color = 'var(--red)';
+    return;
+  }
+  if (!node) return;
+  const f = node.aiFeatures;
+  setBar('entropy', f.entropy, 'var(--cyan)');
+  setBar('inject',  f.actor,   'var(--green)');
+  setBar('spoof',   f.temporal,'var(--blue)');
+  setBar('chain',   f.depth,   'var(--amber)');
+  setBar('trust',   node.aiScore, 'var(--purple)');
+
+  const badge = document.getElementById('integrity-badge');
+  badge.className = `integrity-badge ${node.aiScore > 0.6 ? 'valid' : 'checking'}`;
+  badge.textContent = node.aiScore > 0.6 ? '◈ CHAIN VERIFIED' : '◈ LOW TRUST — REVIEW';
+  document.getElementById('ai-last-event').textContent =
+    `Last: ${node.label} [${node.retrievalPriority}] ${new Date(node.timestamp).toLocaleTimeString()}`;
+
+  document.getElementById('ai-alert').innerHTML =
+    node.aiScore > 0.6
+      ? `<div class="alert-strip success">✓ Nano-AI: Node "${node.label}" scored ${node.aiScore} — trust threshold passed</div>`
+      : `<div class="alert-strip info">ⓘ Nano-AI: Score ${node.aiScore} — below HIGH threshold, logged for review</div>`;
+}
+
+function setBar(id, val, color) {
+  const pct = Math.round(val * 100);
+  document.getElementById('bar-' + id).style.width  = pct + '%';
+  document.getElementById('bar-' + id).style.background = color;
+  document.getElementById('val-' + id).textContent  = pct + '%';
+  document.getElementById('val-' + id).style.color  = color;
+}
+
+// ── METRICS ───────────────────────────────────────────────────
+
+const latencies = [];
+function updateMetrics(node, latency) {
+  document.getElementById('m-nodes').textContent = Object.keys(dag.nodes).length;
+  document.getElementById('nodeCount').textContent = `NODES: ${Object.keys(dag.nodes).length}`;
+  if (latency) {
+    latencies.push(latency);
+    const avg = (latencies.reduce((a,b)=>a+b,0) / latencies.length).toFixed(1);
+    document.getElementById('m-latency').textContent = avg + 'ms';
+  }
+  if (node) {
+    document.getElementById('m-trust').textContent = node.aiScore.toFixed(3);
+    document.getElementById('m-trust').style.color = node.aiScore > 0.8 ? 'var(--green)' :
+      node.aiScore > 0.6 ? 'var(--cyan)' : 'var(--amber)';
+    document.getElementById('m-integrity').textContent = '✓';
+    document.getElementById('m-integrity').style.color = 'var(--green)';
+    document.getElementById('chainIntegrity').textContent = 'INTEGRITY: 100%';
+  }
+  document.getElementById('m-blocks').textContent = totalBlocks;
+}
+
+// ── TERMINAL ──────────────────────────────────────────────────
+
+function log(type, msg) {
+  const term = document.getElementById('terminal');
+  const div  = document.createElement('div');
+  div.className = 'log-line';
+  const now = new Date();
+  const ts  = now.toTimeString().slice(0,8);
+  const prefix = { ok:'[OK]  ', info:'[INF] ', warn:'[WRN] ', err:'[ERR] ', sys:'[SYS] ' };
+  const cls    = { ok:'log-ok', info:'log-info', warn:'log-warn', err:'log-err', sys:'log-sys' };
+  div.innerHTML = `<span class="log-ts">${ts}</span><span class="${cls[type]||'log-info'}">${prefix[type]||''}${msg}</span>`;
+  term.appendChild(div);
+  term.scrollTop = term.scrollHeight;
+}
+
+// ── TAB SWITCHING ─────────────────────────────────────────────
+
+function switchTab(group, tabId, el) {
+  document.querySelectorAll(`#${tabId}`).forEach(t => {});
+  const parent = el.closest('.panel-body');
+  parent.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  parent.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
+  el.classList.add('active');
+}
+
+// ── SAMPLE DATA ───────────────────────────────────────────────
+
+const samples = [
+  { label:'patient-record-001', payload:'{"patient_id":"PT-4421","name":"J.Doe","bp":"120/80","glucose":98,"flagged":false}', cls:'TOP_SECRET', actor:'dr-chen' },
+  { label:'tx-ledger-entry',    payload:'{"from":"wallet-alpha","to":"wallet-beta","amount":1500.00,"currency":"USD","ref":"INV-2026-0317"}', cls:'CONFIDENTIAL', actor:'fin-node-3' },
+  { label:'satellite-telemetry',payload:'{"sat_id":"SAT-7","alt_km":412.3,"lat":31.25,"lon":34.78,"status":"NOMINAL","signal_dbm":-82}', cls:'SECRET', actor:'ground-ctrl' },
+  { label:'ml-training-batch',  payload:'{"dataset":"CIFAR-100","epoch":42,"loss":0.0342,"accuracy":0.9871,"model":"resnet-50-v3"}', cls:'UNCLASSIFIED', actor:'ml-pipeline' },
+];
+let sampleIdx = 0;
+
+function loadSampleData() {
+  const s = samples[sampleIdx % samples.length];
+  document.getElementById('dataLabel').value   = s.label;
+  document.getElementById('dataPayload').value  = s.payload;
+  document.getElementById('dataClass').value    = s.cls;
+  document.getElementById('actorId').value      = s.actor;
+  sampleIdx++;
+  log('info', `Sample loaded: ${s.label}`);
+}
+
+// ── INIT ──────────────────────────────────────────────────────
+
+window.addEventListener('resize', drawDAG);
+
+log('sys', 'PIM-PCD Engine initialised');
+log('sys', 'Nano-AI trust scorer: READY');
+log('sys', 'DAG proof chain: EMPTY — awaiting genesis anchor');
+log('sys', 'ZK verification gateway: ONLINE');
+log('info','Use "ANCHOR & CHAIN" to insert your first data element');
+log('info','Each insertion constructs a cryptographic proof envelope');
+log('info','Hash links, temporal seals, and ZK proofs are computed live');
+
+// Draw empty canvas
+setTimeout(drawDAG, 100);
+</script>
+</body>
+</html>

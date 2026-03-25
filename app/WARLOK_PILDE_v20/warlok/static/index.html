@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>WARLOK — Pilot Console</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&display=swap');
+:root{
+  --bg0:#050709;--bg1:#0a0d13;--bg2:#0f1520;--bg3:#141c2e;
+  --surface:#111827;--border:#1e2d47;--border2:#243858;
+  --cyan:#00e5ff;--cyan-d:#0099bb;--cyan-glow:rgba(0,229,255,.15);
+  --green:#00ff88;--green-d:#00994d;--red:#ff3355;--red-d:#991122;
+  --amber:#ffbb00;--amber-d:#996600;--purple:#9933ff;--teal:#00ccaa;
+  --text:#c8d8f0;--text-d:#5a7a9a;--text-b:#e8f4ff;
+  --mono:'Share Tech Mono',monospace;--ui:'Rajdhani',sans-serif;--disp:'Orbitron',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg0);color:var(--text);font-family:var(--ui);min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;z-index:9999;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.03) 2px,rgba(0,0,0,.03) 4px);
+  pointer-events:none;}
+body::after{content:'';position:fixed;inset:0;z-index:0;
+  background-image:linear-gradient(rgba(0,229,255,.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,229,255,.03) 1px,transparent 1px);
+  background-size:40px 40px;pointer-events:none;}
+
+/* HEADER */
+header{position:relative;z-index:10;background:linear-gradient(180deg,#080c14 0%,var(--bg1) 100%);
+  border-bottom:1px solid var(--border2);padding:0 24px;display:flex;align-items:center;gap:16px;
+  height:60px;box-shadow:0 2px 40px rgba(0,229,255,.08);}
+.logo{font-family:var(--disp);font-size:20px;font-weight:900;letter-spacing:4px;color:var(--cyan);
+  text-shadow:0 0 20px var(--cyan),0 0 40px rgba(0,229,255,.3);}
+.logo span{color:var(--text-d);font-weight:400;font-size:10px;letter-spacing:2px;display:block;margin-top:-4px;}
+.hd{width:1px;height:30px;background:var(--border2);}
+.status-bar{display:flex;align-items:center;gap:14px;font-family:var(--mono);font-size:11px;color:var(--text-d);}
+.sdot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);
+  animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+.hactions{margin-left:auto;display:flex;gap:8px;}
+
+/* LAYOUT */
+.layout{position:relative;z-index:1;display:grid;grid-template-columns:220px 1fr;height:calc(100vh - 60px);}
+nav{background:var(--bg1);border-right:1px solid var(--border);padding:20px 0;
+  display:flex;flex-direction:column;gap:4px;overflow-y:auto;}
+.ns{padding:6px 16px 4px;font-size:9px;letter-spacing:3px;color:var(--text-d);
+  text-transform:uppercase;font-family:var(--mono);margin-top:12px;}
+.ns:first-child{margin-top:0;}
+.ni{display:flex;align-items:center;gap:10px;padding:9px 16px;cursor:pointer;
+  font-size:13px;font-weight:500;letter-spacing:1px;color:var(--text-d);
+  border-left:2px solid transparent;transition:all .15s;text-transform:uppercase;}
+.ni:hover{background:var(--bg2);color:var(--text);}
+.ni.active{background:linear-gradient(90deg,var(--cyan-glow),transparent);
+  border-left-color:var(--cyan);color:var(--cyan);}
+.ni-icon{font-size:14px;width:18px;text-align:center;}
+main{overflow-y:auto;padding:24px;background:var(--bg0);}
+.page{display:none;}
+.page.active{display:block;animation:fadeIn .2s;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+/* PAGE HEADER */
+.ph{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:24px;}
+.pt{font-family:var(--disp);font-size:18px;font-weight:700;letter-spacing:2px;color:var(--text-b);}
+.ps{font-size:12px;color:var(--text-d);margin-top:4px;font-family:var(--mono);}
+
+/* CARDS */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:4px;
+  padding:16px;margin-bottom:16px;position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--cyan-d),transparent);opacity:.4;}
+.card-title{font-size:10px;letter-spacing:3px;color:var(--text-d);text-transform:uppercase;
+  font-family:var(--mono);margin-bottom:12px;}
+
+/* GRIDS */
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px;}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px;}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+
+/* STAT TILES */
+.st{background:var(--bg2);border:1px solid var(--border);border-radius:4px;
+  padding:14px 16px;position:relative;overflow:hidden;}
+.st::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;}
+.st.c::after{background:var(--cyan)}.st.g::after{background:var(--green)}
+.st.r::after{background:var(--red)}.st.a::after{background:var(--amber)}
+.st.p::after{background:var(--purple)}.st.t::after{background:var(--teal)}
+.sl{font-size:9px;letter-spacing:2px;color:var(--text-d);text-transform:uppercase;font-family:var(--mono);}
+.sv{font-family:var(--disp);font-size:28px;font-weight:700;line-height:1.1;margin-top:4px;}
+.st.c .sv{color:var(--cyan);text-shadow:0 0 20px rgba(0,229,255,.4);}
+.st.g .sv{color:var(--green);text-shadow:0 0 20px rgba(0,255,136,.4);}
+.st.r .sv{color:var(--red);text-shadow:0 0 20px rgba(255,51,85,.4);}
+.st.a .sv{color:var(--amber);text-shadow:0 0 20px rgba(255,187,0,.4);}
+.st.p .sv{color:var(--purple);text-shadow:0 0 20px rgba(153,51,255,.4);}
+.st.t .sv{color:var(--teal);text-shadow:0 0 20px rgba(0,204,170,.4);}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;
+  font-family:var(--ui);font-size:12px;font-weight:600;letter-spacing:1.5px;
+  text-transform:uppercase;border:1px solid;border-radius:2px;cursor:pointer;
+  transition:all .15s;background:transparent;}
+.btn-p{border-color:var(--cyan);color:var(--cyan);}
+.btn-p:hover{background:var(--cyan-glow);box-shadow:0 0 16px rgba(0,229,255,.2);}
+.btn-s{border-color:var(--green);color:var(--green);}
+.btn-s:hover{background:rgba(0,255,136,.1);box-shadow:0 0 16px rgba(0,255,136,.2);}
+.btn-d{border-color:var(--red);color:var(--red);}
+.btn-d:hover{background:rgba(255,51,85,.1);box-shadow:0 0 16px rgba(255,51,85,.2);}
+.btn-a{border-color:var(--amber);color:var(--amber);}
+.btn-a:hover{background:rgba(255,187,0,.1);}
+.btn-g{border-color:var(--border2);color:var(--text-d);}
+.btn-g:hover{border-color:var(--text-d);color:var(--text);}
+.btn:active{transform:scale(.97)}.btn:disabled{opacity:.4;cursor:not-allowed;}
+
+/* INPUTS */
+.field{margin-bottom:12px;}
+.field label{display:block;font-size:9px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--text-d);font-family:var(--mono);margin-bottom:6px;}
+input,textarea,select{width:100%;background:var(--bg2);border:1px solid var(--border);
+  border-radius:2px;padding:8px 12px;font-family:var(--mono);font-size:12px;
+  color:var(--text);outline:none;transition:border-color .15s;}
+input:focus,textarea:focus,select:focus{border-color:var(--cyan-d);box-shadow:0 0 0 2px rgba(0,229,255,.08);}
+
+/* BADGES */
+.badge{display:inline-block;padding:2px 8px;font-size:9px;font-family:var(--mono);
+  letter-spacing:1px;text-transform:uppercase;border-radius:2px;border:1px solid;}
+.b-active{border-color:var(--green-d);color:var(--green);background:rgba(0,255,136,.06);}
+.b-invalid{border-color:var(--red-d);color:var(--red);background:rgba(255,51,85,.06);}
+.b-valid{border-color:var(--cyan-d);color:var(--cyan);background:rgba(0,229,255,.06);}
+.b-online{border-color:var(--green-d);color:var(--green);background:rgba(0,255,136,.06);}
+.b-epoch{border-color:var(--amber-d);color:var(--amber);background:rgba(255,187,0,.06);}
+.b-peer{border-color:var(--purple);color:var(--purple);background:rgba(153,51,255,.06);}
+.b-teal{border-color:var(--teal);color:var(--teal);background:rgba(0,204,170,.06);}
+
+/* HASH */
+.hash{font-family:var(--mono);font-size:11px;color:var(--cyan-d);background:var(--bg2);
+  padding:2px 6px;border-radius:2px;border:1px solid var(--border);cursor:pointer;}
+.hash:hover{color:var(--cyan);border-color:var(--cyan-d);}
+
+/* EVENTS LOG */
+.elog{background:var(--bg1);border:1px solid var(--border);border-radius:4px;
+  height:320px;overflow-y:auto;padding:8px;font-family:var(--mono);font-size:11px;}
+.er{display:flex;gap:8px;align-items:flex-start;padding:4px 6px;
+  border-bottom:1px solid rgba(255,255,255,.03);line-height:1.4;animation:sli .2s;}
+@keyframes sli{from{opacity:0;transform:translateX(-4px)}to{opacity:1;transform:none}}
+.er:last-child{border-bottom:none;}
+.et{min-width:130px;padding:1px 6px;border-radius:2px;font-size:9px;letter-spacing:1px;text-align:center;}
+.ed{color:var(--text-d);font-size:10px;word-break:break-all;flex:1;}
+.et-HSM_SIGN,.et-HSM_VERIFY{background:rgba(153,51,255,.15);color:var(--purple);border:1px solid rgba(153,51,255,.25);}
+.et-HSM_EPOCH_ROTATE{background:rgba(255,187,0,.15);color:var(--amber);border:1px solid rgba(255,187,0,.3);}
+.et-HSM_EPOCH_TOKEN,.et-HSM_CROSS_VERIFY{background:rgba(255,187,0,.1);color:#ddaa00;border:1px solid rgba(255,187,0,.2);}
+.et-HUB_CREATE{background:rgba(0,229,255,.1);color:var(--cyan);border:1px solid rgba(0,229,255,.2);}
+.et-HASH{background:rgba(0,229,255,.08);color:var(--cyan-d);border:1px solid rgba(0,229,255,.15);}
+.et-SIGNED{background:rgba(0,255,136,.1);color:var(--green);border:1px solid rgba(0,255,136,.2);}
+.et-DAG_ADD{background:rgba(0,255,136,.07);color:var(--green-d);border:1px solid rgba(0,255,136,.15);}
+.et-PIPELINE_STEP{background:rgba(255,187,0,.1);color:var(--amber);border:1px solid rgba(255,187,0,.2);}
+.et-ATTACK{background:rgba(255,51,85,.15);color:var(--red);border:1px solid rgba(255,51,85,.3);animation:fr .5s;}
+@keyframes fr{0%{background:rgba(255,51,85,.4)}100%{background:rgba(255,51,85,.15)}}
+.et-PEER_INIT,.et-PEER_REGISTER,.et-MESH_ADD_PEER{background:rgba(153,51,255,.12);color:var(--purple);border:1px solid rgba(153,51,255,.2);}
+.et-PEER_SEND,.et-PEER_RECV{background:rgba(0,204,170,.1);color:var(--teal);border:1px solid rgba(0,204,170,.2);}
+.et-PEER_TASK_EXEC{background:rgba(0,229,255,.1);color:var(--cyan);border:1px solid rgba(0,229,255,.2);}
+.et-PEER_BLOCK_REPLICATED{background:rgba(0,255,136,.1);color:var(--green);border:1px solid rgba(0,255,136,.2);}
+.et-PEER_CROSS_VALIDATE,.et-MESH_CROSS_VALIDATE{background:rgba(255,187,0,.1);color:var(--amber);border:1px solid rgba(255,187,0,.2);}
+.et-PEER_AUTH_FAIL{background:rgba(255,51,85,.15);color:var(--red);border:1px solid rgba(255,51,85,.3);}
+.et-STORE_PUT{background:rgba(0,204,170,.1);color:var(--teal);border:1px solid rgba(0,204,170,.2);}
+.et-STORE_GET,.et-STORE_DELETE{background:rgba(0,204,170,.07);color:#009980;border:1px solid rgba(0,204,170,.15);}
+.et-STORE_CORRUPT{background:rgba(255,51,85,.15);color:var(--red);border:1px solid rgba(255,51,85,.3);}
+.et-MESH_TASK_DISPATCH,.et-MESH_BLOCK_REPLICATE,.et-MESH_TELEMETRY{background:rgba(0,204,170,.1);color:var(--teal);border:1px solid rgba(0,204,170,.2);}
+
+/* DAG CANVAS */
+#dag-canvas{width:100%;height:460px;background:var(--bg1);border:1px solid var(--border);
+  border-radius:4px;overflow:hidden;position:relative;cursor:grab;}
+canvas{position:absolute;top:0;left:0;}
+
+/* NODE TABLE */
+.nt{width:100%;border-collapse:collapse;font-size:12px;font-family:var(--mono);}
+.nt th{text-align:left;padding:8px 10px;font-size:9px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--text-d);border-bottom:1px solid var(--border2);background:var(--bg2);}
+.nt td{padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.03);vertical-align:middle;
+  color:var(--text);font-size:11px;}
+.nt tr:hover td{background:var(--bg2);}
+
+/* PEER CARDS */
+.peer-card{background:var(--bg2);border:1px solid var(--border);border-radius:4px;
+  padding:14px 16px;position:relative;overflow:hidden;}
+.peer-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--purple),transparent);opacity:.5;}
+.peer-card .peer-name{font-family:var(--disp);font-size:12px;letter-spacing:2px;
+  color:var(--purple);margin-bottom:8px;}
+.peer-kv{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;
+  font-family:var(--mono);font-size:10px;margin-bottom:8px;}
+.peer-kv .k{color:var(--text-d)}.peer-kv .v{color:var(--text-b)}
+
+/* HSM EPOCH VIZ */
+.epoch-bar{height:6px;background:var(--bg2);border-radius:3px;overflow:hidden;
+  margin:8px 0;border:1px solid var(--border);}
+.epoch-fill{height:100%;border-radius:3px;transition:width .4s;
+  background:linear-gradient(90deg,var(--amber-d),var(--amber));}
+
+/* CONSENSUS RING */
+.consensus-wrap{display:flex;align-items:center;gap:16px;padding:12px 0;}
+.cring{width:64px;height:64px;position:relative;flex-shrink:0;}
+.cring svg{width:100%;height:100%;}
+.cring-pct{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-family:var(--disp);font-size:12px;font-weight:700;}
+
+/* PIPELINE VIZ */
+.pv{display:flex;align-items:center;margin:16px 0;padding:16px;
+  background:var(--bg1);border:1px solid var(--border);border-radius:4px;overflow-x:auto;}
+.pa{display:flex;flex-direction:column;align-items:center;min-width:90px;}
+.ab{background:var(--bg2);border:1px solid var(--border2);border-radius:4px;
+  padding:7px 10px;text-align:center;font-size:11px;font-family:var(--mono);
+  color:var(--text);transition:all .3s;}
+.ab.done{border-color:var(--green);color:var(--green);box-shadow:0 0 12px rgba(0,255,136,.2);}
+.ah{font-family:var(--mono);font-size:8px;color:var(--text-d);margin-top:4px;max-width:80px;
+  overflow:hidden;text-overflow:ellipsis;}
+.arr{width:28px;height:1px;background:linear-gradient(90deg,var(--border2),var(--cyan-d));
+  position:relative;margin:0 4px;flex-shrink:0;align-self:center;margin-bottom:12px;}
+.arr::after{content:'';position:absolute;right:-4px;top:-3px;
+  border-left:6px solid var(--cyan-d);border-top:3px solid transparent;border-bottom:3px solid transparent;}
+
+/* TOAST */
+#toast{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;gap:8px;}
+.ti{background:var(--bg3);border:1px solid var(--border2);border-left:3px solid var(--cyan);
+  padding:10px 16px;font-size:12px;font-family:var(--mono);min-width:260px;
+  animation:tin .2s,tout .3s 2.7s forwards;border-radius:2px;}
+.ti.s{border-left-color:var(--green)}.ti.e{border-left-color:var(--red)}
+.ti.w{border-left-color:var(--amber)}.ti.p{border-left-color:var(--purple)}
+@keyframes tin{from{opacity:0;transform:translateX(12px)}to{opacity:1;transform:none}}
+@keyframes tout{to{opacity:0;transform:translateX(12px)}}
+
+/* MODAL */
+.moverlay{display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.7);
+  backdrop-filter:blur(2px);align-items:center;justify-content:center;}
+.moverlay.open{display:flex;}
+.modal{background:var(--bg2);border:1px solid var(--border2);border-top:2px solid var(--cyan);
+  border-radius:4px;width:600px;max-width:90vw;max-height:80vh;overflow-y:auto;
+  padding:24px;position:relative;}
+.mt{font-family:var(--disp);font-size:13px;letter-spacing:2px;color:var(--cyan);margin-bottom:16px;}
+.mc{position:absolute;top:16px;right:16px;background:none;border:none;
+  color:var(--text-d);font-size:18px;cursor:pointer;padding:4px;}
+.mc:hover{color:var(--text);}
+.kv{display:grid;grid-template-columns:150px 1fr;gap:8px;padding:6px 0;
+  border-bottom:1px solid rgba(255,255,255,.04);font-size:12px;font-family:var(--mono);}
+.kv .k{color:var(--text-d)}.kv .v{color:var(--text-b);word-break:break-all}
+
+/* ATTACK */
+.abanner{background:linear-gradient(135deg,rgba(255,51,85,.1),rgba(255,51,85,.03));
+  border:1px solid rgba(255,51,85,.3);border-left:3px solid var(--red);border-radius:4px;
+  padding:12px 16px;margin-bottom:16px;font-size:12px;color:var(--red);font-family:var(--mono);letter-spacing:1px;}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:6px;height:6px;}
+::-webkit-scrollbar-track{background:var(--bg1);}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px;}
+::-webkit-scrollbar-thumb:hover{background:var(--text-d);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">WARLOK <span>Pilot Console v3.0</span></div>
+  <div class="hd"></div>
+  <div class="status-bar">
+    <div class="sdot" id="conn-dot"></div>
+    <span id="conn-label">CONNECTING...</span>
+    <span style="color:var(--border2)">|</span>
+    <span id="dag-count">0 blocks</span>
+    <span style="color:var(--border2)">|</span>
+    <span id="event-count">0 events</span>
+    <span style="color:var(--border2)">|</span>
+    <span id="epoch-label" style="color:var(--amber)">epoch:0</span>
+    <span style="color:var(--border2)">|</span>
+    <span id="peer-count" style="color:var(--purple)">0 peers</span>
+  </div>
+  <div class="hactions">
+    <button class="btn btn-g" onclick="resetAll()">↺ RESET</button>
+    <button class="btn btn-p" onclick="refreshAll()">⟳ REFRESH</button>
+  </div>
+</header>
+
+<div class="layout">
+<nav>
+  <div class="ns">Monitor</div>
+  <div class="ni active" data-page="dashboard" onclick="goPage('dashboard')"><span class="ni-icon">⬡</span>Dashboard</div>
+  <div class="ni" data-page="graph" onclick="goPage('graph')"><span class="ni-icon">◈</span>DAG Graph</div>
+  <div class="ns">Operations</div>
+  <div class="ni" data-page="execution" onclick="goPage('execution')"><span class="ni-icon">▶</span>Execution</div>
+  <div class="ni" data-page="pipeline" onclick="goPage('pipeline')"><span class="ni-icon">⟿</span>Pipeline</div>
+  <div class="ns">Network</div>
+  <div class="ni" data-page="peers" onclick="goPage('peers')"><span class="ni-icon">◉</span>Peer Mesh</div>
+  <div class="ni" data-page="taskdispatch" onclick="goPage('taskdispatch')"><span class="ni-icon">⇶</span>Task Dispatch</div>
+  <div class="ni" data-page="crossval" onclick="goPage('crossval')"><span class="ni-icon">✦</span>Cross-Validate</div>
+  <div class="ns">Storage</div>
+  <div class="ni" data-page="storage" onclick="goPage('storage')"><span class="ni-icon">▦</span>Storage</div>
+  <div class="ni" data-page="telemetry" onclick="goPage('telemetry')"><span class="ni-icon">◎</span>Telemetry</div>
+  <div class="ns">Analysis</div>
+  <div class="ni" data-page="inspector" onclick="goPage('inspector')"><span class="ni-icon">◉</span>Inspector</div>
+  <div class="ni" data-page="blocks" onclick="goPage('blocks')"><span class="ni-icon">▣</span>Blocks</div>
+  <div class="ns">Security</div>
+  <div class="ni" data-page="hsm" onclick="goPage('hsm')"><span class="ni-icon">⬢</span>HSM / Epochs</div>
+  <div class="ni" data-page="attack" onclick="goPage('attack')"><span class="ni-icon">⚠</span>Attack Sim</div>
+</nav>
+
+<main>
+
+<!-- DASHBOARD -->
+<div id="page-dashboard" class="page active">
+  <div class="ph">
+    <div><div class="pt">SYSTEM DASHBOARD</div><div class="ps">Real-time integrity monitor — v3 with peer mesh</div></div>
+    <button class="btn btn-s" onclick="runPipeline()">▶ RUN PIPELINE</button>
+  </div>
+  <div class="g4">
+    <div class="st c"><div class="sl">Total Blocks</div><div class="sv" id="s-total">0</div></div>
+    <div class="st g"><div class="sl">Active</div><div class="sv" id="s-active">0</div></div>
+    <div class="st r"><div class="sl">Compromised</div><div class="sv" id="s-invalid">0</div></div>
+    <div class="st a"><div class="sl">Events</div><div class="sv" id="s-events">0</div></div>
+  </div>
+  <div class="g4">
+    <div class="st p"><div class="sl">Peers Online</div><div class="sv" id="s-peers">0</div></div>
+    <div class="st a"><div class="sl">HSM Epoch</div><div class="sv" id="s-epoch">0</div></div>
+    <div class="st t"><div class="sl">Store Records</div><div class="sv" id="s-store">0</div></div>
+    <div class="st c"><div class="sl">Next Rotation</div><div class="sv" id="s-rotation">10</div></div>
+  </div>
+  <div class="g2">
+    <div class="card">
+      <div class="card-title">Create Block</div>
+      <div class="field"><label>Payload</label><input type="text" id="d-payload" placeholder="block payload..."/></div>
+      <div class="field"><label>Parent Hash (optional)</label><input type="text" id="d-parent" placeholder="parent hash..."/></div>
+      <button class="btn btn-p" onclick="createBlock()">+ CREATE BLOCK</button>
+    </div>
+    <div class="card">
+      <div class="card-title">Quick Validate</div>
+      <div class="field"><label>Block Hash</label><input type="text" id="d-valhash" placeholder="hash..."/></div>
+      <button class="btn btn-s" onclick="quickValidate()" style="margin-bottom:10px">◎ VALIDATE</button>
+      <div id="d-valresult" style="font-family:var(--mono);font-size:12px"></div>
+    </div>
+  </div>
+  <div class="card"><div class="card-title">Live Event Stream</div><div class="elog" id="dash-events"></div></div>
+</div>
+
+<!-- DAG GRAPH -->
+<div id="page-graph" class="page">
+  <div class="ph">
+    <div><div class="pt">DAG TOPOLOGY</div><div class="ps">Directed acyclic graph — epoch-keyed blocks</div></div>
+    <button class="btn btn-g" onclick="renderDAG()">↺ REDRAW</button>
+  </div>
+  <div id="dag-canvas"><canvas id="dag-cvs"></canvas></div>
+  <div style="margin-top:8px;font-size:10px;font-family:var(--mono);color:var(--text-d);display:flex;gap:16px">
+    <span><span style="color:var(--green)">●</span> ACTIVE</span>
+    <span><span style="color:var(--red)">●</span> INVALID</span>
+    <span><span style="color:var(--amber)">◈</span> epoch annotation</span>
+    <span>Click node to inspect</span>
+  </div>
+</div>
+
+<!-- EXECUTION LOG -->
+<div id="page-execution" class="page">
+  <div class="ph">
+    <div><div class="pt">EXECUTION LOG</div><div class="ps">All component events — hub, HSM, peers, storage</div></div>
+    <button class="btn btn-g" onclick="loadEvents()">↺ REFRESH</button>
+  </div>
+  <div class="card" style="margin-bottom:0">
+    <div class="card-title">Event stream — most recent first</div>
+    <div class="elog" id="exec-events" style="height:500px"></div>
+  </div>
+</div>
+
+<!-- PIPELINE -->
+<div id="page-pipeline" class="page">
+  <div class="ph">
+    <div><div class="pt">PIPELINE RUNNER</div><div class="ps">Collector → Analyzer → Decision → Executor</div></div>
+  </div>
+  <div class="pv" id="pipeline-viz">
+    <div class="pa"><div class="ab" id="pa-Collector">Collector</div><div class="ah" id="ph-Collector">—</div></div>
+    <div class="arr"></div>
+    <div class="pa"><div class="ab" id="pa-Analyzer">Analyzer</div><div class="ah" id="ph-Analyzer">—</div></div>
+    <div class="arr"></div>
+    <div class="pa"><div class="ab" id="pa-Decision">Decision</div><div class="ah" id="ph-Decision">—</div></div>
+    <div class="arr"></div>
+    <div class="pa"><div class="ab" id="pa-Executor">Executor</div><div class="ah" id="ph-Executor">—</div></div>
+  </div>
+  <div class="card">
+    <div class="card-title">Pipeline Control</div>
+    <button class="btn btn-s" onclick="runPipelineAnimated()" id="run-btn">▶ EXECUTE PIPELINE</button>
+    <div id="pipeline-result" style="margin-top:10px;font-family:var(--mono);font-size:11px;color:var(--text-d)"></div>
+  </div>
+  <div class="card"><div class="card-title">Pipeline Events</div><div class="elog" id="pipeline-events" style="height:240px"></div></div>
+</div>
+
+<!-- PEERS -->
+<div id="page-peers" class="page">
+  <div class="ph">
+    <div><div class="pt">PEER MESH</div><div class="ps">Full mesh — each peer holds HSM, DAG, store, inbox</div></div>
+    <button class="btn btn-g" onclick="loadPeers()">↺ REFRESH</button>
+  </div>
+  <div id="peer-grid" class="g3"></div>
+  <div class="card">
+    <div class="card-title">Mesh Event Stream</div>
+    <div class="elog" id="peer-events" style="height:240px"></div>
+  </div>
+</div>
+
+<!-- TASK DISPATCH -->
+<div id="page-taskdispatch" class="page">
+  <div class="ph">
+    <div><div class="pt">TASK DISPATCH</div><div class="ps">Send signed execution tasks peer-to-peer</div></div>
+  </div>
+  <div class="g2">
+    <div class="card">
+      <div class="card-title">Dispatch Task</div>
+      <div class="field"><label>From Peer</label>
+        <select id="td-from"><option value="peer-alpha">peer-alpha</option><option value="peer-beta">peer-beta</option><option value="peer-gamma">peer-gamma</option></select></div>
+      <div class="field"><label>To Peer</label>
+        <select id="td-to"><option value="peer-beta">peer-beta</option><option value="peer-alpha">peer-alpha</option><option value="peer-gamma">peer-gamma</option></select></div>
+      <div class="field"><label>Task Type</label>
+        <select id="td-type">
+          <option value="compute">compute</option>
+          <option value="analyze">analyze</option>
+          <option value="classify">classify</option>
+          <option value="echo">echo</option>
+          <option value="transform">transform</option>
+        </select></div>
+      <div class="field"><label>Task Data</label><input type="text" id="td-data" placeholder="task payload..."/></div>
+      <div class="field"><label>Parent Block Hash (optional)</label><input type="text" id="td-parents" placeholder="parent hash..."/></div>
+      <button class="btn btn-p" onclick="dispatchTask()" style="width:100%">⇶ DISPATCH TASK</button>
+    </div>
+    <div class="card" id="task-result">
+      <div class="card-title">Last Dispatch Result</div>
+      <div style="font-family:var(--mono);font-size:11px;color:var(--text-d)">No task dispatched yet.</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">Task & Execution Events</div>
+    <div class="elog" id="task-events" style="height:240px"></div>
+  </div>
+</div>
+
+<!-- CROSS-VALIDATE -->
+<div id="page-crossval" class="page">
+  <div class="ph">
+    <div><div class="pt">CROSS-VALIDATION</div><div class="ps">Ask all peers to independently verify a block — consensus result</div></div>
+  </div>
+  <div class="card">
+    <div class="card-title">Validate across mesh</div>
+    <div style="display:flex;gap:8px">
+      <select id="cv-requestor" style="width:160px;flex-shrink:0">
+        <option value="peer-alpha">peer-alpha</option>
+        <option value="peer-beta">peer-beta</option>
+        <option value="peer-gamma">peer-gamma</option>
+      </select>
+      <input type="text" id="cv-hash" placeholder="block hash to cross-validate..." style="flex:1"/>
+      <button class="btn btn-a" onclick="crossValidate()">✦ CROSS-VALIDATE</button>
+    </div>
+  </div>
+  <div id="cv-result" style="display:none">
+    <div class="card" id="cv-consensus"></div>
+    <div class="card">
+      <div class="card-title">Per-Peer Results</div>
+      <table class="nt" id="cv-table">
+        <thead><tr><th>Peer</th><th>Valid</th><th>Epoch</th><th>Token (first 16)</th><th>Status</th></tr></thead>
+        <tbody id="cv-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- STORAGE -->
+<div id="page-storage" class="page">
+  <div class="ph">
+    <div><div class="pt">STORAGE MONITOR</div><div class="ps">MemoryStore per peer — swap-ready (File / Redis / S3)</div></div>
+    <button class="btn btn-g" onclick="loadStorage()">↺ REFRESH</button>
+  </div>
+  <div id="storage-stats" class="g4"></div>
+  <div class="g2">
+    <div class="card">
+      <div class="card-title">Hub Store — Put</div>
+      <div class="field"><label>Key</label><input type="text" id="hs-key" placeholder="storage key..."/></div>
+      <div class="field"><label>Value</label><input type="text" id="hs-value" placeholder="value (text)..."/></div>
+      <button class="btn btn-p" onclick="hubStorePut()">PUT TO HUB STORE</button>
+    </div>
+    <div class="card">
+      <div class="card-title">Retrieve Record</div>
+      <div class="field"><label>Peer</label>
+        <select id="hs-peer">
+          <option value="hub">hub</option>
+          <option value="peer-alpha">peer-alpha</option>
+          <option value="peer-beta">peer-beta</option>
+          <option value="peer-gamma">peer-gamma</option>
+        </select></div>
+      <div class="field"><label>Key</label><input type="text" id="hs-getkey" placeholder="key to retrieve..."/></div>
+      <button class="btn btn-s" onclick="storeGet()" style="margin-bottom:10px">GET</button>
+      <div id="hs-getresult" style="font-family:var(--mono);font-size:11px;color:var(--text-d)"></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">Storage Events</div>
+    <div class="elog" id="store-events" style="height:220px"></div>
+  </div>
+</div>
+
+<!-- TELEMETRY -->
+<div id="page-telemetry" class="page">
+  <div class="ph">
+    <div><div class="pt">TELEMETRY ROUTING</div><div class="ps">Push raw data bytes to a peer's designated store</div></div>
+  </div>
+  <div class="g2">
+    <div class="card">
+      <div class="card-title">Send Telemetry</div>
+      <div class="field"><label>From Peer</label>
+        <select id="tel-from"><option value="peer-alpha">peer-alpha</option><option value="peer-beta">peer-beta</option><option value="peer-gamma">peer-gamma</option></select></div>
+      <div class="field"><label>To Peer (storage target)</label>
+        <select id="tel-to"><option value="peer-beta">peer-beta</option><option value="peer-alpha">peer-alpha</option><option value="peer-gamma">peer-gamma</option></select></div>
+      <div class="field"><label>Storage Key</label><input type="text" id="tel-key" placeholder="sensor:01 / reading:xyz..."/></div>
+      <div class="field"><label>Data (text)</label><textarea id="tel-data" rows="3" placeholder="raw telemetry payload..."></textarea></div>
+      <button class="btn btn-t" style="border-color:var(--teal);color:var(--teal);width:100%" onclick="sendTelemetry()">◎ SEND TELEMETRY</button>
+    </div>
+    <div class="card" id="tel-result">
+      <div class="card-title">Last Receipt</div>
+      <div style="font-family:var(--mono);font-size:11px;color:var(--text-d)">No telemetry sent yet.</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">Telemetry Events</div>
+    <div class="elog" id="tel-events" style="height:220px"></div>
+  </div>
+</div>
+
+<!-- INSPECTOR -->
+<div id="page-inspector" class="page">
+  <div class="ph"><div><div class="pt">BLOCK INSPECTOR</div><div class="ps">Deep-dive validation + epoch metadata</div></div></div>
+  <div class="card">
+    <div class="card-title">Hash Lookup</div>
+    <div style="display:flex;gap:8px">
+      <input type="text" id="insp-hash" placeholder="full block hash..." style="flex:1"/>
+      <button class="btn btn-p" onclick="inspectBlock()">INSPECT</button>
+      <button class="btn btn-s" onclick="validateInspect()">VALIDATE</button>
+    </div>
+  </div>
+  <div id="insp-result" style="display:none">
+    <div class="g2">
+      <div class="card" id="insp-meta"></div>
+      <div class="card" id="insp-validation"></div>
+    </div>
+  </div>
+</div>
+
+<!-- BLOCKS TABLE -->
+<div id="page-blocks" class="page">
+  <div class="ph">
+    <div><div class="pt">BLOCK REGISTRY</div><div class="ps">All blocks in the hub DAG</div></div>
+    <button class="btn btn-g" onclick="loadBlocks()">↺ REFRESH</button>
+  </div>
+  <div class="card" style="padding:0;overflow:hidden">
+    <table class="nt">
+      <thead><tr><th>Hash</th><th>Agent</th><th>Epoch</th><th>Parents</th><th>Status</th><th>Actions</th></tr></thead>
+      <tbody id="blocks-tbody"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- HSM / EPOCHS -->
+<div id="page-hsm" class="page">
+  <div class="ph">
+    <div><div class="pt">HSM / EPOCH MONITOR</div><div class="ps">Per-block key derivation — HKDF root → epoch → block key</div></div>
+    <button class="btn btn-g" onclick="loadHSM()">↺ REFRESH</button>
+  </div>
+  <div class="g3">
+    <div class="st a"><div class="sl">Current Epoch</div><div class="sv" id="hsm-epoch">0</div></div>
+    <div class="st c"><div class="sl">Blocks Signed</div><div class="sv" id="hsm-blocks">0</div></div>
+    <div class="st g"><div class="sl">Next Rotation In</div><div class="sv" id="hsm-next">10</div></div>
+  </div>
+  <div class="card">
+    <div class="card-title">Epoch Progress</div>
+    <div style="display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--text-d);margin-bottom:4px">
+      <span>Block 0</span><span id="hsm-prog-label">0 / 10</span><span>Rotate</span>
+    </div>
+    <div class="epoch-bar"><div class="epoch-fill" id="hsm-prog-bar" style="width:0%"></div></div>
+  </div>
+  <div class="card">
+    <div class="card-title">Key Derivation Hierarchy</div>
+    <div style="font-family:var(--mono);font-size:12px;line-height:2;color:var(--text-d);padding:4px 0">
+      <div style="color:var(--cyan)">root_key <span style="color:var(--text-d)">= b"warlok-root-secret"</span></div>
+      <div style="padding-left:20px;color:var(--amber)">└── epoch_key<span id="epoch-key-label" style="color:var(--text-d)"> = HKDF(root_key, "epoch:0")</span></div>
+      <div style="padding-left:40px;color:var(--green)">└── block_key<span style="color:var(--text-d)"> = HKDF(epoch_key, block_hash)</span></div>
+      <div style="padding-left:60px;color:var(--text)">└── sig = HMAC-SHA256(block_key, hash_bytes)</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">HSM Events</div>
+    <div class="elog" id="hsm-events" style="height:260px"></div>
+  </div>
+</div>
+
+<!-- ATTACK SIM -->
+<div id="page-attack" class="page">
+  <div class="ph"><div><div class="pt">ATTACK SIMULATOR</div><div class="ps">Adversarial testing — demo mode only</div></div></div>
+  <div class="abanner">⚠ WARNING — Adversarial operations. All actions are logged and detectable via cross-validation.</div>
+  <div class="g2">
+    <div class="card" style="border-color:rgba(255,51,85,.3)">
+      <div class="card-title" style="color:var(--red)">Payload Tamper</div>
+      <p style="font-size:12px;color:var(--text-d);margin-bottom:12px;line-height:1.6">Appends <code style="color:var(--text)">"tampered"</code> bytes post-signing. Hash mismatch → HSM verify fails.</p>
+      <div class="field"><label>Target Hash</label><input type="text" id="atk-th" placeholder="block hash..."/></div>
+      <button class="btn btn-d" onclick="doTamper()">⚡ TAMPER PAYLOAD</button>
+    </div>
+    <div class="card" style="border-color:rgba(255,51,85,.3)">
+      <div class="card-title" style="color:var(--red)">Signature Break</div>
+      <p style="font-size:12px;color:var(--text-d);margin-bottom:12px;line-height:1.6">Replaces HSM signature with <code style="color:var(--text)">b"bad"</code>. verify_epoch() fails.</p>
+      <div class="field"><label>Target Hash</label><input type="text" id="atk-sh" placeholder="block hash..."/></div>
+      <button class="btn btn-d" onclick="doBreakSig()">⚡ BREAK SIGNATURE</button>
+    </div>
+  </div>
+  <div class="card" style="border-color:rgba(255,51,85,.2)">
+    <div class="card-title">Select Target from DAG</div>
+    <div id="atk-nodes" style="font-family:var(--mono);font-size:11px;color:var(--text-d)">Run a pipeline first.</div>
+  </div>
+  <div class="card"><div class="card-title">Attack Log</div><div class="elog" id="atk-events" style="height:200px"></div></div>
+</div>
+
+</main>
+</div>
+
+<!-- MODAL -->
+<div class="moverlay" id="modal" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <div class="mt" id="modal-title">BLOCK DETAILS</div>
+    <button class="mc" onclick="closeModal()">✕</button>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+const API = '';
+let dagData = {}, eventsData = [], peerData = {}, hsmData = {};
+
+// ── NAVIGATION ────────────────────────────────────────────────────────────────
+function goPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.ni').forEach(n => n.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  document.querySelector(`[data-page="${name}"]`).classList.add('active');
+  const dispatch = {
+    graph: renderDAG, execution: loadEvents, blocks: loadBlocks,
+    attack: loadAtkTargets, peers: loadPeers, storage: loadStorage,
+    hsm: loadHSM, telemetry: loadTelEvents, taskdispatch: loadTaskEvents,
+    crossval: () => {}, pipeline: loadPipelineEvents,
+  };
+  if (dispatch[name]) dispatch[name]();
+}
+
+// ── API ───────────────────────────────────────────────────────────────────────
+async function api(method, path, body) {
+  try {
+    const opts = { method, headers: {'Content-Type':'application/json'} };
+    if (body) opts.body = JSON.stringify(body);
+    const r = await fetch(API + path, opts);
+    return await r.json();
+  } catch(e) { toast('API error: ' + e.message, 'e'); return null; }
+}
+
+// ── REFRESH ALL ───────────────────────────────────────────────────────────────
+async function refreshAll() {
+  const [dag, events, health] = await Promise.all([
+    api('GET','/dag'), api('GET','/events'), api('GET','/health')
+  ]);
+  if (dag) { dagData = dag.nodes; updateStats(dag); }
+  if (events) { eventsData = events.events; renderDashEvents(); document.getElementById('event-count').textContent = events.count + ' events'; }
+  if (health) {
+    hsmData = health.hsm || {};
+    updateConnStatus(true);
+    document.getElementById('epoch-label').textContent = 'epoch:' + (hsmData.epoch_id||0);
+    document.getElementById('peer-count').textContent = (health.peers||[]).length + ' peers';
+    document.getElementById('s-peers').textContent = (health.peers||[]).length;
+    document.getElementById('s-epoch').textContent = hsmData.epoch_id || 0;
+    document.getElementById('s-rotation').textContent = hsmData.next_rotation_in || 10;
+  }
+  const hub_store = await api('GET','/storage/hub');
+  if (hub_store) document.getElementById('s-store').textContent = hub_store.records || 0;
+}
+
+function updateStats(dag) {
+  const ns = Object.values(dag.nodes);
+  document.getElementById('s-total').textContent = ns.length;
+  document.getElementById('s-active').textContent = ns.filter(n=>n.status==='ACTIVE').length;
+  document.getElementById('s-invalid').textContent = ns.filter(n=>n.status==='INVALID').length;
+  document.getElementById('dag-count').textContent = ns.length + ' blocks';
+}
+
+function updateConnStatus(ok) {
+  const dot = document.getElementById('conn-dot'), label = document.getElementById('conn-label');
+  dot.style.background = ok ? 'var(--green)' : 'var(--red)';
+  dot.style.boxShadow  = ok ? '0 0 8px var(--green)' : '0 0 8px var(--red)';
+  label.textContent    = ok ? 'ONLINE' : 'OFFLINE';
+}
+
+// ── EVENTS ────────────────────────────────────────────────────────────────────
+function renderEventRow(ev) {
+  const tc = 'et-' + (ev.type||'').replace(/[^A-Z_]/g,'');
+  const d  = typeof ev.data === 'object' ? JSON.stringify(ev.data) : String(ev.data);
+  return `<div class="er"><span class="et ${tc}">${ev.type}</span><span class="ed">${esc(d.substring(0,140))}</span></div>`;
+}
+
+function renderDashEvents() {
+  const el = document.getElementById('dash-events');
+  el.innerHTML = [...eventsData].slice(-40).reverse().map(renderEventRow).join('');
+  document.getElementById('s-events').textContent = eventsData.length;
+}
+
+async function loadEvents() {
+  const r = await api('GET','/events'); if (!r) return;
+  document.getElementById('exec-events').innerHTML = [...r.events].reverse().map(renderEventRow).join('');
+}
+
+async function loadPipelineEvents() {
+  const r = await api('GET','/events'); if (!r) return;
+  const f = r.events.filter(e=>['PIPELINE_STEP','HUB_CREATE','SIGNED','DAG_ADD'].includes(e.type));
+  document.getElementById('pipeline-events').innerHTML = [...f].reverse().map(renderEventRow).join('');
+}
+
+async function loadTaskEvents() {
+  const r = await api('GET','/events'); if (!r) return;
+  const f = r.events.filter(e=>e.type.startsWith('PEER_TASK')||e.type.startsWith('MESH_TASK')||e.type==='PEER_SEND'||e.type==='PEER_RECV');
+  document.getElementById('task-events').innerHTML = [...f].reverse().map(renderEventRow).join('');
+}
+
+async function loadTelEvents() {
+  const r = await api('GET','/events'); if (!r) return;
+  const f = r.events.filter(e=>e.type.startsWith('PEER_TELEMETRY')||e.type.startsWith('MESH_TELEMETRY')||e.type==='STORE_PUT');
+  document.getElementById('tel-events').innerHTML = [...f].reverse().map(renderEventRow).join('');
+}
+
+// ── BLOCK CREATION ────────────────────────────────────────────────────────────
+async function createBlock() {
+  const payload = document.getElementById('d-payload').value||'manual-block';
+  const parent  = document.getElementById('d-parent').value.trim();
+  const r = await api('POST','/create_block',{parents:parent?[parent]:[],payload});
+  if (r) { toast('Block created: '+r.hash.substring(0,16)+'...','s'); refreshAll(); }
+}
+
+// ── VALIDATE ─────────────────────────────────────────────────────────────────
+async function quickValidate() {
+  const hash = document.getElementById('d-valhash').value.trim(); if (!hash) return;
+  const r = await api('POST','/validate',{hash}); if (!r) return;
+  document.getElementById('d-valresult').innerHTML = r.valid
+    ? `<span style="color:var(--green)">✓ VALID</span> — ${esc(r.msg)}`
+    : `<span style="color:var(--red)">✗ INVALID</span> — ${esc(r.msg)}`;
+}
+
+// ── PIPELINE ──────────────────────────────────────────────────────────────────
+async function runPipeline() {
+  toast('Running pipeline...'); const r = await api('POST','/pipeline');
+  if (r) { toast('Pipeline complete — '+r.count+' blocks','s'); refreshAll(); }
+}
+
+async function runPipelineAnimated() {
+  const btn = document.getElementById('run-btn');
+  btn.disabled = true; btn.textContent = '◌ RUNNING...';
+  ['Collector','Analyzer','Decision','Executor'].forEach(a=>{
+    document.getElementById('pa-'+a).className='ab';
+    document.getElementById('ph-'+a).textContent='—';
+  });
+  const r = await api('POST','/pipeline');
+  if (r?.created) {
+    const agents = ['Collector','Analyzer','Decision','Executor'];
+    for (let i=0;i<agents.length;i++) {
+      document.getElementById('pa-'+agents[i]).className='ab done';
+      document.getElementById('ph-'+agents[i]).textContent=r.created[i]?.substring(0,10)+'...';
+      await sleep(180);
+    }
+    document.getElementById('pipeline-result').textContent='✓ All '+r.count+' agents completed.';
+  }
+  btn.disabled=false; btn.textContent='▶ EXECUTE PIPELINE';
+  refreshAll(); loadPipelineEvents();
+}
+
+// ── DAG GRAPH ─────────────────────────────────────────────────────────────────
+async function renderDAG() {
+  const canvas = document.getElementById('dag-cvs');
+  const cont   = document.getElementById('dag-canvas');
+  canvas.width = cont.clientWidth; canvas.height = cont.clientHeight;
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  const nodes = Object.entries(dagData);
+  if (!nodes.length) {
+    ctx.fillStyle='#3a5070';ctx.font='13px Share Tech Mono';ctx.textAlign='center';
+    ctx.fillText('No blocks — run a pipeline first',canvas.width/2,canvas.height/2); return;
+  }
+  const levels={},visited=new Set();
+  function assign(hash,level){
+    if(visited.has(hash))return;visited.add(hash);
+    levels[hash]=Math.max(levels[hash]||0,level);
+    const n=dagData[hash];if(n)n.parents.forEach(p=>assign(p,level-1));
+  }
+  nodes.forEach(([h])=>assign(h,nodes.length));
+  const minL=Math.min(...Object.values(levels));
+  Object.keys(levels).forEach(k=>levels[k]-=minL);
+  const maxL=Math.max(...Object.values(levels));
+  const byL={};
+  Object.entries(levels).forEach(([h,l])=>{if(!byL[l])byL[l]=[];byL[l].push(h);});
+  const W=canvas.width,H=canvas.height,mX=80,mY=60,nW=96,nH=38;
+  const pos={};
+  Object.entries(byL).forEach(([lvl,hs])=>{
+    const x=mX+(parseInt(lvl)/Math.max(maxL,1))*(W-mX*2);
+    hs.forEach((h,i)=>{pos[h]={x,y:mY+(i+.5)/hs.length*(H-mY*2)};});
+  });
+  // Edges
+  ctx.lineWidth=1.5;
+  nodes.forEach(([h,n])=>{
+    n.parents.forEach(p=>{
+      if(!pos[p]||!pos[h])return;
+      const g=ctx.createLinearGradient(pos[p].x,pos[p].y,pos[h].x,pos[h].y);
+      g.addColorStop(0,'rgba(0,153,187,.3)');g.addColorStop(1,'rgba(0,229,255,.6)');
+      ctx.strokeStyle=g;ctx.beginPath();
+      const mx=(pos[p].x+pos[h].x)/2;
+      ctx.moveTo(pos[p].x+nW/2,pos[p].y);
+      ctx.bezierCurveTo(mx+nW/2,pos[p].y,mx-nW/2,pos[h].y,pos[h].x-nW/2,pos[h].y);
+      ctx.stroke();
+    });
+  });
+  // Nodes
+  nodes.forEach(([h,n])=>{
+    if(!pos[h])return;
+    const {x,y}=pos[h],active=n.status==='ACTIVE';
+    const col=active?'#00ff88':'#ff3355';
+    ctx.shadowColor=col;ctx.shadowBlur=12;
+    ctx.fillStyle='#111827';ctx.strokeStyle=col;ctx.lineWidth=1.5;
+    rr(ctx,x-nW/2,y-nH/2,nW,nH,4);ctx.fill();ctx.stroke();ctx.shadowBlur=0;
+    // Epoch badge
+    const epoch=n.epoch||0;
+    ctx.fillStyle='rgba(255,187,0,.15)';rr(ctx,x+nW/2-20,y-nH/2,20,10,2);ctx.fill();
+    ctx.fillStyle='#ffbb00';ctx.font='7px Share Tech Mono';ctx.textAlign='center';
+    ctx.textBaseline='middle';ctx.fillText('E'+epoch,x+nW/2-10,y-nH/2+5);
+    // Label
+    ctx.fillStyle=active?'#00e5ff':'#ff6688';ctx.font='11px Rajdhani';ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillText(n.agent||'BLOCK',x,y-7);
+    ctx.fillStyle='#5a7a9a';ctx.font='9px Share Tech Mono';
+    ctx.fillText(h.substring(0,10)+'...',x,y+8);
+  });
+  canvas.onclick=e=>{
+    const r=canvas.getBoundingClientRect(),mx=e.clientX-r.left,my=e.clientY-r.top;
+    for(const [h] of nodes){const{x,y}=pos[h]||{};if(!x)continue;
+      if(mx>=x-nW/2&&mx<=x+nW/2&&my>=y-nH/2&&my<=y+nH/2){openModal(h);return;}}
+  };
+}
+
+function rr(ctx,x,y,w,h,r){
+  ctx.beginPath();ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.arcTo(x+w,y,x+w,y+r,r);
+  ctx.lineTo(x+w,y+h-r);ctx.arcTo(x+w,y+h,x+w-r,y+h,r);ctx.lineTo(x+r,y+h);
+  ctx.arcTo(x,y+h,x,y+h-r,r);ctx.lineTo(x,y+r);ctx.arcTo(x,y,x+r,y,r);ctx.closePath();
+}
+
+// ── INSPECTOR ─────────────────────────────────────────────────────────────────
+async function openModal(hash) {
+  const n=dagData[hash];if(!n)return;
+  const vr=await api('POST','/validate',{hash});
+  document.getElementById('modal-title').textContent='BLOCK // '+hash.substring(0,16)+'...';
+  document.getElementById('modal-body').innerHTML=`
+    <div class="kv"><div class="k">Hash</div><div class="v" style="color:var(--cyan)">${hash}</div></div>
+    <div class="kv"><div class="k">Agent</div><div class="v">${n.agent||'—'}</div></div>
+    <div class="kv"><div class="k">Epoch</div><div class="v"><span class="badge b-epoch">E${n.epoch||0}</span></div></div>
+    <div class="kv"><div class="k">Status</div><div class="v"><span class="badge b-${n.status.toLowerCase()}">${n.status}</span></div></div>
+    <div class="kv"><div class="k">Parents</div><div class="v">${n.parents.length?n.parents.map(p=>'<span class="hash">'+p.substring(0,12)+'...</span>').join(' '):'<span style="color:var(--text-d)">genesis</span>'}</div></div>
+    <div class="kv"><div class="k">Validation</div><div class="v" style="color:${vr?.valid?'var(--green)':'var(--red)'}">
+      ${vr?(vr.valid?'✓ VALID':'✗ '+vr.msg):'...'}</div></div>
+  `;
+  document.getElementById('modal').classList.add('open');
+}
+function closeModal(){document.getElementById('modal').classList.remove('open');}
+
+async function inspectBlock() {
+  const hash=document.getElementById('insp-hash').value.trim();
+  if(!hash||!dagData[hash]){toast('Hash not found','w');return;}
+  const n=dagData[hash];
+  document.getElementById('insp-result').style.display='block';
+  document.getElementById('insp-meta').innerHTML=`
+    <div class="card-title">Block Metadata</div>
+    <div class="kv"><div class="k">Hash</div><div class="v" style="color:var(--cyan);font-size:10px">${hash}</div></div>
+    <div class="kv"><div class="k">Agent</div><div class="v">${n.agent||'—'}</div></div>
+    <div class="kv"><div class="k">Epoch</div><div class="v"><span class="badge b-epoch">E${n.epoch||0}</span></div></div>
+    <div class="kv"><div class="k">Status</div><div class="v"><span class="badge b-${n.status.toLowerCase()}">${n.status}</span></div></div>
+    <div class="kv"><div class="k">Parents</div><div class="v">${n.parents.join(', ')||'(genesis)'}</div></div>
+  `;
+}
+
+async function validateInspect() {
+  const hash=document.getElementById('insp-hash').value.trim();if(!hash)return;
+  const r=await api('POST','/validate',{hash});if(!r)return;
+  document.getElementById('insp-validation').innerHTML=`
+    <div class="card-title">Validation Result</div>
+    <div style="font-size:40px;margin:12px 0;color:${r.valid?'var(--green)':'var(--red)'}">${r.valid?'✓':'✗'}</div>
+    <div style="font-size:14px;color:${r.valid?'var(--green)':'var(--red)'};font-family:var(--mono)">${r.msg}</div>
+  `;
+  document.getElementById('insp-result').style.display='block';
+}
+
+// ── BLOCKS TABLE ──────────────────────────────────────────────────────────────
+async function loadBlocks() {
+  const r=await api('GET','/dag');if(!r)return;
+  dagData=r.nodes;
+  const tb=document.getElementById('blocks-tbody');tb.innerHTML='';
+  Object.entries(r.nodes).forEach(([h,n])=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td><span class="hash" onclick="setInspect('${h}')">${h.substring(0,18)}...</span></td>
+      <td>${n.agent||'—'}</td>
+      <td><span class="badge b-epoch">E${n.epoch||0}</span></td>
+      <td>${n.parents.length?n.parents.length+' parent(s)':'<span style="color:var(--text-d)">genesis</span>'}</td>
+      <td><span class="badge b-${n.status.toLowerCase()}">${n.status}</span></td>
+      <td style="display:flex;gap:6px">
+        <button class="btn btn-g" style="padding:3px 8px;font-size:10px" onclick="openModal('${h}')">INSPECT</button>
+        <button class="btn btn-g" style="padding:3px 8px;font-size:10px" onclick="setAtk('${h}')">TARGET</button>
+        <button class="btn btn-a" style="padding:3px 8px;font-size:10px" onclick="setCVHash('${h}')">X-VAL</button>
+      </td>`;
+    tb.appendChild(tr);
+  });
+}
+
+function setInspect(h){document.getElementById('insp-hash').value=h;goPage('inspector');inspectBlock();}
+function setCVHash(h){document.getElementById('cv-hash').value=h;goPage('crossval');}
+
+// ── PEERS ─────────────────────────────────────────────────────────────────────
+async function loadPeers() {
+  const r=await api('GET','/peers');if(!r)return;
+  peerData=r.peer_status||{};
+  const grid=document.getElementById('peer-grid');
+  grid.innerHTML=Object.entries(peerData).map(([pid,p])=>{
+    const ek=p.hsm?.epoch_id||0, bc=p.hsm?.block_count||0,ep=p.hsm?.epoch_size||10;
+    const pct=((bc%ep)/ep*100).toFixed(0);
+    return `<div class="peer-card">
+      <div class="peer-name">◉ ${pid}</div>
+      <div class="peer-kv">
+        <span class="k">DAG blocks</span><span class="v">${p.dag_blocks}</span>
+        <span class="k">Store records</span><span class="v">${p.store?.records||0}</span>
+        <span class="k">Inbox</span><span class="v">${p.inbox_count}</span>
+        <span class="k">Originated</span><span class="v">${p.originated}</span>
+        <span class="k">HSM epoch</span><span class="v"><span class="badge b-epoch">E${ek}</span></span>
+        <span class="k">Peers known</span><span class="v">${(p.peers||[]).join(', ')||'—'}</span>
+      </div>
+      <div style="font-size:9px;font-family:var(--mono);color:var(--text-d);margin-bottom:4px">EPOCH PROGRESS — block ${bc%ep} / ${ep}</div>
+      <div class="epoch-bar"><div class="epoch-fill" style="width:${pct}%"></div></div>
+    </div>`;
+  }).join('');
+  // Peer events
+  const ev=await api('GET','/events');
+  if(ev){
+    const f=ev.events.filter(e=>e.type.startsWith('PEER_')||e.type.startsWith('MESH_')||e.type.startsWith('STORE_'));
+    document.getElementById('peer-events').innerHTML=[...f].slice(-60).reverse().map(renderEventRow).join('');
+  }
+}
+
+// ── TASK DISPATCH ─────────────────────────────────────────────────────────────
+async function dispatchTask() {
+  const from=document.getElementById('td-from').value;
+  const to=document.getElementById('td-to').value;
+  const type=document.getElementById('td-type').value;
+  const data=document.getElementById('td-data').value||'demo-payload';
+  const ph=document.getElementById('td-parents').value.trim();
+  const r=await api('POST','/peers/task',{
+    from, to, task:{type, data, ts:Date.now()},
+    parents: ph?[ph]:[]
+  });
+  if(!r){return;}
+  const div=document.getElementById('task-result');
+  div.innerHTML=`
+    <div class="card-title">Last Dispatch Result</div>
+    <div class="kv" style="border:none"><div class="k">Status</div><div class="v" style="color:${r.status==='OK'?'var(--green)':'var(--red)'}">${r.status}</div></div>
+    <div class="kv" style="border:none"><div class="k">Exec</div><div class="v">${r.exec_status||'—'}</div></div>
+    <div class="kv" style="border:none"><div class="k">Block hash</div><div class="v" style="color:var(--cyan)">${(r.block_hash||'').substring(0,24)}...</div></div>
+    <div class="kv" style="border:none"><div class="k">Store key</div><div class="v">${r.store_key||'—'}</div></div>
+    <div class="kv" style="border:none"><div class="k">Checksum</div><div class="v">${(r.store_receipt?.checksum||'').substring(0,20)}...</div></div>
+  `;
+  toast('Task dispatched → '+to+': '+r.exec_status,'s');
+  loadTaskEvents(); refreshAll();
+}
+
+// ── CROSS-VALIDATE ────────────────────────────────────────────────────────────
+async function crossValidate() {
+  const hash=document.getElementById('cv-hash').value.trim();
+  const req=document.getElementById('cv-requestor').value;
+  if(!hash){toast('Enter a block hash','w');return;}
+  const r=await api('POST','/peers/cross_validate',{requestor:req,hash});
+  if(!r)return;
+  document.getElementById('cv-result').style.display='block';
+  const pct=r.consensus_pct||0;
+  const col=pct===100?'var(--green)':pct>=50?'var(--amber)':'var(--red)';
+  const circ=2*Math.PI*26, fill=circ*(pct/100), gap=circ-fill;
+  document.getElementById('cv-consensus').innerHTML=`
+    <div class="card-title">Consensus Result</div>
+    <div class="consensus-wrap">
+      <div class="cring">
+        <svg viewBox="0 0 64 64">
+          <circle cx="32" cy="32" r="26" fill="none" stroke="var(--border2)" stroke-width="6"/>
+          <circle cx="32" cy="32" r="26" fill="none" stroke="${col}" stroke-width="6"
+            stroke-dasharray="${fill.toFixed(1)} ${gap.toFixed(1)}" stroke-linecap="round"
+            transform="rotate(-90 32 32)"/>
+        </svg>
+        <div class="cring-pct" style="color:${col}">${pct.toFixed(0)}%</div>
+      </div>
+      <div>
+        <div style="font-family:var(--disp);font-size:14px;color:${col}">${pct===100?'FULL CONSENSUS':pct>=50?'PARTIAL':'NO CONSENSUS'}</div>
+        <div style="font-family:var(--mono);font-size:11px;color:var(--text-d);margin-top:6px">${r.valid_count} / ${r.total_peers} peers confirmed valid</div>
+        <div style="font-family:var(--mono);font-size:10px;color:var(--text-d);margin-top:4px">hash: ${hash.substring(0,20)}...</div>
+      </div>
+    </div>
+  `;
+  const tbody=document.getElementById('cv-tbody');tbody.innerHTML='';
+  Object.entries(r.peer_results||{}).forEach(([pid,res])=>{
+    const valid=res.valid, ref=res.ref||res;
+    const actualValid = res.valid;
+    const token = res.token || '';
+    const epoch = res.epoch !== undefined ? res.epoch : '?';
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td style="color:var(--purple)">${pid}</td>
+      <td><span class="badge ${actualValid?'b-valid':'b-invalid'}">${actualValid?'VALID':'INVALID'}</span></td>
+      <td><span class="badge b-epoch">E${epoch}</span></td>
+      <td style="font-family:var(--mono);font-size:10px;color:var(--text-d)">${token.substring(0,16) || '—'}</td>
+      <td><span class="badge ${res.status==='OK'?'b-active':'b-invalid'}">${res.status}</span></td>`;
+    tbody.appendChild(tr);
+  });
+  toast('Cross-validation complete — '+pct+'% consensus', pct===100?'s':pct>=50?'w':'e');
+}
+
+// ── STORAGE ───────────────────────────────────────────────────────────────────
+async function loadStorage() {
+  const targets = ['hub','peer-alpha','peer-beta','peer-gamma'];
+  const stats = await Promise.all(targets.map(t=>api('GET','/storage/'+t)));
+  const div=document.getElementById('storage-stats'); div.innerHTML='';
+  targets.forEach((t,i)=>{
+    const s=stats[i]||{};
+    const tile=document.createElement('div');
+    tile.className='st t';
+    tile.innerHTML=`<div class="sl">${t}</div><div class="sv" style="font-size:20px">${s.records||0}</div>
+      <div style="font-size:9px;font-family:var(--mono);color:var(--text-d);margin-top:4px">${s.bytes_total||0} bytes</div>`;
+    div.appendChild(tile);
+  });
+  const ev=await api('GET','/events');
+  if(ev){
+    const f=ev.events.filter(e=>e.type.startsWith('STORE_'));
+    document.getElementById('store-events').innerHTML=[...f].slice(-60).reverse().map(renderEventRow).join('');
+  }
+}
+
+async function hubStorePut() {
+  const key=document.getElementById('hs-key').value.trim()||'manual-key';
+  const value=document.getElementById('hs-value').value||'demo-value';
+  const r=await api('POST','/storage/hub/put',{key,value});
+  if(r){toast('Stored → hub: '+key,'s');loadStorage();}
+}
+
+async function storeGet() {
+  const peer=document.getElementById('hs-peer').value;
+  const key=document.getElementById('hs-getkey').value.trim();
+  if(!key)return;
+  const path = peer==='hub' ? '/storage/hub/get/'+encodeURIComponent(key)
+                             : '/storage/'+peer+'/get/'+encodeURIComponent(key);
+  const r=await api('GET',path);
+  const el=document.getElementById('hs-getresult');
+  if(!r||r.detail){el.innerHTML='<span style="color:var(--red)">Not found</span>';return;}
+  el.innerHTML=`<div style="color:var(--green)">✓ Found</div>
+    <div>checksum: <span style="color:var(--cyan)">${(r.checksum||'').substring(0,20)}...</span></div>
+    <div>bytes: ${(r.value?.length/2)||0} bytes</div>
+    <div>meta: ${JSON.stringify(r.meta)}</div>`;
+}
+
+// ── TELEMETRY ─────────────────────────────────────────────────────────────────
+async function sendTelemetry() {
+  const from=document.getElementById('tel-from').value;
+  const to=document.getElementById('tel-to').value;
+  const key=document.getElementById('tel-key').value||'sensor:demo';
+  const data=document.getElementById('tel-data').value||'telemetry-payload';
+  const r=await api('POST','/peers/telemetry',{from,to,key,data});
+  if(!r)return;
+  const div=document.getElementById('tel-result');
+  const rec=r.receipt||{};
+  div.innerHTML=`
+    <div class="card-title">Storage Receipt</div>
+    <div class="kv" style="border:none"><div class="k">Key</div><div class="v">${rec.key||key}</div></div>
+    <div class="kv" style="border:none"><div class="k">Backend</div><div class="v">${rec.backend||'memory'}</div></div>
+    <div class="kv" style="border:none"><div class="k">Peer</div><div class="v" style="color:var(--purple)">${rec.peer_id||to}</div></div>
+    <div class="kv" style="border:none"><div class="k">Checksum</div><div class="v" style="color:var(--cyan)">${(rec.checksum||'').substring(0,20)}...</div></div>
+    <div class="kv" style="border:none"><div class="k">Status</div><div class="v" style="color:var(--green)">${r.stored?'STORED':'FAILED'}</div></div>
+  `;
+  toast('Telemetry → '+to+': '+key,'p');
+  loadTelEvents(); loadStorage();
+}
+
+// ── HSM ───────────────────────────────────────────────────────────────────────
+async function loadHSM() {
+  const r=await api('GET','/hsm/status');if(!r)return;
+  document.getElementById('hsm-epoch').textContent  = r.epoch_id||0;
+  document.getElementById('hsm-blocks').textContent = r.block_count||0;
+  document.getElementById('hsm-next').textContent   = r.next_rotation_in||10;
+  document.getElementById('epoch-key-label').textContent = ` = HKDF(root_key, "epoch:${r.epoch_id||0}")`;
+  const pct=((r.block_count%r.epoch_size)/r.epoch_size*100).toFixed(0);
+  document.getElementById('hsm-prog-bar').style.width = pct+'%';
+  document.getElementById('hsm-prog-label').textContent = (r.block_count%r.epoch_size)+' / '+r.epoch_size;
+  const ev=await api('GET','/events');
+  if(ev){
+    const f=ev.events.filter(e=>e.type.startsWith('HSM_'));
+    document.getElementById('hsm-events').innerHTML=[...f].slice(-60).reverse().map(renderEventRow).join('');
+  }
+}
+
+// ── ATTACK ────────────────────────────────────────────────────────────────────
+async function loadAtkTargets() {
+  const r=await api('GET','/dag');if(!r)return;dagData=r.nodes;
+  const el=document.getElementById('atk-nodes');
+  if(!Object.keys(r.nodes).length){el.textContent='No blocks.';return;}
+  el.innerHTML=Object.entries(r.nodes).map(([h,n])=>
+    `<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04)">
+      <span class="badge b-${n.status.toLowerCase()}">${n.status}</span>
+      <span class="badge b-epoch">E${n.epoch||0}</span>
+      <span class="hash" onclick="setAtk('${h}')">${h.substring(0,22)}...</span>
+      <span style="color:var(--text-d)">${n.agent||'—'}</span>
+      <button class="btn btn-d" style="padding:2px 8px;font-size:10px;margin-left:auto" onclick="setAtk('${h}')">SELECT</button>
+    </div>`
+  ).join('');
+  const ev=await api('GET','/events');
+  if(ev){
+    const f=ev.events.filter(e=>e.type==='ATTACK');
+    document.getElementById('atk-events').innerHTML=[...f].reverse().map(renderEventRow).join('');
+  }
+}
+
+function setAtk(h){
+  document.getElementById('atk-th').value=h;
+  document.getElementById('atk-sh').value=h;
+}
+
+async function doTamper(){
+  const h=document.getElementById('atk-th').value.trim();if(!h){toast('Enter hash','w');return;}
+  const r=await api('POST','/attack/tamper',{hash:h});
+  if(r){toast('⚡ Tampered: '+h.substring(0,14)+'...','e');refreshAll();loadAtkTargets();}
+}
+
+async function doBreakSig(){
+  const h=document.getElementById('atk-sh').value.trim();if(!h){toast('Enter hash','w');return;}
+  const r=await api('POST','/attack/signature',{hash:h});
+  if(r){toast('⚡ Signature broken: '+h.substring(0,14)+'...','e');refreshAll();loadAtkTargets();}
+}
+
+// ── RESET ────────────────────────────────────────────────────────────────────
+async function resetAll(){
+  if(!confirm('Reset all blocks, events, and peers?'))return;
+  const r=await api('POST','/reset');
+  if(r){dagData={};eventsData=[];toast('System reset','w');refreshAll();}
+}
+
+// ── TOAST ────────────────────────────────────────────────────────────────────
+function toast(msg,type='i'){
+  const el=document.createElement('div');
+  el.className='ti '+(type==='e'?'e':type==='s'?'s':type==='w'?'w':type==='p'?'p':'');
+  el.textContent=msg;document.getElementById('toast').appendChild(el);
+  setTimeout(()=>el.remove(),3100);
+}
+
+// ── HELPERS ──────────────────────────────────────────────────────────────────
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function sleep(ms){return new Promise(r=>setTimeout(r,ms));}
+
+// ── INIT ─────────────────────────────────────────────────────────────────────
+async function init(){
+  try{const r=await api('GET','/health');updateConnStatus(!!r);}catch{updateConnStatus(false);}
+  await refreshAll();
+  setInterval(refreshAll,5000);
+}
+init();
+</script>
+</body>
+</html>
